@@ -1,0 +1,14 @@
+.centerAlign { line-height:40px;vertical-align:center; }
+.hover-grey:hover { background-color: grey; color: white; } 
+.yellow-line { border-bottom: 1px solid #dab236; }
+.nav-tabs > li.active { border-bottom: 3px solid #dab236; }
+#contact-row > .well { border:0px;box-shadow:none; }
+#website-row > .well { border:0px;box-shadow:none; }
+#hoaddress-row > .well { border:0px;box-shadow:none; }
+#service > .well { border:0px;box-shadow:none; }
+input.uppercase { text-transform: uppercase; }
+.buttonDefSize { width: 80%!important; }
+.ui-datepicker td a {text-align: center!important;}
+.ui-datepicker {width: auto!important; }
+.label-font {  font-weight: 700;color:grey;font-size:13px;color:#777; }
+.serc-btn { position: absolute;top: 7px;right: 10px;font-size: 22px;color: grey;cursor: pointer; }

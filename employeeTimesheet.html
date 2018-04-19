@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en" class="desktop landscape chrome"><!--<![endif]--><!-- START HEAD -->
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+        <title>Timesheet</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="description" content="Calibre is imple and easy admin template">
+        <meta name="keywords" content="calibre bootstrap template, calibre admin, bootstrap, admin template, bootstrap admin">
+        <meta name="author" content="LanceCoder">
+
+        <meta property="og:site_name" content="-CUSTOMER VALUE-">
+        <meta property="og:title" content="-CUSTOMER VALUE-">
+        <meta property="og:description" content="-CUSTOMER VALUE-">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="-CUSTOMER VALUE-">
+        <meta property="og:url" content="-CUSTOMER VALUE-">
+
+       
+        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css" rel="stylesheet">
+        <link href="assets/css/jquery-ui.css" rel="stylesheet">
+        <link href="assets/vendors/sweetalert/sweetalert.css" rel="stylsheet">
+        <link rel='stylesheet' href='fullcalendar/fullcalendar.min.css' />
+        <link href='fullcalendar.print.min.css' rel='stylesheet' media='print' />
+
+        <div id="css"></div>
+        <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+            <script type="text/javascript">
+            $('#css').load(' css.html');
+        </script>
+
+</head>
+<body class="sidebar-expanded sidebar-theme-2 theme-light-cyan"><i class="btn-theme-switcher icon-cog hidden-xs"></i>
+
+        <!-- Page Loader -->
+        <div class="page-loader" style="display: none;"></div>
+
+        <!-- START WRAPPER -->
+        <div class="wrapper">
+
+            <div id="divHeader" ></div>  
+
+            <div id="divSide"></div>
+
+
+            <div class="main-content small_content">
+
+                <!-- START MAIN CONTAINER -->
+                <div class="main-container">
+
+                    <!-- START PAGE HEADER -->
+                    <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
+                        <div class="page-header-content slideshow">
+                            <div class="page-header-overlay">
+
+                                <div class="page-breadcrumb">
+                                    <nav class="c_breadcrumbs">
+                                        <ul>
+                                            <li><a href="#">Home</a></li>
+                                            <li><a href="#">Employee</a></li>
+                                            <li class="active"><a href="#">Timesheet</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- END PAGE HEADER -->
+
+                    <!-- START PAGE CONTENT -->
+                    <div class="page-content">
+
+                        <!-- START ROW -->
+                        <div class="row">
+                    
+                            <!-- START COL-MD-12 -->
+                            <div class="col-md-12">
+                    
+                                <!-- START PANEL -->
+                                <div class="panel">
+                                    <form id="employeeTimesheet" class="sky-form" style="width:100%">
+                                    <div class="panel-body">
+                                        <div class="well">
+                                            <label class="label">Enter Daily Time</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                            <label class="label">Mode:</label>
+                                            <label class="select">
+                                                <select class="select2">
+                                                    <option>Before Shift Starts</option>
+                                                    <option>Login after 15mins</option>
+                                                    <option>Login after 30 mins</option>
+                                                    <option>Login after 1 Hour</option>
+                                                    <option>Half Day</option>
+                                                    <option>Leave</option>
+                                                    <option>Holiday</option>
+                                                    <option>Weekly Off</option>
+                                                    <option>OT</option>
+                                                </select>
+                                            </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                            <label class="label">Date:</label>
+                                            <label class="input">
+                                                <input type="text" class="datepickr">
+                                            </label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                            <label class="label">Start Time:(hh:mm)</label>
+                                            <label class="input">
+                                                <input type="time">
+                                            </label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                            <label class="label">End Time:(hh:mm)</label>
+                                            <label class="input">
+                                                <input type="time">
+                                            </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="well">
+                                            <label class="label">Apply for Leave</label>
+                                        </div>
+                                        <div class="row">
+
+                                            
+                                            <div id="lFrom" class="col-sm-4 hide">
+                                            <label class="label">Leave From:</label>
+                                            <label class="input">
+                                                <input id="leaveFrom" type="text" class="datepickr">
+                                            </label>
+                                            </div>
+
+                                            <div id="lTo" class="col-sm-4 hide">
+                                            <label class="label">Leave To:</label>
+                                            <label class="input">
+                                                <input id="leaveTo" type="text" class="datepickr" >
+                                            </label>
+                                            </div>
+
+                                            <div id="reas" class="col-sm-4 hide">
+                                            <label class="label">Reason</label>
+                                            <label id="reason" class="textarea">
+                                                <textarea></textarea>
+                                            </label>
+                                            </div>
+                                            
+                                            <div class="col-sm-8 col-sm-offset-2 m-b-40">
+                                                <div id="calendar" style="min-width:400px;max-width:100%;max-height:600px;"></div>
+                                            </div>
+
+                                            <!-- <div class="col-sm-12 sky-form">
+                                                <input id="leaveSubmit" type="button" value="Add">
+                                            </div> -->
+                                        </div>
+
+                                        <div class="well">
+                                            <div class="label">OT Details</div>
+                                        </div>
+                                        <div class="row">
+
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                                <!-- END PANEL -->             
+                            
+                                <div class="panel">
+                                    <div class="panel-body">
+                                            <footer class="text-right m-t-20">
+                                            <button type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Reset</button>
+                                            <button form="frmHorizontalWizard" type="submit" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Submit</button>
+                                            <div class="note"><strong>Note:</strong> Fields marked with <span class="text-danger" >*</span> are to be filled mandatorily.</div>
+                                        </footer>
+                                    </div>
+                                </div>
+
+                        </div>
+
+                    </div>
+                    <!-- END COL-MD-12 -->
+            
+                </div>
+                <!-- END ROW -->
+            
+            </div>
+
+            <!-- END PAGE CONTENT -->
+
+            <!-- START PAGE FOOTER -->
+            <footer class="page-footer">
+                    <center><b class="f-s-20">Footer..</b></center>
+            </footer>
+            <!-- END PAGE FOOTER -->
+
+        </div>
+        <!-- END MAIN CONTAINER -->
+
+
+    </div>
+</div>
+
+
+
+<div id="divJS"></div>
+<script type="text/javascript">
+    $('#divHeader').load(' header.html');
+    $('#divSide').load(' sidebar.html');
+    $('#divFooter').load(' footer.html');
+    $('#divJS').load(' js.html');
+
+</script>
+
+
+<script src="assets/js/employeeTimesheet.js" type="text/javascript"></script>
+<script src="assets/js/theme.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src='fullcalendar/lib/moment.min.js'></script>
+<script src='fullcalendar/fullcalendar.js'></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+
+</html>

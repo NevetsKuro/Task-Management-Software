@@ -1,0 +1,82 @@
+    {
+    "titles": [
+        {
+            "id": 1,
+            "title": "Mr"
+        }
+    ],
+    "genders": [
+        {
+            "id": 1,
+            "gender": "Female"
+        },
+        {
+            "id": 2,
+            "gender": "Male"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "category": "Private"
+        },
+        {
+            "id": 2,
+            "category": "Official"
+        }
+    ],
+    "social_medias": [
+        {
+            "id": 1,
+            "social_media": "Github"
+        },
+        {
+            "id": 2,
+            "social_media": "Facebook"
+        }
+    ],
+    "designations": [
+        {
+            "id": 1,
+            "designation": "Software Developer"
+        },
+        {
+            "id": 2,
+            "designation": "Software designer"
+        },
+        {
+            "id": 3,
+            "designation": "Software tester"
+        }
+    ],
+    "lead_statuses": [
+        {
+            "id": 1,
+            "lead_status": "cold"
+        },
+        {
+            "id": 2,
+            "lead_status": "Hot"
+        }
+    ],
+    "sources": [
+        {
+            "id": 1,
+            "source": "Referral"
+        },
+        {
+            "id": 2,
+            "source": "Walkin"
+        }
+    ],
+    "services": [
+        {
+            "id": 1,
+            "service": "service1"
+        },
+        {
+            "id": 2,
+            "service": "service2"
+        }
+    ]
+}

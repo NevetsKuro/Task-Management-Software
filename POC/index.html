@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AJAX</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<div class="container" style="margin: 50px;">
+	<div class="row">
+
+		<div class="col-md-4">
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+				</tr>
+				<tbody id="tbody"></tbody>
+			</table>
+		</div>
+
+		<div class="col-md-4">
+			<div class="card" id="card" style="width:200px; margin-left: 100px;">
+			   
+			  </div>
+		</div>
+	</div>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">	
+
+$(document).ready(function(){
+
+	$.get("https://ait-student.herokuapp.com/student-list", function(data, status){
+		var table = "";
+		for (var i in data){
+			table += '<tr class="clickable-row" data-href="' + data[i].id + '"><td>' + data[i].id + '</td>';
+			table += '<td>' + data[i].name + '</td></tr>';
+		}
+		$("#tbody").append(table);
+    });
+
+    function studentDetail(id){
+    	$.get("https://ait-student.herokuapp.com/student?id=" + id, function(data, status){
+
+    		var card = '<img class="card-img-top" src="' + data.sex + '.png" alt="Card image" style="width:100%"><div class="card-body">';
+			    
+    		card += '<h4 class="card-title">' + data.name + '</h4>';
+    		card +=  '<p class="card-text">' + data.email + '</p>';
+    		card +=  '<p class="card-text">' + data.phone + '</p>';
+    		card +=  '<p class="card-text">' + data.dob + '</p></div>';
+
+			$("#card").html(card);
+    	});
+    }
+    studentDetail(1);
+
+	$(document).on("click", ".clickable-row", function () {
+    	var id = $(this).data("href");
+    	studentDetail(id);
+    	
+	}); 
+});
+</script>
+</body>
+</html>

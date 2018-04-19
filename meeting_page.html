@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="en" class="desktop landscape chrome"><!--<![endif]--><!-- START HEAD -->
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+        <title>Dashboard</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="description" content="Calibre is imple and easy admin template">
+        <meta name="keywords" content="calibre bootstrap template, calibre admin, bootstrap, admin template, bootstrap admin">
+        <meta name="author" content="LanceCoder">
+
+        <meta property="og:site_name" content="-CUSTOMER VALUE-">
+        <meta property="og:title" content="-CUSTOMER VALUE-">
+        <meta property="og:description" content="-CUSTOMER VALUE-">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="-CUSTOMER VALUE-">
+        <meta property="og:url" content="-CUSTOMER VALUE-">
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+       
+       
+        <div id="css"></div>
+
+        <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+        
+        
+        <script type="text/javascript" src="assets/js/addCss.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+</head>
+<body class="sidebar-expanded sidebar-theme-2 theme-light-cyan"><i class="btn-theme-switcher icon-cog hidden-xs"></i>
+
+        <!-- Page Loader -->
+        <div class="page-loader" style="display: none;"></div>
+
+        <!-- START WRAPPER -->
+        <div class="wrapper">
+
+            <div id="divHeader" ></div>  
+
+            <div id="divSide"></div>
+
+
+            <div class="main-content small_content">
+
+                <!-- START MAIN CONTAINER -->
+                <div class="main-container">
+
+                    <!-- START PAGE HEADER -->
+                    <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
+                        <div class="page-header-content slideshow">
+                            <div class="page-header-overlay">
+                                
+                                <ol id="breadcrumb" class="breadcrumb f-s-25">
+                                    <li class="breadcrumb-item" href="#">Home</li>
+                                    <li class="breadcrumb-item active" >Add_Meeting</li>
+                                </ol>   
+                            </div>
+                        </div>
+                    </section>
+                    <!-- END PAGE HEADER -->
+
+                    <!-- START PAGE CONTENT -->
+                    <div class="page-content">
+
+                        <!-- START ROW -->
+                        <div class="row">
+                    
+                            <!-- START COL-MD-12 -->
+                            <div class="col-md-12">
+                    
+                                <!-- START PANEL -->
+                                <div class="panel">
+                                    
+                                    <div class="panel-body">
+                    
+                                        <form id="form1" action="#" class="sky-form">
+                                            <fieldset class="col-sm-10 col-sm-offset-1  ">
+                        
+                                                    <div class="col-sm-12">
+                                                        <label class="label">Name of Client / Contact:<span class="text-danger">*</span></label>
+                                                        <label class="input">
+                                                        
+                                                            <input type="text" id="Name" placeholder="Enter Name.." list="namelist" required>
+                                                            <datalist id="namelist">
+                                                            
+                                                            </datalist>
+                                                        
+                                                        </label>
+                                                    </div>    
+
+                                                    <div class="col-sm-12">
+														<label class="label">Purpose/Objective:</label>
+														<label class="textarea">
+														<i class="icon-append icon-book2"></i>
+														<textarea id="purpose" rows="3" class="autosize-animated" required></textarea>
+														</label>
+													</div>
+													
+													<h3>Meeting Information: </h3>
+                                                    
+                                                    <div class="col-sm-6">
+														<label class="label">Meeting Mode:</label>
+														<label class="select">
+														<select id="meeting_mode" required>
+															<option value="">--Select--</option>
+															<option value="location">Face To Face</option>
+															<option value="oncall">On Call</option>
+														</select>
+														</label>
+													</div>
+													
+													<div class="col-sm-6">
+														<div id="loc-wrapper" class="hide">
+															<label class="label">Enter Location: </label>
+															<label class="input">
+																<input type="text" id="meeting_location" required/>
+															</label>
+														</div>
+														<div id="call-wrapper" class="hide">
+															<label class="label">Enter Phone number: </label>
+															<label class="input">
+																<input type="number" id="meeting_phone" required/>
+															</label>
+														</div>
+													</div>
+													<div class="col-sm-6">
+                                                        <label class="label">Date:</label>
+                                                        <label class="input">
+                                                        <input type="date" id="meet_date" placeholder="Date...">
+                                                        </label>
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-6">
+                                                        <label class="label">Start Time:</label>
+                                                        <label class="input">
+                                                        <input type="text" id="sTime" class="timepicker" placeholder="1:00 PM">
+                                                        </label>
+                                                    </div>
+													<div class="col-sm-6">
+                                                        <label class="label">End Time:</label>
+                                                        <label class="input">
+                                                        <input type="text" id="eTime" class="timepicker" placeholder="1:00 PM">
+                                                        </label>
+                                                    </div>
+                                                    
+                                                    <div class="m-t-15 col-sm-6">
+                                                    <label id="lblSingSelect" class="select">
+                                                        <select id="singSelect" class="form-control">
+                                                                <option value="AK">Alaska</option>
+                                                                <option value="HI">Hawaii</option>
+                                                                <option value="CA">California</option>
+                                                                <option value="NV">Nevada</option>
+                                                                <option value="OR">Oregon</option>
+                                                                <option value="WA">Washington</option>
+                                                        </select>
+                                                    </label>
+                                                    </div>
+
+                                                    <br/>
+                                                    
+                                                    <span class="col-sm-2 col-sm-offset-9">
+                                                        <input class="btn btn-default btn-warning" type="submit" id="btnsubmit" value="Submit">
+                                                    </span>
+                                                    <br/>
+                                                    <span id="message" class="col-sm-12 text-danger text-italic text-center"></span>
+    
+                                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        
+                                            </fieldset>
+                                        </form>
+
+                                        <div>
+
+                                                <div class="">
+                                                    
+                                                    <!--****** Start Colored Modal Footer******-->
+                                                    <div class="modal modal-warning bg-header" id="colored-warning-header" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content animated fadeOut">
+                                                    <div class="modal-header">
+                                                        <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                                                        <h4 class="modal-title"><strong>Contacts</strong></h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">                                                                            
+                                                                    <div class="col-xs-4 col-sm-4 text-bold f-s-12">Name</div>
+                                                                    <div class="col-xs-4 col-sm-4 text-bold f-s-12">Company</div>
+                                                                    <div class="col-xs-3 col-sm-3 text-bold f-s-12">Contact</div>                                                                        
+                                                                    <div class="col-xs-1 col-sm-1 text-bold f-s-12"></div>
+                                                        </div>
+                                                        <hr/>
+                                                        <br/>
+                                                        <div class="row" id="searchResult">
+                                                            <!-- DATA FROM JSON -->
+                                                        </div>
+                                                    </div>                                                            
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                    <!--****** Start Colored Modal Footer******-->
+                                                    
+                                                </div>
+                                                
+                                        </div>
+                                        
+                                        <hr/>
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    </div>
+                                    </div>
+                                <!-- END PANEL -->             
+                    
+                            </div>
+                            <!-- END COL-MD-12 -->
+                    
+                        </div>
+                        <!-- END ROW -->
+                    
+                    </div>
+
+                    <!-- END PAGE CONTENT -->
+
+                    <!-- START PAGE FOOTER -->
+                    <footer class="page-footer">
+                            <center><b class="f-s-20">Footer..</b></center>
+                    </footer>
+                    <!-- END PAGE FOOTER -->
+
+                </div>
+                <!-- END MAIN CONTAINER -->
+
+
+            </div>
+        </div>
+
+
+
+       <div id="divJS"></div>
+         <script type="text/javascript">
+            $('#divHeader').load('header.html');
+            $('#divSide').load('sidebar.html');
+            $('#divFooter').load('footer.html');
+           $('#divJS').load('js.html');
+           $('#css').load('css.html');
+          
+  
+        </script>
+             <script src="assets/js/addjs.js" type="text/javascript"></script>
+
+                         
+
+
+
+        
+          <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+          <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js" type="text/javascript"></script>
+          <script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js" type="text/javascript"></script>
+     
+       <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+       <script type="text/javascript" src="assets/js/custom.js"></script>
+      
+		<script>
+			$(document).on('change', '#meeting_mode', function(){
+				if ($(this).val() == 'location') {
+					$('#loc-wrapper').removeClass('hide');
+					$('#call-wrapper').addClass('hide');
+				} else {
+					$('#loc-wrapper').addClass('hide');
+					$('#call-wrapper').removeClass('hide');
+				}
+			});
+			$('.timepicker').timepicker({
+				dropdown: false
+			});
+			$(window).load(function(){
+				$("#singSelect").select2({
+				  tags: true,
+				  createTag: function (params) {
+					return {
+					  id: params.term,
+					  text: params.term,
+					  newOption: true
+					}
+				  },
+				  templateResult: function (data) {
+					var $result = $("<span></span>");
+
+					$result.text(data.text);
+
+					if (data.newOption) {
+					  $result.append(" <em>(add new)</em>");
+					}
+
+					return $result;
+				  }
+				});
+				$('#singSelect').on('select2:select', function (e) {
+					var data = e.params.data;
+					console.log(data);
+				});
+			});
+			
+		</script>
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+</html>
+
+
+
+
+
+
+

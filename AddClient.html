@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+
+<html lang="en" class="desktop landscape chrome">
+<!--<![endif]-->
+<!-- START HEAD -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <title>Add Client</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Calibre is imple and easy admin template">
+    <meta name="keywords" content="calibre bootstrap template, calibre admin, bootstrap, admin template, bootstrap admin">
+    <meta name="author" content="LanceCoder">
+
+    <meta property="og:site_name" content="-CUSTOMER VALUE-">
+    <meta property="og:title" content="-CUSTOMER VALUE-">
+    <meta property="og:description" content="-CUSTOMER VALUE-">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="-CUSTOMER VALUE-">
+    <meta property="og:url" content="-CUSTOMER VALUE-">
+
+
+    <!-- <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css" rel="stylesheet"> -->
+    <link href="assets/vendors/sweetalert/sweetalert.css" rel="stylsheet">
+    <link href="assets/css/jquery-ui.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/assets/css/jquery-ui.css"> -->
+
+    <div id="css"></div>
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/addCss.js"></script>
+
+    <!-- <script type="text/javascript">
+        $('#css').load('http://ungeek.in/calibre/css.html');
+    </script> -->
+
+
+
+</head>
+
+<body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
+    <i class="btn-theme-switcher icon-cog hidden-xs"></i>
+
+    <!-- Page Loader -->
+    <div class="page-loader" style="display: none;"></div>
+
+    <!-- START WRAPPER -->
+    <div class="wrapper">
+
+        <div id="divHeader"></div>
+
+        <div id="divSide"></div>
+
+
+        <div class="main-content small_content">
+
+            <!-- START MAIN CONTAINER -->
+            <div class="main-container">
+
+                <!-- START PAGE HEADER -->
+                <div class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
+                    <div class="page-header-content slideshow">
+                        <div class="page-header-overlay">
+                            <h1 class="page-title">Add Client</h1>
+                            <div class="page-breadcrumb">
+                                <nav class="c_breadcrumbs">
+                                    <ul>
+                                        <li>
+                                            <a href="#">Home</a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="#">Client</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE HEADER -->
+
+                <!-- START PAGE CONTENT -->
+                <div class="page-content">
+
+                    <!-- START ROW -->
+                    <div class="row">
+
+                        <!-- START COL-MD-12 -->
+                        <div class="col-md-12">
+
+                            <!-- START PANEL -->
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    Client
+                                </div>
+                                <div class="panel-body">
+
+                                    <fieldset class="sky-form m-20">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="label">Group:</label>
+                                                <label class="select">
+                                                    <select id="client_group" class="select2 editselect">
+                                                       
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="checkbox m-19">
+                                                    <input id="branch_notify" type="checkbox">
+                                                    <i></i>
+                                                    <span class="label-font">Send Notification:</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="label">Legal Status:</label>
+                                                <label class="select">
+                                                    <select id="client_legalstatus" class="select2">
+                                                        <option value="1">Individual</option>
+                                                        <option value="2">HUF</option>
+                                                        <option value="3">Proprietor</option>
+                                                        <option value="4">Partnership Firm</option>
+                                                        <option value="5">LLP</option>
+                                                        <option value="6">Company</option>
+                                                        <option value="7">AOP/BOI</option>
+                                                        <option value="8">Trust</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!--=========== START HORIZONTAL FORM WIZARD ===========-->
+                                    <div id="horizontal-wizard">
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active">
+                                                <a href="#tab1" data-toggle="tab">
+                                                    <i class="icon-enter"></i> Basic Details
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#tab2" data-toggle="tab">
+                                                    <i class="icon-user"></i> Contact Person
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#tab3" data-toggle="tab">
+                                                    <i class="icon-user"></i> Managers
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#tab4" data-toggle="tab">
+                                                    <i class="icon-check"></i> Statutory Documents
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                        <div class="progress progress-sm m-t-20 m-b-0">
+                                            <div class="progress-bar progress-bar-primary ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar"
+                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                                <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div>
+                                            </div>
+                                        </div>
+
+                                        <form id="client_form" class="validator m-t-20 sky-form" novalidate="novalidate" action="#">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active fade in" id="tab1">
+
+                                                    <!-- INDIVIDUAL -->
+                                                    <div id="Individual" class="row elem">
+
+                                                        <fieldset>
+
+                                                            <div class="well f-s-25 m-b-20 text-bold">INDIVIDUAL</div>
+                                                            <div class="col-sm-2">
+                                                                <label class="label">Title:</label>
+                                                                <label class="select">
+                                                                    <select id="addContact_title" dataType="title" class="select2 editselect selTitle"></select>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="label">First Name:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="individual_fname" class="inpFirstName" type="text" autofocus required>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="label">Middle Name:</label>
+                                                                <label class="input">
+                                                                    <input id="individual_mname" class="inpMiddleName" type="text">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Last Name:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="individual_lname" class="inpLastName" type="text" required>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Date of Birth:</label>
+                                                                <label class="input">
+                                                                    <input id="individual_dob" type="text" class="inputdob dobdatepickr">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Type of Work:</label>
+                                                                <label class="select">
+                                                                    <select id="TypeWork" class="select2 editselect">
+                                                                        <option value="Service">Service</option>
+                                                                        <option value="Business">Business</option>
+                                                                        <option value="House">House</option>
+                                                                    </select>
+
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Aadhar No.:</label>
+                                                                <label class="input">
+                                                                    <input id="individual_aadhar" class="aadhar_valid" placeholder="1234-5678-9012">
+                                                                </label>
+                                                            </div>
+
+                                                        </fieldset>
+
+                                                    </div>
+
+                                                    <!-- HUF -->
+                                                    <div id="HUF" class="row elem">
+                                                        <fieldset>
+                                                            <div class="well f-s-25 m-b-20 text-bold">Hindu Undivided Family(HUF)</div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Name:</label>
+                                                                <label class="input">
+                                                                    <i class="icon-append icon-user"></i>
+                                                                    <input id="HUF_name" type="text">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Date of Incorporation:</label>
+                                                                <label class="input">
+                                                                    <i class="icon-append icon-calendar-31"></i>
+                                                                    <input id="HUF_date" type="text" class="datepickr">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Name of Karta:</label>
+                                                                <label class="input">
+                                                                    <input id="HUF_nameOfKarta" type="text">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Name of Business:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="HUF_nameofBusiness" class="nameofBusiness" type="text" required>
+                                                                </label>
+                                                            </div>
+
+                                                        </fieldset>
+
+                                                    </div>
+
+                                                    <!-- PROPRIETOR -->
+                                                    <div id="Proprietor" class="row elem">
+
+                                                        <fieldset>
+
+                                                            <div class="text-bold m-b-20 f-s-25 well">Proprietor</div>
+                                                            <div class="col-sm-12">
+                                                                <label class="label">Name of Business:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="Proprietor_name" class="nameofBusiness" type="text" required>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <label class="label">Title:</label>
+                                                                <label class="select2">
+                                                                    <select id="prop_Title" class="select2 title selTitle"></select>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="label">First Name:</label>
+                                                                <label class="input">
+                                                                    <input id="Proprietor_fname" class="inpFirstName" type="text">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="label">Middle Name:</label>
+                                                                <label class="input">
+                                                                    <input id="Proprietor_mname" class="inpMiddleName" type="text">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Last Name:</label>
+                                                                <label class="input">
+                                                                    <input id="Proprietor_lname" class="inpLastName" type="text">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Date of Commencement of Business :</label>
+                                                                <label class="input">
+                                                                    <input id="Proprietor_dateOfComm" type="text">
+                                                                </label>
+                                                            </div>
+                                                        </fieldset>
+
+                                                    </div>
+
+                                                    <!-- Partnership Firm -->
+                                                    <div id="PartnershipFirm" class="row elem">
+
+                                                        <fieldset>
+
+                                                            <div class="col-sm-12 text-bold f-s-25">Partnership Firm</div>
+
+                                                            <div class="col-sm-12">
+                                                                <label class="label">Name of Business:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="Partnership_name" class="nameofBusiness" type="text" required>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Date of Partnership Deed:</label>
+                                                                <label class="input">
+                                                                    <input id="Partnership_date" type="text" class="datepickr">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Date of Commencement of Business:</label>
+                                                                <label class="input">
+                                                                    <input id="Partnership_date" type="text" class="datepickr">
+                                                                </label>
+                                                            </div>
+
+                                                            <div id="partner-row">
+                                                                <div class="col-sm-12 well m-t-40">
+                                                                    <label class="label">Details of Partners:</label>
+                                                                </div>
+                                                                <div class="new row well">
+                                                                <div class="col-sm-6">
+                                                                    <label class="label">Partner's Name
+                                                                        <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <label class="input">
+                                                                        <input class="partnerName" type="text" required>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-5">
+                                                                    <label class="label">Partnership Share(in %)</label>
+                                                                    <label class="input">
+                                                                        <input class="partnershare" type="number" min="0" max="100">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-1">
+                                                                    <label class="label">
+                                                                        Remove
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="col-sm-2 m-l-20">
+                                                                    <input id="addpartners" type="button" class="btn btn-success buttonDefSize" value="Add">
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+
+                                                    </div>
+
+                                                    <!-- LLP -->
+                                                    <div id="LLP" class="row elem">
+                                                        <fieldset>
+                                                            <div class="text-bold m-b-20 f-s-25 well">Limited Liability Partnership(LLP)</div>
+                                                            <div class="col-sm-12">
+                                                                <label class="label">Name of LLP:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="LLP_name" class="nameofBusiness" type="text" required>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Date of Incorporation:</label>
+                                                                <label class="input">
+                                                                    <input id="LLP_date" type="text" class="datepickr">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Name of other Partners:</label>
+                                                                <label class="input">
+                                                                    <input id="partners_noopartner" type="text">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">LLPIN:</label>
+                                                                <label class="input">
+                                                                    <input id="LLP_LLPIN" type="text" class="llpin_valid">
+                                                                </label>
+                                                            </div>
+                                                            <div id="dpartner-row" class="col-sm-12">
+                                                                <div class="well">
+                                                                    <label class="label">Details of Designated Partners</label>
+                                                                </div>
+                                                                <div class="new row well ">
+                                                                    <div class="col-sm-6">
+                                                                        <label class="label">Name of Designated Partner:</label>
+                                                                        <label class="input">
+                                                                            <input id="LLP_designatedpartner" class="LLP_designatedpartner" type="text">
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-sm-5">
+                                                                        <label class="label">Corresponding DIN of Designated Partner:</label>
+                                                                        <label class="input">
+                                                                            <input id="LLP_din_designatedpartner" class="LLP_din_designatedpartner" class="din_valid" type="number">
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-sm-1">
+                                                                        <label class="label">Remove</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 m-20">
+                                                                <div class="col-sm-2">
+                                                                    <input id="addDpartners" type="button" class="btn btn-success buttonDefSize" value="Add">
+                                                                </div>
+                                                            </div>
+
+                                                        </fieldset>
+
+                                                    </div>
+
+                                                    <!-- Company -->
+                                                    <div id="Company" class="row elem">
+
+                                                        <fieldset>
+
+                                                            <div class="well f-s-25 m-b-20 text-bold">Company</div>
+                                                            <div class="col-sm-12">
+                                                                <label class="label">Name of Company:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="company_name" class="nameofBusiness" type="text" required>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Types of Company:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="select">
+                                                                    <select id="company_types" class="select2" required>
+                                                                        <option value="C1">C1</option>
+                                                                    </select>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Date of Incorporation:</label>
+                                                                <label class="input">
+                                                                    <input id="company_date" type="text" class="datepickr">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">CIN</label>
+                                                                <label class="input">
+                                                                    <input id="company_cin" type="text" class="cin_valid" placeholder="e.g. A 11111 AA 1111 AAA 111111">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                   <label class="col-sm-2 checkbox m-t-30">
+                                                                    <input type="checkbox" id="company_listedy" name="listed">
+                                                                    <i></i>
+                                                                    <span class="label-font">Listed</span>
+                                                                </label>
+                                                               
+                                                            </div>
+                                                            <div class="nofE col-sm-6 hide">
+                                                                <label class="label">Name(s) of Stock Exchange:</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="company_stock">
+                                                                </label>
+                                                            </div>
+
+                                                            <div id="director-row" class="col-sm-12 m-b-10 m-t-10">
+                                                                <div class="row well">
+                                                                    <label class="label">Directors:</label>
+                                                                </div>
+                                                                <div class="new row well">
+                                                                    <div class="col-sm-5">
+                                                                        <label class="label">Name of Directors:</label>
+                                                                        <label class="input">
+                                                                            <input class="company_directors" id="company_directors" type="text">
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-sm-5">
+                                                                        <label class="label">Corresponding DIN of Directors:</label>
+                                                                        <label class="input">
+                                                                            <input id="company_din_directors" class="company_din_directors din_valid" type="number">
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <label class="label">Remove</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="col-sm-2 m-20">
+                                                                    <input id="adddirectors" type="button" class="btn btn-success buttonDefSize" value="Add">
+                                                                </div>
+                                                            </div>
+
+                                                        </fieldset>
+
+                                                    </div>
+
+                                                    <!-- AOP/BOI -->
+                                                    <div id="AOP" class="row elem">
+
+                                                        <fieldset>
+
+                                                            <div class="well text-bold m-b-20 f-s-25">AOP/BOI:</div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Name of Association:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="AOP_name" class="nameofBusiness" type="text" required>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Date of Commencement:</label>
+                                                                <label class="input">
+                                                                    <input id="AOP_date" type="text" class="datepickr">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Name of Member(s):</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="members">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Registration No.:</label>
+                                                                <label class="input">
+                                                                    <input id="AOP_registration" type="text">
+                                                                </label>
+                                                            </div>
+                                                        </fieldset>
+
+                                                    </div>
+
+                                                    <!-- TRUST -->
+                                                    <div id="trust" class="row elem">
+                                                        <fieldset>
+
+                                                            <div class="well text-bold m-b-20 f-s-25">Trust:</div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Name of Trust:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="trust_name" class="nameofBusiness" type="text" required>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Name(s) of Trustee:</label>
+                                                                <label class="input">
+                                                                    <input id="trusteeName" type="text">
+
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Date of Commencement:</label>
+                                                                <label class="input">
+                                                                    <input id="trust_doc" type="text" class="datepickr">
+                                                                </label>
+                                                            </div>
+                                                        </fieldset>
+
+                                                    </div>
+
+                                                    <hr>
+
+                                                    <div class="organis hide">
+                                                        <div class="row m-t-30 m-b-30">
+                                                            <div class="col-sm-7 contact-search">
+                                                                <label class="label">Organisation:</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="searchOrgKeyword" class=" " placeholder="Search...">
+                                                                    <i id="search_organisations" class="fa fa-search serc-btn"></i>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input class="btn btn-success buttonDefSize m-t-25 addNewOrg" value="Add"/>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                    <input id="editOrganisation" oid="null" class="btn btn-success buttonDefSize m-t-25" value="Edit" disabled>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <hr>
+
+                                                    <div id="common">
+                                                        <div id="address-row">
+                                                            <div class="row well m-t-40 m-b-20">
+                                                                <label class="label">Address</label>
+                                                            </div>
+                                                            <div class="new row well">
+                                                                <div class="col-sm-2">
+                                                                    <label class="label">Category:</label>
+                                                                    <label class="select">
+                                                                        <select id="addrCategory" class="address_category select2 editselect ">
+
+                                                                        </select>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <label class="label">Address:</label>
+                                                                    <label class="textarea textarea-expandable">
+                                                                        <textarea class="address_street" id="streetAddress" rows="3"></textarea>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label class="label">State:</label>
+                                                                    <label class="select">
+                                                                        <select id="state" class="address_state select2 editSelect" type="text">
+                                                                        </select>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label class="label">City:</label>
+                                                                    <label class="input">
+                                                                        <input id="city" class="address_city" type="text">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label class="label">Pincode:</label>
+                                                                    <label class="input">
+                                                                        <input id="pincode" class="address_pincode" type="number">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-1">
+                                                                    <label class="label">Remove</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row">
+                                                            <div class="m-20 col-sm-2">
+                                                                <input id="add_maddress" type="button" class="btn btn-success buttonDefSize" value="Add">
+                                                            </div>
+                                                        </div>
+                                                        <div id="contact-row">
+                                                            <div class="col-sm-12 well">
+                                                                <label class="label">Phone Numbers</label>
+                                                            </div>
+                                                            <div class="new row well m-t-30">
+                                                                <div class="col-sm-4">
+                                                                    <label class="label">Category</label>
+                                                                    <label class="select">
+                                                                        <select class="contactnumber_category select2 editselect">
+                                                                            
+                                                                        </select>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="label">Phone No.
+                                                                        <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <label class="input">
+                                                                        <input id="phone" class="addContact_contactNumbers phonenumber_valid" type="number" required>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label class="label">Remove</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-2 m-20">
+                                                                <input id="addcontact" type="button" class="btn btn-success buttonDefSize" value="Add">
+                                                            </div>
+                                                        </div>
+
+                                                        <div id="email-row">
+                                                            <div class="col-sm-12 well">
+                                                                <label class="label">Email ID's</label>
+                                                            </div>
+                                                            <div class="new row well m-t-30">
+                                                                <div class="col-sm-4">
+                                                                    <label class="label">Category</label>
+                                                                    <label class="select">
+                                                                        <select id="emailCategory" class="email_category select2 editselect">
+                                                                          
+                                                                        </select>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="label">Email Id
+                                                                        <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <label class="input">
+                                                                        <input id="email" type="email" class="addContact_emailIds" placeholder="e.g. abc@example.com" required>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label class="label">Remove</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-2 m-20">
+                                                                <input id="addEmail" type="button" class="btn btn-success buttonDefSize" value="Add">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row m-t-20 m-b-20">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">PAN No:</label>
+                                                                <label class="input">
+                                                                    <input id="PANNO" class="pannumber_valid" type="text" placeholder="e.g. AAAAA1111A">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Website:</label>
+                                                                <label class="input">
+                                                                    <input id="website" type="text" placeholder="http://www.example.com">
+                                                                </label>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="companyCommon" class="elem m-t-20">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Nature of Business:</label>
+                                                                <label class="select">
+                                                                    <select id="nature_business" class="select2-multiple editselect" multiple></select>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Types of Industry:</label>
+                                                                <label class="select">
+                                                                    <select id="industryType" class="select-multiple editselect" multiple></select>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Types of Business:</label>
+                                                                <label class="select">
+                                                                    <select id="businessType" class="select2-multiple editselect" multiple></select>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">GSTIN:</label>
+                                                                <label class="input">
+                                                                    <input id="GSTIN" type="text" class="gstinnumber" placeholder="e.g.AA AAAAA0000A 1 Z 5">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">TAN No:</label>
+                                                                <label class="input">
+                                                                    <input id="TANNO" type="text" class="pannumber_valid" placeholder="e.g. AAAAA 1111 A">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div>
+                                                        <!--****** Start Colored Modal Footer******-->
+                                                        <div class="modal modal-warning bg-header" id="organisation-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content animated fadeOut">
+                                                                        <div class="modal-header">
+                                                                            <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                                <i class="fa fa-times"></i>
+                                                                            </button>
+                                                                            <h4 class="modal-title">
+                                                                                <strong>Organisations</strong>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Sr. No</div>
+                                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Name</div>
+                                                                                <div class="col-xs-1 col-sm-1 text-bold f-s-12">Group</div>
+                                                                            </div>
+                                                                            <hr>
+                                                                            <br/>
+                                                                            <div class="row" id="orgList">
+                                                                                <!-- DATA FROM JSON -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--****** Start Colored Modal Footer******-->
+                                                    </div>
+
+                                                    <!-- BRANCHES -->
+                                                    <div class="a_branch hide m-t-40 m-b-40">
+                                                        <div id="branch-row">
+                                                            <div class="row well m-t-40 m-b-20">
+                                                                <label class="label">Branches:</label>
+                                                            </div>
+                                                            <div class="new row well">
+                                                                <div class="col-sm-2">
+                                                                    <label class="label">Name:</label>
+                                                                    <label class="input">
+                                                                        <input id="branch_name" class="branch_name" type="text">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <label class="label">Address:</label>
+                                                                    <label class="input">
+                                                                        <input id="branch_address" class="branch_address" type="text">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label class="label">GSTIN:</label>
+                                                                    <label class="input">
+                                                                        <input id="branch_GSTIN" class="branch_gst gstinnumber" type="number">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label class="label">Phone No:
+                                                                        <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <label class="input">
+                                                                        <input id="branch_phone" class="branch_phone phonenumber_valid" type="number" required>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label class="label">Email ID:
+                                                                        <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <label class="input">
+                                                                        <input id="branch_email" class="branch_email" type="email" placeholder="e.g. abc@example.com" required>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-1">
+                                                                    <label class="label">Remove</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                            <div class="row m-20">
+                                                                <div class="col-sm-2">
+                                                                    <input id="addbranch" type="button" class="btn btn-success buttonDefSize" value="Add">
+                                                                </div>
+                                                            </div>
+                                                        
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="tab-pane fade" id="tab2">
+
+                                                    <fieldset>
+                                                        <table id="clientsContact_datatable" class="display" style="width:100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Primary</th>
+                                                                    <th>Id</th>
+                                                                    <th>TitleId</th>
+                                                                    <th>Title</th>
+                                                                    <th>Name</th>
+                                                                    <th>Email</th>
+                                                                    <th>Phone No.</th>
+                                                                    <th>Relation</th>
+                                                                    <th>Designation</th>
+                                                                    <th>Service</th>
+                                                                    <th>Remove</th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <th>Primary</th>
+                                                                    <th>Id</th>
+                                                                    <th>TitleId</th>
+                                                                    <th>Title</th>
+                                                                    <th>Name</th>
+                                                                    <th>Email</th>
+                                                                    <th>Phone No.</th>
+                                                                    <th>Relation</th>
+                                                                    <th>Designation</th>
+                                                                    <th>Service</th>
+                                                                    <th>Remove</th>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+
+                                                    </fieldset>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-2 m-20">
+                                                            <input id="countSelected" class="btn btn-warning buttonDefSize" value="Count">
+                                                        </div>
+                                                        <div class="col-sm-2 m-20">
+                                                            <input id="add_clientsContact" class="btn btn-warning buttonDefSize" value="Add">
+                                                        </div>
+                                                    </div>
+
+                                                    <fieldset id="clientsContact_form" class="m-t-50 hide">
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <label class="label">Title:</label>
+                                                                <label class="select">
+                                                                    <select id="clientsContact_title" class="select2 editselect selTitle">
+                                                                        
+                                                                    </select>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <label class="label">Name:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="clientsContact_Name" class="inpFirstName" type="text" required>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Email:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="clientsContact_email" type="email" placeholder="e.g. abc@example.com" required>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Phone:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="clientsContact_phone" class="phonenumber_valid" type="number" required>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="designation_tab col-sm-6 hide">
+                                                                <label class="label">Designation:</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="clientsContact_designation">
+
+                                                                </label>
+                                                            </div>
+                                                            <div class="service_tab col-sm-6 hide">
+                                                                <label class="label">Purpose:</label>
+                                                                <label class="textarea textarea-expandable">
+                                                                    <textarea id="clientsContact_purpose" rows="2"></textarea>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="relation_tab row">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Relation:</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="clientsContact_relation">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row m-t-30">
+                                                            <div class="col-sm-offset-7 col-sm-2 m-r-20 m-b-20">
+                                                                <input id="close_add_clientsContact" type="button" class="btn btn-danger buttonDefSize p-l-20 p-r-20" type="text" value="Cancel">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input id="add_to_clientsContact" class="btn btn-success buttonDefSize p-l-20 p-r-20" type="button" value="Add">
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+
+
+                                                <div class="tab-pane fade" id="tab3">
+
+                                                    <fieldset id="service" class="m-t-20">
+
+                                                        <div class="row well">
+
+                                                            <div class="col-md-4">
+                                                                <label class="label">Service</label>
+                                                                <label class="select" id="service_1">
+                                                                    <select id="services" class="select2 editselect">
+
+                                                                    </select>
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <label class="label">Managers</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="RelationshipManagers">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <label class="label">Role</label>
+                                                                <label class="input">
+                                                                    <input type="text" name="Org_name" placeholder="">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <label>Remove</label>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </fieldset>
+                                                    <div id="addService" class="row m-t-30">
+                                                        <div class="col-sm-2 m-20">
+                                                            <input type="button" class="btn btn-success buttonDefSize" value="Add">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="tab-pane fade" id="tab4">
+                                                    <!-- <div class="alert alert-info" role="alert">
+                                                                                    Congratulations you're successfully registered.
+                                                                                </div>-->
+
+                                                    <fieldset>
+                                                        <table id="statDocs" class="display" style="width:100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>Name</th>
+                                                                    <th>Number</th>
+                                                                    <th>Issuing Authority</th>
+                                                                    <th>Valid From</th>
+                                                                    <th>Valid Till</th>
+                                                                    <th>Applicable Law</th>
+                                                                    <th>Remove</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>Name</th>
+                                                                    <th>Number</th>
+                                                                    <th>Issuing Authority</th>
+                                                                    <th>Valid From</th>
+                                                                    <th>Valid Till</th>
+                                                                    <th>Applicable Law</th>
+                                                                    <th>Remove</th>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+
+                                                    </fieldset>
+                                                    <div class="row">
+                                                        <div class="col-sm-2 m-20">
+                                                            <input id="show_addmore" type="button" class="btn btn-success buttonDefSize" value="Add">
+                                                        </div>
+                                                    </div>
+                                                    <fieldset id="document_form" class="well hide">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Name:</label>
+                                                                <label class="input">
+                                                                    <input id="stat_name" type="text">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Number:</label>
+                                                                <label class="input">
+                                                                    <input id="stat_number" type="number">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Issuing Authority:</label>
+                                                                <label class="input">
+                                                                    <input id="stat_issuingAuthority" type="text">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Valid From:</label>
+                                                                <label class="input">
+                                                                    <input id="stat_validFrom" type="text" class="datepickr">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Valid Till:</label>
+                                                                <label class="input">
+                                                                    <input id="stat_validTo" type="text" class="datepickr">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Applicable Law:</label>
+                                                                <label class="input">
+                                                                    <input id="stat_applicable" type="text">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Document:</label>
+                                                                <div class="input input-file">
+                                                                    <i class="icon-prepend icon-user"></i>
+                                                                    <div class="button">
+                                                                        <input id="stat_document" type="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
+                                                                    <input type="text" readonly="" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-2 col-sm-offset-7 m-r-20">
+                                                                <input id="close_addmore" type="button" class="btn btn-danger buttonDefSize p-l-15 p-r-15" value="Cancel">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input id="submit_addmore" type="button" class="btn btn-success buttonDefSize p-l-30 p-r-30" value="Submit">
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <!--/#wizard1-->
+                                    <!--=========== END HORIZONTAL FORM WIZARD ===========-->
+                                </div>
+                            </div>
+                            <!-- END PANEL -->
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-2 col-sm-offset-8">
+                                            <input class="btn btn-danger buttonDefSize" type="reset" value="Reset">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input id="clientSubmit" class="btn btn-success buttonDefSize" value="Submit">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- END COL-MD-12 -->
+
+                    </div>
+                    <!-- END ROW -->
+
+                </div>
+
+                <!-- END PAGE CONTENT -->
+
+                <!-- START PAGE FOOTER -->
+                <footer class="page-footer">
+                    <center>
+                        <b class="f-s-20">Footer..</b>
+                    </center>
+                </footer>
+                <!-- END PAGE FOOTER -->
+
+            </div>
+            <!-- END MAIN CONTAINER -->
+
+
+        </div>
+    </div>
+
+
+    <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
+
+    <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script>
+        /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.ui.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.nanoscroller.min.js" type="text/javascript"></script>
+    <script src="assets/js/nicescroll.min.js" type="text/javascript"></script>
+    <script src="assets/js/animsition.min.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script> -->
+    <script src="assets/js/jquery.cookie.min.js"></script>
+    <script src="assets/js/device.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/scrollTo.min.js"></script>
+    <script src="assets/js/rippler.min.js" type="text/javascript"></script>
+    <!-- SKY FORM JS PLUGINS-->
+    <script src="assets/js/jquery.form.min.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/jquery.maskedinput.min.js"></script>
+    <script src="assets/js/jquery.modal.js"></script>
+    <script src="assets/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="assets/js/select2.js" type="text/javascript"></script>
+    <!--[if lt IE 10]>
+                <script src="../../assets/vendors/skyforms/jquery.placeholder.min.js"></script>
+        <![endif]-->
+    <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+                <script src="../../assets/vendors/skyforms/sky-forms-ie8.js"></script>
+        <![endif]-->
+    <!-- END SKY FORM JS PLUGINS-->
+    <!--================================/
+        /* START GLOBAL JS PLUGINS
+        /*================================-->
+
+
+    <!-- SKY FORM JS PLUGINS-->
+    <script src="assets/vendors/skyforms/js/jquery.form.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.validate.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.maskedinput.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.modal.js"></script>
+
+    <!--================================/
+        /* START JS PLUGINS FOR THIS PAGE
+        /*================================-->
+    <!-- <script src="assets/js/jquery.peity.min.js"></script> -->
+    <!--<script src="assets/js/echarts.js"></script>-->
+    <script src="assets/js/skycons.js"></script>
+    <script src="assets/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="assets/vendors/bootstrap-fileupload/js/bootstrap-fileupload.js"></script>
+
+    <!--================================/
+        /* END JS PLUGINS FOR THIS PAGE
+        /*================================-->
+
+
+    <!--================================/
+            /* START COMMON SCRIPT FOR ALL PAGES
+            /*================================-->
+
+    <script src="assets/js/forms/form-wizard.js" type="text/javascript"></script>
+    <!--================================/
+            /* END COMMON SCRIPT FOR ALL PAGES
+            /*================================-->
+
+
+
+    <!--================================/
+        /* START SCRIPT THIS PAGE ONLY
+        /*================================-->
+    <!-- <script src="assets/js/dashboard.js" type="text/javascript"></script> -->
+    <!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
+    <script src="assets/js/widget-weather.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
+    <script src="assets/js/widget-list.js" type="text/javascript"></script>
+
+    <!--================================/
+        /* END SCRIPT THIS PAGE ONLY
+        /*================================-->
+
+
+    <!--================================/
+        /* START CUSTOM SCRIPTS
+        /*================================-->
+
+        <!-- <script src="assets/js/addCss.js"></script> -->
+    <script type="text/javascript">
+        //$('#divHeader').load('http://localhost:8080/header.html');
+        // $('#divSide').load('http://localhost:8080/sidebar.html');
+        // $('#divFooter').load('http://localhost:8080/footer.html');
+    </script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js" type="text/javascript"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
+    <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+    <!-- <script src="assets/pages/jquery.ui-sliders.js"></script> -->
+    <script src="http://www.ungeek.in/calibre/assets/js/subFunc.js" type="text/javascript"></script>
+    <script src="assets/js/custom_client.js" type="text/javascript"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+    <script src="assets/js/addheader.js" type="text/javascript"></script>
+    <script src="assets/js/addSidebar.js" type="text/javascript"></script>
+    <!--================================/
+        /* END CUSTOM SCRIPTS
+       
+       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script src="assets/js/addheader.js" type="text/javascript"></script>
+        <script src="assets/js/addSidebar.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                //global functions
+                App.init();
+
+            });
+
+        </script>
+        */-->
+
+</body>
+
+
+
+</html>
