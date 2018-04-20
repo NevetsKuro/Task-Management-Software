@@ -10,7 +10,9 @@ $(document).ready(function () {
 
         var listContact = "";
         var contactLink = "AddContact.html?contact=";
-        var clientLink = "AddContact.html?client=";
+        var clientLink = "AddClient.html?client=";
+        var contactViewLink = "ViewContact.html"
+        var clientViewLink = "ViewClient.html"
 
         if(currentList){
             currentList.forEach(element => {
@@ -44,7 +46,7 @@ $(document).ready(function () {
                             <a title="Select/Deselect" class="btn bg-grey btn-sm selectable">
                                 <i class="glyphicon glyphicon-ok-circle"></i>
                             </a>
-                            <a title="View"  class="btn btn-success btn-sm">
+                            <a title="View" href="${contactViewLink}?id=${element.id}" class="btn btn-success btn-sm">
                                 <i class="glyphicon glyphicon glyphicon-user"></i>
                             </a>
                             <a title="Edit" href="${contactLink}${element.id}" class="btn btn-success btn-sm">
@@ -53,7 +55,7 @@ $(document).ready(function () {
                             <a title="Delete" id="${element.id}" class="deleteContact btn btn-danger btn-sm">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </a>
-                            <a title="Convert to Client" href="${clientLink}${element.id}" class="btn btn-primary btn-sm CTC">
+                            <a title="Convert to Client" href="${clientLink}?client=${element.id}" class="btn btn-primary btn-sm CTC">
                                 <i class="glyphicon glyphicon-random"></i>
                             </a> 
 
@@ -81,17 +83,13 @@ $(document).ready(function () {
                             <div class="front-content">
                                 
                                 <h4 class="m-t-0 m-b-5 header-title">
-                                    <b class="name">${element.name}</b>
+                                    <b class="name">${element.name?element.name:'Name'}</b>
                                 </h4>
-                                <p class="text-muted text-bold">${element.designation}</p>
                                 <p class="text-dark">
-                                    <small>${( listOf == 'contact' ? element.organisation:" " )}</small>
+                                    <small>${element.group?element.group:'GROUP'}</small>
                                 </p>
                                 <p class="text-dark">
-                                    <small>${element.phone}</small>
-                                </p>
-                                <p class="text-dark m-l-50">
-                                    <small>${(typeof element.email !== "" || typeof element.email !== 'null') ? element.email : 'Not available'}</small>
+                                    <small>${element.legal_status?element.legal_status:'Legal Status'}</small>
                                 </p>
 
                             </div>
@@ -107,12 +105,9 @@ $(document).ready(function () {
                             <a title="Edit" href="${contactLink}${element.id}" class="btn btn-success btn-sm">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </a>
-                            <a title="Delete" id="${element.id}" class="deleteContact btn btn-danger btn-sm">
+                            <a title="Delete" id="${element.id}" class="deleteClient btn btn-danger btn-sm">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </a>
-                            <a title="Convert to Client" href="${clientLink}${element.id}" class="btn btn-primary btn-sm CTC">
-                                <i class="glyphicon glyphicon-random"></i>
-                            </a> 
 
                         </div>
                     </div>
@@ -225,7 +220,7 @@ $(document).ready(function () {
 
     });
 
-    $(".selectAll").on('click', function () {
+    $(document).on('click',".selectAll", function () {
         if ($(this).is(':checked')) {
             $('.actionBut').attr('disabled', false);
             $(".selectable").children('.glyphicon').removeClass('glyphicon-ok-circle');
@@ -280,7 +275,7 @@ $(document).ready(function () {
         var sortByDesignation = currentList.sort(compareDesignation);
         contactListBody(sortByDesignation);
     });
-    $('.searchContact').on('click', function (e) {
+    $(document).on('click','.searchContact', function (e) {
         e.preventDefault();
         var searchData = $('.searchContactText').val();
         $('.cList').empty();

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="en" class="desktop landscape chrome">
+<!--<![endif]-->
+<!-- START HEAD -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <title>Add Client</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Calibre is imple and easy admin template">
+    <meta name="keywords" content="calibre bootstrap template, calibre admin, bootstrap, admin template, bootstrap admin">
+    <meta name="author" content="LanceCoder">
+
+    <meta property="og:site_name" content="-CUSTOMER VALUE-">
+    <meta property="og:title" content="-CUSTOMER VALUE-">
+    <meta property="og:description" content="-CUSTOMER VALUE-">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="-CUSTOMER VALUE-">
+    <meta property="og:url" content="-CUSTOMER VALUE-">
+
+
+    <link href="assets/vendors/sweetalert/sweetalert.css" rel="stylsheet">
+    <link href="assets/css/jquery-ui.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/assets/css/jquery-ui.css"> -->
+
+    <div id="css"></div>
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/addCss.js"></script>
+
+
+</head>
+
+<body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
+    <i class="btn-theme-switcher icon-cog hidden-xs"></i>
+
+    <!-- Page Loader -->
+    <div class="page-loader" style="display: none;"></div>
+
+    <!-- START WRAPPER -->
+    <div class="wrapper">
+
+        <div class="">
+                <!-- START PAGE CONTENT -->
+                <div class="">
+
+                    <!-- START ROW -->
+                    <div class="row">
+
+                        <!-- START COL-MD-12 -->
+                        <div class="col-md-12">
+
+                            <!-- START PANEL -->
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    Quick Add Contact
+                                </div>
+                                <div class="panel-body">
+                                    <form id="clientsContact_form" class="sky-form">
+                                        <fieldset class="m-t-50">
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <label class="label">Title:</label>
+                                                        <label class="select">
+                                                            <select id="clientsContact_title" class="select2 editselect selTitle">
+                                                                
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <label class="label">Name:
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <label class="input">
+                                                            <input id="clientsContact_Name" class="inpFirstName" type="text" required>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <label class="label">Gender:</label>
+                                                        <label class="select">
+                                                            <select id="clientsContact_Gender" class="select2">
+
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label class="label">Email:
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <label class="input">
+                                                            <input id="clientsContact_email" type="email" placeholder="e.g. abc@example.com" required>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label class="label">Phone:
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <label class="input">
+                                                            <input id="clientsContact_phone" class="phonenumber_valid" type="number" required>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="designation_tab col-sm-6 hide">
+                                                        <label class="label">Designation:</label>
+                                                        <label class="input">
+                                                            <input type="text" id="clientsContact_designation">
+
+                                                        </label>
+                                                    </div>
+                                                    <div class="service_tab col-sm-6 hide">
+                                                        <label class="label">Purpose:</label>
+                                                        <label class="textarea textarea-expandable">
+                                                            <textarea id="clientsContact_purpose" rows="2"></textarea>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class=" row">
+                                                    <div class="relation_tab col-sm-6 hide">
+                                                        <label class="label">Relation:</label>
+                                                        <label class="input">
+                                                            <input type="text" id="clientsContact_relation">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row m-t-30">
+                                                    <div class="col-sm-offset-7 col-sm-2 m-r-20 m-b-20">
+                                                        <input id="close_add_clientsContact" type="button" class="btn btn-danger buttonDefSize p-l-20 p-r-20" type="text" value="Cancel">
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <input id="add_to_clientsContact" class="btn btn-success buttonDefSize p-l-20 p-r-20" type="button" value="Add">
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END COL-MD-12 -->
+
+                    </div>
+                    <!-- END ROW -->
+
+                </div>
+
+                <!-- END PAGE CONTENT -->
+
+            </div>
+            <!-- END MAIN CONTAINER -->
+
+
+    </div>
+
+
+    <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
+
+    <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script>
+        /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.ui.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.nanoscroller.min.js" type="text/javascript"></script>
+    <script src="assets/js/nicescroll.min.js" type="text/javascript"></script>
+    <script src="assets/js/animsition.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.cookie.min.js"></script>
+    <script src="assets/js/device.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/scrollTo.min.js"></script>
+    <script src="assets/js/rippler.min.js" type="text/javascript"></script>
+    <!-- SKY FORM JS PLUGINS-->
+    <script src="assets/js/jquery.form.min.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/jquery.maskedinput.min.js"></script>
+    <script src="assets/js/jquery.modal.js"></script>
+    <script src="assets/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="assets/js/select2.js" type="text/javascript"></script>
+    <!--[if lt IE 10]>
+                    <script src="../../assets/vendors/skyforms/jquery.placeholder.min.js"></script>
+            <![endif]-->
+    <!--[if lt IE 9]>
+                    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+                    <script src="../../assets/vendors/skyforms/sky-forms-ie8.js"></script>
+            <![endif]-->
+    <!-- END SKY FORM JS PLUGINS-->
+    <!--================================/
+            /* START GLOBAL JS PLUGINS
+            /*================================-->
+
+
+    <!-- SKY FORM JS PLUGINS-->
+    <script src="assets/vendors/skyforms/js/jquery.form.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.validate.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.maskedinput.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.modal.js"></script>
+
+    <!--================================/
+            /* START JS PLUGINS FOR THIS PAGE
+            /*================================-->
+    <!-- <script src="assets/js/jquery.peity.min.js"></script> -->
+    <script src="assets/js/skycons.js"></script>
+    <script src="assets/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="assets/vendors/bootstrap-fileupload/js/bootstrap-fileupload.js"></script>
+
+    <!--================================/
+            /* END JS PLUGINS FOR THIS PAGE
+            /*================================-->
+
+
+    <!--================================/
+                /* START COMMON SCRIPT FOR ALL PAGES
+                /*================================-->
+
+    <script src="assets/js/forms/form-wizard.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/dashboard.js" type="text/javascript"></script> -->
+    <script src="assets/js/widget-weather.js" type="text/javascript"></script>
+    <script src="assets/js/widget-list.js" type="text/javascript"></script>
+
+    <!--================================/
+            /* END SCRIPT THIS PAGE ONLY
+            /*================================-->
+
+
+    <!--================================/
+            /* START CUSTOM SCRIPTS
+            /*================================-->
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js" type="text/javascript"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
+    <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+    <!-- <script src="assets/pages/jquery.ui-sliders.js"></script> -->
+    <script src="http://www.ungeek.in/calibre/assets/js/subFunc.js" type="text/javascript"></script>
+    <script src="assets/js/quick_add_contact.js" type="text/javascript"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+    <script src="assets/js/addheader.js" type="text/javascript"></script>
+    <script src="assets/js/addSidebar.js" type="text/javascript"></script>
+    <!--================================/
+            /* END CUSTOM SCRIPTS
+           
+           <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+            <script src="assets/js/addheader.js" type="text/javascript"></script>
+            <script src="assets/js/addSidebar.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+    
+                    //global functions
+                    App.init();
+    
+                });
+    
+            </script>
+            */-->
+
+</body>
+
+
+
+</html>

@@ -35,7 +35,6 @@
     <script type="text/javascript" src="assets/js/addCss.js"></script>
 
 
-
 </head>
 
 <body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
@@ -875,43 +874,34 @@
                                                         <table id="clientsContact_datatable" class="display" style="width:100%">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Primary</th>
+                                                                    <th>is_Primary</th>
                                                                     <th>Id</th>
-                                                                    <th>TitleId</th>
-                                                                    <th>Title</th>
                                                                     <th>Name</th>
                                                                     <th>Email</th>
                                                                     <th>Phone No.</th>
                                                                     <th>Relation</th>
                                                                     <th>Designation</th>
-                                                                    <th>Service</th>
+                                                                    <th>Purpose</th>
                                                                     <th>Remove</th>
                                                                 </tr>
                                                             </thead>
-
                                                             <tfoot>
                                                                 <tr>
-                                                                    <th>Primary</th>
+                                                                    <th>is_Primary</th>
                                                                     <th>Id</th>
-                                                                    <th>TitleId</th>
-                                                                    <th>Title</th>
                                                                     <th>Name</th>
                                                                     <th>Email</th>
                                                                     <th>Phone No.</th>
                                                                     <th>Relation</th>
                                                                     <th>Designation</th>
-                                                                    <th>Service</th>
+                                                                    <th>Purpose</th>
                                                                     <th>Remove</th>
                                                                 </tr>
                                                             </tfoot>
                                                         </table>
-
                                                     </fieldset>
 
                                                     <div class="row">
-                                                        <div class="col-sm-2 m-20">
-                                                            <input id="countSelected" class="btn btn-warning buttonDefSize" value="Count">
-                                                        </div>
                                                         <div class="col-sm-2 m-20">
                                                             <input id="add_clientsContact" class="btn btn-warning buttonDefSize" value="Add">
                                                         </div>
@@ -927,12 +917,20 @@
                                                                     </select>
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-8">
+                                                            <div class="col-sm-5">
                                                                 <label class="label">Name:
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <label class="input">
                                                                     <input id="clientsContact_Name" class="inpFirstName" type="text" required>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <label class="label">Gender:</label>
+                                                                <label class="select">
+                                                                    <select id="clientsContact_Gender" class="select2">
+
+                                                                    </select>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -1033,8 +1031,8 @@
 
                                                 <div class="tab-pane fade" id="tab4">
                                                     <!-- <div class="alert alert-info" role="alert">
-                                                                                    Congratulations you're successfully registered.
-                                                                                </div>-->
+                                                        Congratulations you're successfully registered.
+                                                    </div>-->
 
                                                     <fieldset>
                                                         <table id="statDocs" class="display" style="width:100%">

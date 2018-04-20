@@ -181,10 +181,6 @@ $(document).ready(function(){
                 currentOrganisationsId = data.contact_organisation.organisation.id;
                 $('#addContact_title').val(data.title);
                 var name = breakName(data.name);
-                // var arr = name.split(' ');
-                // var fname = arr[0];
-                // var lname = arr[1];
-                // var mname = arr[2];
                 $('#addContact_fname').val(name.firstName);
                 $('#addContact_mname').val(name.middleName);
                 $('#addContact_lname').val(name.lastName);
@@ -199,27 +195,31 @@ $(document).ready(function(){
                 $('#addContact_image').val(data.image);
                 $('#addContact_vcard').val(data.card_image);
 
-                $('#editOrganisation').attr('oid',currentOrganisationsId).removeAttr('disabled');
-                $('#addContact_website').html(data.contact_organisation.organisation.website);
-                $('#addContact_designation').val(data.contact_organisation.designation);
-                $('#addContact_orgName').html(data.contact_organisation.organisation.name);
-                $('#addContact_industry').html(data.contact_organisation.organisation.industry_types.join(', '));
-                $('#addContact_business_type').html(data.contact_organisation.organisation.business_types.join(', '));
-                $('#addContact_business_nature').html(data.contact_organisation.organisation.business_natures.join(', '));
-                $('#addContact_group').html(data.contact_organisation.organisation.group);
+                if(data.contact_organisation){
+                    $('#editOrganisation').attr('oid',currentOrganisationsId).removeAttr('disabled');
+                    $('#addContact_website').html(data.contact_organisation.organisation.website);
+                    $('#addContact_designation').val(data.contact_organisation.designation);
+                    $('#addContact_orgName').html(data.contact_organisation.organisation.name);
+                    $('#addContact_industry').html(data.contact_organisation.organisation.industry_types.join(', '));
+                    $('#addContact_business_type').html(data.contact_organisation.organisation.business_types.join(', '));
+                    $('#addContact_business_nature').html(data.contact_organisation.organisation.business_natures.join(', '));
+                    $('#addContact_group').html(data.contact_organisation.organisation.group);
+                }
 
-                $('#addContact_potential_service').val(data.lead.potential_services);
-                $('#addContact_branch').val(data.contact_organisation.branch);
-                $('#addContact_lead_status').val(data.lead.status);
-                $('#addContact_source').val(data.lead.source);
-                $('#addContact_reference').val(data.lead.reference);
-                $('#addContact_notes').val(data.lead.notes);
-                var rangeSlider = $("#range_02").data('ionRangeSlider');
-                rangeSlider.update({from:data.lead.priority});
-                $('#addContact_assignee').val(data.lead.originators);
-                $('#addContact_assignee').val(data.lead.originators);
-                $('#addContact_comments').val(data.lead.comments);
-                
+                if(data.lead){
+                    $('#addContact_potential_service').val(data.lead.potential_services);
+                    $('#addContact_branch').val(data.contact_organisation.branch);
+                    $('#addContact_lead_status').val(data.lead.status);
+                    $('#addContact_source').val(data.lead.source);
+                    $('#addContact_reference').val(data.lead.reference);
+                    $('#addContact_notes').val(data.lead.notes);
+                    var rangeSlider = $("#range_02").data('ionRangeSlider');
+                    rangeSlider.update({from:data.lead.priority});
+                    $('#addContact_assignee').val(data.lead.originators);
+                    $('#addContact_assignee').val(data.lead.originators);
+                    $('#addContact_comments').val(data.lead.comments);
+                }
+
                 var multiNums = data.phone_numbers;
                 var multiEmail = data.email_addresses;
                 var multiSocial = data.social_media_links;
@@ -600,7 +600,7 @@ $(document).ready(function(){
     $(document).on('click','#editOrganisation',function(){
         currentOrganisationsId = $(this).attr('oid');
         // var url = "addOrganisation.html?id="+currentOrganisationsId+'&cid='+currentContactsId;
-        window.open("addOrganisation.html?id="+currentOrganisationsId+"&cid="+currentContactsId, "","menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=1200,height=450");
+        window.open("addOrganisation.html?id="+currentOrganisationsId+"&cid="+currentContactsId, "","menubar=0,titlebar=0,status=0,resizable=1,top=100,left=300,width=600,height=450");
         // $(location).attr('href',url);
 
     });

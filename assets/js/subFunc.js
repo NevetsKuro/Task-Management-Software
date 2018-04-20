@@ -223,8 +223,6 @@
             editSelect();
 
 
-
-
         window.GetURLParams = function(){
             var urlParams;
             var groupdata = {};

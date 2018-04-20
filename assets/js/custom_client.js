@@ -123,10 +123,10 @@ $(document).ready(function () {
         // var url = "addOrganisation.html?id="+currentOrganisationsId+'&cid='+currentContactsId;
         window.open("addOrganisation.html?id="+currentOrganisationsId+'&ctid='+currentClientId, "","menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=1200,height=450");
         // $(location).attr('href',url);
-
     });
+
     $(document).on('click','.addNewOrg',function(){
-        window.open('addOrganisation.html?ctid='+client,'',"menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=1200,height=450");
+        window.open('addOrganisation.html?ctid='+client,'',"menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=700,height=450");
     });
 
 
@@ -143,7 +143,7 @@ $(document).ready(function () {
         type: 'GET',
         success: function (groups) {
             for (var i = 0; i < groups.length; i++) {
-                $('#nature_business').append('<option value=' + groups.id + '>' + groups.group + '</option>');
+                $('#client_group').append('<option value=' + groups.id + '>' + groups.group + '</option>');
             }
         }
 
@@ -191,17 +191,18 @@ $(document).ready(function () {
                 $('.selTitle').append('<option value=' + data.titles[i].id + '>' + data.titles[i].title + '</option>');
             }
 
-
-
             for (var i = 0; i < data.categories.length; i++) {
                 $('.contactnumber_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
                 $('.email_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
                 $('.address_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
             }
 
-
             for (var i = 0; i < data.services.length; i++) {
                 $('#services').append('<option value=' + data.services[i].id + '>' + data.services[i].service + '</option>');
+            }
+
+            for(var i = 0; i < data.genders.length; i++){
+                $('#clientsContact_Gender').append('<option value=' + data.genders[i].id + '>' + data.genders[i].gender + '</option>');
             }
 
 
@@ -343,8 +344,10 @@ $(document).ready(function () {
     hideclient_elements();
     $('#Individual').removeClass('hide');
 
+    var legal;
     $('#client_legalstatus').on('change', function () {
         var selected = this.value;
+        legal = selected;
         hideclient_elements();
         //$('a_branch').removeClass('hide');
         $('.relation_tab').addClass('hide');
@@ -674,41 +677,41 @@ $(document).ready(function () {
 
     //**********Add branch in client
     var addbranch = `
-<div class="new row well">
-<div class="col-sm-2">
-        <label class="input">
-        <input id="branch_name" class="branch_name" type="text">
-        </label>
-</div>
-<div class="col-sm-3">
-        <label class="input">
-        <input id="branch_address" class="branch_address" type="text">
-        </label>
-</div>
-<div class="col-sm-2">
-        <label class="input">
-        <input id="branch_GSTIN" class="branch_gst gstinnumber" type="number">
-        </label>
-</div>
-<div class="col-sm-2">
-       <label class="input">
-        <input id="branch_phone" class="branch_phone phonenumber_valid" type="number" required>
-        </label>
-</div>
-<div class="col-sm-2">
-        <label class="input">
-        <input id="branch_email" class="branch_email" type="email" placeholder="e.g. abc@example.com" required>
-        </label>
-</div>
-<div class="col-sm-1">
-<div id="removebranch" class="text-center text-danger">
-    <span class="centerAlign p-t-10">
-        <i class="glyphicon glyphicon-remove fa-lg"></i>
-    <span>
-</div>
-</div>
-</div>
-`
+        <div class="new row well">
+        <div class="col-sm-2">
+                <label class="input">
+                <input id="branch_name" class="branch_name" type="text">
+                </label>
+        </div>
+        <div class="col-sm-3">
+                <label class="input">
+                <input id="branch_address" class="branch_address" type="text">
+                </label>
+        </div>
+        <div class="col-sm-2">
+                <label class="input">
+                <input id="branch_GSTIN" class="branch_gst gstinnumber" type="number">
+                </label>
+        </div>
+        <div class="col-sm-2">
+            <label class="input">
+                <input id="branch_phone" class="branch_phone phonenumber_valid" type="number" required>
+                </label>
+        </div>
+        <div class="col-sm-2">
+                <label class="input">
+                <input id="branch_email" class="branch_email" type="email" placeholder="e.g. abc@example.com" required>
+                </label>
+        </div>
+        <div class="col-sm-1">
+        <div id="removebranch" class="text-center text-danger">
+            <span class="centerAlign p-t-10">
+                <i class="glyphicon glyphicon-remove fa-lg"></i>
+            <span>
+        </div>
+        </div>
+        </div>
+        `
 
     function addBranchRows() {
         $('#branch-row')
@@ -813,8 +816,7 @@ $(document).ready(function () {
 
 
     //Multple entries for directors
-
-    var adddirector =
+    var addirector =
         `<div class="new row well">
         <div class="col-sm-5">
             <label class="input">
@@ -830,16 +832,15 @@ $(document).ready(function () {
             <div id="removedirector" class="text-center text-danger">
                     <i class="glyphicon glyphicon-remove fa-lg"></i>
                 </div>
-
+            </div>
         </div>
-    </div>
-`
+        `;
 
 
 
     function addDirectorRows() {
         $('#director-row')
-            .append(adddirector);
+            .append(addirector);
         $('#director-row .new:last').addClass('zoomInUp animated').show('fast');
         editSelect();
 
@@ -881,31 +882,29 @@ $(document).ready(function () {
     //    $('#design_partners').append(
     var designatedPartner =
         `<div class="row new well">
-    <div class="col-sm-6">
-            <label class="input">
-            <input id="LLP_designatedpartner" class="LLP_designatedpartner" type="text">
-            </label>
-    </div>
-    <div class="col-sm-5">
-            <label class="input">
-            <input id="LLP_din_designatedpartner" class="LLP_din_designatedpartner" type="number" max="9" min="7">
-            </label>
-    </div>
-    <div class="col-sm-1 text-center text-danger">
-            <span id="remove-Dpartner">
-                <i class="glyphicon glyphicon-remove fa-lg m-t-15"></i>    
-            </span>
-    </div>
-</div>
-`
+            <div class="col-sm-6">
+                    <label class="input">
+                    <input id="LLP_designatedpartner" class="LLP_designatedpartner" type="text">
+                    </label>
+            </div>
+            <div class="col-sm-5">
+                    <label class="input">
+                    <input id="LLP_din_designatedpartner" class="LLP_din_designatedpartner" type="number" max="9" min="7">
+                    </label>
+            </div>
+            <div class="col-sm-1 text-center text-danger">
+                    <span id="remove-Dpartner">
+                        <i class="glyphicon glyphicon-remove fa-lg m-t-15"></i> 
+                    </span>
+            </div>
+        </div>
+        `;
 
     function addDPartnerRows() {
         $('#dpartner-row')
             .append(designatedPartner);
         $('#dpartner-row .new:last').addClass('zoomInUp animated').show('fast');
         editSelect();
-
-
     }
 
     function AddDPartner(values) {
@@ -934,13 +933,9 @@ $(document).ready(function () {
 
     $('#adddPartner').on('click', addDPartnerRows);
 
-
     $('#dpartner-row').on('click', '#remove-Dpartner', function () {
         $(this).parents('.new').remove();
     });
-
-
-
 
     //if listed
     $('#company_listedy').on('change', function () {
@@ -965,15 +960,11 @@ $(document).ready(function () {
                 "visible": false,
             },
             {
-                "targets": [2],
+                "targets": [6],
                 "visible": false,
             },
             {
-                "targets": [8],
-                "visible": false,
-            },
-            {
-                "targets": [9],
+                "targets": [7],
                 "visible": false,
             }
         ],
@@ -987,42 +978,66 @@ $(document).ready(function () {
     });
 
     $('#add_clientsContact').on('click', function () {
-        $('#clientsContact_form').removeClass('hide');
+        // $('#clientsContact_form').removeClass('hide');
+        window.open('quick_Add_contact.html?legalStatus='+legal,'',"menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=700,height=450");
     });
 
-    var pocCount = 1;
-    $('#add_to_clientsContact').on('click', function () {
+
+    $(document).on('click','#add_to_clientsContact',addQuickContact);
+
+    function addQuickContact(){
         var titleId = $('#clientsContact_title').val();
         var titleText = $('#clientsContact_title').find('option:selected').text();
         
         var Name = $('#clientsContact_Name').val();
+        var gender = $('#clientsContact_Gender').val();
         var email = $('#clientsContact_email').val();
         var phone = $('#clientsContact_phone').val();
         var relation = $('#clientsContact_relation').val();
         var designation = $('#clientsContact_designation').val();
         var purpose = $('#clientsContact_purpose').val();
+        var legal = $('#client_legalstatus').val();
+
+        if(legal == "1"){
+            var contactData=new Object();
+            contactData.title = titleId;
+            contactData.name = Name;
+            contactData.gender = gender;
+            contactData.email_addresses = [{category:1, email: email, is_primary:true}];
+            contactData.phone_numbers = [{category:1, number: '+91' + phone, is_primary:true}];
+            // contactData.relation = relation;
+            var cid = createQuickContact(contactData);
+            //data for sending to client individuals
+        }else{
+        
+            var contactData=new Object();
+            contactData.title = titleId;
+            contactData.name = Name;
+            contactData.gender = gender;
+            contactData.email_addresses = [{category:1, email: email, is_primary:true}];
+            contactData.phone_numbers = [{category:1, number: '+91' + phone, is_primary:true}];
+            contactData.designation = designation;
+            // contactData.purpose = purpose;
+            var cid = createQuickContact(contactData);
+            //data for sending to client company
+        }
 
         if (titleId && Name && email && phone) {
-            AddContactPerson(pocCount, titleId, titleText, Name, email, phone, relation, designation, purpose);
-            pocCount++;
+            AddContactPerson(cid, titleId, titleText, Name, email, phone, relation, designation, purpose,legal);
             swal("Contact Added!", "success");
         } else {
             swal('Please fill all the columns!!');
         }
-    });
+    }
 
 
-
-    function AddContactPerson(id, titleId, title, Name, email, phone, relation, designation, purpose) {
-        var legal = $('#client_legalstatus').val();
+    window.AddContactPerson = function(id, titleId, title, Name, email, phone, relation, designation, purpose,legal) {
 
         if (legal == 1) {
             cC_table.row.add([
                 '',
                 id,
-                titleId,
-                title,
-                Name,
+                title+Name,
                 email,
                 phone,
                 relation,
@@ -1034,10 +1049,8 @@ $(document).ready(function () {
             cC_table.row.add([
                 '',
                 id,
-                titleId,
-                title,
-                Name,
-                email,
+                title+Name,
+                email,  
                 phone,
                 '',
                 designation,
@@ -1049,15 +1062,11 @@ $(document).ready(function () {
 
     }
 
-    $('#countSelected').on('click', function () {
-        var row = cC_table.rows('.selected').data();
+    // $('#countSelected').on('click', function () {
+    //     var row = cC_table.rows('.selected').data();
 
-        console.log(row[0][1]);
-    });
-
-
-
-
+    //     console.log(row[0][1]);
+    // });
 
     $('#clientsContact_datatable tbody').on('click', 'div.cc_remove', function () {
         swal({
@@ -1074,7 +1083,7 @@ $(document).ready(function () {
                         icon: "success",
                     });
                 } else {
-                    swal("The selected row is deleted!");
+                    swal("The selected row is not deleted!");
                 }
             });
     });
@@ -1125,21 +1134,17 @@ $(document).ready(function () {
                 .then((willDelete) => {
                     if (willDelete) {
                         stat_docs.row($(this).parents('tr')).remove().draw();
-                        swal("Poof! Your imaginary file has been deleted!", {
+                        swal("The Selected row has been deleted!", {
                             icon: "success",
                         });
                     } else {
-                        swal("The selected row is deleted!");
+                        swal("The selected row is not deleted!");
                     }
                 });
         });
 
         swal("Row added", "Look in the above table!", "success");
     });
-
-
-
-
 
     //adding row for satutory document
     $('#show_addmore').click(function () {
@@ -1302,8 +1307,8 @@ $(document).ready(function () {
                             var contact = new Object();
                             contact.title=row[2];//get
                             contact.name=row[4];
-                            contact.email_addresses = [{category:3, email: row[5], is_primary:true}];
-                            contact.phone_numbers = [{category:3, number: '+91' + row[6], is_primary:true}];
+                            contact.email_addresses = [{category:1, email: row[5], is_primary:true}];
+                            contact.phone_numbers = [{category:1, number: '+91' + row[6], is_primary:true}];
                             contact.gender = 1;
                        
                             newId = createQuickContact(contact);
@@ -1338,8 +1343,8 @@ $(document).ready(function () {
                         var contact = new Object();
                         contact.title=row[2];//get
                         contact.name=row[4];
-                        contact.email_addresses = [{category:3, email: row[5], is_primary:true}];
-                        contact.phone_numbers = [{category:3, number: '+91' + row[6], is_primary:true}];
+                        contact.email_addresses = [{category:1, email: row[5], is_primary:true}];
+                        contact.phone_numbers = [{category:1, number: '+91' + row[6], is_primary:true}];
                         contact.gender = 1;
                    
                         newId = createQuickContact(contact);
@@ -1414,7 +1419,6 @@ $(document).ready(function () {
                         o.businessName = $('#AOP_name').val();
                         o.commencemaneDate = $('#AOP_date').val();
                         o.registrationNo = $('#AOP_registration').val();
-
 
                         url =   urlRoot +  'aop-boi/';
 
