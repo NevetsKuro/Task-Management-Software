@@ -539,13 +539,11 @@ $(document).ready(function(){
 
     window.contact_organisation = function (){
             
-        if(!updatedOrgId){
             if($(this).attr('id')){
                 var orgId = $(this).attr('id');
-            }
-        }else{
+            }else{
                 var orgId = updatedOrgId;
-        }
+            }
             
         $.ajax({
             url:'https://office-management-demo.herokuapp.com/organisations/display/'+orgId,
@@ -600,13 +598,13 @@ $(document).ready(function(){
     $(document).on('click','#editOrganisation',function(){
         currentOrganisationsId = $(this).attr('oid');
         // var url = "addOrganisation.html?id="+currentOrganisationsId+'&cid='+currentContactsId;
-        window.open("addOrganisation.html?id="+currentOrganisationsId+"&cid="+currentContactsId, "","menubar=0,titlebar=0,status=0,resizable=1,top=100,left=300,width=600,height=450");
+        window.open("addOrganisation.html?id="+currentOrganisationsId+"&cid="+currentContactsId, "","menubar=0,titlebar=0,status=0,resizable=1,top=100,left=300,width=800,height=450");
         // $(location).attr('href',url);
 
     });
 
     $(document).on('click','.addNewOrg',function(){
-        window.open('addOrganisation.html?cid='+currentContactsId,'',"menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=1200,height=450");
+        window.open('addOrganisation.html?cid='+currentContactsId,'',"menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450");
     });
 
     var contact = {};
@@ -815,7 +813,7 @@ $(document).ready(function(){
                     processData: false,
                     data:contactJSON,
                     success:function(data){
-                        swal('Contact added to server');
+                        swal('Contact updated to server');
                         var urL = 'ContactList.html?listOf=contact';
                         $(location).attr('href',urL);
                     },

@@ -2,9 +2,10 @@ $(document).ready(function(){
 
     var urlParams = GetURLParams();
     var legalStatus = urlParams['legalStatus'];
-    var contactId = urlParams['id'];
+    var contactId = urlParams['cid'];
+    var method = urlParams['method'];
 
-        //auto filling forms prefilled data
+    //auto filling forms prefilled data
     $.ajax({
         url: 'http://office-management-demo.herokuapp.com/contacts/form-data',
         datatype: 'JSON',
@@ -17,12 +18,36 @@ $(document).ready(function(){
             for(var i = 0; i < data.genders.length; i++){
                 $('#clientsContact_Gender').append('<option value=' + data.genders[i].id + '>' + data.genders[i].gender + '</option>');
             }
+            for(var i = 0; i < data.designations.length; i++){
+                $('#clientsContact_designation').append('<option value=' + data.designations[i].id + '>' + data.designations[i].designation + '</option>');
+            }
+            for(var i = 0; i < data.services.length; i++){
+                $('#clientsContact_purpose').append('<option value=' + data.services[i].id + '>' + data.services[i].service + '</option>');
+            }
             console.log('Pre filled data added!!!');
         },
         error: function (data) {
-            swal('Server is not working:' + data);
+            swal('Cannot find contacts!');
         }
     });    
+
+    
+        // $.ajax({
+        //     url: 'http://office-management-demo.herokuapp.com/clients/individuals/'+clientsId,
+        //     datatype: 'JSON',
+        //     type: 'GET',
+        //     success: function (data) {
+
+        //         var priRelation = data.poc.findIndex(x=>x.is_primary == true);
+        //         $('#clientsContact_relation').val(data.poc[priRelation].relation);
+        //         $('#clientsContact_purpose').val(data.services.service).trigger('change');
+
+        //         console.log('client\'s data added!!!');
+        //     },
+        //     error: function () {
+        //         swal('Cannot find Contact!');
+        //     }
+        // });
 
     if (legalStatus == '1') {
         $('.relation_tab').removeClass('hide');
@@ -59,6 +84,7 @@ $(document).ready(function(){
     }
 
     
+
     function createQuickContact(contact) {
 
         var newId;
@@ -83,9 +109,8 @@ $(document).ready(function(){
         return newId;
     }
 
-
-    $(document).on('click','#add_to_clientsContact',addQuickContact);
-
+    var pocObj1;
+    var pocObj2;
     function addQuickContact(){
         var titleId = $('#clientsContact_title').val();
         var titleText = $('#clientsContact_title').find('option:selected').text();
@@ -96,8 +121,11 @@ $(document).ready(function(){
         var phone = $('#clientsContact_phone').val();
         var relation = $('#clientsContact_relation').val();
         var designation = $('#clientsContact_designation').val();
+        var designationText = $('#clientsContact_designation').find('option:selected').text();
         var purpose = $('#clientsContact_purpose').val();
-        var legal = $('#client_legalstatus').val();
+        var purposeText = $('#clientsContact_purpose').find('option:selected').text();
+        var legal = legalStatus;
+
 
         if(legal == "1"){
             var contactData=new Object();
@@ -108,7 +136,13 @@ $(document).ready(function(){
             contactData.phone_numbers = [{category:1, number: '+91' + phone, is_primary:true}];
             // contactData.relation = relation;
             var cid = createQuickContact(contactData);
+            pocObj1 = new Object();
+            pocObj1.is_primary = false;        
+            pocObj1.contact = cid;
+            pocObj1.relation = relation;
+    
             //data for sending to client individuals
+            contactId = cid;
         }else{
         
             var contactData=new Object();
@@ -120,16 +154,29 @@ $(document).ready(function(){
             contactData.designation = designation;
             // contactData.purpose = purpose;
             var cid = createQuickContact(contactData);
+            pocObj2 = new Object();
+            pocObj2.is_primary = false;
+            pocObj2.purpose = purpose;
+            pocObj2.contact = cid;
+
             //data for sending to client company
+            contactId = cid;
         }
 
         if (titleId && Name && email && phone) {
-            window.opener.AddContactPerson(cid, titleId, titleText, Name, email, phone, relation, designation, purpose,legal);
+            if(legal = 1){
+                window.opener.AddContactPerson(contactId, titleText, Name, email, phone, relation, designationText, purposeText,legal,pocObj1);
+            }else{
+                window.opener.AddContactPerson(contactId, titleText, Name, email, phone, relation, designationText, purposeText,legal,pocObj2);
+            }
             swal("Contact Added!", "success");
+            window.close();
         } else {
             swal('Please fill all the columns!!');
         }
+        
     }
 
+    $(document).on('click','#add_to_clientsContact',addQuickContact);
 
 });

@@ -317,63 +317,68 @@
                                                     <!-- Partnership Firm -->
                                                     <div id="PartnershipFirm" class="row elem">
 
-                                                        <fieldset>
 
-                                                            <div class="col-sm-12 text-bold f-s-25">Partnership Firm</div>
+                                                            <div class="text-bold m-b-20 well f-s-25">Partnership Firm</div>
 
-                                                            <div class="col-sm-12">
-                                                                <label class="label">Name of Business:
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
-                                                                <label class="input">
-                                                                    <input id="Partnership_name" class="nameofBusiness" type="text" required>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Date of Partnership Deed:</label>
-                                                                <label class="input">
-                                                                    <input id="Partnership_date" type="text" class="datepickr">
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Date of Commencement of Business:</label>
-                                                                <label class="input">
-                                                                    <input id="Partnership_date" type="text" class="datepickr">
-                                                                </label>
-                                                            </div>
-
-                                                            <div id="partner-row">
-                                                                <div class="col-sm-12 well m-t-40">
-                                                                    <label class="label">Details of Partners:</label>
-                                                                </div>
-                                                                <div class="new row well">
-                                                                <div class="col-sm-6">
-                                                                    <label class="label">Partner's Name
+                                                            <div class="">
+                                                                <div class="col-sm-12">
+                                                                    <label class="label">Name of Business:
                                                                         <span class="text-danger">*</span>
                                                                     </label>
                                                                     <label class="input">
-                                                                        <input class="partnerName" type="text" required>
+                                                                        <input id="Partnership_name" class="nameofBusiness" type="text" required>
                                                                     </label>
                                                                 </div>
-                                                                <div class="col-sm-5">
-                                                                    <label class="label">Partnership Share(in %)</label>
+                                                            </div>
+                                                            <div class="">
+                                                                <div class="col-sm-6">
+                                                                    <label class="label">Date of Partnership Deed:</label>
                                                                     <label class="input">
-                                                                        <input class="partnershare" type="number" min="0" max="100">
+                                                                        <input id="Partnership_date" type="text" class="datepickr">
                                                                     </label>
                                                                 </div>
-                                                                <div class="col-sm-1">
-                                                                    <label class="label">
-                                                                        Remove
+                                                                <div class="col-sm-6">
+                                                                    <label class="label">Date of Commencement of Business:</label>
+                                                                    <label class="input">
+                                                                        <input id="Partnership_date" type="text" class="datepickr">
                                                                     </label>
                                                                 </div>
                                                             </div>
+
+                                                            <div id="partner-row">
+                                                                <br>
+                                                                <div class="well row">
+                                                                    <label class="label">Details of Partners:</label>
+                                                                </div>
+                                                                <br>
+                                                                <div class="new row well">
+                                                                    <div class="col-sm-6">
+                                                                        <label class="label">Partner's Name
+                                                                            <span class="text-danger">*</span>
+                                                                        </label>
+                                                                        <label class="input">
+                                                                            <input class="partnerName" type="text" required>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-sm-5">
+                                                                        <label class="label">Partnership Share(in %)</label>
+                                                                        <label class="input">
+                                                                            <input class="partnershare" type="number" min="0" max="100">
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-sm-1">
+                                                                        <label class="label">
+                                                                            Remove
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-12">
-                                                                <div class="col-sm-2 m-l-20">
+
+                                                            <div class="row">
+                                                                <div class="col-sm-2 m-20">
                                                                     <input id="addpartners" type="button" class="btn btn-success buttonDefSize" value="Add">
                                                                 </div>
                                                             </div>
-                                                        </fieldset>
 
                                                     </div>
 
@@ -906,86 +911,7 @@
                                                             <input id="add_clientsContact" class="btn btn-warning buttonDefSize" value="Add">
                                                         </div>
                                                     </div>
-
-                                                    <fieldset id="clientsContact_form" class="m-t-50 hide">
-                                                        <div class="row">
-                                                            <div class="col-sm-2">
-                                                                <label class="label">Title:</label>
-                                                                <label class="select">
-                                                                    <select id="clientsContact_title" class="select2 editselect selTitle">
-                                                                        
-                                                                    </select>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-5">
-                                                                <label class="label">Name:
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
-                                                                <label class="input">
-                                                                    <input id="clientsContact_Name" class="inpFirstName" type="text" required>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-5">
-                                                                <label class="label">Gender:</label>
-                                                                <label class="select">
-                                                                    <select id="clientsContact_Gender" class="select2">
-
-                                                                    </select>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Email:
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
-                                                                <label class="input">
-                                                                    <input id="clientsContact_email" type="email" placeholder="e.g. abc@example.com" required>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Phone:
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
-                                                                <label class="input">
-                                                                    <input id="clientsContact_phone" class="phonenumber_valid" type="number" required>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="designation_tab col-sm-6 hide">
-                                                                <label class="label">Designation:</label>
-                                                                <label class="input">
-                                                                    <input type="text" id="clientsContact_designation">
-
-                                                                </label>
-                                                            </div>
-                                                            <div class="service_tab col-sm-6 hide">
-                                                                <label class="label">Purpose:</label>
-                                                                <label class="textarea textarea-expandable">
-                                                                    <textarea id="clientsContact_purpose" rows="2"></textarea>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="relation_tab row">
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Relation:</label>
-                                                                <label class="input">
-                                                                    <input type="text" id="clientsContact_relation">
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row m-t-30">
-                                                            <div class="col-sm-offset-7 col-sm-2 m-r-20 m-b-20">
-                                                                <input id="close_add_clientsContact" type="button" class="btn btn-danger buttonDefSize p-l-20 p-r-20" type="text" value="Cancel">
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                <input id="add_to_clientsContact" class="btn btn-success buttonDefSize p-l-20 p-r-20" type="button" value="Add">
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
                                                 </div>
-
 
                                                 <div class="tab-pane fade" id="tab3">
 
