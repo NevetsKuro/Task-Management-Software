@@ -120,7 +120,7 @@
 
         $(document).on('change',".gstinnumber", function(){    
             var inputvalues = $(this).val();
-            var gstinformat = new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9]{1}Z[A-Z]{1}$');
+            var gstinformat = new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9]{1}[A-Z]{1}[1-9]{1}$');
             
             if (gstinformat.test(inputvalues)) {
                 return true;

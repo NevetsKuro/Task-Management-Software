@@ -558,7 +558,7 @@ $(document).ready(function(){
                 $('#addContact_business_type').html(data.business_types.join(', '));
                 $('#addContact_industry').html(data.industry_types.join(', '));
                 $('#addContact_business_nature').html(data.business_natures.join(', '));
-                var multiBrns = data.branches
+                var multiBrns = data.branches;
                 $('#hoaddress-row .new').each(function(index){
                     if(index>0){
                         $(this).remove();
