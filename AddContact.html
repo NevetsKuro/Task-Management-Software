@@ -218,7 +218,7 @@
 
                                     </div>
 
-                                    <hr/>
+                                    <hr>
                                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                 </div>
                             </div>
@@ -275,80 +275,78 @@
                                                 <div class="tab-content p-b-50">
                                                     <div class="tab-pane fade active in" id="tab1">
 
-                                                        <div class="col-sm-2">
-                                                            <label class="label">Title:
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <label class="select">
-                                                                <select update-ctrl="title" id="addContact_title" class="select2 editselect" required>
-                                                                    <option disabled selected value>--select--</option>
-                                                                </select>
-                                                            </label>
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <label class="label">Title:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="select">
+                                                                    <select update-ctrl="title" id="addContact_title" class="select2 editselect" required>
+                                                                        <option disabled selected value>--select--</option>
+                                                                    </select>
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                <label class="label">First Name:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <i class="icon-append icon-user"></i>
+                                                                    <input update-ctrl="name" type="text" id="addContact_fname" placeholder="Enter Name.." list="f2namelist" maxlength="128" title="fName" required>
+                                                                    <datalist id="f2namelist">
+
+                                                                    </datalist>
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                <label class="label">Middle Name:</label>
+                                                                <label class="input">
+                                                                    <i class="icon-append icon-user"></i>
+                                                                    <input update-ctrl="name" type="text" id="addContact_mname" placeholder="Enter Name.." list="m2namelist" maxlength="128">
+                                                                    <datalist id="m2namelist">
+
+                                                                    </datalist>
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Last Name:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <i class="icon-append icon-user"></i>
+                                                                    <input update-ctrl="name" type="text" id="addContact_lname" placeholder="Enter Name.." list="l2namelist" maxlength="128" title="lName" required>
+                                                                    <datalist id="l2namelist">
+
+                                                                    </datalist>
+                                                                </label>
+                                                            </div>
                                                         </div>
 
-                                                        <div class="col-sm-3">
-                                                            <label class="label">First Name:
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <label class="input">
-                                                                <i class="icon-append icon-user"></i>
-                                                                <input update-ctrl="name" type="text" id="addContact_fname" placeholder="Enter Name.." list="f2namelist" maxlength="128" title="fName" required>
-                                                                <datalist id="f2namelist">
-
-                                                                </datalist>
-                                                            </label>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <label class="label col-sm-10">Gender:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="select">
+                                                                    <select update-ctrl="gender" id="addContact_gender" class="select2 editselect" title="gender" required>
+                                                                        <option disabled selected value>--select--</option>
+                                                                    </select>
+                                                                </label>
+                                                            </div>
+                                                            
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Date of Birth:</label>
+                                                                <label class="input">
+                                                                    <input update-ctrl="dob" id="addContact_dob" class="dobdatepickr" type="text" placeholder="e.g. dd/mm/yy">
+                                                                </label>
+                                                            </div>
                                                         </div>
-
-                                                        <div class="col-sm-3">
-                                                            <label class="label">Middle Name:</label>
-                                                            <label class="input">
-                                                                <i class="icon-append icon-user"></i>
-                                                                <input update-ctrl="name" type="text" id="addContact_mname" placeholder="Enter Name.." list="m2namelist" maxlength="128">
-                                                                <datalist id="m2namelist">
-
-                                                                </datalist>
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="col-sm-4">
-                                                            <label class="label">Last Name:
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <label class="input">
-                                                                <i class="icon-append icon-user"></i>
-                                                                <input update-ctrl="name" type="text" id="addContact_lname" placeholder="Enter Name.." list="l2namelist" maxlength="128" title="lName" required>
-                                                                <datalist id="l2namelist">
-
-                                                                </datalist>
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label class="label col-sm-10">Gender:
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <label class="select">
-                                                                <select update-ctrl="gender" id="addContact_gender" class="select2 editselect" title="gender" required>
-                                                                    <option disabled selected value>--select--</option>
-                                                                </select>
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label class="label">Date of Birth:</label>
-                                                            <label class="input">
-                                                                <input update-ctrl="dob" id="addContact_dob" class="dobdatepickr" type="text" placeholder="e.g. dd/mm/yy">
-                                                            </label>
-                                                        </div>
-
-
-                                                        <div class="col-sm-6">
-                                                            <p></p>
-                                                            <span>&nbsp;</span>
-                                                        </div>
-
-                                                        <div class="col-md-12">
-                                                            <label class="label">Address:</label>
+                                                        
+                                                        <div class="row">
+                                                            <label class="label col-sm-12">Address:</label>
                                                             <label class="textarea col-sm-9">
                                                                 <textarea update-ctrl="address" id="addContact_addresses" rows="5" placeholder="Address e.g. Laxmi Plaza, Laxmi Industrial Estate, New Link Road, Andheri West, Mumbai"></textarea>
                                                             </label>
@@ -359,12 +357,9 @@
                                                             </label>
                                                         </div>
 
-                                                        <hr>
-
                                                         <div class="col-sm-12">
                                                             <hr>
                                                         </div>
-                                                        <div class="col-sm-12 p-10"></div>
 
                                                         <div class="col-sm-12 well">
                                                             <label class="label">Contacts:
@@ -396,14 +391,14 @@
                                                                                 <input type='radio' update-ctrl="phone_numbers" name="CNChecked" class='cn_is_primary'><i class='rounded-x m-l-10'></i>
                                                                             </label>
                                                                         </div>
-                                                                        <div class="col-xs-3 col-sm-3 p-b-12">
+                                                                        <div class="col-xs-3 col-sm-3 ">
                                                                             <label class="select">
                                                                                 <select update-ctrl="phone_numbers" class="contactnumber_category select2 editselect" required>
 
                                                                                 </select>
                                                                             </label>
                                                                         </div>
-                                                                        <div class="col-xs-5 col-sm-5 p-b-12">
+                                                                        <div class="col-xs-5 col-sm-5">
                                                                             <label class="input">
                                                                                 <input update-ctrl="phone_numbers" type="number" class="addContact_contactNumbers contactnumber_valid" minlength="10" maxlength="10" placeholder="10 digit number"
                                                                                     required>
@@ -422,18 +417,14 @@
 
                                                         <div class="row">
                                                             <label class="label col-sm-2 m-l-20">
-                                                                <a class="btn btn-success buttonDefSize m-b-20 m-t-0" id="addcontact">Add</a>
+                                                                <a class="btn btn-success buttonDefSize m-t-0" id="addcontact">Add</a>
                                                             </label>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <p></p>
-                                                            <span>&nbsp;</span>
-                                                        </div>
 
+                                                        
                                                         <div class="col-sm-12">
                                                             <hr>
                                                         </div>
-                                                        <div class="col-sm-12 p-10"></div>
 
                                                         <div class="col-sm-12 well">
                                                             <label class="label">Email-Id's:
@@ -489,7 +480,7 @@
 
                                                         <div class="row">
                                                             <label class="label col-sm-2 m-l-20">
-                                                                <a class="btn btn-success buttonDefSize m-b-20 m-t-0" id="addemail">Add</a>
+                                                                <a class="btn btn-success buttonDefSize m-t-0" id="addemail">Add</a>
                                                             </label>
                                                         </div>
 
@@ -544,27 +535,33 @@
 
                                                         <div class="row">
                                                             <label class="label col-sm-2 m-l-20">
-                                                                <a class="btn btn-success buttonDefSize m-b-20 m-t-0" id="addwebsite">Add</a>
+                                                                <a class="btn btn-success buttonDefSize m-t-0" id="addwebsite">Add</a>
                                                             </label>
                                                         </div>
 
-                                                        <div class="col-sm-6">
-                                                            <label class="label">Person's Image:
-                                                            </label>
-                                                            <div class="input input-file">
-                                                                <div class="button">
-                                                                    <input update-ctrl="vcard" id="file" type="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
-                                                                <input id="addContact_vcard" type="text" readonly="">
+                                                        <div class="col-sm-12">
+                                                            <hr>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Person's Image:
+                                                                </label>
+                                                                <div class="input input-file">
+                                                                    <div class="button">
+                                                                        <input update-ctrl="vcard" id="file" type="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
+                                                                    <input id="addContact_vcard" type="text" readonly="">
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        <div class="col-sm-6">
-                                                            <label class="label">Card Image:
-                                                            </label>
-                                                            <div class="input input-file">
-                                                                <div class="button">
-                                                                    <input update-ctrl="cardImage" id="file2" type="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
-                                                                <input id="addContact_image" type="text" readonly="" >
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Card Image:
+                                                                </label>
+                                                                <div class="input input-file">
+                                                                    <div class="button">
+                                                                        <input update-ctrl="cardImage" id="file2" type="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
+                                                                    <input id="addContact_image" type="text" readonly="" >
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -583,7 +580,7 @@
                                                                 </label>
                                                             </div>
                                                         </div>
-                                                        <div class="row m-t-30 m-b-30">
+                                                        <div class="row m-t-30">
                                                             <div class="col-sm-7 contact-search">
                                                                 <label class="label">Organisation:</label>
                                                                 <label class="input">
@@ -594,10 +591,8 @@
                                                             <div class="col-sm-2">
                                                                 <input class="btn btn-success buttonDefSize m-t-25 addNewOrg" value="Add"/>
                                                             </div>
-                                                            
                                                         </div>
 
-                                                        <hr>
                                                         <div class="row">
                                                             <div class="col-sm-offset-10 col-sm-2">
                                                                 <input id="editOrganisation" oid="null" class="btn btn-success buttonDefSize m-t-25" value="Edit" disabled>
@@ -649,7 +644,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row m-r-10 m-l-10 m-t-30">
+                                                        <div class="row m-r-2 m-l-10 m-t-30">
                                                             <div class="col-sm-12 well">
                                                                 <label class="label">Address:
                                                                     <span class="text-danger">*</span>
@@ -720,7 +715,7 @@
                                                                 </label>
                                                             </div>
 
-                                                            <div class="refer_hide col-sm-6 hide">
+                                                            <div class="refer_hide col-sm-6">
                                                                 <label class="label">Reference:</label>
                                                                 <label class="select">
                                                                     <select update-ctrl="lead" id="addContact_reference" class="select2 editselect" multiple>

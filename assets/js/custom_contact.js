@@ -486,7 +486,7 @@ $(document).ready(function(){
 
     $('#addContact_source').on('change',function(){
         optionValue = $("#addContact_source option:selected").text();
-        if(optionValue == 'Referral'){
+        if(optionValue == 'Reference'){
             $('.refer_hide').removeClass('hide');
         }else{
             $('.refer_hide').addClass('hide');

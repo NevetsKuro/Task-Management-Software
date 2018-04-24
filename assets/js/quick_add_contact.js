@@ -164,7 +164,7 @@ $(document).ready(function(){
         }
 
         if (titleId && Name && email && phone) {
-            if(legal = 1){
+            if(legal == 1){
                 window.opener.AddContactPerson(contactId, titleText, Name, email, phone, relation, designationText, purposeText,legal,pocObj1);
             }else{
                 window.opener.AddContactPerson(contactId, titleText, Name, email, phone, relation, designationText, purposeText,legal,pocObj2);
