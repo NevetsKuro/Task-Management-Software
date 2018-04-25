@@ -304,7 +304,7 @@ $(document).ready(function(){
     var addContactRow = `
     <div class='new row well'>
         <div class='col-xs-2 col-sm-2'>
-            <label class='checkbox'>
+            <label class='checkbox m-l-22'>
                 <input type='radio' update-ctrl="phone_numbers" name="CNChecked" class='cn_is_primary'><i class='rounded-x m-l-10'></i>
             </label>
         </div>
@@ -330,7 +330,7 @@ $(document).ready(function(){
     var addEmailRow = `
     <div class='new row well'>
         <div class='col-xs-2 col-sm-2'>
-            <label class='checkbox'>
+            <label class='checkbox m-l-22'>
                 <input type='radio' update-ctrl="email_addresses" name="EAChecked" class='ea_is_primary'><i class='rounded-x m-l-10'></i>
             </label>
         </div>

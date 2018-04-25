@@ -26,10 +26,10 @@ $(document).ready(function () {
             });
 
         }else if(client){
-            if(contact){
+            if(legal){
                 var legalText;
                 if(legal== 1 ){
-                    legalText='individual';
+                    legalText='individuals';
                 }else if(legal == 2){
                     legalText = 'hufs';
                 }else if(legal == 3){
@@ -46,7 +46,7 @@ $(document).ready(function () {
                     legalText = 'trusts';
                 }
                 $.ajax({
-                    url:'http://office-management-demo.herokuapp.com/clients/'+legalText+'/'+client+'/',
+                    url:'http://office-management-demo.herokuapp.com/clients/'+legalText+'/'+client,
                     type:'GET',
                     datatype:'JSON',
                     success:function(data){
@@ -55,19 +55,22 @@ $(document).ready(function () {
                         $('#PANNO').val(data.pan_no);
                         if(legal==1){
                             $('#individual_aadhar').val(data.aadhar_no);
-                            contOrg = data.prospect;
+                            contOrg = 1//data.prospect;
                             client_organisation();
+                            console.log('legal'+ legal +'-'+contOrg+'-org id');
                         }else{
                             $('#GSTIN').val(data.gstin);
                             $('#TANNO').val(data.tan_no);
                             
                             if(legal == 2){
+                                $('#client_legalstatus').val(legal).trigger('change');
                                 $('#HUF_date').val(data.commencement_date);
                                 $('#HUF_nameOfKarta').val(data.karta_name);
                                 contOrg = data.prospect;
                                 client_organisation();
-                            
+                                console.log('legal'+ legal +'-'+contOrg+'-org id');
                             }else if(legal == 3){
+                                $('#client_legalstatus').val(legal).trigger('change');
                                 $('#prop_Title').val(data.title.id);
                                 var name = data.owner_name.split(' ');
                                 $('#Proprietor_fname').val(name[0]);
@@ -78,12 +81,14 @@ $(document).ready(function () {
                                 client_organisation();
                             
                             }else if(legal == 4){
+                                $('#client_legalstatus').val(legal).trigger('change');
                                 $('#Partnership_date').val(data.partnership_deed_date);
                                 $('#Proprietor_dateOfComm').val(data.commencement_date);
                                 addPartnerRows(data.partners);
                                 contOrg = data.prospect;
                                 client_organisation();
                             }else if(legal == 5){
+                                $('#client_legalstatus').val(legal).trigger('change');
                                 $('#partners_noopartner').val(data.other_partners.name.join(','));
                                 $('#LLP_LLPIN').val(data.llpin);
                                 $('#LLP_date').val(data.commencement_date);
@@ -91,6 +96,7 @@ $(document).ready(function () {
                                 contOrg = data.prospect;
                                 client_organisation();
                             }else if(legal == 6){
+                                $('#client_legalstatus').val(legal).trigger('change');
                                 $('#company_date').val(data.commencement_date);
                                 $('#company_types').val(company_type);
                                 $('#company_cin').val(data.cin);
@@ -100,19 +106,25 @@ $(document).ready(function () {
                                 contOrg = data.prospect;
                                 client_organisation();
                             }else if(legal == 7){
+                                $('#client_legalstatus').val(legal).trigger('change');
                                 $('#members').val(data.members.name.join(','));
                                 $('#AOP_date').val(data.commencement_date);
                                 $('#AOP_registration').val(data.registration_no);    
                                 contOrg = data.prospect;
                                 client_organisation();
                             }else if(legal == 8){
-                                // $('#trust_name').val(data.);
+                                $('#client_legalstatus').val(legal).trigger('change');
                                 $('#trust_doc').val(data.commencement_date);
                                 $('#trusteeName').val(daa.trustee);
                                 contOrg = data.prospect;
                                 client_organisation();
+                                // $('#trust_name').val(data.);
                             }
                     }
+                    console.log('Client data Added');
+                    },
+                    error:function(){
+                        swal('Cannot find Client');
                     }
                 });
             }
@@ -238,11 +250,6 @@ $(document).ready(function () {
     });
 
 
-
-
-
-
-
     //////////////////////////////////////////////////
 
     $.ajax({
@@ -362,40 +369,40 @@ $(document).ready(function () {
     }
 
     //Client is being edited
-    if (client != undefined && client != '') {
-        $.ajax({
-            url: 'http://office-management-demo.herokuapp.com/clients/' + client,
-            datatype: 'JSON',
-            type: 'GET',
-            success: function (client) {
-                //Fill the form with details about the client
-                AddPhone(client.phone_numbers);
-                AddEmail(client.email_addresses);
-                AddAddress(client.address);
-                AddPhone(contact.phone_numbers);
-                AddEmail(contact.email_addresses);
-                AddAddress([contact.address]);
-                AddBranch(contact.contact_organisation.organisation.branches);
+    // if (client != undefined && client != '') {
+    //     $.ajax({
+    //         url: 'http://office-management-demo.herokuapp.com/clients/' + client,
+    //         datatype: 'JSON',
+    //         type: 'GET',
+    //         success: function (client) {
+    //             //Fill the form with details about the client
+    //             AddPhone(client.phone_numbers);
+    //             AddEmail(client.email_addresses);
+    //             AddAddress(client.address);
+    //             AddPhone(contact.phone_numbers);
+    //             AddEmail(contact.email_addresses);
+    //             AddAddress([contact.address]);
+    //             AddBranch(contact.contact_organisation.organisation.branches);
 
-                $('.selTitle').val(client.title);
-                var ns = breakName(client.name);
-                $('.inpFirstName').val(ns.firstName);
-                $('.inpMiddleName').val(ns.middleName);
-                $('.inpLastName').val(ns.lastName);
-                $('.inputdob').val(client.dob);
-                $('#website').val(client.contact_organisation.website);
-                $('#Proprietor_name').val(client.client_organisation.name);
-                $('#LLP_name').val(client.client_organisation.name);
-                $('#company_name').val(contact.contact_organisation.name);
-                $('#AOP_name').val(client.contact_organisation.name);
-                $('#trust_name').val(client.contact_organisation.name);
-                $('#trust_name').val(client.contact_organisation.name);
-                $('#nature_business').val(client.business_natures);
-                $('#industryType').val(client.industry_types);
-                $('#businessType').val(client.business_types);
-            }
-        });
-    }
+    //             $('.selTitle').val(client.title);
+    //             var ns = breakName(client.name);
+    //             $('.inpFirstName').val(ns.firstName);
+    //             $('.inpMiddleName').val(ns.middleName);
+    //             $('.inpLastName').val(ns.lastName);
+    //             $('.inputdob').val(client.dob);
+    //             $('#website').val(client.contact_organisation.website);
+    //             $('#Proprietor_name').val(client.client_organisation.name);
+    //             $('#LLP_name').val(client.client_organisation.name);
+    //             $('#company_name').val(contact.contact_organisation.name);
+    //             $('#AOP_name').val(client.contact_organisation.name);
+    //             $('#trust_name').val(client.contact_organisation.name);
+    //             $('#trust_name').val(client.contact_organisation.name);
+    //             $('#nature_business').val(client.business_natures);
+    //             $('#industryType').val(client.industry_types);
+    //             $('#businessType').val(client.business_types);
+    //         }
+    //     });
+    // }
 
     //get POC for the selected group
     // $('#client_group').on('change', function () {
@@ -435,7 +442,7 @@ $(document).ready(function () {
     hideclient_elements();
     $('#Individual').removeClass('hide');
 
-    var legal = '1';
+    // var legal = '1';
     $('#client_legalstatus').on('change', function () {
         var selected = this.value;
         legal = selected;
@@ -1286,7 +1293,7 @@ $(document).ready(function () {
         }
 
         if (contact != undefined||client!=undefined) {
-            //Convert
+            //Updating a client/contact
             var id;
             var id = (contact !=undefined?contact:client);
             var legalStatus = $('#client_legalstatus').val();
@@ -1297,11 +1304,12 @@ $(document).ready(function () {
             clientData.services.push(1); //Change later
             
             if (legalStatus == 1) {
-                clientData.prospect = contact;
                 clientData.aadhar_no = $('#individual_aadhar').val();
-                if (currentClientId != undefined){
-                    clientData.prospect = currentClientId;
-                }
+                // if (client != undefined){
+                //     clientData.prospect = client;
+                // }else{
+                //     clientData.prospect = contact;
+                // }                                                        no data for prospect
 
                 var isPrimaryId = cC_table.rows('.selected').data()[0][1];
                 var indexPrimary = pocObjArr.findIndex(x=>x.contact == isPrimaryId);

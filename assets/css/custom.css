@@ -12,4 +12,17 @@ input.uppercase { text-transform: uppercase; }
 .ui-datepicker {width: auto!important; }
 .label-font {  font-weight: 700;color:grey;font-size:13px;color:#777; }
 .serc-btn { position: absolute;top: 7px;right: 10px;font-size: 22px;color: grey;cursor: pointer; }
-.well { margin-bottom: 0px!important; }
+.well { margin-bottom: 0px!important; padding:10px;}
+.panel-body { transform: scale(0.95); }
+
+.se-pre-con {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('http://lancecoder.com/themes/calibre/assets/images/loader.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+/* .no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; } */

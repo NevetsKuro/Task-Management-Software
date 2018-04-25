@@ -89,9 +89,6 @@
 
                             <!-- START PANEL -->
                             <div class="panel">
-                                <div class="panel-heading">
-                                    Client
-                                </div>
                                 <div class="panel-body">
 
                                     <fieldset class="sky-form m-20">
@@ -168,11 +165,11 @@
                                                 <div class="tab-pane active fade in" id="tab1">
 
                                                     <!-- INDIVIDUAL -->
-                                                    <div id="Individual" class="row elem">
+                                                    <div id="Individual" class="elem">
 
-                                                        <fieldset>
-
-                                                            <div class="well f-s-25 m-b-20 text-bold">INDIVIDUAL</div>
+                                                        <div class="well f-s-25 p-l-20 text-bold">INDIVIDUAL</div>
+                                                        <span class="m-10"></span>
+                                                        <div class="row">
                                                             <div class="col-sm-2">
                                                                 <label class="label">Title:</label>
                                                                 <label class="select">
@@ -201,6 +198,8 @@
                                                                     <input id="individual_lname" class="inpLastName" type="text" required>
                                                                 </label>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Date of Birth:</label>
                                                                 <label class="input">
@@ -218,21 +217,24 @@
 
                                                                 </label>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Aadhar No.:</label>
                                                                 <label class="input">
                                                                     <input id="individual_aadhar" class="aadhar_valid" placeholder="1234-5678-9012">
                                                                 </label>
                                                             </div>
-
-                                                        </fieldset>
+                                                        </div>
 
                                                     </div>
 
                                                     <!-- HUF -->
-                                                    <div id="HUF" class="row elem">
-                                                        <fieldset>
-                                                            <div class="well f-s-25 m-b-20 text-bold">Hindu Undivided Family(HUF)</div>
+                                                    <div id="HUF" class="elem">
+
+                                                            <div class="well f-s-25 p-l-20 text-bold">Hindu Undivided Family(HUF)</div>
+                                                            <span class="m-10"></span>
+                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Name:</label>
                                                                 <label class="input">
@@ -247,6 +249,8 @@
                                                                     <input id="HUF_date" type="text" class="datepickr">
                                                                 </label>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Name of Karta:</label>
                                                                 <label class="input">
@@ -261,17 +265,15 @@
                                                                     <input id="HUF_nameofBusiness" class="nameofBusiness" type="text" required>
                                                                 </label>
                                                             </div>
-
-                                                        </fieldset>
-
+                                                        </div>
                                                     </div>
 
                                                     <!-- PROPRIETOR -->
-                                                    <div id="Proprietor" class="row elem">
+                                                    <div id="Proprietor" class="elem">
 
-                                                        <fieldset>
-
-                                                            <div class="text-bold m-b-20 f-s-25 well">Proprietor</div>
+                                                            <div class="text-bold p-l-20 f-s-25 well">Proprietor</div>
+                                                            <span class="m-10"></span>
+                                                        <div class="row">
                                                             <div class="col-sm-12">
                                                                 <label class="label">Name of Business:
                                                                     <span class="text-danger">*</span>
@@ -280,6 +282,8 @@
                                                                     <input id="Proprietor_name" class="nameofBusiness" type="text" required>
                                                                 </label>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-sm-2">
                                                                 <label class="label">Title:</label>
                                                                 <label class="select2">
@@ -304,48 +308,52 @@
                                                                     <input id="Proprietor_lname" class="inpLastName" type="text">
                                                                 </label>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Date of Commencement of Business :</label>
                                                                 <label class="input">
                                                                     <input id="Proprietor_dateOfComm" type="text">
                                                                 </label>
                                                             </div>
-                                                        </fieldset>
-
+                                                        </div>
                                                     </div>
 
                                                     <!-- Partnership Firm -->
-                                                    <div id="PartnershipFirm" class="row elem">
+                                                    <div id="PartnershipFirm" class="elem">
 
-
-                                                            <div class="text-bold m-b-20 well f-s-25">Partnership Firm</div>
-
-                                                            <div class="col-sm-12">
-                                                                <label class="label">Name of Business:
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
-                                                                <label class="input">
-                                                                    <input id="Partnership_name" class="nameofBusiness" type="text" required>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Date of Partnership Deed:</label>
-                                                                <label class="input">
-                                                                    <input id="Partnership_date" type="text" class="datepickr">
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Date of Commencement of Business:</label>
-                                                                <label class="input">
-                                                                    <input id="Partnership_dateOfComm" type="text" class="datepickr">
-                                                                </label>
-                                                            </div>
-
-                                                            <div id="partner-row">
-                                                                <div class=" row m-l-30 f-s-20">
-                                                                    <label class="label">Details of Partners:</label>
+                                                            <div class="text-bold p-l-20 well f-s-18">Partnership Firm</div>
+                                                            <span class="m-10"></span>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <label class="label">Name of Business:
+                                                                        <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <label class="input">
+                                                                        <input id="Partnership_name" class="nameofBusiness" type="text" required>
+                                                                    </label>
                                                                 </div>
-                                                                <br>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="label">Date of Partnership Deed:</label>
+                                                                    <label class="input">
+                                                                        <input id="Partnership_date" type="text" class="datepickr">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="label">Date of Commencement of Business:</label>
+                                                                    <label class="input">
+                                                                        <input id="Partnership_dateOfComm" type="text" class="datepickr">
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <span class="m-10"></span>
+                                                            <div id="partner-row" class="">
+                                                                <div class="row well p-l-20 f-s-15">
+                                                                    <label class="label col-sm-10">Details of Partners:</label>
+                                                                    <i id='addpartners' class="glyphicon glyphicon-plus text-danger m-l-30 col-sm-1" title="Add Partners"></i>
+                                                                </div>
                                                                 <div class="new row well">
                                                                     <div class="col-sm-6">
                                                                         <label class="label">Partner's Name
@@ -369,18 +377,19 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="row">
+                                                            <!-- <div class="row">
                                                                 <div class="col-sm-2 m-20">
                                                                     <input id="addpartners" type="button" class="btn btn-success buttonDefSize" value="Add">
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
 
                                                     </div>
 
                                                     <!-- LLP -->
-                                                    <div id="LLP" class="row elem">
-                                                        <fieldset>
-                                                            <div class="text-bold m-b-20 f-s-25 well">Limited Liability Partnership(LLP)</div>
+                                                    <div id="LLP" class="elem">
+                                                        <div class="text-bold p-l-20 f-s-25 well">Limited Liability Partnership(LLP)</div>
+                                                        <span class="m-10"></span>
+                                                        <div class="row">
                                                             <div class="col-sm-12">
                                                                 <label class="label">Name of LLP:
                                                                     <span class="text-danger">*</span>
@@ -389,6 +398,8 @@
                                                                     <input id="LLP_name" class="nameofBusiness" type="text" required>
                                                                 </label>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Date of Incorporation:</label>
                                                                 <label class="input">
@@ -401,98 +412,107 @@
                                                                     <input id="partners_noopartner" type="text">
                                                                 </label>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">LLPIN:</label>
                                                                 <label class="input">
                                                                     <input id="LLP_LLPIN" type="text" class="llpin_valid">
                                                                 </label>
                                                             </div>
-                                                            <div id="dpartner-row" class="col-sm-12">
-                                                                <div class="well">
-                                                                    <label class="label">Details of Designated Partners</label>
+                                                        </div>
+                                                        <div id="dpartner-row" class="col-sm-12">
+                                                            <span class="m-10"></span>
+                                                            <div class="row well f-s-15">
+                                                                <label class="label col-sm-10 m-l-20">Details of Designated Partners</label>
+                                                                <i id='addDpartners' class="glyphicon glyphicon-plus text-danger m-l-20 col-sm-1" title="Add Partners"></i>
+                                                            </div>
+                                                            <div class="new row well ">
+                                                                <div class="col-sm-6">
+                                                                    <label class="label">Name of Designated Partner:</label>
+                                                                    <label class="input">
+                                                                        <input id="LLP_designatedpartner" class="LLP_designatedpartner" type="text">
+                                                                    </label>
                                                                 </div>
-                                                                <div class="new row well ">
-                                                                    <div class="col-sm-6">
-                                                                        <label class="label">Name of Designated Partner:</label>
-                                                                        <label class="input">
-                                                                            <input id="LLP_designatedpartner" class="LLP_designatedpartner" type="text">
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="col-sm-5">
-                                                                        <label class="label">Corresponding DIN of Designated Partner:</label>
-                                                                        <label class="input">
-                                                                            <input id="LLP_din_designatedpartner" class="LLP_din_designatedpartner" class="din_valid" type="number">
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="col-sm-1">
-                                                                        <label class="label">Remove</label>
-                                                                    </div>
+                                                                <div class="col-sm-5">
+                                                                    <label class="label">Corresponding DIN of Designated Partner:</label>
+                                                                    <label class="input">
+                                                                        <input id="LLP_din_designatedpartner" class="LLP_din_designatedpartner" class="din_valid" type="number">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-1">
+                                                                    <label class="label">Remove</label>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-12 m-20">
+                                                            <!-- <div class="col-sm-12 m-20">
                                                                 <div class="col-sm-2">
                                                                     <input id="addDpartners" type="button" class="btn btn-success buttonDefSize" value="Add">
                                                                 </div>
-                                                            </div>
-
-                                                        </fieldset>
-
+                                                            </div> -->
+                                                        </div>
                                                     </div>
 
                                                     <!-- Company -->
-                                                    <div id="Company" class="row elem">
+                                                    <div id="Company" class="elem">
 
-                                                        <fieldset>
-
-                                                            <div class="well f-s-25 m-b-20 text-bold">Company</div>
-                                                            <div class="col-sm-12">
-                                                                <label class="label">Name of Company:
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
-                                                                <label class="input">
-                                                                    <input id="company_name" class="nameofBusiness" type="text" required>
-                                                                </label>
+                                                            <div class="well f-s-25 p-l--20 text-bold">Company</div>
+                                                            <span class="m-10"></span>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <label class="label">Name of Company:
+                                                                        <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <label class="input">
+                                                                        <input id="company_name" class="nameofBusiness" type="text" required>
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Types of Company:
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
-                                                                <label class="select">
-                                                                    <select id="company_types" class="select2" required>
-                                                                        <option value="C1">C1</option>
-                                                                    </select>
-                                                                </label>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="label">Types of Company:
+                                                                        <span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <label class="select">
+                                                                        <select id="company_types" class="select2" required>
+                                                                            <option value="C1">C1</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="label">Date of Incorporation:</label>
+                                                                    <label class="input">
+                                                                        <input id="company_date" type="text" class="datepickr">
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Date of Incorporation:</label>
-                                                                <label class="input">
-                                                                    <input id="company_date" type="text" class="datepickr">
-                                                                </label>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <label class="label">CIN</label>
+                                                                    <label class="input">
+                                                                        <input id="company_cin" type="text" class="cin_valid" placeholder="e.g. A11111AA1111AAA111111">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="col-sm-2 checkbox m-t-30">
+                                                                        <input type="checkbox" id="company_listedy" name="listed">
+                                                                        <i></i>
+                                                                        <span class="label-font">Listed</span>
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                                <label class="label">CIN</label>
-                                                                <label class="input">
-                                                                    <input id="company_cin" type="text" class="cin_valid" placeholder="e.g. A11111AA1111AAA111111">
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                   <label class="col-sm-2 checkbox m-t-30">
-                                                                    <input type="checkbox" id="company_listedy" name="listed">
-                                                                    <i></i>
-                                                                    <span class="label-font">Listed</span>
-                                                                </label>
-                                                               
-                                                            </div>
-                                                            <div class="nofE col-sm-6 hide">
-                                                                <label class="label">Name(s) of Stock Exchange:</label>
-                                                                <label class="input">
-                                                                    <input type="text" id="company_stock">
-                                                                </label>
+                                                            <div class="row">
+                                                                <div class="nofE col-sm-6 hide">
+                                                                    <label class="label">Name(s) of Stock Exchange:</label>
+                                                                    <label class="input">
+                                                                        <input type="text" id="company_stock">
+                                                                    </label>
+                                                                </div>
                                                             </div>
 
                                                             <div id="director-row" class="col-sm-12 m-b-10 m-t-10">
-                                                                <div class="row well">
-                                                                    <label class="label">Directors:</label>
+                                                                <div class="row well f-s-15">
+                                                                    <label class="label col-md-10 m-l-20">Directors:</label>
+                                                                    <i id='addDirectors' class="glyphicon glyphicon-plus text-danger m-l-20 col-sm-1" title="Add Partners"></i>
                                                                 </div>
                                                                 <div class="new row well">
                                                                     <div class="col-sm-5">
@@ -512,22 +532,22 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-12">
+                                                            <!-- <div class="col-sm-12">
                                                                 <div class="col-sm-2 m-20">
                                                                     <input id="addDirectors" type="button" class="btn btn-success buttonDefSize" value="Add">
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
 
                                                         </fieldset>
 
                                                     </div>
 
                                                     <!-- AOP/BOI -->
-                                                    <div id="AOP" class="row elem">
+                                                    <div id="AOP" class="elem">
 
-                                                        <fieldset>
-
-                                                            <div class="well text-bold m-b-20 f-s-25">AOP/BOI:</div>
+                                                        <div class="well text-bold p-l-20 f-s-25">AOP/BOI:</div>
+                                                        <span class="m-10"></span>
+                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Name of Association:
                                                                     <span class="text-danger">*</span>
@@ -542,6 +562,8 @@
                                                                     <input id="AOP_date" type="text" class="datepickr">
                                                                 </label>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Name of Member(s):</label>
                                                                 <label class="input">
@@ -554,15 +576,15 @@
                                                                     <input id="AOP_registration" type="text">
                                                                 </label>
                                                             </div>
-                                                        </fieldset>
-
+                                                        </div>
                                                     </div>
 
                                                     <!-- TRUST -->
-                                                    <div id="trust" class="row elem">
-                                                        <fieldset>
-
-                                                            <div class="well text-bold m-b-20 f-s-25">Trust:</div>
+                                                    <div id="trust" class="elem">
+                                                       
+                                                        <div class="well text-bold p-l-20 f-s-25">Trust:</div>
+                                                        <span class="m-10"></span>
+                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Name of Trust:
                                                                     <span class="text-danger">*</span>
@@ -578,14 +600,15 @@
 
                                                                 </label>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Date of Commencement:</label>
                                                                 <label class="input">
                                                                     <input id="trust_doc" type="text" class="datepickr">
                                                                 </label>
                                                             </div>
-                                                        </fieldset>
-
+                                                        </div>
                                                     </div>
 
                                                     <div class="organis hide">
@@ -721,7 +744,7 @@
                                                             <div class="col-sm-6">
                                                                 <label class="label">PAN No:</label>
                                                                 <label class="input">
-                                                                    <input id="PANNO" class="pannumber_valid" type="text" placeholder="e.g. AAAAA1111A">
+                                                                    <input id="PANNO" class="pannumber_valid" type="text" placeholder="e.g. AAAAA1111A" value="AHAGS3545A">
                                                                 </label>
                                                             </div>
                                                             <div class="col-sm-6">
@@ -759,7 +782,7 @@
                                                             <div class="col-sm-6">
                                                                 <label class="label">GSTIN:</label>
                                                                 <label class="input">
-                                                                    <input id="GSTIN" type="text" class="gstinnumber" placeholder="e.g.22 AAAAA0000A 1 Z 5">
+                                                                    <input id="GSTIN" type="text" class="gstinnumber" placeholder="e.g.22AAAAA0000A1Z5" value="22AAAAA0000A1Z5">
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -767,12 +790,11 @@
                                                             <div class="col-sm-6">
                                                                 <label class="label">TAN No:</label>
                                                                 <label class="input">
-                                                                    <input id="TANNO" type="text" class="pannumber_valid" placeholder="e.g. AAAAA 1111 A">
+                                                                    <input id="TANNO" type="text" class="pannumber_valid" placeholder="e.g. AAAAA1111A" value="AAAAA4444A">
                                                                 </label>
                                                             </div>
                                                         </div>
                                                     </div>
-
 
                                                     <div>
                                                         <!--****** Start Colored Modal Footer******-->
@@ -808,7 +830,7 @@
                                                     <!-- BRANCHES -->
                                                     <div class="a_branch hide m-t-40 m-b-40">
                                                         <div id="branch-row">
-                                                            <div class="row well m-t-40 m-b-20">
+                                                            <div class="row well p-l-40">
                                                                 <label class="label">Branches:</label>
                                                             </div>
                                                             <div class="new row well">

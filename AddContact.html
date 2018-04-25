@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 
 <html lang="en" class="desktop landscape chrome">
-<!--<![endif]-->
-<!-- START HEAD -->
-
+    <!--<![endif]-->
+    <!-- START HEAD -->
+    
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
+    
+    
     <title>Add Contact</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+    
     <meta name="description" content="Calibre is imple and easy admin template">
     <meta name="keywords" content="calibre bootstrap template, calibre admin, bootstrap, admin template, bootstrap admin">
     <meta name="author" content="LanceCoder">
-
+    
     <meta property="og:site_name" content="-CUSTOMER VALUE-">
     <meta property="og:title" content="-CUSTOMER VALUE-">
     <meta property="og:description" content="-CUSTOMER VALUE-">
@@ -25,23 +25,23 @@
     <meta property="og:image" content="-CUSTOMER VALUE-">
     <meta property="og:url" content="-CUSTOMER VALUE-">
 
+    
 
-
-
+    
     
     <link href="assets/css/jquery-ui.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/assets/css/jquery-ui.css"> -->
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    
     <div id="css"></div>
     
-
 </head>
 
 <body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
+    <div class="se-pre-con"></div>
+    
     <i class="btn-theme-switcher icon-cog hidden-xs"></i>
-
+    
     <!-- Page Loader -->
-    <div class="page-loader" style="display: none;"></div>
 
     <!-- START WRAPPER -->
     <div class="wrapper">
@@ -77,6 +77,7 @@
                 </section>
                 <!-- END PAGE HEADER -->
 
+
                 <!-- START PAGE CONTENT -->
                 <div class="page-content">
 
@@ -87,161 +88,151 @@
                         <div class="col-md-12">
 
                             <!-- START PANEL -->
-                            <div class="panel">
+                            <div class="panel-group" id="accord">
+                            <div class="panel panel-white">
+                                <div class="panel-heading" style="padding: 10px;">
+                                    <h4 class="panel-title">
+                                        <a id="chckDup" data-toggle="collapse" href="#collapseChck" aria-expanded="false" class="collapsed">Check If Contact Exists ?</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseChck" data-parent="#accord" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                    <div class="panel-body">
 
+                                        <form id="form1" action="#" class="sky-form">
+                                            <fieldset class="col-sm-10 col-sm-offset-1">
 
-                                <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <label class="label">Name:
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <label class="input">
+                                                            <input type="text" id="Name" placeholder=" First name | Middle name | Last name ..." list="namelist" required>
+                                                            <datalist id="namelist">
 
-                                    <form id="form1" action="#" class="sky-form">
-                                        <fieldset class="col-sm-10 col-sm-offset-1">
-
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <label class="label">Name:
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <label class="input">
-                                                        <input type="text" id="Name" placeholder=" First name | Middle name | Last name ..." list="namelist" required>
-                                                        <datalist id="namelist">
-
-                                                        </datalist>
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <label class="label">Company:</label>
-                                                    <label class="input">
-                                                        <input type="text" id="Company" placeholder="Enter Company.." list="cnamelist">
-                                                        <datalist id="cnamelist">
-
-                                                        </datalist>
-                                                    </label>
-                                                </div>
-
-                                                <div class="col-sm-6">
-                                                    <label class="label">Phone:</label>
-                                                    <label class="input">
-                                                        <input type="text" id="Phone" class="contactnumber_valid" placeholder="10 digit number">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6 col-xs-12">
-                                                    <label class="label">Email:</label>
-                                                    <label class="input">
-                                                        <input type="email" id="Email" placeholder="e.g. abc@gmail.com">
-                                                    </label>
-                                                </div>
-                                            </div>
-
-
-                                            <br/>
-
-                                            <span class="col-sm-3 col-sm-offset-9">
-                                                <input class="btn btn-default btn-warning buttonDefSize" id="btnsubmit" value="Check Duplicate">
-                                            </span>
-                                            <br/>
-                                            <span id="message" class="col-sm-12 text-danger text-italic text-center"></span>
-
-                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-
-                                        </fieldset>
-                                    </form>
-
-                                    <div>
-
-                                        <div class="">
-
-                                            <!--****** Start Colored Modal Footer******-->
-                                            <div class="modal modal-warning bg-header" id="colored-warning-header" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content animated fadeOut">
-                                                        <div class="modal-header">
-                                                            <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                <i class="fa fa-times"></i>
-                                                            </button>
-                                                            <h4 class="modal-title">
-                                                                <strong>Contacts</strong>
-                                                            </h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Name</div>
-                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Company</div>
-                                                                <div class="col-xs-3 col-sm-3 text-bold f-s-12">Contact</div>
-                                                                <div class="col-xs-1 col-sm-1 text-bold f-s-12"></div>
-                                                            </div>
-                                                            <hr>
-                                                            <br/>
-                                                            <div class="row" id="searchResult">
-                                                                <!-- DATA FROM JSON -->
-                                                            </div>
-                                                        </div>
+                                                            </datalist>
+                                                        </label>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!--****** Start Colored Modal Footer******-->
 
-                                        </div>
-                                        <div>
-                                            <!--****** Start Colored Modal Footer******-->
-                                            <div class="modal modal-warning bg-header" id="organisation-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content animated fadeOut">
-                                                            <div class="modal-header">
-                                                                <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                    <i class="fa fa-times"></i>
-                                                                </button>
-                                                                <h4 class="modal-title">
-                                                                    <strong>Organisations</strong>
-                                                                </h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <div class="col-xs-4 col-sm-4 text-bold f-s-12">Sr. No</div>
-                                                                    <div class="col-xs-4 col-sm-4 text-bold f-s-12">Name</div>
-                                                                    <div class="col-xs-1 col-sm-1 text-bold f-s-12">Group</div>
-                                                                </div>
-                                                                <hr>
-                                                                <br/>
-                                                                <div class="row" id="orgList">
-                                                                    <!-- DATA FROM JSON -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label class="label">Company:</label>
+                                                        <label class="input">
+                                                            <input type="text" id="Company" placeholder="Enter Company.." list="cnamelist">
+                                                            <datalist id="cnamelist">
+
+                                                            </datalist>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <label class="label">Phone:</label>
+                                                        <label class="input">
+                                                            <input type="text" id="Phone" class="contactnumber_valid" placeholder="10 digit number">
+                                                        </label>
                                                     </div>
                                                 </div>
-                                                <!--****** Start Colored Modal Footer******-->
-                                        </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <label class="label">Email:</label>
+                                                        <label class="input">
+                                                            <input type="email" id="Email" placeholder="e.g. abc@gmail.com">
+                                                        </label>
+                                                    </div>
+                                                </div>
 
+
+                                                <br/>
+
+                                                <span class="col-sm-3 col-sm-offset-9">
+                                                    <input class="btn btn-default btn-warning buttonDefSize" id="btnsubmit" value="Check Duplicate">
+                                                </span>
+                                                <br/>
+                                                <span id="message" class="col-sm-12 text-danger text-italic text-center"></span>
+
+                                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                                            </fieldset>
+                                        </form>
+
+                                        <hr>
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     </div>
-
-                                    <hr>
-                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                 </div>
                             </div>
+                            </div>
                             <!-- END PANEL -->
+
+                            <div class="">
+
+                                    <!--****** Start Colored Modal Footer******-->
+                                    <div class="modal modal-warning bg-header" id="colored-warning-header" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content animated fadeOut">
+                                                <div class="modal-header">
+                                                    <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    <h4 class="modal-title">
+                                                        <strong>Contacts</strong>
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-xs-4 col-sm-4 text-bold f-s-12">Name</div>
+                                                        <div class="col-xs-4 col-sm-4 text-bold f-s-12">Company</div>
+                                                        <div class="col-xs-3 col-sm-3 text-bold f-s-12">Contact</div>
+                                                        <div class="col-xs-1 col-sm-1 text-bold f-s-12"></div>
+                                                    </div>
+                                                    <hr>
+                                                    <br/>
+                                                    <div class="row" id="searchResult">
+                                                        <!-- DATA FROM JSON -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--****** Start Colored Modal Footer******-->
+
+                                </div>
+                                <div>
+                                    <!--****** Start Colored Modal Footer******-->
+                                    <div class="modal modal-warning bg-header" id="organisation-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content animated fadeOut">
+                                                    <div class="modal-header">
+                                                        <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <h4 class="modal-title">
+                                                            <strong>Organisations</strong>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-xs-4 col-sm-4 text-bold f-s-12">Sr. No</div>
+                                                            <div class="col-xs-4 col-sm-4 text-bold f-s-12">Name</div>
+                                                            <div class="col-xs-1 col-sm-1 text-bold f-s-12">Group</div>
+                                                        </div>
+                                                        <hr>
+                                                        <br/>
+                                                        <div class="row" id="orgList">
+                                                            <!-- DATA FROM JSON -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--****** Start Colored Modal Footer******-->
+                                </div>
+
 
                             <div class="contactFormBody panel">
 
                                 <div class="panel-body">
 
-                                    <div class="row sky-form m-b-30 m-l-15">
-                                        <div class="col-sm-5 col-sm-offset-1">
-                                            <label class="label">Originator:
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <label class="select">
-                                                <select id="addContact_originator" class="select2" required>
-                                                    <option>OriginatorTest1</option>
-                                                    <option>OriginatorTest2</option>
-                                                </select>
-                                            </label>
-                                            <!-- <div class="note m-t-5"><strong>Note:</strong> Click to add. Click cross for remove the item.</div> -->
-                                        </div>
-                                    </div>
                                     <!-- ADDITIOAL INFORMATION -->
                                     <div id="new-form" class="col-sm-12">
 
@@ -345,29 +336,31 @@
                                                             </div>
                                                         </div>
                                                         
-                                                        <div class="row">
-                                                            <label class="label col-sm-12">Address:</label>
+                                                        <div class="row m-b-20">
+                                                            <div class="col-sm-12">
+                                                                <label class="label">Address:</label>
+                                                            </div>
                                                             <label class="textarea col-sm-9">
                                                                 <textarea update-ctrl="address" id="addContact_addresses" rows="5" placeholder="Address e.g. Laxmi Plaza, Laxmi Industrial Estate, New Link Road, Andheri West, Mumbai"></textarea>
                                                             </label>
                                                             <label class="input col-sm-3">
-                                                                <input update-ctrl="address" id="addContact_state" type="text" placeholder="State">
-                                                                <input update-ctrl="address" id="addContact_city" type="text" placeholder="City">
-                                                                <input update-ctrl="address" id="addContact_pincode" type="number" placeholder="pincode" accept=" ">
+                                                                <input update-ctrl="address" id="addContact_state" type="text" placeholder="State" class="m-b-5">
+                                                                <input update-ctrl="address" id="addContact_city" type="text" placeholder="City" class="m-b-5">
+                                                                <input update-ctrl="address" id="addContact_pincode" type="number" placeholder="Pincode">
                                                             </label>
                                                         </div>
 
-                                                        <div class="col-sm-12">
-                                                            <hr>
-                                                        </div>
-
-                                                        <div class="col-sm-12 well">
-                                                            <label class="label">Contacts:
+                                                        <div class="row well">
+                                                            <label class="label col-sm-10 m-l-10">Contacts:
                                                                 <span class="text-danger">*</span>
                                                             </label>
+                                                            <label class="col-sm-1 text-danger m-l-15">
+                                                                <a class="glyphicon glyphicon-plus f-s-15" title="Add Contact" id="addcontact"></a>
+                                                                <!-- <i class="linear-icons li icon-plus-circle f-s-20" title="Add Contact" id="addcontact"></i> -->
+                                                            </label>
                                                         </div>
 
-                                                        <div class="col-sm-12 m-l-5 m-r-5">
+                                                        <div class="row m-l-5 m-r-5 m-b-20">
                                                             <div class="table table-small-font">
                                                                 <div class="row text-bold well">
                                                                     <div class="col-xs-2 col-sm-2">
@@ -387,7 +380,7 @@
                                                                 <div id="contact-row" update-ctrl="phone_numbers">
                                                                     <div class="row new well">
                                                                         <div class='col-xs-2 col-sm-2'>
-                                                                            <label class='checkbox'>
+                                                                            <label class='checkbox m-l-22'>
                                                                                 <input type='radio' update-ctrl="phone_numbers" name="CNChecked" class='cn_is_primary'><i class='rounded-x m-l-10'></i>
                                                                             </label>
                                                                         </div>
@@ -415,23 +408,16 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row">
-                                                            <label class="label col-sm-2 m-l-20">
-                                                                <a class="btn btn-success buttonDefSize m-t-0" id="addcontact">Add</a>
-                                                            </label>
-                                                        </div>
-
                                                         
-                                                        <div class="col-sm-12">
-                                                            <hr>
-                                                        </div>
-
-                                                        <div class="col-sm-12 well">
-                                                            <label class="label">Email-Id's:
+                                                        <div class="row well">
+                                                            <label class="label col-sm-10 m-l-10">Email-Id's:
                                                                 <span class="text-danger">*</span>
                                                             </label>
+                                                            <label class="col-sm-1 text-danger m-l-15">
+                                                                <a class="glyphicon glyphicon-plus f-s-15" title="Add Email" id="addemail"></a>
+                                                            </label>
                                                         </div>
-                                                        <div class="col-sm-12 m-l-5 m-r-5">
+                                                        <div class="row m-l-5 m-r-5 m-b-20">
                                                             <div class="table table-small-font">
                                                                 <div class="row text-bold well">
                                                                     <div class="col-xs-2 col-sm-2">
@@ -451,7 +437,7 @@
                                                                 <div id="email-row" update-ctrl="email_addresses">
                                                                     <div class="row new well">
                                                                         <div class='col-xs-2 col-sm-2'>
-                                                                            <label class='checkbox'>
+                                                                            <label class='checkbox m-l-22'>
                                                                                 <input type='radio' update-ctrl="email_addresses" name="EAChecked" class='ea_is_primary'><i class='rounded-x m-l-10'></i>
                                                                             </label>
                                                                         </div>
@@ -478,22 +464,15 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row">
-                                                            <label class="label col-sm-2 m-l-20">
-                                                                <a class="btn btn-success buttonDefSize m-t-0" id="addemail">Add</a>
+                                                        <div class="row well">
+                                                            <label class="label col-sm-10 m-l-10">Social Media Links:
+                                                            </label>
+                                                            <label class="col-sm-1 text-danger m-l-15">
+                                                                <a class="glyphicon glyphicon-plus f-s-15" title="Add Social Media" id="addwebsite"></a>
                                                             </label>
                                                         </div>
 
-                                                        <div class="col-sm-12">
-                                                            <hr>
-                                                        </div>
-
-                                                        <div class="col-sm-12 well">
-                                                            <label class="label">Social Media Links:
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="col-sm-12 m-l-5 m-r-5">
+                                                        <div class="row m-l-5 m-r-5 m-b-20">
                                                             <div id="table1" class="table table-small-font table-striped display-all">
                                                                 <div class="row text-bold well">
                                                                     <div class="col-sm-4">
@@ -525,22 +504,12 @@
                                                                             <div id="remove-website" update-ctrl='social_media_links' class="text-center text-danger">
                                                                                 <span class="centerAlign">
                                                                                     <i class="glyphicon glyphicon-remove fa-lg"></i>
-                                                                                    <span>
+                                                                                <span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <label class="label col-sm-2 m-l-20">
-                                                                <a class="btn btn-success buttonDefSize m-t-0" id="addwebsite">Add</a>
-                                                            </label>
-                                                        </div>
-
-                                                        <div class="col-sm-12">
-                                                            <hr>
                                                         </div>
 
                                                         <div class="row">
@@ -644,58 +613,55 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row m-r-2 m-l-10 m-t-30">
-                                                            <div class="col-sm-12 well">
-                                                                <label class="label">Address:
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
-                                                            </div>
-
-                                                            <div class="col-sm-12 m-l-5 m-r-5">
-                                                                <div id="hoaddress" class="table table-small-font table-striped display-all">
-                                                                    <div class="row text-bold well">
-                                                                        <div class="col-sm-1">
-                                                                            From
-                                                                        </div>
-                                                                        <div class="col-sm-1">
-                                                                            is H/O
-                                                                        </div>
-                                                                        <div class="col-sm-3">
-                                                                            Branch Name
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            Address
-                                                                        </div>
+                                                        <div class="row well">
+                                                            <label class="label col-sm-10 m-l-10">Email-Id's:
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div id="hoaddress" class="table table-small-font table-striped display-all">
+                                                                <div class="row text-bold well">
+                                                                    <div class="col-sm-1 text-center m-l-10">
+                                                                        From
                                                                     </div>
+                                                                    <div class="col-sm-1">
+                                                                        is H/O
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        Branch Name
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        Address
+                                                                    </div>
+                                                                </div>
 
-                                                                    <div id="hoaddress-row">
-                                                                        <div id="" class="new row well">
-                                                                            <div class="col-xs-1 col-sm-1">
-                                                                                <label class="checkbox">
-                                                                                    <input type="radio" update-ctrl="contact_organisation" name="branchChecked" class="hoaddress_from">
-                                                                                    <i class="rounded-x m-l-10"></i>
-                                                                                </label>
-                                                                            </div>
-
-                                                                            <div class="col-xs-1 col-sm-1">
-                                                                                <label class="checkbox">
-                                                                                    <input type="checkbox" class="hoaddress_isHO" disabled>
-                                                                                    <i class="rounded-x m-l-10"></i>
-                                                                                </label>
-                                                                            </div>
-                                                                            <div class="col-xs-3 col-sm-3">
-                                                                                <label class="input">
-                                                                                    <input type="text" class="hoBranchName" disabled>
-                                                                                </label>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6 col-sm-6">
-                                                                                <label class="textarea textarea-expandable">
-                                                                                    <textarea class="hoaddresses" row="3" disabled></textarea>
-                                                                                </label>
-                                                                            </div>
-
+                                                                <div id="hoaddress-row">
+                                                                    <div id="" class="new row well">
+                                                                        <div class="col-xs-1 col-sm-1">
+                                                                            <label class="checkbox m-l-10">
+                                                                                <input type="radio" update-ctrl="contact_organisation" name="branchChecked" class="hoaddress_from">
+                                                                                <i class="rounded-x m-l-10"></i>
+                                                                            </label>
                                                                         </div>
+
+                                                                        <div class="col-xs-1 col-sm-1">
+                                                                            <label class="checkbox">
+                                                                                <input type="checkbox" class="hoaddress_isHO" disabled>
+                                                                                <i class="rounded-x m-l-10"></i>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-xs-3 col-sm-3">
+                                                                            <label class="input">
+                                                                                <input type="text" class="hoBranchName" disabled>
+                                                                            </label>
+                                                                        </div>
+
+                                                                        <div class="col-xs-6 col-sm-6">
+                                                                            <label class="textarea textarea-expandable">
+                                                                                <textarea class="hoaddresses" row="3" disabled></textarea>
+                                                                            </label>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -744,24 +710,35 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-6">
+                                                                <label class="label">Originator:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="select">
+                                                                    <select id="addContact_originator" class="select2" required>
+                                                                        <option>OriginatorTest1</option>
+                                                                        <option>OriginatorTest2</option>
+                                                                    </select>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Assignee:</label>
+                                                                <label class="select">
+                                                                    <select update-ctrl="lead" id="addContact_assignee" class="select2-multiple" multiple required>
+                                                                        
+                                                                    </select>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
                                                                 <label class="label col-sm-10">Potential Service:</label>
                                                                 <label class="select">
                                                                     <select update-ctrl="lead" id="addContact_potential_service" class="select2-multiple editselect" multiple>
                                                                         
                                                                     </select>
                                                                 </label>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label class="label col-sm-10">Assignee:</label>
-                                                                <label class="select">
-                                                                    <select update-ctrl="lead" id="addContact_assignee" class="select2-multiple" multiple required>
-                                                                            <option disabled selected value>--select--</option>
-                                                                    </select>
-                                                                </label>
-                                                            </div>
-                                                            
+                                                            </div>        
                                                         </div>
-
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <label class="label">Notes:</label>
@@ -835,7 +812,16 @@
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
     <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 
+    <script>
+    //paste this code under the head tag or in a separate js file.
+	// Wait for window load
+	$(window).load(function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");;
+    });
+    </script>
     <script>
         /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
         $.widget.bridge('uibutton', $.ui.button);
@@ -912,7 +898,7 @@
     <script src="assets/js/widget-weather.js" type="text/javascript"></script>
     <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
     <script src="assets/js/widget-list.js" type="text/javascript"></script>
-
+    
     <!--================================/
         /* END SCRIPT THIS PAGE ONLY
         /*================================-->

@@ -10,10 +10,10 @@
             });
             
             $(".datepickr").datepicker({
-            changeMonth:true,
-            changeYear:true,
-            yearRange: "1850:3000",
-            dateFormat:'dd/mm/yy'
+                changeMonth:true,
+                changeYear:true,
+                yearRange: "1850:3000",
+                dateFormat:'dd/mm/yy'
             });
         
             window.inputChanges = function(){
@@ -185,12 +185,12 @@
             }
         });
 
-        $(document).on('focus', 'form :input' ,function(){
+        $(document).on('focus', 'form :input:not(select)' ,function(){
             $('html, body').animate({
-                scrollTop : $(this).offset().top - 150
+                scrollTop : $(this).offset().top - 180
             },
             'slow');
-            console.log($(this).offset().top);
+            // console.log($(this).offset().top);
         });
 
         window.editSelect = function(){
