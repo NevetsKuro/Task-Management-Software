@@ -139,7 +139,7 @@ $(document).ready(function(){
             pocObj1 = new Object();
             pocObj1.is_primary = false;        
             pocObj1.contact = cid;
-            pocObj1.relation = relation;
+            pocObj1.relation = 1;//relation;
     
             //data for sending to client individuals
             contactId = cid;

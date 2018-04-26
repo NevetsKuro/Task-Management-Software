@@ -4,12 +4,14 @@ $(document).ready(function(){
     var glob = '';
     var glob2 = '';
     var origForm;
+
+    var urlRooT = 'https://office-management-demo.herokuapp.com/';
     
     $('#file').on('change',function(){
-        $('#addContact_vcard').val($(this).val());
+        $('#addContact_vcard').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
     });
     $('#file2').on('change',function(){
-        $('#addContact_image').val($(this).val())
+        $('#addContact_image').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
     });
      
     // UpdateCont = inputChanges(); 
@@ -42,7 +44,7 @@ $(document).ready(function(){
     
         if(name!='' && name!=undefined){
         $.ajax({
-                url:'https://office-management-demo.herokuapp.com/contacts',
+                url:urlRooT+'contacts',
                 datatype: 'JSON' ,
                 type: 'GET' ,
                 data: 'name='+name+'&phone='+phone+'&email='+email+'&organisation='+organisation ,
@@ -92,7 +94,7 @@ $(document).ready(function(){
     
     //auto filling forms prefilled data
     $.ajax({
-        url:'http://office-management-demo.herokuapp.com/contacts/form-data',
+        url:urlRooT+'contacts/form-data',
         datatype:'JSON',
         type:'GET',
         success:function(data){
@@ -169,7 +171,7 @@ $(document).ready(function(){
         console.log('click function running...');
         
         $.ajax({
-            url:'https://office-management-demo.herokuapp.com/contacts/'+id,
+            url:urlRooT+'contacts/'+id,
             datatype:'JSON',
             type:'GET',
             success:function(data){
@@ -296,7 +298,6 @@ $(document).ready(function(){
         UpdateCont = inputChanges();
         // origForm = inputChanges();
     }
-    
     
     //add exsting contact to below form in add contact
     $('#searchResult').on('click','.click', filterContactData);
@@ -501,7 +502,7 @@ $(document).ready(function(){
 
         if(searchOrgKeyword != ""){
         $.ajax({
-            url:"http://office-management-demo.herokuapp.com/organisations/?name="+searchOrgKeyword,
+            url:urlRooT+"organisations/?name="+searchOrgKeyword,
             method:'GET',
             datatype:'JSON',
             success:function(orgList){
@@ -546,7 +547,7 @@ $(document).ready(function(){
             }
             
         $.ajax({
-            url:'https://office-management-demo.herokuapp.com/organisations/display/'+orgId,
+            url:urlRooT+'organisations/display/'+orgId,
             type:'GET',
             contentType:'application/json',
             datatype:'JSON',
@@ -802,7 +803,7 @@ $(document).ready(function(){
                 $.ajax({
                     async: true,
                     crossDomain: true,
-                    url:'http://office-management-demo.herokuapp.com/contacts/'+currentContactsId+'/?',
+                    url:urlRooT+'contacts/'+currentContactsId+'/?',
                     datatype:'JSON',
                     type:'PUT',
                     headers: {
@@ -928,7 +929,7 @@ $(document).ready(function(){
             console.log('The json file for new contact is = \n'+contactJSON);
                 
             $.ajax({
-                url:'http://office-management-demo.herokuapp.com/contacts/?',
+                url:urlRooT+'contacts/?',
                 type:'POST',
                 contentType:'application/json',
                 datatype:'JSON',

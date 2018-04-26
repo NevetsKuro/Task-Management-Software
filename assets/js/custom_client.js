@@ -12,11 +12,16 @@ $(document).ready(function () {
     var client = urlParams['client'];   //type number
     var legal = urlParams['legal'];     //type number
     var contOrg;
+    var urlRoot = 'http://office-management-demo.herokuapp.com/'
+
+    $('#file3').on('change',function(){
+        $('#stat_document').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
+    });
 
     if(contact!=undefined||client!=undefined){
         if(contact){
             $.ajax({
-                url:'http://office-management-demo.herokuapp.com/contacts/'+contact+'/',
+                url:urlRoot+'contacts/'+contact+'/',
                 type:'GET',
                 datatype:'JSON',
                 success:function(data){
@@ -46,11 +51,11 @@ $(document).ready(function () {
                     legalText = 'trusts';
                 }
                 $.ajax({
-                    url:'http://office-management-demo.herokuapp.com/clients/'+legalText+'/'+client,
+                    url:urlRoot+'clients/'+legalText+'/'+client,
                     type:'GET',
                     datatype:'JSON',
                     success:function(data){
-
+                        var commencement_date = $.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date));
                         $('#client_legalstatus').val(legal).trigger('change');
                         $('#PANNO').val(data.pan_no);
                         if(legal==1){
@@ -64,7 +69,7 @@ $(document).ready(function () {
                             
                             if(legal == 2){
                                 $('#client_legalstatus').val(legal).trigger('change');
-                                $('#HUF_date').val(data.commencement_date);
+                                $('#HUF_date').val(commencement_date);
                                 $('#HUF_nameOfKarta').val(data.karta_name);
                                 contOrg = data.prospect;
                                 client_organisation();
@@ -76,14 +81,14 @@ $(document).ready(function () {
                                 $('#Proprietor_fname').val(name[0]);
                                 $('#Proprietor_mname').val(name.length==2?'':name[1]);
                                 $('#Proprietor_lname').val(name[length-1]);
-                                $('#Proprietor_dateOfComm').val(data.commencement_date);
+                                $('#Proprietor_dateOfComm').val(commencement_date);
                                 contOrg = data.prospect;
                                 client_organisation();
                             
                             }else if(legal == 4){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#Partnership_date').val(data.partnership_deed_date);
-                                $('#Proprietor_dateOfComm').val(data.commencement_date);
+                                $('#Proprietor_dateOfComm').val(commencement_date);
                                 addPartnerRows(data.partners);
                                 contOrg = data.prospect;
                                 client_organisation();
@@ -91,13 +96,13 @@ $(document).ready(function () {
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#partners_noopartner').val(data.other_partners.name.join(','));
                                 $('#LLP_LLPIN').val(data.llpin);
-                                $('#LLP_date').val(data.commencement_date);
+                                $('#LLP_date').val(commencement_date);
                                 addDPartnerRows(data.designated_partner);
                                 contOrg = data.prospect;
                                 client_organisation();
                             }else if(legal == 6){
                                 $('#client_legalstatus').val(legal).trigger('change');
-                                $('#company_date').val(data.commencement_date);
+                                $('#company_date').val(commencement_date);
                                 $('#company_types').val(company_type);
                                 $('#company_cin').val(data.cin);
                                 $('#company_listedy').prop('checked',stock_exchange_listed);
@@ -108,13 +113,13 @@ $(document).ready(function () {
                             }else if(legal == 7){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#members').val(data.members.name.join(','));
-                                $('#AOP_date').val(data.commencement_date);
+                                $('#AOP_date').val(commencement_date);
                                 $('#AOP_registration').val(data.registration_no);    
                                 contOrg = data.prospect;
                                 client_organisation();
                             }else if(legal == 8){
                                 $('#client_legalstatus').val(legal).trigger('change');
-                                $('#trust_doc').val(data.commencement_date);
+                                $('#trust_doc').val(commencement_date);
                                 $('#trusteeName').val(daa.trustee);
                                 contOrg = data.prospect;
                                 client_organisation();
@@ -140,7 +145,7 @@ $(document).ready(function () {
 
         if(searchOrgKeyword != ""){
         $.ajax({
-            url:"http://office-management-demo.herokuapp.com/organisations/?name="+searchOrgKeyword,
+            url:urlRoot+"organisations/?name="+searchOrgKeyword,
             method:'GET',
             datatype:'JSON',
             success:function(orgList){
@@ -187,7 +192,7 @@ $(document).ready(function () {
         }
         
     $.ajax({
-            url:'https://office-management-demo.herokuapp.com/organisations/'+orgId +'/',
+            url:urlRoot+'organisations/'+orgId +'/',
             type:'GET',
             contentType:'application/json',
             datatype:'JSON',
@@ -234,12 +239,12 @@ $(document).ready(function () {
     }
 
 
-
+    var currentClientId;
     $(document).on('click','.orgClick',client_organisation);
 
     $(document).on('click','#editOrganisation',function(){
         currentOrganisationsId = $(this).attr('oid');
-        var currentClientId = client;
+        currentClientId = client;
         // var url = "addOrganisation.html?id="+currentOrganisationsId+'&cid='+currentContactsId;
         window.open("addOrganisation.html?id="+currentOrganisationsId+'&ctid='+currentClientId, "","menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450");
         // $(location).attr('href',url);
@@ -253,7 +258,7 @@ $(document).ready(function () {
     //////////////////////////////////////////////////
 
     $.ajax({
-        url: 'https://office-management-demo.herokuapp.com/organisations/groups',
+        url: urlRoot+'organisations/groups',
         datatype: 'JSON',
         type: 'GET',
         success: function (groups) {
@@ -266,7 +271,7 @@ $(document).ready(function () {
     
     //PopulateStates('#state');
     $.ajax({
-        url: 'http://office-management-demo.herokuapp.com/organisations/form-data',
+        url: urlRoot+'organisations/form-data',
         datatype: 'JSON',
         type: 'GET',
         success: function (data) {
@@ -294,7 +299,7 @@ $(document).ready(function () {
 
     //auto filling forms prefilled data
     $.ajax({
-        url: 'http://office-management-demo.herokuapp.com/contacts/form-data',
+        url: urlRoot+'contacts/form-data',
         datatype: 'JSON',
         type: 'GET',
         success: function (data) {
@@ -325,22 +330,17 @@ $(document).ready(function () {
     });
 
     // Convert to client has been selected
-    var contOrg;
+    var currentOrganisationsId;
     if (contact != undefined && contact != '') {
         $.ajax({
-            url: 'http://office-management-demo.herokuapp.com/contacts/' + contact,
+            url: urlRoot+'contacts/' + contact,
             datatype: 'JSON',
             type: 'GET',
             success: function (contact) {
                 //Fill the form with details about the contact
-                AddPhone(contact.phone_numbers);
-                AddEmail(contact.email_addresses);
-                AddAddress([contact.address]);
                 AddBranch(contact.contact_organisation.organisation.branches);
 
-
                 $('.selTitle').val(contact.title);
-
 
                 var ns = breakName(contact.name);
                 $('.inpFirstName').val(ns.firstName);
@@ -363,7 +363,7 @@ $(document).ready(function () {
                 $('#nature_business').val(contact.contact_organisation.organisation.business_natures);
                 $('#industryType').val(contact.contact_organisation.organisation.industry_types);
                 $('#businessType').val(contact.contact_organisation.organisation.business_types);
-                contOrg = contact.contact_organisation.organisation.id;
+                currentOrganisationId = contact.contact_organisation.organisation.id;
             }
         });
     }
@@ -545,8 +545,6 @@ $(document).ready(function () {
     });
 
 
-
-
     //************Multiple entries for phones
 
     var addContactRow = `
@@ -625,7 +623,6 @@ $(document).ready(function () {
 
 
     //**************Multiple entries for email
-
     var addEmailRow = `
         <div class='new row well'>
             <div class='col-xs-4 col-sm-4'>
@@ -768,45 +765,33 @@ $(document).ready(function () {
     $('#address-row').on('click', '#remove-address', function () {
         $(this).parents('.new').remove();
     });
-
-
     //******************End - Multiple entries for address
 
 
     //**********Add branch in client
     var addbranch = `
         <div class="new row well">
-        <div class="col-sm-2">
-                <label class="input">
-                <input id="branch_name" class="branch_name" type="text">
-                </label>
-        </div>
         <div class="col-sm-3">
-                <label class="input">
-                <input id="branch_address" class="branch_address" type="text">
-                </label>
-        </div>
-        <div class="col-sm-2">
-                <label class="input">
-                <input id="branch_GSTIN" class="branch_gst gstinnumber" type="number">
-                </label>
-        </div>
-        <div class="col-sm-2">
             <label class="input">
-                <input id="branch_phone" class="branch_phone phonenumber_valid" type="number" required>
-                </label>
+            <input id="branch_name" class="branch_name" type="text">
+            </label>
         </div>
-        <div class="col-sm-2">
-                <label class="input">
-                <input id="branch_email" class="branch_email" type="email" placeholder="e.g. abc@example.com" required>
-                </label>
+        <div class="col-sm-4">
+            <label class="textarea textarea-expandable">
+            <textarea id="branch_address" class="branch_address" type="text"></textarea>
+            </label>
+        </div>
+        <div class="col-sm-4">
+            <label class="input">
+            <input id="branch_GSTIN" class="branch_gst gstinnumber" type="number">
+            </label>
         </div>
         <div class="col-sm-1">
-        <div id="removebranch" class="text-center text-danger">
-            <span class="centerAlign p-t-10">
-                <i class="glyphicon glyphicon-remove fa-lg"></i>
-            <span>
-        </div>
+            <div id="removebranch" class="text-center text-danger">
+                <span class="centerAlign p-t-10">
+                    <i class="glyphicon glyphicon-remove fa-lg"></i>
+                <span>
+            </div>
         </div>
         </div>
         `;
@@ -964,8 +949,6 @@ $(document).ready(function () {
 
 
     //multple entries for details of designation partners
-    //$('#addDpartners').on('click', function () {
-    //    $('#design_partners').append(
     var designatedPartner =
         `<div class="row new well">
             <div class="col-sm-6">
@@ -1016,12 +999,12 @@ $(document).ready(function () {
         }
     }
 
-
-    $('#adddPartner').on('click', addDPartnerRows);
+    $('#addDpartners').on('click', addDPartnerRows);
 
     $('#dpartner-row').on('click', '#remove-Dpartner', function () {
         $(this).parents('.new').remove();
     });
+
 
     //if listed
     $('#company_listedy').on('change', function () {
@@ -1068,9 +1051,14 @@ $(document).ready(function () {
         ctid = cC_table.rows('.selected').data()[0][1];
         alert('changed');
     });
+
     $('#add_clientsContact').on('click', function () {
+        if(legal==undefined){
+            legal=$('#client_legalstatus').val();
+        }
         window.open('quick_Add_contact.html?legalStatus='+legal+'&method=Add','',"menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450");
     });
+
     var pocObjArr = [];
     window.AddContactPerson = function(id, title, Name, email, phone, relation, designation, purpose,legal ,pocObj) {
 
@@ -1102,14 +1090,6 @@ $(document).ready(function () {
             ]).draw(false);
         }
     }
-
-
-
-    // $('#countSelected').on('click', function () {
-    //     var row = cC_table.rows('.selected').data();
-
-    //     console.log(row[0][1]);
-    // });
 
     $('#clientsContact_datatable tbody').on('click', 'div.cc_remove', function () {
         swal({
@@ -1206,7 +1186,7 @@ $(document).ready(function () {
     });
     $('#close_addmore').click(function () {
         $('#document_form').addClass('hide');
-    })
+    });
 
     //adding Service in client
     $('#addService').on('click', function () {
@@ -1247,7 +1227,7 @@ $(document).ready(function () {
         $(this).parent('#newservice').remove();
     });
 
-    var urlRoot = "http://office-management-demo.herokuapp.com/clients/";
+    var urlRooT = urlRoot+"clients/";
     //Save Client details in the DB
     $(document).on('click', '#clientSubmit', function () {
         var clientData = new Object();
@@ -1259,37 +1239,37 @@ $(document).ready(function () {
         var dirs;
         getDirectorsRow=function(){
             var directors=[];
-        $('#director-row .new').each(function(index) {
-            dirs = new Object();
-            dirs['name'] = $(this).find('.company_directors').val();
-            dirs['din'] = $(this).find('.company_din_directors').val();
-            directors.push(dirs);
-        });
-        return directors;
+            $('#director-row .new').each(function(index) {
+                dirs = new Object();
+                dirs['name'] = $(this).find('.company_directors').val();
+                dirs['din'] = $(this).find('.company_din_directors').val();
+                directors.push(dirs);
+            });
+            return directors;
         }
 
         var parss;
         getPartnersRow=function(){
             var partnerInShare=[];
-        $('#partner-row .new').each(function(index) {
-            parss = new Object();
-            parss['name'] = $(this).find('.partnerName').val();
-            parss['share'] = $(this).find('.partnershare').val();
-            partnerInShare.push(parss);
-        });
-        return partnerInShare;
+            $('#partner-row .new').each(function(index) {
+                parss = new Object();
+                parss['name'] = $(this).find('.partnerName').val();
+                parss['share'] = $(this).find('.partnershare').val();
+                partnerInShare.push(parss);
+            });
+            return partnerInShare;
         }
 
         var pars;
         getDpartnersRow=function(){
             var dPartners=[];
-        $('#email-row .new').each(function(index) {
-            pars = new Object();
-            pars['name'] = $(this).find('.LLP_designatedpartner').val();
-            pars['din'] = $(this).find('.LLP_din_designatedpartner').val();
-            dPartners.push(email);
-        });
-        return dPartners;
+            $('#email-row .new').each(function(index) {
+                pars = new Object();
+                pars['name'] = $(this).find('.LLP_designatedpartner').val();
+                pars['din'] = $(this).find('.LLP_din_designatedpartner').val();
+                dPartners.push(pars);
+            });
+            return dPartners;
         }
 
         if (contact != undefined||client!=undefined) {
@@ -1317,13 +1297,12 @@ $(document).ready(function () {
                 
                 clientData.pocs = pocObjArr;
 
-                url = urlRoot +  'individuals/';
+                url = urlRooT +  'individuals/';
                 
             } else {
 
-                clientData.prospect = currentOrganisationsId;
-                clientData.GSTIN = $('#GSTIN').val();
-                clientData.TANNO = $('#TANNO').val();
+                clientData.gstin = $('#GSTIN').val();
+                clientData.tan_no = $('#TANNO').val();
                 //Get Branches
                 var isPrimaryId = cC_table.rows('.selected').data()[0][1];
                 var indexPrimary = pocObjArr.findIndex(x=>x.contact == isPrimaryId);
@@ -1338,7 +1317,7 @@ $(document).ready(function () {
                     // clientData.name = $('#HUF_name').val();
                     // clientData.businessName = $('#HUF_nameofBusiness').val();
 
-                    url = urlRoot +  'hufs/';
+                    url = urlRooT +  'hufs/';
 
                 } else if (legalStatus == 3) {//Proprietor
 
@@ -1351,7 +1330,7 @@ $(document).ready(function () {
 
                     // clientData.businessName = $('#Proprietor_name').val();
 
-                    url =   urlRoot +  'proprietors/';
+                    url =   urlRooT +  'proprietors/';
 
                 } else if (legalStatus == 4) {//Partnership
 
@@ -1361,7 +1340,7 @@ $(document).ready(function () {
                     //Get Details of Partners
                     // clientData.businessName = $('#Partnership_name').val();
 
-                    url =   urlRoot +  'partnership-firms/';
+                    url =   urlRooT +  'partnership-firms/';
 
                 } else if (legalStatus == 5) {//LLP
                     
@@ -1378,7 +1357,7 @@ $(document).ready(function () {
                     clientData.designated_partner = getDpartnersRow();
                     // clientData.businessName = $('#LLP_name').val();
 
-                    url =   urlRoot +  'llps/';
+                    url =   urlRooT +  'llps/';
 
                 } else if (legalStatus == 6) {//Company
                     
@@ -1392,7 +1371,7 @@ $(document).ready(function () {
                     clientData.directors = getDirectorsRow();
                     //Get Details of Directors
 
-                    url =   urlRoot +  'limited-companies/';
+                    url =   urlRooT +  'limited-companies/';
 
                 } else if (legalStatus == 7) {//AOP-BOI
                     
@@ -1409,15 +1388,15 @@ $(document).ready(function () {
                     clientData.commencement_date = getFormateDateToServer($('#AOP_date').val());
                     clientData.registration_no = $('#AOP_registration').val();
 
-                    url =   urlRoot +  'aop-boi/';
+                    url =   urlRooT +  'aop-boi/';
 
                 } else if (legalStatus == 8) {//Trusts
                     
-                    clientData.businessName = $('#trust_name').val();
-                    clientData.commencemaneDate = getFormateDateToServer($('#trust_doc').val());
-                    clientData.trusteeName = $('#trusteeName').val();
+                    // clientData.businessName = $('#trust_name').val();
+                    clientData.commencement_date = getFormateDateToServer($('#trust_doc').val());
+                    clientData.trustee = $('#trusteeName').val();
 
-                    url =   urlRoot +  'trusts/';
+                    url =   urlRooT +  'trusts/';
 
                 }
             }
@@ -1445,8 +1424,7 @@ $(document).ready(function () {
             //Create a new client
             clientData.pan_no = $('#PANNO').val();
             clientData.services = [];
-            clientData.services.push(1); //Change later
-
+            clientData.services.push(1);
             
             if (legalStatus == 1) {//Individuals
 
@@ -1461,7 +1439,7 @@ $(document).ready(function () {
                 
                 clientData.pocs = pocObjArr;
 
-                url = urlRoot +  'individuals/?';
+                url = urlRooT + 'individuals/?';
 
                 
             } else {
@@ -1479,33 +1457,28 @@ $(document).ready(function () {
                     
                     clientData.commencement_date = getFormateDateToServer($('#HUF_date').val());
                     clientData.karta_name = $('#HUF_nameOfKarta').val();
-                    // clientData.name = $('#HUF_name').val();
-                    // clientData.businessName = $('#HUF_nameofBusiness').val();
+                    clientData.title = $('#HUF_name').val();
 
-                    url = urlRoot +  'hufs/?';
-
+                    url = urlRooT +  'hufs/?';
 
                 } else if (legalStatus == 3) {//Proprietor
                     
                     clientData.title = $('#prop_Title').val();
-                    clientData.name = $('#Proprietor_fname').val();
+                    clientData.owner_name = $('#Proprietor_fname').val();
                     if ($('#Proprietor_mname').val() != '')
-                        clientData.name += ' ' + $('#Proprietor_mname').val();
-                    clientData.owner_name += ' ' + $('#Proprietor_lname').val();
+                        clientData.owner_name += ' ' + $('#Proprietor_mname').val();
+                    clientData.owner_name +=' ' + $('#Proprietor_lname').val();
                     clientData.commencement_date = getFormateDateToServer($('#Proprietor_dateOfComm').val());
-                    // clientData.businessName = $('#Proprietor_name').val();
 
-                    url =   urlRoot +  'proprietors/?';
+                    url =   urlRooT +  'proprietors/?';
 
                 } else if (legalStatus == 4) {//Partnership
                     
                     clientData.partnership_deed_date = getFormateDateToServer($('#Partnership_date').val());
                     clientData.commencement_date = getFormateDateToServer($('#Partnership_dateOfComm').val());
                     clientData.partners = getPartnersRow();
-                    //Get Details of Partners
-                    // clientData.businessName = $('#Partnership_name').val();
 
-                    url =   urlRoot +  'partnership-firms/?';
+                    url =   urlRooT +  'partnership-firms/?';
 
                 } else if (legalStatus == 5) {//LLP
                     
@@ -1519,10 +1492,9 @@ $(document).ready(function () {
                     clientData.llpin = $('#LLP_LLPIN').val();
                     clientData.commencement_date = getFormateDateToServer($('#LLP_date').val());
                     clientData.other_partners = oparsObj;
-                    clientData.designated_partner = getDpartnersRow();
-                    // clientData.businessName = $('#LLP_name').val();
+                    clientData.designated_partners = getDpartnersRow();
 
-                    url =   urlRoot +  'llps/?';
+                    url =   urlRooT +  'llps/?';
 
                 } else if (legalStatus == 6) {//Company
                     
@@ -1532,9 +1504,8 @@ $(document).ready(function () {
                     clientData.stock_exchange_listed = $('#company_listedy').prop('checked');
                     clientData.stock_exchange_name = $('#company_stock').val();
                     clientData.directors = getDirectorsRow();
-                    // clientData.businessName = $('#company_name').val();
                     
-                    url =   urlRoot +  'limited-companies/?';
+                    url =   urlRooT +  'limited-companies/?';
 
                 } else if (legalStatus == 7) {//AOP-BOI
                     
@@ -1549,17 +1520,16 @@ $(document).ready(function () {
                     clientData.members = memObj;
                     clientData.commencement_date = getFormateDateToServer($('#AOP_date').val());
                     clientData.registration_no = $('#AOP_registration').val();
-                    // clientData.businessName = $('#AOP_name').val();
 
-                    url =   urlRoot +  'aop-boi/?';
+                    url =   urlRooT +  'aop-boi/?';
 
                 } else if (legalStatus == 8) {//Trusts
                     
-                    clientData.businessName = $('#trust_name').val();
-                    clientData.commencemaneDate = $('#trust_doc').val();
-                    clientData.trusteeName = $('#trusteeName').val();
+                    // clientData.businessName = $('#trust_name').val();
+                    clientData.commencement_date = $('#trust_doc').val();
+                    clientData.trustee = $('#trusteeName').val();
 
-                    url =   urlRoot +  'trusts/?';
+                    url =   urlRooT +  'trusts/?';
 
                 }
             }
@@ -1568,20 +1538,20 @@ $(document).ready(function () {
             console.log(clientJSON);
             
             
-            // $.ajax({
-            //     url: url,
-            //     type: 'POST',
-            //     contentType: 'application/json',
-            //     data: clientJSON,
-            //     success: function (data) {
-            //         swal('Client added');
-
-            //     },
-            //     error: function (error) {
-            //         swal('Not able to create client');
-            //         console.log('Error in creating client:' + error.responseText);
-            //     }
-            // });
+            $.ajax({
+                url: url,
+                type: 'POST',
+                contentType: 'application/json',
+                data: clientJSON,
+                success: function (data) {
+                    swal('Client added');
+                },
+                error: function (error) {
+                    swal('Not able to create client');
+                    console.log('Error in creating client:' + error.responseText);
+                }
+            });
         }
+
     });
 });

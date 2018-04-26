@@ -37,7 +37,8 @@
 </head>
 
 <body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
-    <div class="se-pre-con"></div>
+
+    <div class="page-loader" style="display: none;"></div>
     
     <i class="btn-theme-switcher icon-cog hidden-xs"></i>
     
@@ -146,7 +147,7 @@
                                                 <br/>
 
                                                 <span class="col-sm-3 col-sm-offset-9">
-                                                    <input class="btn btn-default btn-warning buttonDefSize" id="btnsubmit" value="Check Duplicate">
+                                                    <input class="btn btn-default btn-warning buttonDefSize btn-raised" id="btnsubmit" value="Check Duplicate">
                                                 </span>
                                                 <br/>
                                                 <span id="message" class="col-sm-12 text-danger text-italic text-center"></span>
@@ -558,13 +559,13 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input class="btn btn-success buttonDefSize m-t-25 addNewOrg" value="Add"/>
+                                                                <input class="btn btn-success buttonDefSize btn-raised m-t-25 addNewOrg" value="Add"/>
                                                             </div>
                                                         </div>
 
                                                         <div class="row">
                                                             <div class="col-sm-offset-10 col-sm-2">
-                                                                <input id="editOrganisation" oid="null" class="btn btn-success buttonDefSize m-t-25" value="Edit" disabled>
+                                                                <input id="editOrganisation" oid="null" class="btn btn-success buttonDefSize btn-raised m-t-25" value="Edit" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="row m-t-30 m-b-30">
@@ -764,30 +765,24 @@
                             <div class="contactFormBut panel">
                                 <div class="panel-body">
                                     <div class="row m-t-20">
-
                                         <div class="col-sm-2 pull-right">
-                                            <input form="addContact_form" type="reset" class="btn btn-danger btn-raised border-rounded float-right buttonDefSize" value="Reset">
+                                            <input form="addContact_form" type="reset" class="btn btn-danger btn-raised border-rounded float-right buttonDefSize btn-raised" value="Reset">
                                         </div>
                                         <div class="col-sm-2 pull-right">
-                                            <input form="addContact_form" id="addContact_submit" class="btn btn-success btn-raised border-rounded float-right buttonDefSize" value="Submit">
+                                            <input form="addContact_form" id="addContact_submit" class="btn btn-success btn-raised border-rounded float-right buttonDefSize btn-raised" value="Submit">
                                         </div>
                                         <div class="note col-sm-12">
-                                            <strong>Note:</strong> Fields marked with
-                                            <span class="text-danger">*</span> are to be filled mandatorily.</div>
+                                            <strong>Note:</strong> Fields marked with <span class="text-danger">*</span> are to be filled mandatorily.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                     <!-- END COL-MD-12 -->
-
                 </div>
                 <!-- END ROW -->
-
             </div>
-
             <!-- END PAGE CONTENT -->
 
             <!-- START PAGE FOOTER -->
@@ -800,8 +795,6 @@
 
         </div>
         <!-- END MAIN CONTAINER -->
-
-
     </div>
     </div>
 
@@ -814,15 +807,22 @@
     <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 
-    <script>
-    //paste this code under the head tag or in a separate js file.
-	// Wait for window load
-	$(window).load(function() {
-		// Animate loader off screen
-		$(".se-pre-con").fadeOut("slow");;
-    });
-    </script>
-    <script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //global functions
+            App.init();
+
+
+        });
+
+        //paste this code under the head tag or in a separate js file.
+        // Wait for window load
+        $(window).load(function() {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("slow");;
+        });
+
         /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
         $.widget.bridge('uibutton', $.ui.button);
         $.widget.bridge('uitooltip', $.ui.tooltip);
@@ -856,7 +856,6 @@
     <!--================================/
         /* START GLOBAL JS PLUGINS
         /*================================-->
-
 
     <!-- SKY FORM JS PLUGINS-->
     <script src="assets/vendors/skyforms/js/jquery.form.min.js"></script>
@@ -902,17 +901,7 @@
     <!--================================/
         /* END SCRIPT THIS PAGE ONLY
         /*================================-->
-        <script type="text/javascript">
-            $(document).ready(function () {
-    
-                //global functions
-                App.init();
-    
-    
-            });
-    
-        </script>
-
+        
     <!--================================/
         /* START CUSTOM SCRIPTS
         /*================================-->
