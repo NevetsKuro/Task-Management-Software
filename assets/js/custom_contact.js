@@ -5,7 +5,8 @@ $(document).ready(function(){
     var glob2 = '';
     var origForm;
 
-    var urlRooT = 'https://office-management-demo.herokuapp.com/';
+    // var urlRooT = 'https://office-management-demo.herokuapp.com/';
+    var urlRooT = 'http://35.202.86.61/office-management/';
     
     $('#file').on('change',function(){
         $('#addContact_vcard').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
@@ -852,7 +853,6 @@ $(document).ready(function(){
             var CF_source = $('#addContact_source').val();
             var CF_reference = $('#addContact_reference').val();
             var CF_notes = $('#addContact_notes').val();
-
             
             //organistional form data
             var CF_designation = $('#addContact_designation').val();
@@ -872,9 +872,7 @@ $(document).ready(function(){
             contactOrg.designation = CF_designation;
             contactOrg.branch = CF_branch;
                 
-            
             getHoaddressRow();
-
 
             // var dtto = $.datepicker.formatDate('yy-mm-dd', new Date(CF_dob));
             

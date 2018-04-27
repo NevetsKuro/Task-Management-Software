@@ -4,10 +4,11 @@ $(document).ready(function(){
     var legalStatus = urlParams['legalStatus'];
     var contactId = urlParams['cid'];
     var method = urlParams['method'];
-
+    // var urlRoot = 'http://office-management-demo.herokuapp.com/';
+    var urlRoot = 'http://35.202.86.61/office-management/';
     //auto filling forms prefilled data
     $.ajax({
-        url: 'http://office-management-demo.herokuapp.com/contacts/form-data',
+        url: urlRoot + 'contacts/form-data',
         datatype: 'JSON',
         type: 'GET',
         success: function (data) {
@@ -89,7 +90,7 @@ $(document).ready(function(){
 
         var newId;
         $.ajax({
-            url: 'http://office-management-demo.herokuapp.com/contacts/?',
+            url: urlRoot + 'contacts/?',
             datatype: 'JSON',
             async: false,
             method: 'POST',

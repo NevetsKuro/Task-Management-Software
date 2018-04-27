@@ -24,5 +24,6 @@ input.uppercase { text-transform: uppercase; }
 	z-index: 9999;
 	background: url('http://lancecoder.com/themes/calibre/assets/images/loader.gif') 50% 50% no-repeat rgb(249,249,249);
 }
-/* .no-js #loader { display: none;  }
-.js #loader { display: block; position: absolute; left: 100px; top: 0; } */
+span.select2-selection.select2-selection--multiple{
+	background-color: white!important;
+}
