@@ -2,6 +2,7 @@ $(document).ready(function(){
     
     var UpdateCont = inputChanges();
 
+    var urlRoot = 'http://35.202.86.61/office-management/';
     // function formData(formDataId,formDataArr){
     //     for (var i = 0; i < formData.length; i++) {
     //         $(formDataId).append(` <option value="${formDataArr[i].id}">${formDataArr[i][1]}</option> `);
@@ -11,7 +12,7 @@ $(document).ready(function(){
 
 
     $.ajax({
-        url:'http://office-management-demo.herokuapp.com/organisations/form-data',
+        url:urlRoot + 'organisations/form-data',
         datatype:'JSON',
         type:'GET',
         success:function(data){
@@ -94,7 +95,7 @@ $(document).ready(function(){
     if(orgId != null || orgId != undefined){
                 //var orgId = $.cookie("orgID");
                 $.ajax({
-                    url:'http://office-management-demo.herokuapp.com/organisations/'+orgId,
+                    url:urlRoot + 'organisations/'+orgId,
                     datatype:'json',
                     method:'get',
                     success:function(orgData){
@@ -208,7 +209,7 @@ $(document).ready(function(){
                     $.ajax({
                         async: true,
                         crossDomain: true,
-                        url:'https://office-management-demo.herokuapp.com/organisations/'+ orgId +'/?',
+                        url:urlRoot + 'organisations/'+ orgId +'/?',
                         method:'PUT',
                         headers:{
                             "content-type": "application/json",
@@ -285,7 +286,7 @@ $(document).ready(function(){
                 console.log('The json file is = \n'+orgJSON);
                 
                 $.ajax({
-                    url: 'http://office-management-demo.herokuapp.com/organisations/?',
+                    url: urlRoot + 'organisations/?',
                     type:'POST',
                     datatype:'JSON',
                     contentType:'application/json',

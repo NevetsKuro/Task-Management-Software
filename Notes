@@ -1,7 +1,22 @@
-1. pocs of every legal statuses response not showing up
+
 5. Create update() for Branches in organisations.
 6. contacts. vcard and image require url instead of string 
 7. one client list - for all legal statuses
+14.  what is relation field type? - dropdown(on server) or text(on UI).
+15. no poc in huf,proprietors, GET request
+
+//Services
+//Stat Documents
+//
+
+
+
+
+
+UI changes & scripting to b written
+-add contact data
+-add gstin in organisation
+-add ..
 
 
 Done-----
@@ -11,3 +26,12 @@ Done-----
 11. size of dropdowns done
 13. there is relation in proprietors- done
 9. prospect for individuals - DONE individual id = prospect
+
+
+
+Need to know
+1. Contact converts into client always not the other way round
+2. purpose is Service
+3. organisation can be added from legal status(companies) or contact
+4. how to pass paramete to a callback function
+
