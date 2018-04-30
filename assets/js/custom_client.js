@@ -21,6 +21,8 @@ $(document).ready(function () {
         $('#stat_document').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
     });
 
+    
+    
     if(contact!=undefined||client!=undefined){
         if(contact){
             $.ajax({
@@ -28,8 +30,8 @@ $(document).ready(function () {
                 type:'GET',
                 datatype:'JSON',
                 success:function(data){
-                    contOrg = data.contact_organisation.organisation.id;
-                    client_organisation();
+                    // contOrg = data.contact_organisation.organisation.id;
+                    client_organisation(data.contact_organisation.organisation.id);
                 }
             });
 
@@ -61,10 +63,39 @@ $(document).ready(function () {
                         var commencement_date = $.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date));
                         $('#client_legalstatus').val(legal).trigger('change');
                         $('#PANNO').val(data.pan_no);
+                        var poc = data.pocs;
+                        
+                        for (let i = 0; i < poc.length; i++) {
+                            var id = poc[i].contact;
+                            $.getJSON(urlRoot+'contacts/'+id,function(data){
+                                    
+                                    cC_table.clear().draw();
+                                    
+                                    var row = data;
+                                    var is_Primary = row.email_addresses.findIndex(x=>x.is_primary == true);
+                                    var p_email = row.email_addresses[is_Primary].email;
+                                    var is_Primary = row.phone_numbers.findIndex(x=>x.is_primary == true);
+                                    var p_phone = row.phone_numbers[is_Primary].number;
+                                    cC_table.row.add([
+                                        '',
+                                        row.id,
+                                        row.title+' '+row.name,
+                                        p_email,
+                                        p_phone,
+                                        '',                                             //relation
+                                        row.contact_organisation.designation,            //designation
+                                        '',                                             //purpose
+                                        '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
+                                    ]).draw(false);
+                                    
+                            });
+
+                        }
+
                         if(legal==1){
                             $('#individual_aadhar').val(data.aadhar_no);
-                            contOrg = 1//data.prospect;
-                            client_organisation();
+                            //contOrg = 1//data.prospect;
+                            client_organisation(data.prospect);
                         }else{
                             $('#GSTIN').val(data.gstin);
                             $('#TANNO').val(data.tan_no);
@@ -73,8 +104,8 @@ $(document).ready(function () {
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#HUF_date').val(commencement_date);
                                 $('#HUF_nameOfKarta').val(data.karta_name);
-                                contOrg = data.prospect;
-                                client_organisation();
+                                // contOrg = data.prospect;
+                                client_organisation(data.prospect);
                             }else if(legal == 3){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#prop_Title').val(data.title.id);
@@ -83,16 +114,16 @@ $(document).ready(function () {
                                 $('#Proprietor_mname').val(name.length==2?'':name[1]);
                                 $('#Proprietor_lname').val(name[name.length-1]);
                                 $('#Proprietor_dateOfComm').val(commencement_date);
-                                contOrg = data.prospect;
-                                client_organisation();
+                                // contOrg = data.prospect;
+                                client_organisation(data.prospect);
                             
                             }else if(legal == 4){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#Partnership_date').val($.datepicker.formatDate("dd/mm/yy", new Date(data.partnership_deed_date)));
                                 $('#Partnership_dateOfComm').val(commencement_date);
                                 AddPartner(data.partners);
-                                contOrg = data.prospect;
-                                client_organisation();
+                                // contOrg = data.prospect;
+                                client_organisation(data.prospect);
                             }else if(legal == 5){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 var other_Partners = "";
@@ -106,8 +137,8 @@ $(document).ready(function () {
                                 $('#LLP_LLPIN').val(data.llpin);
                                 $('#LLP_date').val(commencement_date);
                                 AddDPartner(data.designated_partners);
-                                contOrg = data.prospect;
-                                client_organisation();
+                                // contOrg = data.prospect;
+                                client_organisation(data.prospect);
                             }else if(legal == 6){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#company_date').val(commencement_date);
@@ -116,8 +147,8 @@ $(document).ready(function () {
                                 $('#company_listedy').prop('checked',data.stock_exchange_listed).trigger('change');
                                 $('#company_stock').val(data.stock_exchange_name);
                                 AddDirector(data.directors);
-                                contOrg = data.prospect;
-                                client_organisation();
+                                // contOrg = data.prospect;
+                                client_organisation(data.prospect);
                             }else if(legal == 7){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 var members = "";
@@ -130,8 +161,8 @@ $(document).ready(function () {
                                 $('#members').val(members);
                                 $('#AOP_date').val(commencement_date);
                                 $('#AOP_registration').val(data.registration_no);  
-                                contOrg = data.prospect;
-                                client_organisation();
+                                // contOrg = data.prospect;
+                                client_organisation(data.prospect);
                             }else if(legal == 8){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#trust_doc').val(commencement_date);
@@ -143,8 +174,8 @@ $(document).ready(function () {
                                     }
                                 }
                                 $('#trusteeName').val(trustee);
-                                contOrg = data.prospect;
-                                client_organisation();
+                                // contOrg = data.prospect;
+                                client_organisation(data.prospect);
                                 // $('#trust_name').val(data.);
                             }
                     }
@@ -205,16 +236,16 @@ $(document).ready(function () {
     });
 
 
-    window.client_organisation = function (){
-        if($(this).attr('id')){
-            var orgId = $(this).attr('id');
-        }else if(contOrg){
-            var orgId = contOrg;
-        }else{
-            var orgId = updatedOrgId;
-        }
+    window.client_organisation = function (orgId){
+        // if($(this).attr('id')){
+        //     var orgId = $(this).attr('id');
+        // }else if(contOrg){
+        //     var orgId = contOrg;
+        // }else{
+        //     var orgId = updatedOrgId;
+        // }
         
-    $.ajax({
+        $.ajax({
             url:urlRoot+'organisations/'+orgId +'/',
             type:'GET',
             contentType:'application/json',
@@ -223,7 +254,7 @@ $(document).ready(function () {
 
                 $('.nameofBusiness').val(data.name);
                 $('#website').val(data.website);
-                $('#client_group').val(data.group).trigger('change');
+                // $('#client_group').val(data.group).trigger('change');
                 $('#businessType').val(data.business_types).trigger('change');
                 $('#industryType').val(data.industry_types).trigger('change');
                 $('#nature_business').val(data.business_natures).trigger('change');
@@ -238,14 +269,16 @@ $(document).ready(function () {
                     if(i > 0){
                         // addAddresses();
                         addBranchRows();
-                        // $('#hoaddress-row .new:last .hoaddress_from').attr('id',multiBrns[i].id);
                         $('#branch-row .new:last .branch_name').val(multiBrns[i].name);
                         $('#branch-row .new:last .branch_address').val(multiBrns[i].address);
+                        $('#branch-row .new:last .branch_gst').val(multiBrns[i].gstin);
+                        // $('#hoaddress-row .new:last .hoaddress_from').attr('id',multiBrns[i].id);
                         // $('#hoaddress-row .new:last .hoaddress_isHO').attr('checked',multiBrns[i].is_head_office);
                     }else{
-                        // $('#hoaddress-row .new .hoaddress_from').attr('id',multiBrns[i].id);
                         $('#branch-row .new .branch_name').val(multiBrns[i].name);
                         $('#branch-row .new .branch_address').val(multiBrns[i].address);
+                        $('#branch-row .new .branch_gst').val(multiBrns[i].gstin);
+                        // $('#hoaddress-row .new .hoaddress_from').attr('id',multiBrns[i].id);
                         // $('#hoaddress-row .new .hoaddress_isHO').attr('checked',multiBrns[i].is_head_office);
                     }
                 }
@@ -263,7 +296,10 @@ $(document).ready(function () {
 
 
     var currentClientId;
-    $(document).on('click','.orgClick',client_organisation);
+    // $(document).on('click','.orgClick',client_organisation);
+    $(document).on('click','.orgClick',function(){
+        client_organisation($(this).attr('id'));
+    });
 
     $(document).on('click','#editOrganisation',function(){
         currentOrganisationsId = $(this).attr('oid');
@@ -323,9 +359,6 @@ $(document).ready(function () {
         datatype: 'JSON',
         type: 'GET',
         success: function (data) {
-            // for (var i = 0; i < data.relation.length; i++) {
-            //     $('.selTitle').append('<option value=' + data.relation[i].id + '>' + data.relation[i].relation + '</option>');
-            // }
             for (var i = 0; i < data.company_type.length; i++) {
                 $('#company_types').append('<option value=' + data.company_type[i].id + '>' + data.company_type[i].company_type + '</option>');
             }
@@ -466,6 +499,40 @@ $(document).ready(function () {
     //         }
     //     });
     // });
+
+    $(document).on('change','#client_group',function(){
+        var groupId = $(this).val();
+        $.ajax({
+            url:urlRoot+'contacts/?group='+groupId,
+            datatype:'JSON',
+            success:function(data){
+                
+                cC_table.clear().draw();
+                for(var i = 0; i < data.length; i++){
+                    // data[i].name
+                    
+                    var row = data[i]; 
+                    cC_table.row.add([
+                        '',
+                        row.id,
+                        row.title+' '+row.name,
+                        row.email,
+                        row.phone,
+                        '',                     //relation
+                        row.designation,        //designation
+                        '',                     //purpose
+                        '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
+                    ]).draw(false);
+                }
+            },
+            error:function(error){
+                swal('Cannot fetch POCS of group');
+                console.log(error.responseText);
+            }
+        });
+    });
+
+
 
     //checkbox option(if yes)
     if ($('#company_listed').val() === 'yes') {
@@ -919,11 +986,9 @@ $(document).ready(function () {
                 addPartnerRows();
                 $('#partner-row .new:last .partnerName').val(values[i].name);
                 $('#partner-row .new:last .partnershare').val(values[i].share);
-                
             } else {
                 $('#partner-row .new .partnerName').val(values[i].name);
                 $('#partner-row .new .partnershare').val(values[i].share);
-
             }
         }
     }
@@ -1099,37 +1164,41 @@ $(document).ready(function () {
         if(legal==undefined){
             legal=$('#client_legalstatus').val();
         }
-        window.open('quick_Add_contact.html?legalStatus='+legal+'&method=Add','',"menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450");
+        window.open('quick_Add_contact.html?legalStatus='+legal+'&method=Add','',"menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450,location=0");
     });
 
-    var pocObjArr = [];
-    window.AddContactPerson = function(id, title, Name, email, phone, relation, designation, purpose,legal ,pocObj) {
+    var pocObj1;
+    var pocObj2;
+
+    window.AddContactPerson = function(id, title, name, email, phone, relationText, relation, designation, purpose,legal) {
 
         if (legal == 1) {
-            pocObjArr.push(pocObj);
-            cC_table.row.add([
+            //pocObjArr.push(pocObj);
+            var new_row = cC_table.row.add([
                 '',
                 id,
-                title+' '+Name,
+                title+' '+name,
                 email,
                 phone,
-                relation,
+                relation,            //'<select id="cc_relation"></select>',
                 '',
                 '',
-                '<div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div>'
-            ]).draw(false);
+                '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
+            ]).draw(false).node();
+            // $('#clientsContact_datatable tbody tr').eq(new_row[0]).children()[4].innerHTML = relationText;
+            new_row.childNodes[4].innerHTML = relationText;
         } else {
-            pocObjArr.push(pocObj);
+            //pocObjArr.push(pocObj);
             cC_table.row.add([
                 '',
                 id,
-                title+' '+Name,
+                title+' '+name,
                 email,  
                 phone,
                 '',
                 designation,
                 purpose,
-                '<div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div>'
+                '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
             ]).draw(false);
         }
     }
@@ -1163,6 +1232,54 @@ $(document).ready(function () {
                     swal("The selected row is not deleted!");
                 }
             });
+    });
+
+    var edit = true;
+    var editC = true;
+    $('#clientsContact_datatable tbody').on('click', 'div.cc_update', function () {
+        
+        if(legal == 1){
+            if(edit){
+                var relation = cC_table.row($(this).parents('tr')).data()[5];
+                $(this).parents('tr').children()[4].innerHTML = '<select id="cc_relation" width="100%"></select>';
+                $(this).children().removeClass('glyphicon-pencil').addClass('glyphicon-ok');
+                $.ajax({
+                    url: urlRoot + 'clients/form-data',
+                    datatype: 'JSON',
+                    type: 'GET',
+                    success: function (data) {
+                        client_formData = data;
+                        for (var i = 0; i < data.relation.length; i++) {
+                            $('#cc_relation').append('<option value=' + data.relation[i].id + '>' + data.relation[i].relation + '</option>');
+                        }
+                    },
+                    error:function(){
+                        swal('Cannot fetch client form data');
+                    }
+                });
+                edit = false;
+            }else{
+                var editedRelation = cC_table.$(this).parents('tr').find('#cc_relation').val();
+                var editedRelationText = cC_table.$(this).parents('tr').find('#cc_relation').find('option:selected').text();
+                cC_table.row($(this).parents('tr')).data()[5] = editedRelation;
+                $(this).parents('tr').children()[4].innerHTML = editedRelationText;
+                $(this).children().removeClass('glyphicon-ok').addClass('glyphicon-pencil');
+                edit = true;
+            }
+        }else{
+            if(editC){
+                var purpose = cC_table.row($(this).parents('tr')).data()[7];
+                $(this).parents('tr').children()[5].innerHTML = '<input id="cc_purpose" type="text" width="100%" value='+ purpose +'>';
+                $(this).children().removeClass('glyphicon-pencil').addClass('glyphicon-ok');
+                editC = false;
+            }else{
+                var editedPurpose = cC_table.$(this).parents('tr').find('#cc_purpose').val();
+                cC_table.row($(this).parents('tr')).data()[7] = editedPurpose;
+                $(this).parents('tr').children()[5].innerHTML = editedPurpose;
+                $(this).children().removeClass('glyphicon-ok').addClass('glyphicon-pencil');
+                editC = true;
+            }
+        }
     });
 
     var stat_docs = $('#statDocs').DataTable({
@@ -1314,7 +1431,6 @@ $(document).ready(function () {
             swal('Please add a POC');
             return false;
         }else{
-
             var is_Selected = cC_table.row('.selected').data();
             if( is_Selected == null){
                 swal('Please select a POC');
@@ -1379,6 +1495,22 @@ $(document).ready(function () {
                     }else if(contact!=undefined){
                         clientData.prospect = contact;
                     }
+                    var pocObjArr = [];
+                    var pocRows = cC_table.rows().data();
+                    for (var c = 0; c < pocRows.length; c++) {
+                        var row = pocRows[c];
+            
+                        //Create contact for each POC
+                        var relation = row[5]; //relation
+                        var newId = row[1]; //id
+            
+                        
+                        pocObjArr.push({
+                            "contact":newId,
+                            "relation":relation,
+                            "is_primary":false
+                        });
+                    }
 
                     var isPrimaryId = cC_table.rows('.selected').data()[0][1];
                     var indexPrimary = pocObjArr.findIndex(x=>x.contact == isPrimaryId);
@@ -1393,6 +1525,24 @@ $(document).ready(function () {
                     clientData.gstin = $('#GSTIN').val();
                     clientData.tan_no = $('#TANNO').val();
                     //Get Branches
+
+                    var pocObjArr = [];
+                    var pocRows = cC_table.rows().data();
+                    for (var c = 0; c < pocRows.length; c++) {
+                        var row = pocRows[c];
+            
+                        //Create contact for each POC
+                        var purpose = row[7]; //purpose
+                        var newId = row[1]; //id
+            
+                        
+                        pocObjArr.push({
+                            "contact":newId,
+                            "purpose":purpose,
+                            "is_primary":false
+                        });
+                    }
+
                     var isPrimaryId = cC_table.rows('.selected').data()[0][1];
                     var indexPrimary = pocObjArr.findIndex(x=>x.contact == isPrimaryId);
                     pocObjArr[indexPrimary].is_primary = true;
@@ -1543,6 +1693,24 @@ $(document).ready(function () {
                         clientData.prospect = currentClientId;
                     }
 
+                    //Creating POCs for individuals
+                    var pocObjArr = [];
+                    var pocRows = cC_table.rows().data();
+                    for (var c = 0; c < pocRows.length; c++) {
+                        var row = pocRows[c];
+            
+                        //Create contact for each POC
+                        var relation = row[5]; //relation
+                        var newId = row[1]; //id
+            
+                        
+                        pocObjArr.push({
+                            "contact":newId,
+                            "relation":relation,
+                            "is_primary":false
+                        });
+                    }
+
                     var isPrimaryId = cC_table.rows('.selected').data()[0][1];
                     var indexPrimary = pocObjArr.findIndex(x=>x.contact == isPrimaryId);
                     pocObjArr[indexPrimary].is_primary = true;
@@ -1556,7 +1724,25 @@ $(document).ready(function () {
 
                     clientData.GSTIN = $('#GSTIN').val();
                     clientData.TANNO = $('#TANNO').val();
-                    //Get POC
+                    
+                    //Creating POCs for companies
+                    var pocObjArr = [];
+                    var pocRows = cC_table.rows().data();
+                    for (var c = 0; c < pocRows.length; c++) {
+                        var row = pocRows[c];
+            
+                        //Create contact for each POC
+                        var purpose = row[7]; //purpose
+                        var newId = row[1]; //id
+            
+                        
+                        pocObjArr.push({
+                            "contact":newId,
+                            "purpose":purpose,
+                            "is_primary":false
+                        });
+                    }
+
                     var isPrimaryId = cC_table.rows('.selected').data()[0][1];
                     var indexPrimary = pocObjArr.findIndex(x=>x.contact == isPrimaryId);
                     pocObjArr[indexPrimary].is_primary = true;

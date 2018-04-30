@@ -1,25 +1,24 @@
 
-5. Create update() for Branches in organisations.
 6. contacts. vcard and image require url instead of string 
 7. one client list - for all legal statuses
-14.  what is relation field type? - dropdown(on server) or text(on UI).
-15. no poc in huf,proprietors, GET request
+16. no organisations/display api for viewing in contacts form
+18. organisation is_headOffice is not changing.
+20. purpose in companies is shown required??
 
 //Services
 //Stat Documents
-//
-
-
-
-
+//Images
 
 UI changes & scripting to b written
--add contact data
 -add gstin in organisation
--add ..
+-change relation to dropdown
 
 
 Done-----
+19. What is title in huf? //Answer :-- Name _change_ name of huf. 
+17. TO-DO s how to add pocs from clients data to client form for editing //Answer :-- using id of contacts
+14. what is relation field type? - dropdown(on server) or text(on UI). // Dropdown
+15. no poc in huf,proprietors, GET request // Created
 2,3,4 .. completed!!
 10. title, dob, type of work, website. No elements representing them. done added to contacts
 12. multiple dropdowns overlay effect -UI
@@ -31,7 +30,6 @@ Done-----
 
 Need to know
 1. Contact converts into client always not the other way round
-2. purpose is Service
 3. organisation can be added from legal status(companies) or contact
-4. how to pass paramete to a callback function
+
 

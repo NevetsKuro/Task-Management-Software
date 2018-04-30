@@ -10,7 +10,6 @@ $(document).ready(function(){
     //     }
     // }
 
-
     $.ajax({
         url:urlRoot + 'organisations/form-data',
         datatype:'JSON',
@@ -223,12 +222,13 @@ $(document).ready(function(){
                             currentContactId = urlParam['cid'];
                             // var urL = 'AddContact.html?contact='+currentContactId;
                             // $(location).attr('href',urL);
-                            window.opener.updatedOrgId = orgId;
-                            console.log('updateOrgId: ' + window.opener.updatedOrgId);
+                            // window.opener.updatedOrgId = orgId;
+                            // console.log('updateOrgId: ' + window.opener.updatedOrgId);
+                            console.log('current Organisation Id'+ orgId);
                             if(isContactForm){
-                                window.opener.contact_organisation();
+                                window.opener.contact_organisation(orgId);
                             }else if(isClientForm){
-                                window.opener.client_organisation();
+                                window.opener.client_organisation(orgId);
                             }
                             setTimeout(window.close(),1000);
                         },
@@ -295,12 +295,12 @@ $(document).ready(function(){
                         swal('Organisation Added!!!');
                         var newOrgId = data.id;
                         console.log('new organisation id is = ' + newOrgId);
-                        window.opener.updatedOrgId = newOrgId;
-                        console.log('updateOrgId: ' + window.opener.updatedOrgId);
+                        // window.opener.updatedOrgId = newOrgId;
+                        // console.log('updateOrgId: ' + window.opener.updatedOrgId);
                         if(isContactForm){
-                            window.opener.contact_organisation();
+                            window.opener.contact_organisation(newOrgId);
                         }else if(isClientForm){
-                            window.opener.client_organisation();
+                            window.opener.client_organisation(newOrgId);
                         }
                         setTimeout(window.close(),1000);
                     },

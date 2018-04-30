@@ -595,7 +595,10 @@ $(document).ready(function(){
 
     
 
-    $(document).on('click','.orgClick',contact_organisation);
+    //$(document).on('click','.orgClick',contact_organisation);
+    $(document).on('click','.orgClick',function(){
+        contact_organisation();
+    });
 
     $(document).on('click','#editOrganisation',function(){
         currentOrganisationsId = $(this).attr('oid');

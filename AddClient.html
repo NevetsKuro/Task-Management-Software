@@ -89,7 +89,7 @@
 
                             <!-- START PANEL -->
                             <div class="panel">
-                                <div class="panel-body">
+                                <div class="panel-body panel-bodyClient">
 
                                     <fieldset class="sky-form m-20">
                                         <div class="row">
@@ -97,7 +97,7 @@
                                                 <label class="label">Group:</label>
                                                 <label class="select">
                                                     <select id="client_group" class="select2 editselect">
-                                                       
+                                                       <option selected disabled value>--select--</option>
                                                     </select>
                                                 </label>
                                             </div>
@@ -208,12 +208,8 @@
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label class="label">Type of Work:</label>
-                                                                <label class="select">
-                                                                    <select id="TypeWork" class="select2 editselect">
-                                                                        <option value="Service">Service</option>
-                                                                        <option value="Business">Business</option>
-                                                                        <option value="House">House</option>
-                                                                    </select>
+                                                                <label class="input">
+                                                                    <input id="individual_typeWork" type="text" placeholder="">
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -835,7 +831,7 @@
                                                                     <input id="addbranch" type="button" class="btn btn-success buttonDefSize btn-raised" value="Add">
                                                                 </div>
                                                             </div>
-                                                         -->
+                                                             -->
                                                     </div>
                                                     <span class="m-20"></span>
                                                 </div>
@@ -1068,7 +1064,7 @@
 
                             <!-- START PANEL -->
                             <div class="panel">
-                                <div class="panel-body">
+                                <div class="panel-body panel-bodyClient">
                                     <div class="row">
                                         <div class="col-sm-2 col-sm-offset-8">
                                             <input class="btn btn-danger buttonDefSize btn-raised" type="reset" value="Reset">
