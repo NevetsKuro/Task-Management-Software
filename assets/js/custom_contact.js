@@ -181,7 +181,6 @@ $(document).ready(function(){
                 currentContactData = data;
 
                 currentContactsId = data.id;
-                currentOrganisationsId = data.contact_organisation.organisation.id;
                 $('#addContact_title').val(data.title);
                 var name = breakName(data.name);
                 $('#addContact_fname').val(name.firstName);
@@ -197,8 +196,9 @@ $(document).ready(function(){
                 $('#addContact_state').val(addr.State);
                 $('#addContact_image').val(data.image);
                 $('#addContact_vcard').val(data.card_image);
-
+                
                 if(data.contact_organisation){
+                    currentOrganisationsId = data.contact_organisation.organisation.id;
                     $('#editOrganisation').attr('oid',currentOrganisationsId).removeAttr('disabled');
                     $('#addContact_website').html(data.contact_organisation.organisation.website);
                     $('#addContact_designation').val(data.contact_organisation.designation);
@@ -539,13 +539,13 @@ $(document).ready(function(){
 
     });
 
-    window.contact_organisation = function (){
+    window.contact_organisation = function (orgId){
             
-            if($(this).attr('id')){
-                var orgId = $(this).attr('id');
-            }else{
-                var orgId = updatedOrgId;
-            }
+            // if($(this).attr('id')){
+            //     var orgId = $(this).attr('id');
+            // }else{
+            //     var orgId = updatedOrgId;
+            // }
             
         $.ajax({
             url:urlRooT+'organisations/display/'+orgId,
@@ -597,7 +597,8 @@ $(document).ready(function(){
 
     //$(document).on('click','.orgClick',contact_organisation);
     $(document).on('click','.orgClick',function(){
-        contact_organisation();
+        var orgId = $(this).attr('id');
+        contact_organisation(orgId);
     });
 
     $(document).on('click','#editOrganisation',function(){

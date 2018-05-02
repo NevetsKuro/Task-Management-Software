@@ -10,10 +10,8 @@ $(document).ready(function () {
 
         var listContact = "";
         var contactLink = "AddContact.html?contact=";
-        var clientLink = "AddClient.html?client=";
         var contactViewLink = "ViewContact.html"
-        var clientViewLink = "ViewClient.html"
-
+        
         if(currentList){
             currentList.forEach(element => {
                 listContact += `
@@ -70,9 +68,9 @@ $(document).ready(function () {
     }
 
     function clientListBody(currentList) {
-        var listContact = "";
-        // var contactLink = "AddContact.html?contact=";
-        // var clientLink = "AddContact.html?client=";
+        var listClient = "";
+        var clientLink = "AddClient.html?client=";
+        var clientViewLink = "ViewClient.html"
 
         if(currentList){
             currentList.forEach(element => {
@@ -102,7 +100,7 @@ $(document).ready(function () {
                             <a title="View"  class="btn btn-success btn-sm">
                                 <i class="glyphicon glyphicon glyphicon-user"></i>
                             </a>
-                            <a title="Edit" href="${contactLink}${element.id}" class="btn btn-success btn-sm">
+                            <a title="Edit" href="${clientLink}${element.id}" class="btn btn-success btn-sm">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </a>
                             <a title="Delete" id="${element.id}" class="deleteClient btn btn-danger btn-sm">
@@ -115,13 +113,13 @@ $(document).ready(function () {
                 </div>
                 `
             });
-        $('.cList').html(listContact);
+        $('.cList').html(listClient);
         }
     }
 
     if(listOf === 'contact'){
     $.ajax({
-        url: "https://office-management-demo.herokuapp.com/contacts/",
+        url: urlRoot+'contacts/',
         datatype: "JSON",
         type: 'GET',
         success: function (contactListData) {
@@ -133,13 +131,13 @@ $(document).ready(function () {
     });
     }else if(listOf === 'client'){
         $.ajax({
-            url:"https://heroku-office-client.herokuapp.com/client/individuals/", 
+            url:urlRoot+'clients/', 
             datatype: "JSON",
             type: 'GET',
             success: function (clientListData) {
     
-                contactListBody(clientListData);
-                clientList = clientListData;
+                clientListBody(clientListData);
+                currentList = clientListData;
     
             }
         });
@@ -163,7 +161,7 @@ $(document).ready(function () {
                         icon: "success",
                     });
                     $.ajax({
-                        url: "https://office-management-demo.herokuapp.com/contacts/" +id+'/',
+                        url: urlRoot + 'contacts/' +id+'/',
                         type: 'DELETE',
                         async:false,
                         datatype: "JSON",
@@ -173,8 +171,8 @@ $(document).ready(function () {
                     });
                     $('.cList').empty();
                     $.ajax({
-                        url: "https://office-management-demo.herokuapp.com/contacts/",
-                        datatype: "JSON",
+                        url: urlRoot + 'contacts/',
+                        datatype: 'JSON',
                         type: 'GET',
                         success: function (contactListData) {
                             contactListBody(contactListData);
@@ -280,7 +278,7 @@ $(document).ready(function () {
         var searchData = $('.searchContactText').val();
         $('.cList').empty();
         $.ajax({
-            url: "https://office-management-demo.herokuapp.com/contacts/?name="+searchData,
+            url: urlRoot + 'contacts/?name=' + searchData,
             datatype: 'JSON',
             type: 'GET',
             success: function (searchResult) {

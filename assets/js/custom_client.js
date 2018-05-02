@@ -30,7 +30,6 @@ $(document).ready(function () {
                 type:'GET',
                 datatype:'JSON',
                 success:function(data){
-                    // contOrg = data.contact_organisation.organisation.id;
                     client_organisation(data.contact_organisation.organisation.id);
                 }
             });
@@ -60,11 +59,13 @@ $(document).ready(function () {
                     type:'GET',
                     datatype:'JSON',
                     success:function(data){
+
                         var commencement_date = $.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date));
                         $('#client_legalstatus').val(legal).trigger('change');
                         $('#PANNO').val(data.pan_no);
                         var poc = data.pocs;
                         
+                        //getting POC by contact id 
                         for (let i = 0; i < poc.length; i++) {
                             var id = poc[i].contact;
                             $.getJSON(urlRoot+'contacts/'+id,function(data){
@@ -87,15 +88,13 @@ $(document).ready(function () {
                                         '',                                             //purpose
                                         '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
                                     ]).draw(false);
-                                    
                             });
-
                         }
 
                         if(legal==1){
                             $('#individual_aadhar').val(data.aadhar_no);
-                            //contOrg = 1//data.prospect;
                             client_organisation(data.prospect);
+                        
                         }else{
                             $('#GSTIN').val(data.gstin);
                             $('#TANNO').val(data.tan_no);
@@ -104,7 +103,6 @@ $(document).ready(function () {
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#HUF_date').val(commencement_date);
                                 $('#HUF_nameOfKarta').val(data.karta_name);
-                                // contOrg = data.prospect;
                                 client_organisation(data.prospect);
                             }else if(legal == 3){
                                 $('#client_legalstatus').val(legal).trigger('change');
@@ -114,7 +112,6 @@ $(document).ready(function () {
                                 $('#Proprietor_mname').val(name.length==2?'':name[1]);
                                 $('#Proprietor_lname').val(name[name.length-1]);
                                 $('#Proprietor_dateOfComm').val(commencement_date);
-                                // contOrg = data.prospect;
                                 client_organisation(data.prospect);
                             
                             }else if(legal == 4){
@@ -122,7 +119,6 @@ $(document).ready(function () {
                                 $('#Partnership_date').val($.datepicker.formatDate("dd/mm/yy", new Date(data.partnership_deed_date)));
                                 $('#Partnership_dateOfComm').val(commencement_date);
                                 AddPartner(data.partners);
-                                // contOrg = data.prospect;
                                 client_organisation(data.prospect);
                             }else if(legal == 5){
                                 $('#client_legalstatus').val(legal).trigger('change');
@@ -137,7 +133,6 @@ $(document).ready(function () {
                                 $('#LLP_LLPIN').val(data.llpin);
                                 $('#LLP_date').val(commencement_date);
                                 AddDPartner(data.designated_partners);
-                                // contOrg = data.prospect;
                                 client_organisation(data.prospect);
                             }else if(legal == 6){
                                 $('#client_legalstatus').val(legal).trigger('change');
@@ -147,7 +142,6 @@ $(document).ready(function () {
                                 $('#company_listedy').prop('checked',data.stock_exchange_listed).trigger('change');
                                 $('#company_stock').val(data.stock_exchange_name);
                                 AddDirector(data.directors);
-                                // contOrg = data.prospect;
                                 client_organisation(data.prospect);
                             }else if(legal == 7){
                                 $('#client_legalstatus').val(legal).trigger('change');
@@ -160,8 +154,7 @@ $(document).ready(function () {
                                 }
                                 $('#members').val(members);
                                 $('#AOP_date').val(commencement_date);
-                                $('#AOP_registration').val(data.registration_no);  
-                                // contOrg = data.prospect;
+                                $('#AOP_registration').val(data.registration_no);
                                 client_organisation(data.prospect);
                             }else if(legal == 8){
                                 $('#client_legalstatus').val(legal).trigger('change');
@@ -174,9 +167,7 @@ $(document).ready(function () {
                                     }
                                 }
                                 $('#trusteeName').val(trustee);
-                                // contOrg = data.prospect;
                                 client_organisation(data.prospect);
-                                // $('#trust_name').val(data.);
                             }
                     }
                     console.log('legal='+ legal +'-- Org id='+contOrg);
@@ -1664,9 +1655,15 @@ $(document).ready(function () {
                 console.log(clientJSON);
 
                 $.ajax({
+                    async: true,
+                    crossDomain: true,
                     url: url+''+id+'/',
                     type: 'PUT',
-                    contentType: 'application/json',
+                    headers: {
+                        "content-type": "application/json",
+                        "cache-control": "no-cache"
+                    },
+                    processData: false,
                     data: clientJSON,
                     success: function (data) {
                         swal('Client updated');

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+
+<html lang="en" class="desktop landscape chrome">
+<!--<![endif]-->
+<!-- START HEAD -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <title>View Contact</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Calibre is imple and easy admin template">
+    <meta name="keywords" content="calibre bootstrap template, calibre admin, bootstrap, admin template, bootstrap admin">
+    <meta name="author" content="LanceCoder">
+
+    <meta property="og:site_name" content="-CUSTOMER VALUE-">
+    <meta property="og:title" content="-CUSTOMER VALUE-">
+    <meta property="og:description" content="-CUSTOMER VALUE-">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="-CUSTOMER VALUE-">
+    <meta property="og:url" content="-CUSTOMER VALUE-">
+
+
+
+    <link href="assets/css/jquery-ui.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/assets/css/jquery-ui.css"> -->
+
+    <div id="css"></div>
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/addCss.js"></script> -->
+
+    <script type="text/javascript">
+        $('#css').load('http://ungeek.in/calibre/css.html');
+    </script>
+    
+</head>
+
+<body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
+    <i class="btn-theme-switcher icon-cog hidden-xs"></i>
+
+    <!-- Page Loader -->
+    <div class="page-loader" style="display: none;"></div>
+
+    <!-- START WRAPPER -->
+    <div class="wrapper">
+
+        <div id="divHeader"></div>
+
+        <div id="divSide"></div>
+
+        <div class="main-content small_content">
+
+            <!-- START MAIN CONTAINER -->
+            <div class="main-container">
+
+                <!-- START PAGE HEADER -->
+                <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
+                    <div class="page-header-content slideshow">
+                        <div class="page-header-overlay">
+                            <h1 class="page-title">Add Contact</h1>
+                            <div class="page-breadcrumb">
+                                <nav class="c_breadcrumbs">
+                                    <ul>
+                                        <li>
+                                            <a href="#">Home</a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="#">Contact</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- END PAGE HEADER -->
+
+                <!-- START PAGE CONTENT -->
+                <div class="page-content">
+
+                    <!-- START ROW -->
+                    <div class="row">
+
+                        <!-- START COL-MD-12 -->
+                        <div class="col-md-12">
+
+                            <!-- START PANEL -->
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-2 col-sm-offset-6">
+                                                    <a href="" id="btncnv1">
+                                                        <button id="btncnvertcl" class="btn btn-success buttonDefSize">Convert</button>
+                                                    </a>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <a href="" id="btndef1">
+                                                        <button id="edit" class="btn btn-success buttonDefSize">Edit</button>
+                                                    </a>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button id="" class="btn btn-success buttonDefSize delete">Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--TEMP-->
+                                    <hr>
+                                    <!--INFO-->
+                                    <div class="row">
+                                        <div class="col-sm-3 col-sm-offset-1" id="pic">
+                                            <img height="100px" class="img-circle" src="assets/images/avatar3.jpg" alt="">
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label class="input">
+                                                        Title:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-10" id="title">
+                                                    Title
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label class="input">
+                                                        Name:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-10" id="name">
+                                                    Name
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label class="input">
+                                                        Organisation:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-5" id="organisation">
+                                                    Organisation
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <label class="input">
+                                                        Group:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-4" id="group">
+                                                    Group
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label class="input">
+                                                        Branch:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-10" id="branch">
+                                                    Branch
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label class="input">
+                                                        Designation:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-10" id="desig">
+                                                    Designation
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--TABS-->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                        </div>
+                                    </div>
+                                    <div>
+
+                                        <div class="">
+
+                                            <!--****** Start Colored Modal Footer******-->
+                                            <div class="modal modal-warning bg-header" id="colored-warning-header" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content animated fadeOut">
+                                                        <div class="modal-header">
+                                                            <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                <i class="fa fa-times"></i>
+                                                            </button>
+                                                            <h4 class="modal-title">
+                                                                <strong>Contacts</strong>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Name</div>
+                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Company</div>
+                                                                <div class="col-xs-3 col-sm-3 text-bold f-s-12">Contact</div>
+                                                                <div class="col-xs-1 col-sm-1 text-bold f-s-12"></div>
+                                                            </div>
+                                                            <hr/>
+                                                            <br/>
+                                                            <div class="row" id="searchResult">
+                                                                <!-- DATA FROM JSON -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--****** Start Colored Modal Footer******-->
+
+                                        </div>
+
+                                    </div>
+
+                                    <hr/>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                </div>
+                            </div>
+                            <!-- END PANEL -->
+
+                            <div class="contactFormBody panel">
+
+                                <div class="panel-body">
+
+                                    <!--div class="row sky-form m-b-30 m-l-15">
+                                        <div class="col-sm-5 col-sm-offset-1">
+                                            <label class="label">Originator:
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <label class="select">
+                                                <select id="addContact_originator" class="select2" required>
+
+                                                </select>
+                                            </label>
+                                            <! <div class="note m-t-5"><strong>Note:</strong> Click to add. Click cross for remove the item.</div>>
+                                        </div>
+                                    </div-->
+                                    <!-- ADDITIOAL INFORMATION -->
+                                    <div id="new-form" class="col-sm-12">
+                                        <div id="horizontal-wizard" class="col-sm-10 col-sm-offset-1">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li role="presentation" class="active">
+                                                    <a href="#tab1" data-toggle="tab" aria-expanded="true">
+                                                        <i class="icon-user"></i> Personal Information
+                                                    </a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="#tab2" data-toggle="tab">
+                                                        <i class="icon-factory"></i> Organisational Details
+                                                    </a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="#tab3" data-toggle="tab">
+                                                        <i class="icon-document"></i> Lead Management
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+
+                                            <!-- <div class="progress progress-sm m-t-20 m-b-0">
+                                                    <div class="progress-bar progress-bar-primary ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                                    <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div></div>
+                                                </div> -->
+
+                                            <form id="addContact_form" class="validator sky-form">
+                                                <div class="tab-content p-b-50">
+                                                    <div class="tab-pane fade active in" id="tab1">
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Phone Number:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="pphone">
+                                                                Phone number
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Email ID:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="pemail">
+                                                                Email id
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Other Phone Numbers:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="ophone">
+                                                                Other phone number
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Other Email ID:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="omail">
+                                                                Other email id
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Address:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="address">
+                                                                Address
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Date Of Birth:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="dob">
+                                                                Date Of Birth
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Gender:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="gender">
+                                                                Gender
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--END OF TAB1 -->
+
+                                                    <div class="tab-pane fade" id="tab2">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">
+                                                                    Address:
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <span id="addorg">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6 ">
+                                                                <label class="label">
+                                                                    Link:
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <span id="weblink" href="">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">
+                                                                    Industry Type:
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <span id="industrytpe">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">
+                                                                    Nature of Business:
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <span id="businessnature">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">
+                                                                    Business Type:
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <span id="businesstype">
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="tab3">
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Source:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="source">
+                                                                SOURCE
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Reference:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="reference">
+                                                                REFERENCE
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Status:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="status">
+                                                                STATUS
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Priority:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="priority">
+                                                                PRIORITY
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-sm-offset-1">
+                                                                <label class="label">Potiential Services:</label>
+                                                            </div>
+                                                            <div class="col-sm-6 col-sm-offset-1" id="potent">
+                                                                POTENTIAL SERVICES
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END OF TAB3-->
+
+
+                                                </div>
+                                                <!-- END OF TAB2 -->
+
+
+
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <!-- END OF ADDITIONAL INFORMATION -->
+                            </div>
+                        </div>
+                        <!-- END PANEL -->
+
+                        <!--div class="contactFormBut panel">
+                                <div class="panel-body">
+                                    <div class="row m-t-20">
+
+                                        <div class="col-sm-2 pull-right">
+                                            <button form="addContact_form" type="reset" class="btn btn-danger btn-raised border-rounded float-right buttonDefSize">Reset</button>
+                                        </div>
+                                        <div class="col-sm-2 pull-right">
+                                            <button form="addContact_form" id="addContact_submit" class="btn btn-success btn-raised border-rounded float-right buttonDefSize">Submit</button>
+                                        </div>
+                                        <div class="note col-sm-12">
+                                            <strong>Note:</strong> Fields marked with
+                                            <span class="text-danger">*</span> are to be filled mandatorily.</div>
+                                    </div>
+                                </div>
+                            </div-->
+
+                    </div>
+
+                </div>
+                <!-- END COL-MD-12 -->
+
+            </div>
+            <!-- END ROW -->
+
+        </div>
+
+        <!-- END PAGE CONTENT -->
+
+        <!-- START PAGE FOOTER -->
+        <footer class="page-footer">
+            <center>
+                <b class="f-s-20">Footer..</b>
+            </center>
+        </footer>
+        <!-- END PAGE FOOTER -->
+
+    </div>
+    <!-- END MAIN CONTAINER -->
+
+
+    </div>
+    </div>
+
+
+
+
+    <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
+
+    <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script>
+        /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+
+    </script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.ui.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.nanoscroller.min.js" type="text/javascript"></script>
+    <script src="assets/js/nicescroll.min.js" type="text/javascript"></script>
+    <script src="assets/js/animsition.min.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script> -->
+    <script src="assets/js/jquery.cookie.min.js"></script>
+    <script src="assets/js/device.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/scrollTo.min.js"></script>
+    <script src="assets/js/rippler.min.js" type="text/javascript"></script>
+    <!-- SKY FORM JS PLUGINS-->
+    <script src="assets/js/jquery.form.min.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/jquery.maskedinput.min.js"></script>
+    <script src="assets/js/jquery.modal.js"></script>
+    <script src="assets/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="assets/js/select2.js" type="text/javascript"></script>
+    <!--[if lt IE 10]>
+                <script src="../../assets/vendors/skyforms/jquery.placeholder.min.js"></script>
+        <![endif]-->
+    <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+                <script src="../../assets/vendors/skyforms/sky-forms-ie8.js"></script>
+        <![endif]-->
+    <!-- END SKY FORM JS PLUGINS-->
+    <!--================================/
+        /* START GLOBAL JS PLUGINS
+        /*================================-->
+
+
+    <!-- SKY FORM JS PLUGINS-->
+    <script src="assets/vendors/skyforms/js/jquery.form.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.validate.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.maskedinput.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.modal.js"></script>
+
+    <!--================================/
+        /* START JS PLUGINS FOR THIS PAGE
+        /*================================-->
+    <!-- <script src="assets/js/jquery.peity.min.js"></script> -->
+    <!--<script src="assets/js/echarts.js"></script>-->
+    <script src="assets/js/skycons.js"></script>
+    <script src="assets/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="assets/vendors/bootstrap-fileupload/js/bootstrap-fileupload.js"></script>
+
+    <!--================================/
+        /* END JS PLUGINS FOR THIS PAGE
+        /*================================-->
+
+
+    <!--================================/
+            /* START COMMON SCRIPT FOR ALL PAGES
+            /*================================-->
+
+    <script src="assets/js/forms/form-wizard.js" type="text/javascript"></script>
+    <!--================================/
+            /* END COMMON SCRIPT FOR ALL PAGES
+            /*================================-->
+
+
+
+    <!--================================/
+        /* START SCRIPT THIS PAGE ONLY
+        /*================================-->
+    <!-- <script src="assets/js/dashboard.js" type="text/javascript"></script> -->
+    <!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
+    <script src="assets/js/widget-weather.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
+    <script src="assets/js/widget-list.js" type="text/javascript"></script>
+
+    <!--================================/
+        /* END SCRIPT THIS PAGE ONLY
+        /*================================-->
+
+
+    <!--================================/
+        /* START CUSTOM SCRIPTS
+        /*================================-->
+
+
+    <script type="text/javascript">
+
+            //$('#divHeader').load('http://localhost:8080/header.html');
+            // $('#divSide').load('http://localhost:8080/sidebar.html');
+            // $('#divFooter').load('http://localhost:8080/footer.html');
+
+
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
+    <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+    <script src="assets/pages/jquery.ui-sliders.js"></script>
+    <script src="assets/pages/theme.min.js"></script>
+
+    <script src="assets/js/subFunc.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/custom_contact.js" type="text/javascript"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+    <script src="assets/js/addheader.js" type="text/javascript"></script>
+    <script src="assets/js/addSidebar.js" type="text/javascript"></script>
+    <script type="text/javascript" src="assets/js/viewContact.js"></script>
+    <!--================================/
+        /* END CUSTOM SCRIPTS
+        /*================================-->
+</body>
+
+
+</html>

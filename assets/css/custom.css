@@ -2,10 +2,10 @@
 .hover-grey:hover { background-color: grey; color: white; } 
 .yellow-line { border-bottom: 1px solid #dab236; }
 .nav-tabs > li.active { border-bottom: 3px solid #dab236; }
-#contact-row > .well { border:0px;box-shadow:none; }
+/* #contact-row > .well { border:0px;box-shadow:none; }
 #website-row > .well { border:0px;box-shadow:none; }
 #hoaddress-row > .well { border:0px;box-shadow:none;}
-#service > .well { border:0px;box-shadow:none; }
+#service > .well { border:0px;box-shadow:none; } */
 input.uppercase { text-transform: uppercase; }
 .buttonDefSize { width: 80%!important; }
 .ui-datepicker td a {text-align: center!important;}
@@ -14,7 +14,7 @@ input.uppercase { text-transform: uppercase; }
 .serc-btn { position: absolute;top: 7px;right: 10px;font-size: 22px;color: grey;cursor: pointer; }
 .well { margin-bottom: 0px!important; padding:10px;}
 .panel-bodyContact { transform: scale(0.95); }
-.panel-bodyClient { transform: scale(0.9); }
+.panel-bodyClient, .panel-body { transform: scale(0.9); }
 
 .se-pre-con {
 	position: fixed;
@@ -31,4 +31,7 @@ span.select2-selection.select2-selection--multiple{
 .custom_inline{
 	display: inline-flex;
 	margin-left: 15px;
+}
+.mNega5 {
+	margin: -5px;
 }

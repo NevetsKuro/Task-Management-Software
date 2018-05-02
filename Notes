@@ -1,9 +1,15 @@
 
 6. contacts. vcard and image require url instead of string 
 7. one client list - for all legal statuses
-16. no organisations/display api for viewing in contacts form
+16. no ../organisations/display api for viewing in contacts form
 18. organisation is_headOffice is not changing.
 20. purpose in companies is shown required??
+21. type of work in individuals
+22. HUFs update. The change is only reflected in the response but not in the back end.
+23. Same in every legal statuses.
+24. contacts 
+
+----------Drop client until issues fixed.----------------
 
 //Services
 //Stat Documents
@@ -27,8 +33,7 @@ Done-----
 9. prospect for individuals - DONE individual id = prospect
 
 
-
-Need to know
+Need to know:
 1. Contact converts into client always not the other way round
 3. organisation can be added from legal status(companies) or contact
 

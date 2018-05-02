@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+<html lang="en" class="desktop landscape chrome">
+<!--<![endif]-->
+<!-- START HEAD -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Add Client</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Calibre is imple and easy admin template">
+    <meta name="keywords" content="calibre bootstrap template, calibre admin, bootstrap, admin template, bootstrap admin">
+    <meta name="author" content="LanceCoder">
+
+    <meta property="og:site_name" content="-CUSTOMER VALUE-">
+    <meta property="og:title" content="-CUSTOMER VALUE-">
+    <meta property="og:description" content="-CUSTOMER VALUE-">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="-CUSTOMER VALUE-">
+    <meta property="og:url" content="-CUSTOMER VALUE-">
+
+
+
+    <link href="assets/css/jquery-ui.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/assets/css/jquery-ui.css"> -->
+
+    <div id="css"></div>
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/addCss.js"></script> -->
+    <script type="text/javascript">
+        $('#css').load('http://ungeek.in/calibre/css.html');
+    </script>
+   
+</head>
+
+<body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
+    <i class="btn-theme-switcher icon-cog hidden-xs"></i>
+
+    <!-- Page Loader -->
+    <div class="page-loader" style="display: none;"></div>
+
+    <!-- START WRAPPER -->
+    <div class="wrapper">
+
+        <div id="divHeader"></div>
+
+        <div id="divSide"></div>
+
+        <div class="main-content small_content">
+
+            <!-- START MAIN CONTAINER -->
+            <div class="main-container">
+
+                <!-- START PAGE HEADER -->
+                <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
+                    <div class="page-header-content slideshow">
+                        <div class="page-header-overlay">
+                            <h1 class="page-title">Add Contact</h1>
+                            <div class="page-breadcrumb">
+                                <nav class="c_breadcrumbs">
+                                    <ul>
+                                        <li>
+                                            <a href="#">Home</a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="#">Contact</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- END PAGE HEADER -->
+
+                <!-- START PAGE CONTENT -->
+                <div class="page-content">
+
+                    <!-- START ROW -->
+                    <div class="row">
+
+                        <!-- START COL-MD-12 -->
+                        <div class="col-md-12">
+
+                            <!-- START PANEL -->
+                            <div class="panel">
+
+
+                                <div class="panel-body">
+                                    <div class="well f-s-25 m-b-20 text-bold">
+                                        <div class="row">
+                                            <center>
+                                                <div class="col-sm-12" >
+                                                    <label class="input" id="name">
+                                                        Name
+                                                    </label>
+                                                </div>
+                                            </center>
+                                        </div>
+                                        <div class="row">
+                                            <center>
+                                                <div class="col-sm-12" >
+                                                    <label class="input" id="group">
+                                                            Group
+                                                    </label>
+                                                </div>
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-sm-1">
+                                                <label class="input">
+                                                    Phone:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-3" id="phone">
+                                                Phone
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <label class="input">
+                                                    Email:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-3" id="mail">
+                                                Email Address
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <label class="input">
+                                                    Website:
+                                                </label>
+                                            </div>
+                                            <a class="col-sm-3" id="website" href="#">
+                                                Website
+                                            </a>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-1">
+                                                <label class="input">
+                                                    PAN:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-3" id="pan">
+                                                Permanent Access Number
+                                            </div>
+                                            <div id="gstdrop">
+                                                <div class="col-sm-1">
+                                                    <label class="input">
+                                                        GSTIN:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3" id="gstin">
+                                                    GSTIN
+                                                </div>
+                                            </div>    
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-1">
+                                                <label class="input">
+                                                    Address:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-3" id="address">
+                                                Address
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row hide" id="aop">
+                                       <div class="col-sm-1">
+                                            <label class="input">
+                                                Reg No:
+                                            </label>
+                                       </div>
+                                        <div class="col-sm-3" id="reg">
+                                            Registeration Number
+                                        </div>
+                                        <div class="col-sm-2">
+                                                <label class="input">
+                                                    Members Name:
+                                                </label>
+                                        </div>
+                                        <div class="col-sm-6" id="members">
+                                            Members
+                                        </div>
+                                    </div>
+                                    <div class="row hide" id="company">
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <label class="input">
+                                                        CIN:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3" id="cin">
+                                                    Company Identification Number
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <label class="input">
+                                                        TAN:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3" id="tan">
+                                                    TAN
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label class="input">
+                                                        Date Of Incorporation:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-2" id="doi">
+                                                    Date Of Incorporation
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label class="input">
+                                                        Name of Stock Exchange listed on:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    Name of Stock Exchange listed on
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table class="table table-responsive" id="cmptable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr.No</th>
+                                                                <th>Name of Director</th>
+                                                                <th>DIN</th>
+                                                                <th>Shareholding</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="directors">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row hide" id="huf">
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                Name Of Karta:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="nok">
+                                            Name Of Karta
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                Type Of Industry:
+                                            </label>   
+                                        </div>
+                                        <div class="col-sm-3">
+                                            Type Of Industry
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="input">
+                                                Nature Of Business:
+                                            </label>   
+                                        </div>
+                                        <div class="col-sm-2">
+                                            Nature Of Business
+                                        </div>
+                                    </div>
+                                    <div class="row hide" id="llp">
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-1">
+                                                <label class="input">
+                                                    LLPIN:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                LLPIN
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <label class="input">
+                                                    TAN:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                TAN
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label class="input">
+                                                    Date Of Incorporation:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                Date Of Incorporation
+                                            </div>
+                                            <div class="row">
+                                                <table class="table table-responsive" id="llptable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr.No</th>
+                                                            <th>Name of Designated Partner</th>
+                                                            <th>DIN</th>
+                                                            <th>Profit Share</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="desigp">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row hide" id="partner">
+                                        <div class="col-sm-12">
+                                            <table class="table table-responsive" id="parttable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sr.No</th>
+                                                        <th>Name of Partners</th>
+                                                        <th>Corresponding Share</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="partn">
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row hide" id="trust">
+                                        <div class="col-sm-2">
+                                            <label class="input">
+                                                Name Of Trustee:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="tnot">
+                                            Name Of Trustee
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="input">
+                                                Date Of Commencement:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="tdoc">
+                                            Date Of Commencement
+                                        </div>
+                                    </div>
+                                    <div class="row hide" id="individual">
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                DOB:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="indob">
+                                            Date Of Birth
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="input">
+                                                Type Of Work:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-2" id="indtow">
+                                            Type Of Work
+                                        </div> 
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                Adhar:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="indadhar">
+                                            ADHAR NUMBER
+                                        </div>
+                                    </div>
+                                    <div class="hide" id="prop">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="input">
+                                                    Owner's Name:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-2" id="propown">
+                                                Owner Name
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label class="input">
+                                                    Nature Of Business:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-2" id="propnob">
+                                                Nature Of Business
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="input" >
+                                                    Date Of Commencement:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-2" id="propdoc">
+                                                Date
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label class="input" >
+                                                    Type Of Industry:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-2" id="proptof">
+                                                Type Of Industry
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label class="input" >
+                                                    Type Of Business:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-2" id="proptob">
+                                                    Type Of Business
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label class="input" >
+                                                    TAN:
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-2" id="proptan">
+                                                TAN NUMBER
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="">
+
+                                            <!--****** Start Colored Modal Footer******-->
+                                            <div class="modal modal-warning bg-header" id="colored-warning-header" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content animated fadeOut">
+                                                        <div class="modal-header">
+                                                            <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                <i class="fa fa-times"></i>
+                                                            </button>
+                                                            <h4 class="modal-title">
+                                                                <strong>Contacts</strong>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Name</div>
+                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Company</div>
+                                                                <div class="col-xs-3 col-sm-3 text-bold f-s-12">Contact</div>
+                                                                <div class="col-xs-1 col-sm-1 text-bold f-s-12"></div>
+                                                            </div>
+                                                            <hr/>
+                                                            <br/>
+                                                            <div class="row" id="searchResult">
+                                                                <!-- DATA FROM JSON -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--****** Start Colored Modal Footer******-->
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                </div>
+                            </div>
+                            <!-- END PANEL -->
+
+                        <div class="contactFormBody panel">
+                            <div class="panel-body">
+                                <div id="branc">
+                                    <div class="row">
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                <u>Branch:</u>
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="branch">
+                                            <u>Branch</u>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                GSTIN:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="bgst">
+                                            GSTIN
+                                        </div>    
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                Phone:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            Phone Number
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                Email Id:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="bemail">
+                                            Email Address
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                Address:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-6" id="baddress">
+                                            ADDRESS
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div> 
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <label class="input">
+                                                <u>Person To Be Contacted</u>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <table id="poctable" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Relation</th>
+                                                <th>Designation</th>
+                                                <th>Purpose</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="pocbody"></tbody>
+                                        <!-- <tfoot>
+                                            <tr>
+                                                <th class="pocname">Name</th>
+                                                <th class="pocphone">Phone</th>
+                                                <th class="pocmail">Email</th>
+                                                <th class="pocreln">Relation</th>
+                                                <th class="pocdesig">Designation</th>
+                                                <th class="pocpurpose">Purpose</th>
+                                            </tr>
+                                        </tfoot> -->
+                                    </table>
+                                    <!--div class="row">
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                Name:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="pocname">
+                                            Name
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                Phone:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="pocphone">
+                                            Phone Number
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                Email Id:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="pocmail">
+                                            Email Address
+                                        </div>
+                                    </div-->
+                                    <!--div class="row">
+                                        <div id="deso">
+                                            <div class="col-sm-1">
+                                                <label class="input">
+                                                    Desig. :
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-3" id="pocdesig">
+                                                Designation
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-1">
+                                            <label class="input">
+                                                Relation:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3" id="pocreln">
+                                            Relation
+                                        </div>
+                                    </div-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END COL-MD-12 -->
+                </div>
+                <!-- END ROW -->
+            </div-->
+
+            <!-- END PAGE CONTENT -->
+
+            <!-- START PAGE FOOTER -->
+            <footer class="page-footer">
+                <center>
+                    <b class="f-s-20">Footer..</b>
+                </center>
+            </footer>
+            <!-- END PAGE FOOTER -->
+
+        </div>
+        <!-- END MAIN CONTAINER -->
+
+
+    </div>
+    </div>
+
+
+
+
+    <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
+
+    <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script>
+        /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+
+    </script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.ui.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.nanoscroller.min.js" type="text/javascript"></script>
+    <script src="assets/js/nicescroll.min.js" type="text/javascript"></script>
+    <script src="assets/js/animsition.min.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script> -->
+    <script src="assets/js/jquery.cookie.min.js"></script>
+    <script src="assets/js/device.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/scrollTo.min.js"></script>
+    <script src="assets/js/rippler.min.js" type="text/javascript"></script>
+    <!-- SKY FORM JS PLUGINS-->
+    <script src="assets/js/jquery.form.min.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/jquery.maskedinput.min.js"></script>
+    <script src="assets/js/jquery.modal.js"></script>
+    <script src="assets/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="assets/js/select2.js" type="text/javascript"></script>
+    <!--[if lt IE 10]>
+                <script src="../../assets/vendors/skyforms/jquery.placeholder.min.js"></script>
+        <![endif]-->
+    <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+                <script src="../../assets/vendors/skyforms/sky-forms-ie8.js"></script>
+        <![endif]-->
+    <!-- END SKY FORM JS PLUGINS-->
+    <!--================================/
+        /* START GLOBAL JS PLUGINS
+        /*================================-->
+
+
+    <!-- SKY FORM JS PLUGINS-->
+    <script src="assets/vendors/skyforms/js/jquery.form.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.validate.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.maskedinput.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.modal.js"></script>
+
+    <!--================================/
+        /* START JS PLUGINS FOR THIS PAGE
+        /*================================-->
+    <!-- <script src="assets/js/jquery.peity.min.js"></script> -->
+    <!--<script src="assets/js/echarts.js"></script>-->
+    <script src="assets/js/skycons.js"></script>
+    <script src="assets/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="assets/vendors/bootstrap-fileupload/js/bootstrap-fileupload.js"></script>
+
+    <!--================================/
+        /* END JS PLUGINS FOR THIS PAGE
+        /*================================-->
+
+
+    <!--================================/
+            /* START COMMON SCRIPT FOR ALL PAGES
+            /*================================-->
+
+    <script src="assets/js/forms/form-wizard.js" type="text/javascript"></script>
+    <!--================================/
+            /* END COMMON SCRIPT FOR ALL PAGES
+            /*================================-->
+
+
+
+    <!--================================/
+        /* START SCRIPT THIS PAGE ONLY
+        /*================================-->
+    <!-- <script src="assets/js/dashboard.js" type="text/javascript"></script> -->
+    <!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
+    <script src="assets/js/widget-weather.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
+    <script src="assets/js/widget-list.js" type="text/javascript"></script>
+
+    <!--================================/
+        /* END SCRIPT THIS PAGE ONLY
+        /*================================-->
+
+
+    <!--================================/
+        /* START CUSTOM SCRIPTS
+        /*================================-->
+
+
+    <script type="text/javascript">
+
+            //$('#divHeader').load('http://localhost:8080/header.html');
+            // $('#divSide').load('http://localhost:8080/sidebar.html');
+            // $('#divFooter').load('http://localhost:8080/footer.html');
+
+
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
+    <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+    <script src="assets/pages/jquery.ui-sliders.js"></script>
+    <script src="assets/pages/theme.min.js"></script>
+    
+    <script src="assets/js/subFunc.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/custom_contact.js" type="text/javascript"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+    <script src="assets/js/addheader.js" type="text/javascript"></script>
+    <script src="assets/js/addSidebar.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="assets/js/viewclient.js" type="text/javascript"></script>
+    <!--================================/
+        /* END CUSTOM SCRIPTS
+        /*================================-->
+</body>
+
+
+</html>

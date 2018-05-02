@@ -86,69 +86,189 @@
                                     <hr>
                                     <form class="sky-form" id="HR_Form">
                                         <div class="row">
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-12">
+                                                <label class="label">Employee Name:</label>
+                                                <label class="input">
+                                                    <input id="employee_name" type="text" placeholder="">
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
                                                 <label class="label">Title:</label>
                                                 <label class="select">
-                                                    <select class="select2"></select>
+                                                    <select id="employee_title" class="select2">
+
+                                                    </select>
                                                 </label>
                                             </div>
-                                            <div class="col-sm-3">
-                                                <label class="label">First Name:</label>
+                                            <div class="col-sm-6">
+                                                <label class="label">Date of Birth:</label>
                                                 <label class="input">
-                                                    <input class="" type="text">
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <label class="label">Middle Name:</label>
-                                                <label class="input">
-                                                    <input class="" type="text">
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <label class="label">Last Name:</label>
-                                                <label class="input">
-                                                    <input class="" type="text">
+                                                    <input id="employee_dob" type="text" class="datepickr">
                                                 </label>
                                             </div>
                                         </div>
-
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <div class="label">Date Of Birth:</div>
-                                                <div class="input">
-                                                    <input class="dobdatepickr" type="text">
+                                                <label class="label">Designation:</label>
+                                                <label class="select">
+                                                    <select id="employee_designation" class="select2">
+
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="label">Location:</label>
+                                                <label class="input">
+                                                    <input id="employee_location" class="" type="text">
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="label">Department:</label>
+                                                <label class="select">
+                                                    <select id="employee_department" class="select2">
+
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="m-10"></div>
+                                        
+                                        <div class="row m-l-5 m-r-5 m-b-20">
+                                            <div class="row well mNega5">
+                                                <label class="label col-sm-10 m-l-10">Contacts:
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <label class="col-sm-1 text-danger m-l-15">
+                                                    <a class="glyphicon glyphicon-plus f-s-15" title="Add Contact" id="addcontact"></a>
+                                                </label>
+                                            </div>
+                                            <div id="contact-row" update-ctrl="phone_numbers">
+                                                <div class="row text-bold well">
+                                                    <div class="col-xs-2 col-sm-2">
+                                                        Is Primary?
+                                                    </div> 
+                                                    <div class="col-xs-3 col-sm-3">
+                                                        Phone Category
+                                                    </div>
+                                                    <div class="col-xs-5 col-sm-5">
+                                                        Phone Number
+                                                    </div>
+                                                    <div class="col-xs-2 col-sm-2">
+                                                        Remove
+                                                    </div>
+                                                </div>
+                                                <div class="row new well">
+                                                    <div class='col-xs-2 col-sm-2'>
+                                                        <label class='checkbox m-l-22'>
+                                                            <input type='radio' update-ctrl="phone_numbers" name="CNChecked" class='cn_is_primary'><i class='rounded-x m-l-10'></i>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xs-3 col-sm-3 ">
+                                                        <label class="select">
+                                                            <select update-ctrl="phone_numbers" class="contactnumber_category select2 editselect" required>
+
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xs-5 col-sm-5">
+                                                        <label class="input">
+                                                            <input update-ctrl="phone_numbers" type="number" class="addContact_contactNumbers contactnumber_valid" minlength="10" maxlength="10" placeholder="10 digit number"
+                                                                required>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xs-2 col-sm-2 p-b-12">
+                                                        <div>
+                                                            <label>&nbsp;</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <label class="label">Years of Service:</label>
-                                                <label class="input">
-                                                    <input class="" type="number">
+                                        </div>
+
+                                        
+                                        <div class="row m-l-5 m-r-5 m-b-20">
+                                            <div class="row well mNega5">
+                                                <label class="label col-sm-10 m-l-10">Email-Id's:
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <label class="col-sm-1 text-danger m-l-15">
+                                                    <a class="glyphicon glyphicon-plus f-s-15" title="Add Email" id="addemail"></a>
                                                 </label>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <label class="label">Confirm Date:</label>
-                                                <label class="input">
-                                                    <input type="text" class="datepickr">
-                                                </label>
+                                            <div id="email-row" update-ctrl="email_addresses">
+                                                <div class="row text-bold well">
+                                                    <div class="col-xs-2 col-sm-2">
+                                                        Is Primary?
+                                                    </div>        
+                                                    <div class="col-xs-3 col-sm-3">
+                                                        Email Category
+                                                    </div>
+                                                    <div class="col-xs-5 col-sm-5">
+                                                        Email ID
+                                                    </div>
+                                                    <div class="col-xs-2 col-sm-2">
+                                                        Remove
+                                                    </div>
+                                                </div>
+                                                <div class="row new well">
+                                                    <div class='col-xs-2 col-sm-2'>
+                                                        <label class='checkbox m-l-22'>
+                                                            <input type='radio' update-ctrl="email_addresses" name="EAChecked" class='ea_is_primary'><i class='rounded-x m-l-10'></i>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xs-3 col-sm-3 p-b-12">
+                                                        <label class="select">
+                                                            <select update-ctrl="email_addresses" class="email_category select2 editselect" required>
+
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xs-5 col-sm-5 p-b-12">
+                                                        <label class="input">
+                                                            <input update-ctrl="email_addresses" type="email" class="addContact_emailIds email_valid" placeholder="e.g. abc@gmail.com" required>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-xs-2 col-sm-2 p-b-12">
+                                                        <div>
+                                                            <label>&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label class="label">CTC(per Annum):</label>
+                                                <label class="input">
+                                                    <input id="employee_ctc" class="" type="text">
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="label">Reporting Manager(s)</label>
+                                                <label class="input">
+                                                    <input id="employee_reportingManager" type="text">
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
                                 <!-- END PANEL -->             
                             
-                                        <div class="panel">
-                                            <div class="panel-body">
-                                                    <footer class="text-right m-t-20">
-                                                    <button type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Reset</button>
-                                                    <button form="HR_Form" type="submit" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Submit</button>
-                                                    <div class="note"><strong>Note:</strong> Fields marked with <span class="text-danger" >*</span> are to be filled mandatorily.</div>
-                                                </footer>
-                                            </div>
-                                        </div>
+                                <div class="panel">
+                                    <div class="panel-body">
+                                            <footer class="text-right m-t-20">
+                                            <button type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Reset</button>
+                                            <button form="HR_Form" type="submit" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Submit</button>
+                                            <div class="note"><strong>Note:</strong> Fields marked with <span class="text-danger" >*</span> are to be filled mandatorily.</div>
+                                        </footer>
+                                    </div>
+                                </div>
 
                         </div>
 
@@ -279,12 +399,9 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
 <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
-<!-- <script src="assets/js/subFunc.js" type="text/javascript"></script> -->
-<script src="http://www.ungeek.in/calibre/assets/js/subFunc.js" type="text/javascript"></script>
-<script src="assets/js/custom_contact.js" type="text/javascript"></script>
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="assets/js/subFunc.js" type="text/javascript"></script>
+<script src="assets/js/add_employee.js" type="text/javascript"></script>
 <script src="assets/js/addheader.js" type="text/javascript"></script>
 <script src="assets/js/addSidebar.js" type="text/javascript"></script>
 <!--================================/

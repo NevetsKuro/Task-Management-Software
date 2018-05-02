@@ -1,6 +1,9 @@
 
   $(document).ready(function(){
 
+
+    window.urlRoot = 'http://35.202.86.61/office-management/';
+
             var currDate = new Date().getFullYear();
             $(".dobdatepickr").datepicker({
                 changeMonth:true,
