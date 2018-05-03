@@ -181,12 +181,12 @@ $(document).ready(function(){
                 currentContactData = data;
 
                 currentContactsId = data.id;
-                $('#addContact_title').val(data.title);
+                $('#addContact_title').val(data.title).trigger('change');
                 var name = breakName(data.name);
                 $('#addContact_fname').val(name.firstName);
                 $('#addContact_mname').val(name.middleName);
                 $('#addContact_lname').val(name.lastName);
-                $('#addContact_gender').val(data.gender);
+                $('#addContact_gender').val(data.gender).trigger('change');
                 var formatted = $.datepicker.formatDate("dd/mm/yy", new Date(data.dob));
                 $('#addContact_dob').val(formatted);
                 var addr = breakAddress(data.address);
@@ -210,15 +210,14 @@ $(document).ready(function(){
                 }
 
                 if(data.lead){
-                    $('#addContact_potential_service').val(data.lead.potential_services);
+                    $('#addContact_potential_service').val(data.lead.potential_services).trigger('change');
                     $('#addContact_branch').val(data.contact_organisation.branch);
-                    $('#addContact_lead_status').val(data.lead.status);
-                    $('#addContact_source').val(data.lead.source);
+                    $('#addContact_lead_status').val(data.lead.status).trigger('change');
+                    $('#addContact_source').val(data.lead.source).trigger('change');
                     $('#addContact_reference').val(data.lead.reference);
                     $('#addContact_notes').val(data.lead.notes);
                     var rangeSlider = $("#range_02").data('ionRangeSlider');
                     rangeSlider.update({from:data.lead.priority});
-                    $('#addContact_assignee').val(data.lead.originators);
                     $('#addContact_assignee').val(data.lead.originators);
                     $('#addContact_comments').val(data.lead.comments);
                 }
@@ -232,12 +231,12 @@ $(document).ready(function(){
                     
                     if(i>0){
                         addContactRows();
-                        $('#contact-row .new:last .contactnumber_category').val(multiNums[i].category);
+                        $('#contact-row .new:last .contactnumber_category').val(multiNums[i].category).trigger('change');
                         $('#contact-row .new:last .addContact_contactNumbers').val(parseInt(multiNums[i].number.toString().slice(3),10));
                         $('#contact-row .new:last .cn_is_primary').attr('checked',multiNums[i].is_primary);
                         
                     }else{
-                        $('#contact-row .new .contactnumber_category').val(multiNums[i].category);
+                        $('#contact-row .new .contactnumber_category').val(multiNums[i].category).trigger('change');
                         $('#contact-row .new .addContact_contactNumbers').val(parseInt(multiNums[i].number.toString().slice(3),10));
                         $('#contact-row .new .cn_is_primary').attr('checked',multiNums[i].is_primary);
                     }
@@ -247,11 +246,11 @@ $(document).ready(function(){
                 for(let i = 0; i < multiEmail.length; i++){
                     if(i>0){
                         addEmailRows();
-                        $('#email-row .new:last .email_category').val(multiEmail[i].category);
+                        $('#email-row .new:last .email_category').val(multiEmail[i].category).trigger('change');
                         $('#email-row .new:last .addContact_emailIds').val(multiEmail[i].email);
                         $('#email-row .new:last .ea_is_primary').attr('checked',multiEmail[i].is_primary);
                     }else{
-                        $('#email-row .new .email_category').val(multiEmail[i].category);
+                        $('#email-row .new .email_category').val(multiEmail[i].category).trigger('change');
                         $('#email-row .new .addContact_emailIds').val(multiEmail[i].email);
                         $('#email-row .new .ea_is_primary').attr('checked',multiEmail[i].is_primary);
                     }
@@ -260,10 +259,10 @@ $(document).ready(function(){
                 for(let i=0; i < multiSocial.length; i++){
                     if(i > 0){
                         addWebsiteRows();
-                        $('#website-row .new:last .socialmedia_category').val(multiSocial[i].social_media);
+                        $('#website-row .new:last .socialmedia_category').val(multiSocial[i].social_media).trigger('change');
                         $('#website-row .new:last .social_media_link').val(multiSocial[i].link);
                     }else{
-                        $('#website-row .new .socialmedia_category').val(multiSocial[i].social_media);
+                        $('#website-row .new .socialmedia_category').val(multiSocial[i].social_media).trigger('change');
                         $('#website-row .new .social_media_link').val(multiSocial[i].link);
                     }
                 }
@@ -284,7 +283,7 @@ $(document).ready(function(){
                 }
                 console.log(data.name+" details are added to the form!!");
                 // $('select').trigger('change');
-                $('form :input').trigger('change');
+                // $('form :input').trigger('change');
             },
             error:function(error){
                 swal('Contact` cannot be fetched');
@@ -475,7 +474,6 @@ $(document).ready(function(){
         </div>
         `);
         $('#hoaddress-row .new:last').addClass('zoomInUp animated').show('fast');
-
     }
 
     $('#addaddress').on('click',addAddresses);
@@ -540,12 +538,6 @@ $(document).ready(function(){
     });
 
     window.contact_organisation = function (orgId){
-            
-            // if($(this).attr('id')){
-            //     var orgId = $(this).attr('id');
-            // }else{
-            //     var orgId = updatedOrgId;
-            // }
             
         $.ajax({
             url:urlRooT+'organisations/display/'+orgId,

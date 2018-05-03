@@ -108,7 +108,18 @@ $(window).ready(function(){
         dataType:'JSON', //to parse string into JSON object,
         success: function(datag){ 
             if(datag){
-            global=datag;
+                global=datag;
+            }
+        }
+    });
+
+    $.ajax({
+        url: urlRoot + 'clients/form-data',
+        type: 'GET',
+        dataType:'JSON', //to parse string into JSON object,
+        success: function(data){ 
+            if(data){
+                global2=data;
             }
         }
     });
@@ -120,10 +131,71 @@ $(window).ready(function(){
         success: function(data){
             $('#pan').html(data.pan_no);
             $('#indadhar').html(data.aadhar_no);
+            $('.doc').html($.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date)));
+            
+            
             var cons=""
             cons=data.pocs;
+            if(legalstatus=='partnership-firms'){
+                var pars='';
+                for (let i = 0; i < data.partners.length; i++) {
+                    pars+= '<tr>';
+                    pars+='<td>'+i+'</td>';
+                    pars+='<td>'+data.partners[i].name+'</td>';
+                    pars+='<td>'+data.partners[i].share+'</td>';
+                    pars+='</tr>';
+                }
+                $('#partn').html(pars);
+                $('.deedDoc').html($.datepicker.formatDate("dd/mm/yy", new Date(data.partnership_deed_date)));
+            }
+            if(legalstatus=='limited-companies'){
+                var dirs='';
+                for (let i = 0; i < data.directors.length; i++) {
+                    dirs+='<tr>'
+                    dirs+='<td>'+i +'</td>';
+                    dirs+='<td>'+data.directors[i].name +'</td>';
+                    dirs+='<td>'+data.directors[i].din +'</td>';
+                    dirs+='</tr>';
+                }
+                $('#directors').html(dirs);
+            }
+            if(legalstatus=='llps'){
+                var dpars='';
+                for (let i = 0; i < data.designated_partners.length; i++) {
+                    dpars+='<tr>'
+                    dpars+='<td>'+i +'</td>';
+                    dpars+='<td>'+data.designated_partners[i].name +'</td>';
+                    dpars+='<td>'+data.designated_partners[i].din +'</td>';
+                    dpars+='</tr>';
+                }
+                $('#desigp').html(dpars);
+                var parss='';
+                for (let i = 0; i < data.other_partners.length; i++) {
+                    parss += data.other_partners[i].name;
+                }
+                $('#dPars').html(parss);
+            }
+            if(legalstatus=='trusts'){
+                var trustee='';
+                for (let i = 0; i < data.trustee.length; i++) {
+                    trustee+=data.trustee[i].name;
+                }
+                $('#tnot').html(trustee);
+            }
+            
+            // var relation, purpose;
             for(var i=0;i<data.pocs.length;i++){
-                if(data.pocs[i].is_primary===true){
+                // if(legalstatus === 'individuals'){
+                //     var relationid = data.pocs[i].relation;
+                //     relation = global2.relation.find(function(rel){
+                //         return rel.id == relationid;
+                //     }).relation;
+                // }else{
+                //     purpose = data.pocs[i].purpose;
+                // }
+                // var relation = '';
+                var purpose = '';
+                if(data.pocs[i].is_primary==true){
                     $.ajax({
                         url:urlRoot + 'contacts/display/' + data.pocs[i].contact,
                         type: 'GET',
@@ -135,29 +207,39 @@ $(window).ready(function(){
                             $('#website').attr("href",data2.contact_organisation.organisation.website);
                             var dob=data2.dob;
                             var splitDate = dob.split('-');
-                            $('#indob').html(splitDate[2] + '-' + splitDate[1] + '-' + splitDate[0]);
+                            $('.dob').html(splitDate[2] + '/' + splitDate[1] + '/' + splitDate[0]);
                             $('#address').html(data2.address);
                             var phones=data2.phone_numbers;
                             var mails=data2.email_addresses;
                             for(var i=0;i<phones.length;i++){
-                                if(phones[i].is_primary===true)
-                                    $("#phone").html(phones[i].number);      
+                                if(phones[i].is_primary===true){
+                                    $("#phone").html(phones[i].number);
+                                }
                             }
                             for(var i=0;i<mails.length;i++){
-                                if(mails[i].is_primary===true)
-                                    $("#mail").html(mails[i].email);      
+                                if(mails[i].is_primary===true){
+                                    $("#mail").html(mails[i].email);
+                                }
                             }
+                            var org = data2.contact_organisation.organisation;
+                            var branchid = data2.contact_organisation.branch;
+                            var brans = org.branches.find(function(branch){return branch.id === branchid;});
+                            $('#branchname').html(brans.name);
+                            $('#baddress').html(brans.address);
+                            $('#bgst').html(brans.gstin);
+                        },
+                        error:function(error){
+                            console.log(error.responseText);
                         }
                     });
                 }
-                else{
+                else if(data.pocs[i].is_primary==false){
                     $.ajax({
                         url: urlRoot + 'contacts/display/'+data.pocs[i].contact,
                         type: 'GET',
-                        dataType: 'json',
+                        dataType: 'JSON',
                         success: function(datatb){
                             var dname=datatb.name;
-                            var Purpose="Purpose";
                             var phon="",mal="";
                             for(var j=0;j<datatb.phone_numbers.length;j++){
                                 if(datatb.phone_numbers[j].is_primary===true)
@@ -167,10 +249,14 @@ $(window).ready(function(){
                                 if(datatb.email_addresses[k].is_primary===true)
                                    mal=datatb.email_addresses[k].email;      
                             }
-                            var relation="Friend";
+                            
                             if(legalstatus=="individuals"){
-                                var purpose=null;
-                                var designation=null;
+                                var designation='';
+                                var relationid = data.pocs[i].relation;
+                                var relation = global2.relation.find(function(rel){
+                                    return rel.id == relationid;
+                                }).relation;
+                                var purpose='';
                                 dat.row.add([
                                     datatb.name,
                                     phon,
@@ -181,18 +267,23 @@ $(window).ready(function(){
                                 ]).draw(false);
                             }
                             else{
-                                var relation=null;
+                                if(datatb.contact_organisation){
+                                    var design = global.designations.find(function(des){
+                                        return des.id===datatb.contact_organisation.designation
+                                        }).designation;
+                                }
                                 dat.row.add([
                                     datatb.name,
                                     phon,
                                     mal,
                                     relation,
-                                    global.designations.find(function(des){
-                                        return des.id===datatb.contact_organisation.designation
-                                        }).designation,
+                                    design,
                                     purpose
                                 ]).draw(false);
                             }
+                        },
+                        error:function(error){
+                            console.log(error.responseText);
                         }
                     });
                 }

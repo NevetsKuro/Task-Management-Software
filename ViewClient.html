@@ -79,7 +79,6 @@
 
                 <!-- START PAGE CONTENT -->
                 <div class="page-content">
-
                     <!-- START ROW -->
                     <div class="row">
 
@@ -111,6 +110,21 @@
                                             </center>
                                         </div>
                                     </div>
+                                    <hr>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-offset-8 col-sm-2">
+                                                        <a href="" id="btndef1">
+                                                            <button id="editClient" class="btn btn-success buttonDefSize">Edit</button>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <button id="delClient" class="btn btn-success buttonDefSize delete">Delete</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <hr>
                                     <div>
                                         <div class="row">
@@ -146,7 +160,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-3" id="pan">
-                                                Permanent Access Number
+                                                    Permanent Access Number
                                             </div>
                                             <div id="gstdrop">
                                                 <div class="col-sm-1">
@@ -155,7 +169,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-sm-3" id="gstin">
-                                                    GSTIN
+                                                        GSTIN
                                                 </div>
                                             </div>    
                                         </div>
@@ -166,11 +180,12 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-3" id="address">
-                                                Address
+                                                    Address
                                             </div>
                                         </div>
                                     </div>
                                     <hr>
+                                    <!-- AOP-BOI -->
                                     <div class="row hide" id="aop">
                                        <div class="col-sm-1">
                                             <label class="input">
@@ -181,14 +196,16 @@
                                             Registeration Number
                                         </div>
                                         <div class="col-sm-2">
-                                                <label class="input">
-                                                    Members Name:
-                                                </label>
+                                            <label class="input">
+                                                Members Name:
+                                            </label>
                                         </div>
                                         <div class="col-sm-6" id="members">
                                             Members
                                         </div>
                                     </div>
+
+                                    <!-- Company -->
                                     <div class="row hide" id="company">
                                         <div class="col-sm-12">
                                             <div class="row">
@@ -213,7 +230,7 @@
                                                         Date Of Incorporation:
                                                     </label>
                                                 </div>
-                                                <div class="col-sm-2" id="doi">
+                                                <div class="col-sm-2 doc">
                                                     Date Of Incorporation
                                                 </div>
                                             </div>
@@ -246,6 +263,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- HUF -->
                                     <div class="row hide" id="huf">
                                         <div class="col-sm-1">
                                             <label class="input">
@@ -253,7 +271,7 @@
                                             </label>
                                         </div>
                                         <div class="col-sm-3" id="nok">
-                                            Name Of Karta
+                                                Name Of Karta
                                         </div>
                                         <div class="col-sm-1">
                                             <label class="input">
@@ -261,7 +279,7 @@
                                             </label>   
                                         </div>
                                         <div class="col-sm-3">
-                                            Type Of Industry
+                                                Type Of Industry
                                         </div>
                                         <div class="col-sm-2">
                                             <label class="input">
@@ -269,9 +287,10 @@
                                             </label>   
                                         </div>
                                         <div class="col-sm-2">
-                                            Nature Of Business
+                                                Nature Of Business
                                         </div>
                                     </div>
+                                    <!-- LLPS -->
                                     <div class="row hide" id="llp">
                                         <div class="col-sm-12">
                                             <div class="col-sm-1">
@@ -280,7 +299,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-3">
-                                                LLPIN
+                                                    LLPIN
                                             </div>
                                             <div class="col-sm-1">
                                                 <label class="input">
@@ -295,8 +314,16 @@
                                                     Date Of Incorporation:
                                                 </label>
                                             </div>
-                                            <div class="col-sm-2">
-                                                Date Of Incorporation
+                                            <div class="col-sm-2 doc">
+                                                    Date Of Incorporation
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="input">
+                                                    Other Designated Partners:
+                                                </label>
+                                            </div>
+                                            <div id="dPars" class="col-sm-3">
+                                                    Other designated partners
                                             </div>
                                             <div class="row">
                                                 <table class="table table-responsive" id="llptable">
@@ -315,7 +342,25 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- PARTNERSHIP FIRM -->
                                     <div class="row hide" id="partner">
+                                        <div class="col-sm-3">
+                                            <label class="input">
+                                                Date Of Commencement:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3 doc">
+                                                Date
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="input">
+                                                Date of Patnership Deed:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-3 deedDoc">
+                                            Date 
+                                        </div>
+                                        <span class="m-10"></span>
                                         <div class="col-sm-12">
                                             <table class="table table-responsive" id="parttable">
                                                 <thead>
@@ -331,6 +376,7 @@
                                             </table>
                                         </div>
                                     </div>
+                                    <!-- TRUSTS -->
                                     <div class="row hide" id="trust">
                                         <div class="col-sm-2">
                                             <label class="input">
@@ -338,14 +384,14 @@
                                             </label>
                                         </div>
                                         <div class="col-sm-3" id="tnot">
-                                            Name Of Trustee
+                                            Name Of Trustee(s)
                                         </div>
                                         <div class="col-sm-3">
                                             <label class="input">
                                                 Date Of Commencement:
                                             </label>
                                         </div>
-                                        <div class="col-sm-3" id="tdoc">
+                                        <div class="col-sm-3 doc">
                                             Date Of Commencement
                                         </div>
                                     </div>
@@ -355,7 +401,7 @@
                                                 DOB:
                                             </label>
                                         </div>
-                                        <div class="col-sm-3" id="indob">
+                                        <div class="col-sm-3 dob">
                                             Date Of Birth
                                         </div>
                                         <div class="col-sm-2">
@@ -368,11 +414,11 @@
                                         </div> 
                                         <div class="col-sm-1">
                                             <label class="input">
-                                                Adhar:
+                                                Addhar:
                                             </label>
                                         </div>
                                         <div class="col-sm-3" id="indadhar">
-                                            ADHAR NUMBER
+                                            ADDHAR NUMBER
                                         </div>
                                     </div>
                                     <div class="hide" id="prop">
@@ -400,7 +446,7 @@
                                                     Date Of Commencement:
                                                 </label>
                                             </div>
-                                            <div class="col-sm-2" id="propdoc">
+                                            <div class="col-sm-2 doc">
                                                 Date
                                             </div>
                                             <div class="col-sm-2">
@@ -480,11 +526,9 @@
                                                 <u>Branch:</u>
                                             </label>
                                         </div>
-                                        <div class="col-sm-3" id="branch">
+                                        <div class="col-sm-3" id="branchname">
                                             <u>Branch</u>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-sm-1">
                                             <label class="input">
                                                 GSTIN:
@@ -492,31 +536,13 @@
                                         </div>
                                         <div class="col-sm-3" id="bgst">
                                             GSTIN
-                                        </div>    
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                Phone:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            Phone Number
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                Email Id:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3" id="bemail">
-                                            Email Address
-                                        </div>
-                                    </div>
-                                    <div class="row">
+                                        </div>  
                                         <div class="col-sm-1">
                                             <label class="input">
                                                 Address:
                                             </label>
                                         </div>
-                                        <div class="col-sm-6" id="baddress">
+                                        <div class="col-sm-3" id="baddress">
                                             ADDRESS
                                         </div>
                                     </div>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="en" class="desktop landscape chrome">
+    <!--<![endif]-->
+    <!-- START HEAD -->
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <title>Add Contact</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="description" content="Calibre is imple and easy admin template">
+    <meta name="keywords" content="calibre bootstrap template, calibre admin, bootstrap, admin template, bootstrap admin">
+    <meta name="author" content="LanceCoder">
+    
+    <meta property="og:site_name" content="-CUSTOMER VALUE-">
+    <meta property="og:title" content="-CUSTOMER VALUE-">
+    <meta property="og:description" content="-CUSTOMER VALUE-">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="-CUSTOMER VALUE-">
+    <meta property="og:url" content="-CUSTOMER VALUE-">
+
+    
+
+    
+    
+    <link href="assets/css/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    
+    <div id="css"></div>
+    
+</head>
+
+<body class="loginpagewrapper theme-light-cyan">
+
+        <div class="overlay">
+
+            <div class="panel login1">
+                <div class="panel-heading">
+                    <h1>Calibre Login</h1>
+                </div>
+                <div class="panel-body">
+
+                    <form class="form-horizontal sky-form" action="index.php" method="post">
+
+                        <fieldset>
+
+                            <div>
+                                <label class="input">
+                                    <i class="icon-prepend icon-user"></i>
+                                    <input type="text" placeholder="Username">
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="input">
+                                    <i class="icon-prepend icon-lock"></i>
+                                    <input type="password" placeholder="Password">
+                                </label>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div>
+                                        <label class="checkbox remember">
+                                            <input type="checkbox" name="checkbox"><i></i>Remember
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="forgot-password-wrapper">
+                                        <a href="#" class="forgot-password">Forgot Password?</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </fieldset>
+
+                        <div>
+                            <button type="submit" class="btn btn-bordered btn-primary btn-flat btn-block">Login</button>
+                            <button type="button" class="btn btn-info btn-flat btn-block">Register</button>
+                        </div>
+
+                        <div>
+                            <hr class="login-separator" />
+                        </div>
+
+                        <div>
+                            <button type="button" class="btn btn-facebook facebook btn-flat col-md-6">CONNECT TO FACEBOOK</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-twitter twitter btn-flat col-md-6">CONNECT TO TWITTER</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>  
+        
+        
+
+        
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //global functions
+            App.init();
+
+
+        });
+
+        //paste this code under the head tag or in a separate js file.
+        // Wait for window load
+        $(window).load(function() {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("slow");;
+        });
+
+        /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+
+    </script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.ui.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.nanoscroller.min.js" type="text/javascript"></script>
+    <script src="assets/js/nicescroll.min.js" type="text/javascript"></script>
+    <script src="assets/js/animsition.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.cookie.min.js"></script>
+    <script src="assets/js/device.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/scrollTo.min.js"></script>
+    <script src="assets/js/rippler.min.js" type="text/javascript"></script>
+    <!-- SKY FORM JS PLUGINS-->
+    <script src="assets/js/theme.min.js" type="text/javascript"></script>
+    <script src="assets/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="assets/js/select2.js" type="text/javascript"></script>
+    <!--[if lt IE 10]>
+                <script src="../../assets/vendors/skyforms/jquery.placeholder.min.js"></script>
+        <![endif]-->
+    <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+                <script src="../../assets/vendors/skyforms/sky-forms-ie8.js"></script>
+        <![endif]-->
+    <!-- END SKY FORM JS PLUGINS-->
+    <!--================================/
+        /* START GLOBAL JS PLUGINS
+        /*================================-->
+
+    <!-- SKY FORM JS PLUGINS-->
+    <script src="assets/vendors/skyforms/js/jquery.form.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.validate.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.maskedinput.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.modal.js"></script>
+
+    <!--================================/
+        /* START JS PLUGINS FOR THIS PAGE
+        /*================================-->
+    <!-- <script src="assets/js/jquery.peity.min.js"></script> -->
+    <!--<script src="assets/js/echarts.js"></script>-->
+    <script src="assets/js/skycons.js"></script>
+    <script src="assets/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="assets/vendors/bootstrap-fileupload/js/bootstrap-fileupload.js"></script>
+
+    <!--================================/
+        /* END JS PLUGINS FOR THIS PAGE
+        /*================================-->
+
+
+    <!--================================/
+    /* START COMMON SCRIPT FOR ALL PAGES
+    /*================================-->
+
+    <script src="assets/js/forms/forms.js" type="text/javascript"></script>
+    <script src="assets/js/forms/form-wizard.js" type="text/javascript"></script>
+    <!--================================/
+            /* END COMMON SCRIPT FOR ALL PAGES
+            /*================================-->
+
+
+
+    <!--================================/
+        /* START SCRIPT THIS PAGE ONLY
+        /*================================-->
+    <!-- <script src="assets/js/dashboard.js" type="text/javascript"></script> -->
+    <!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
+    <script src="assets/js/widget-weather.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
+    <script src="assets/js/widget-list.js" type="text/javascript"></script>
+    
+    <!--================================/
+        /* END SCRIPT THIS PAGE ONLY
+        /*================================-->
+         <script type="text/javascript">
+        $(document).ready(function () {
+
+            //global functions
+            App.init();
+
+
+        });
+
+    </script>
+    <!--================================/
+        /* START CUSTOM SCRIPTS
+        /*================================-->
+
+        <!-- <script type="text/javascript">
+            $('#css').load('http://www.ungeek.in/calibre/css.html');
+        </script> -->
+        
+        <script src="assets/js/addCss.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
+        <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+        
+</body>
+</html>

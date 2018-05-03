@@ -10,6 +10,7 @@ $(document).ready(function () {
 
         var listContact = "";
         var contactLink = "AddContact.html?contact=";
+        var clientLink = "AddClient.html?client=";
         var contactViewLink = "ViewContact.html"
         
         if(currentList){
@@ -44,7 +45,7 @@ $(document).ready(function () {
                             <a title="Select/Deselect" class="btn bg-grey btn-sm selectable">
                                 <i class="glyphicon glyphicon-ok-circle"></i>
                             </a>
-                            <a title="View" href="${contactViewLink}?id=${element.id}" class="btn btn-success btn-sm">
+                            <a title="View" href="${contactViewLink}?contact=${element.id}" class="btn btn-success btn-sm">
                                 <i class="glyphicon glyphicon glyphicon-user"></i>
                             </a>
                             <a title="Edit" href="${contactLink}${element.id}" class="btn btn-success btn-sm">
@@ -53,7 +54,7 @@ $(document).ready(function () {
                             <a title="Delete" id="${element.id}" class="deleteContact btn btn-danger btn-sm">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </a>
-                            <a title="Convert to Client" href="${clientLink}?client=${element.id}" class="btn btn-primary btn-sm CTC">
+                            <a title="Convert to Client" href="${clientLink}${element.id}" class="btn btn-primary btn-sm CTC">
                                 <i class="glyphicon glyphicon-random"></i>
                             </a> 
 
@@ -184,6 +185,49 @@ $(document).ready(function () {
             });
     });
 
+    $(document).on('click','.deleteSelected',function(){
+        var ids =[];
+        $('.color-4').each(function(){ ids.push($(this).find('.deleteContact').attr('id'));});
+        swal({
+            title: "Are you sure?",
+            text: "You want to delete this Contact!!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                
+                swal("Poof! Your contact has been deleted!", {
+                    icon: "success",
+                });
+                for (let i = 0; i < ids.length; i++) {
+                    $.ajax({
+                        url: urlRoot + 'contacts/' +ids[i]+'/',
+                        type: 'DELETE',
+                        async:false,
+                        datatype: "JSON",
+                        success: function () {
+                            swal('Contact Id has been deleted!!');
+                        },error:function(error){
+                            swal(error.responseText);
+                        }
+
+                    });
+                }
+                $('.cList').empty();
+                $.ajax({
+                    url: urlRoot + 'contacts/',
+                    datatype: 'JSON',
+                    type: 'GET',
+                    success: function (contactListData) {
+                        contactListBody(contactListData);
+                        currentList = contactListData
+                    }
+                });
+            }
+        });
+    });
 
     $(document).on('click', '.selectable', function () {
         if ($(this).hasClass('bg-grey')) {

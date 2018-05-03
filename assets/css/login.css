@@ -1,1 +1,116 @@
-.loginpagewrapper{background-image:url(../../images/buildings/building1.jpg);background-repeat:no-repeat;background-position:center;background-attachment:fixed;background-size:cover}.loginpagewrapper .login1{background:rgba(0,0,0,0.5);position:absolute;width:400px;top:50%;left:50%;-moz-transform:translate(-50%, -50%);-ms-transform:translate(-50%, -50%);-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px}.loginpagewrapper .login1 .panel-heading{border-width:2px;border:none}.loginpagewrapper .login1 .panel-heading h1{color:#fff;text-align:center}.loginpagewrapper .login1 .sky-form fieldset,.loginpagewrapper .login1 footer{background:none}.loginpagewrapper .login1 label.remember{color:#fff;padding-top:1px}.loginpagewrapper .login1 section>a{text-decoration:underline;color:#fff}.loginpagewrapper .login1 section>.bg-facebook{color:#fff}.loginpagewrapper .login1 section>.bg-twitter{color:#fff}.loginpagewrapper .login1 .login-separator{position:relative;margin-top:32px;margin-bottom:31px;border-top:1px solid #5f5f5f}.loginpagewrapper .login1 .login-separator:before{content:"or";position:absolute;left:50%;transform:translate(-50%, -50%);background:rgba(0,0,0,0.8);color:#fff;width:21px;text-align:center;top:-1px;-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%}.loginpagewrapper .login1 .forgot-password-wrapper{text-align:right}.loginpagewrapper .login1 .forgot-password-wrapper a{color:#fff;position:relative;top:5px}.loginpagewrapper .login1 form input:hover,.loginpagewrapper .login1 form input:focus,.loginpagewrapper .login1 form input:active,.loginpagewrapper .login1 form select:hover,.loginpagewrapper .login1 form select:focus,.loginpagewrapper .login1 form select:active{border:1px solid white !important}@media screen and (min-width: 275px) and (max-width: 410px){.loginpagewrapper .login1{width:255px}}@media screen and (min-width: 410px) and (max-width: 991px){.loginpagewrapper button.facebook,.loginpagewrapper button.twitter{width:100%}}@media screen and (max-width: 410px){.loginpagewrapper button.facebook,.loginpagewrapper button.twitter{width:100%}}
+.loginpagewrapper {
+    background-image: url(../images/buildings/img5300x200.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover
+}
+
+.loginpagewrapper .login1 {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px
+}
+
+.loginpagewrapper .login1 .panel-heading {
+    border-width: 2px;
+    border: none
+}
+
+.loginpagewrapper .login1 .panel-heading h1 {
+    color: #fff;
+    text-align: center
+}
+
+.loginpagewrapper .login1 .sky-form fieldset,
+.loginpagewrapper .login1 footer {
+    background: none
+}
+
+.loginpagewrapper .login1 label.remember {
+    color: #fff;
+    padding-top: 1px
+}
+
+.loginpagewrapper .login1 section>a {
+    text-decoration: underline;
+    color: #fff
+}
+
+.loginpagewrapper .login1 section>.bg-facebook {
+    color: #fff
+}
+
+.loginpagewrapper .login1 section>.bg-twitter {
+    color: #fff
+}
+
+.loginpagewrapper .login1 .login-separator {
+    position: relative;
+    margin-top: 32px;
+    margin-bottom: 31px;
+    border-top: 1px solid #5f5f5f
+}
+
+.loginpagewrapper .login1 .login-separator:before {
+    content: "or";
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    width: 21px;
+    text-align: center;
+    top: -1px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%
+}
+
+.loginpagewrapper .login1 .forgot-password-wrapper {
+    text-align: right
+}
+
+.loginpagewrapper .login1 .forgot-password-wrapper a {
+    color: #fff;
+    position: relative;
+    top: 5px
+}
+
+.loginpagewrapper .login1 form input:hover,
+.loginpagewrapper .login1 form input:focus,
+.loginpagewrapper .login1 form input:active,
+.loginpagewrapper .login1 form select:hover,
+.loginpagewrapper .login1 form select:focus,
+.loginpagewrapper .login1 form select:active {
+    border: 1px solid white !important
+}
+
+@media screen and (min-width: 275px) and (max-width: 410px) {
+    .loginpagewrapper .login1 {
+        width: 255px
+    }
+}
+
+@media screen and (min-width: 410px) and (max-width: 991px) {
+    .loginpagewrapper button.facebook,
+    .loginpagewrapper button.twitter {
+        width: 100%
+    }
+}
+
+@media screen and (max-width: 410px) {
+    .loginpagewrapper button.facebook,
+    .loginpagewrapper button.twitter {
+        width: 100%
+    }
+}

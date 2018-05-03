@@ -111,5 +111,5 @@ cssVar += "    <script data-require-id=\"echarts\/chart\/tree\" src=\"assets\/js
 cssVar += "    <script data-require-id=\"echarts\/chart\/wordCloud\" src=\"assets\/js\/wordCloud.js\" async=\"\"><\/script>";
 cssVar += "    <script data-require-id=\"echarts\/chart\/heatmap\" src=\"assets\/js\/heatmap.js\" async=\"\"><\/script>";
 cssVar += "    <script data-require-id=\"echarts\/chart\/map\" src=\"assets\/js\/map.js\" async=\"\"><\/script> -->";
-
+cssVar += "    <link href=\"assets\/css\/login.css\" rel=\"stylesheet\">";
 $('#css').html(cssVar);
