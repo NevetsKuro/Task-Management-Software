@@ -128,6 +128,10 @@ $(document).ready(function(){
             for (var i = 0; i < data.designations.length; i++) {
                 $('#addContact_designation').append('<option value=' + data.designations[i].id+'>'+data.designations[i].designation+'</option>');
             }
+
+            for (var i = 0; i < data.departments.length; i++) {
+                $('#addContact_department').append('<option value=' + data.departments[i].id+'>'+data.departments[i].department+'</option>');
+            }
             
             for (var i = 0; i < data.sources.length; i++) {
                 $('#addContact_source').append('<option value=' + data.sources[i].id+'>'+data.sources[i].source+'</option>');
@@ -202,16 +206,17 @@ $(document).ready(function(){
                     $('#editOrganisation').attr('oid',currentOrganisationsId).removeAttr('disabled');
                     $('#addContact_website').html(data.contact_organisation.organisation.website);
                     $('#addContact_designation').val(data.contact_organisation.designation);
+                    $('#addContact_department').val(data.contact_organisation.department);
                     $('#addContact_orgName').html(data.contact_organisation.organisation.name);
                     $('#addContact_industry').html(data.contact_organisation.organisation.industry_types.join(', '));
                     $('#addContact_business_type').html(data.contact_organisation.organisation.business_types.join(', '));
                     $('#addContact_business_nature').html(data.contact_organisation.organisation.business_natures.join(', '));
                     $('#addContact_group').html(data.contact_organisation.organisation.group);
+                    $('#addContact_branch').val(data.contact_organisation.branch);
                 }
 
                 if(data.lead){
                     $('#addContact_potential_service').val(data.lead.potential_services).trigger('change');
-                    $('#addContact_branch').val(data.contact_organisation.branch);
                     $('#addContact_lead_status').val(data.lead.status).trigger('change');
                     $('#addContact_source').val(data.lead.source).trigger('change');
                     $('#addContact_reference').val(data.lead.reference);
@@ -225,8 +230,23 @@ $(document).ready(function(){
                 var multiNums = data.phone_numbers;
                 var multiEmail = data.email_addresses;
                 var multiSocial = data.social_media_links;
-                var multiBrans = data.contact_organisation.organisation.branches;
-
+                if(data.contact_organisation){
+                    var multiBrans = data.contact_organisation.organisation.branches;
+                    for(let i=0; i < multiBrans.length; i++){
+                        if(i > 0){
+                            addAddresses();
+                            $('#hoaddress-row .new:last .hoaddress_from').attr('id',multiBrans[i].id);
+                            $('#hoaddress-row .new:last .hoBranchName').val(multiBrans[i].name);
+                            $('#hoaddress-row .new:last .hoaddresses').val(multiBrans[i].address);
+                            $('#hoaddress-row .new:last .hoaddress_isHO').attr('checked',multiBrans[i].is_head_office);
+                        }else{
+                            $('#hoaddress-row .new:last .hoaddress_from').attr('id',multiBrans[i].id);
+                            $('#hoaddress-row .new .hoBranchName').val(multiBrans[i].name);
+                            $('#hoaddress-row .new .hoaddresses').val(multiBrans[i].address);
+                            $('#hoaddress-row .new .hoaddress_isHO').attr('checked',multiBrans[i].is_head_office);
+                        }
+                    }
+                }
                 for(let i = 0; i < multiNums.length; i++) {
                     
                     if(i>0){
@@ -267,20 +287,7 @@ $(document).ready(function(){
                     }
                 }
 
-                for(let i=0; i < multiBrans.length; i++){
-                    if(i > 0){
-                        addAddresses();
-                        $('#hoaddress-row .new:last .hoaddress_from').attr('id',multiBrans[i].id);
-                        $('#hoaddress-row .new:last .hoBranchName').val(multiBrans[i].name);
-                        $('#hoaddress-row .new:last .hoaddresses').val(multiBrans[i].address);
-                        $('#hoaddress-row .new:last .hoaddress_isHO').attr('checked',multiBrans[i].is_head_office);
-                    }else{
-                        $('#hoaddress-row .new:last .hoaddress_from').attr('id',multiBrans[i].id);
-                        $('#hoaddress-row .new .hoBranchName').val(multiBrans[i].name);
-                        $('#hoaddress-row .new .hoaddresses').val(multiBrans[i].address);
-                        $('#hoaddress-row .new .hoaddress_isHO').attr('checked',multiBrans[i].is_head_office);
-                    }
-                }
+                
                 console.log(data.name+" details are added to the form!!");
                 // $('select').trigger('change');
                 // $('form :input').trigger('change');
@@ -662,7 +669,7 @@ $(document).ready(function(){
             leads.assignees = [1] // CF_assignee;
             leads.status = CF_leadStatus;
             leads.source = CF_source;
-            leads.reference = "1" // CF_reference;
+            leads.reference = CF_reference;
             leads.priority = CF_priority;
             leads.notes = CF_notes;
             leads.potential_services = CF_potentialService;
@@ -672,10 +679,12 @@ $(document).ready(function(){
 
     function getOrg(){
         var CF_designation = $('#addContact_designation').val();
+        var CF_department = 1;//$('#addContact_department').val();
         var CF_branch = $('.hoaddress_from').attr('id');
 
         var contact_organisation = {}
         contact_organisation.designation = CF_designation;
+        contact_organisation.department = CF_department;
         contact_organisation.branch = CF_branch;
 
         return contact_organisation;
@@ -692,6 +701,7 @@ $(document).ready(function(){
         var website = getWebsiteRow().link == ""?getWebsiteRow():[];
         var potential_services = $('#addContact_potential_service').val();
         var branch = $('.hoaddress_from').attr('id');
+        var branchChk = $("input[name='branchChecked']").prop('checked');
 
         if(title == null){
             swal('Please select a title!');
@@ -715,6 +725,9 @@ $(document).ready(function(){
             swal('Please select a potential services');
             return false;
         }else if(branch == undefined){
+            swal('Please add a branch');
+            return false;
+        }else if(branchChk==false){
             swal('Please select a branch');
             return false;
         }
@@ -729,74 +742,52 @@ $(document).ready(function(){
         var valid = checkValidation();
         if(valid){
 
-        //personal form data
-        console.log(currentContactsId);
-        if( currentContactsId != undefined){
-            
-                var contactData = new Object();
-            if(UpdateCont != undefined && UpdateCont.length > 0 ){
+            //personal form data
+            console.log(currentContactsId);
+            if( currentContactsId != undefined){
                 
-                //mundane fields
-                $.each(UpdateCont, function(key, value){
-                    $(value).each(function(index){
-                        var dataType = value.attr('update-ctrl');
-                        var Val = value.val();
-                        
-                        switch(dataType){
-                            // case 'name':
-                            //     Val = getFullName();
-                            //     break;
-                            case 'address':
-                                Val = getFullAddress();
-                                break;
-                            case 'social_media_links':
-                                Val =  getWebsiteRow();
-                                break;
-                            case 'lead':
-                                Val = getLeads();
-                                break;
-                            case 'contact_organisation':
-                                Val = getOrg();
-                                break;
-                            // case 'phone_numbers':
-                            //     Val = getContactRow();
-                            //     break;
-                            // case 'email_addresses':
-                            //     Val = getEmailRow();
-                            //     break;
-                            // case 'dob':
-                            //     Val = getFormateDateToServer(Val);
-                                console.log(dataType + "changed");
-                            }
+                    var contactData = new Object();
+                if(UpdateCont != undefined && UpdateCont.length > 0 ){
+                    
+                    //mundane fields
+                    $.each(UpdateCont, function(key, value){
+                        $(value).each(function(index){
+                            var dataType = value.attr('update-ctrl');
+                            var Val = value.val();
                             
-                            contactData[dataType] = Val;
+                            switch(dataType){
+                                // case 'name':
+                                //     Val = getFullName();
+                                //     break;
+                                case 'address':
+                                    Val = getFullAddress();
+                                    break;
+                                case 'social_media_links':
+                                    Val =  getWebsiteRow();
+                                    break;
+                                case 'lead':
+                                    Val = getLeads();
+                                    break;
+                                case 'contact_organisation':
+                                    Val = getOrg();
+                                    break;
+                                    console.log(dataType + "changed");
+                                }
+                                contactData[dataType] = Val;
+                            });
+                            
                         });
-                        
-                    });
-                    contactData['title'] = $('#addContact_title').val();
-                    contactData['name'] = getFullName();
-                    contactData['gender'] = $('#addContact_gender').val();
-                    contactData['dob'] = getFormateDateToServer($('#addContact_dob').val());
-                    contactData['email_addresses'] = getEmailRow();
-                    contactData['phone_numbers'] = getContactRow();
+                        contactData['title'] = $('#addContact_title').val();
+                        contactData['name'] = getFullName();
+                        contactData['gender'] = $('#addContact_gender').val();
+                        contactData['dob'] = getFormateDateToServer($('#addContact_dob').val());
+                        contactData['email_addresses'] = getEmailRow();
+                        contactData['phone_numbers'] = getContactRow();
+                    }
+                
+                var contactJSON = JSON.stringify(contactData);
+                console.log('The json file for new contact is = \n'+contactJSON);
 
-                }
-            
-           
-            // contactData.title = 1;
-            // contactData.name = "Bhaskar D. Barua";
-            // contactData.gender = 1;
-            // contactData.dob = "2018-04-16";
-            // contactData.address = "vasai road_mumbai_400016_maharashtra";
-            // contactData.email_addresses = [];
-            // contactData.phone_numbers= [];
-            
-            // {"title":1,"name":"Bhaskar  Barua","gender":"1","dob":"2018-04-16","address":"vasai road_mumbai_400016_maharashtra","phone_numbers":[{"category":"2","number":"+919876543210","is_primary":true}],"email_addresses":[{"category":"1","email":"bhaskabb@gmail.com","is_primary":false}],"social_media_links":[{"social_media":"2","link":"http://www.github.com"}],"contact_organisation":{"designation":"1","branch":"1"},"lead":{"originators":[1],"assignees":[1],"status":"1","source":"1","reference":"1","priority":"5","notes":"notinggggg","potential_services":["1","2"]}};
-
-            var contactJSON = JSON.stringify(contactData);
-            
-            console.log('The json file for new contact is = \n'+contactJSON);
-            // if(UpdateCont !== origForm){
                 $.ajax({
                     async: true,
                     crossDomain: true,
@@ -820,125 +811,87 @@ $(document).ready(function(){
                         console.log(error.responseText);
                     }
                 });
-            // }else{
-            //     swal('No Changes were made. Redirecting to ContactList.');
-            //     var urL = 'ContactList.html?listOf=contact';
-            //     $(location).attr('href',urL);
-            // }
 
-        }else{
+            }else{
 
-            var CF_title = $('#addContact_title').val();
-            var CF_fullName = getFullName();
-            var CF_gender = $('#addContact_gender').val();
-            var CF_dob = $('#addContact_dob').val();
-            var CF_address = $('#addContact_addresses').val();
-            var CF_state = $('#addContact_state').val();
-            var CF_city = $('#addContact_city').val();
-            var CF_pincode = $('#addContact_pincode').val();
-            var CF_ModAddress = getFullAddress();
-            var CF_image = $('#addContact_image').val();
-            var CF_vcard = $('#addContact_vcard').val();
-            
-            //lead status form data
-            var CF_leadStatus = $('#addContact_lead_status').val();
-            var CF_priority = $('#range_02').val();
-            var CF_originator = $('#addContact_originator').val();
-            var CF_assignee = $('#addContact_assignee').val();
-            var CF_potentialService = $('#addContact_potential_service').val();
-            var CF_source = $('#addContact_source').val();
-            var CF_reference = $('#addContact_reference').val();
-            var CF_notes = $('#addContact_notes').val();
-            
-            //organistional form data
-            var CF_designation = $('#addContact_designation').val();
-            var CF_branch = $('.hoaddress_from').attr('id');
-            
-            var leads = {}
-            leads.originators = [1] // CF_originator;
-            leads.assignees = [1] // CF_assignee;
-            leads.source = CF_source;
-            leads.reference = CF_reference;
-            leads.status = CF_leadStatus;
-            leads.priority = CF_priority;
-            leads.potential_services = CF_potentialService;
-            leads.notes = CF_notes;
-        
-            var contactOrg = {};
-            contactOrg.designation = CF_designation;
-            contactOrg.branch = CF_branch;
+                var CF_title = $('#addContact_title').val();
+                var CF_fullName = getFullName();
+                var CF_gender = $('#addContact_gender').val();
+                var CF_dob = $('#addContact_dob').val();
+                var CF_address = $('#addContact_addresses').val();
+                var CF_state = $('#addContact_state').val();
+                var CF_city = $('#addContact_city').val();
+                var CF_pincode = $('#addContact_pincode').val();
+                var CF_ModAddress = getFullAddress();
+                var CF_image = $('#addContact_image').val();
+                var CF_vcard = $('#addContact_vcard').val();
                 
-            getHoaddressRow();
-
-            // var dtto = $.datepicker.formatDate('yy-mm-dd', new Date(CF_dob));
-            
-            console.log('Date is : ' + getFormateDateToServer(CF_dob));
-            
-            var contactData = new Object();
-            contactData.title = CF_title;
-            contactData.name = CF_fullName;
-            contactData.gender = CF_gender;
-            contactData.dob = getFormateDateToServer(CF_dob);
-            contactData.address = CF_ModAddress;
-            contactData.email_addresses = getEmailRow();
-            contactData.phone_numbers = getContactRow();
-            contactData.social_media_links = getWebsiteRow();
-            contactData.contact_organisation = contactOrg;
-            contactData.lead = leads;
-
-            
-            //pattern for posting
-            // {
-            //     "title": 0,
-            //     "name": "string",
-            //     "gender": 0,
-            //     "dob": "2018-04-07",
-            //     "address": "string",
-            //     "email_addresses": [
-            //     {}
-            //     ],
-            //     "phone_numbers": [
-            //     {}
-            //     ],
-            //     "social_media_links": [
-            //     {}
-            //     ],
-            //     "contact_organisation": {
-            //     "designation": 0,
-            //     "branch": 0
-            //     },
-            //     "lead": {
-            //     "originators": [],
-            //     "assignees": [],
-            //     "status": 0,
-            //     "source": 0,
-            //     "reference": 0,
-            //     "priority": 0,
-            //     "notes": "string",
-            //     "potential_services": []
-            //     }
-            //     }
-
-            var contactJSON = JSON.stringify(contactData);
-            console.log('The json file for new contact is = \n'+contactJSON);
+                //lead status form data
+                var CF_leadStatus = $('#addContact_lead_status').val();
+                var CF_priority = $('#range_02').val();
+                var CF_originator = $('#addContact_originator').val();
+                var CF_assignee = $('#addContact_assignee').val();
+                var CF_potentialService = $('#addContact_potential_service').val();
+                var CF_source = $('#addContact_source').val();
+                var CF_reference = $('#addContact_reference').val();
+                var CF_notes = $('#addContact_notes').val();
                 
-            $.ajax({
-                url:urlRooT+'contacts/?',
-                type:'POST',
-                contentType:'application/json',
-                datatype:'JSON',
-                data:contactJSON,
-                success:function(data){
-                    swal('contact added to server');
-                    var urL = 'ContactList.html?listOf=contact';
-                    $(location).attr('href',urL);
-                },
-                error:function(error){
-                    swal('Cannot add new Contact');
-                    console.log(error.responseText);
-                }
-            });
-        }
+                //organistional form data
+                var CF_designation = $('#addContact_designation').val();
+                var CF_department = $('#addContact_department').val();
+                var CF_branch = $('.hoaddress_from:checked').attr('id');
+                
+                var leads = {}
+                leads.originators = [1] // CF_originator;
+                leads.assignees = [1] // CF_assignee;
+                leads.source = CF_source;
+                leads.reference = CF_reference;
+                leads.status = CF_leadStatus;
+                leads.priority = CF_priority;
+                leads.potential_services = CF_potentialService;
+                leads.notes = CF_notes;
+            
+                var contactOrg = {};
+                contactOrg.designation = CF_designation;
+                contactOrg.department = CF_department;
+                contactOrg.branch = CF_branch;
+                    
+                getHoaddressRow();
+                
+                console.log('Date is : ' + getFormateDateToServer(CF_dob));
+                
+                var contactData = new Object();
+                contactData.title = CF_title;
+                contactData.name = CF_fullName;
+                contactData.gender = CF_gender;
+                contactData.dob = getFormateDateToServer(CF_dob);
+                contactData.address = CF_ModAddress;
+                contactData.email_addresses = getEmailRow();
+                contactData.phone_numbers = getContactRow();
+                contactData.social_media_links = getWebsiteRow();
+                contactData.contact_organisation = contactOrg;
+                contactData.lead = leads;
+
+                var contactJSON = JSON.stringify(contactData);
+                console.log('The json file for new contact is = \n'+contactJSON);
+                    
+                $.ajax({
+                    url:urlRooT+'contacts/?',
+                    type:'POST',
+                    contentType:'application/json',
+                    datatype:'JSON',
+                    data:contactJSON,
+                    success:function(data){
+                        swal('contact added to server');
+                        var urL = 'ContactList.html?listOf=contact';
+                        $(location).attr('href',urL);
+                    },
+                    error:function(error){
+                        swal('Cannot add new Contact');
+                        console.log(error.responseText);
+                    }
+                });
+            }
 
         }
     });

@@ -202,9 +202,6 @@ $(window).ready(function(){
                         dataType: 'json',
                         success: function(data2){
                             $('#name').html(data2.name);
-                            $('#group').html(data2.contact_organisation.organisation.group);
-                            $('#website').html(data2.contact_organisation.organisation.website);
-                            $('#website').attr("href",data2.contact_organisation.organisation.website);
                             var dob=data2.dob;
                             var splitDate = dob.split('-');
                             $('.dob').html(splitDate[2] + '/' + splitDate[1] + '/' + splitDate[0]);
@@ -221,12 +218,17 @@ $(window).ready(function(){
                                     $("#mail").html(mails[i].email);
                                 }
                             }
-                            var org = data2.contact_organisation.organisation;
-                            var branchid = data2.contact_organisation.branch;
-                            var brans = org.branches.find(function(branch){return branch.id === branchid;});
-                            $('#branchname').html(brans.name);
-                            $('#baddress').html(brans.address);
-                            $('#bgst').html(brans.gstin);
+                            if(contact_organisation){
+                                $('#group').html(data2.contact_organisation.organisation.group);
+                                $('#website').html(data2.contact_organisation.organisation.website);
+                                $('#website').attr("href",data2.contact_organisation.organisation.website);
+                                var org = data2.contact_organisation.organisation;
+                                var branchid = data2.contact_organisation.branch;
+                                var brans = org.branches.find(function(branch){return branch.id === branchid;});
+                                $('#branchname').html(brans.name);
+                                $('#baddress').html(brans.address);
+                                $('#bgst').html(brans.gstin);
+                            }
                         },
                         error:function(error){
                             console.log(error.responseText);

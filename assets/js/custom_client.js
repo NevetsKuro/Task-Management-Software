@@ -7,7 +7,7 @@
 $(document).ready(function () {
 
     var urlParams = GetURLParams();
-
+    var globalContact = [];
     var contact = urlParams['contact']; //type number
     var client = urlParams['client'];   //type number
     var legal = urlParams['legal'];     //type number
@@ -21,8 +21,7 @@ $(document).ready(function () {
         $('#stat_document').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
     });
 
-    
-    
+    var indContactId;
     if(contact!=undefined||client!=undefined){
         if(contact){
             $.ajax({
@@ -66,26 +65,31 @@ $(document).ready(function () {
                         var poc = data.pocs;
                         
                         //getting POC by contact id 
+                        cC_table.clear().draw();
                         for (let i = 0; i < poc.length; i++) {
                             var id = poc[i].contact;
                             $.getJSON(urlRoot+'contacts/'+id,function(data){
-                                    
-                                    cC_table.clear().draw();
-                                    
+
                                     var row = data;
-                                    var is_Primary = row.email_addresses.findIndex(x=>x.is_primary == true);
-                                    var p_email = row.email_addresses[is_Primary].email;
-                                    var is_Primary = row.phone_numbers.findIndex(x=>x.is_primary == true);
-                                    var p_phone = row.phone_numbers[is_Primary].number;
+                                    var p_email = '';
+                                    var p_phone = '';
+                                    if(row.email_addresses.length > 0){
+                                        var is_Primary = row.email_addresses.findIndex(x=>x.is_primary == true);
+                                        p_email = row.email_addresses[is_Primary].email;
+                                    }
+                                    if(row.phone_numbers.length > 0){
+                                        var is_Primary = row.phone_numbers.findIndex(x=>x.is_primary == true);
+                                        p_phone = row.phone_numbers[is_Primary].number;
+                                    }
                                     cC_table.row.add([
                                         '',
                                         row.id,
                                         row.title+' '+row.name,
                                         p_email,
                                         p_phone,
-                                        '',                                             //relation
-                                        row.contact_organisation.designation,            //designation
-                                        '',                                             //purpose
+                                        '',                                                                                                   //relation
+                                        row.contact_organisation?row.contact_organisation.designation:'Not Mentioned',            //designation
+                                        '',                                                                                                   //purpose
                                         '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
                                     ]).draw(false);
                             });
@@ -93,8 +97,21 @@ $(document).ready(function () {
 
                         if(legal==1){
                             $('#individual_aadhar').val(data.aadhar_no);
-                            client_organisation(data.prospect);
-                        
+                            $('#individual_typeWork').val(data.typeOfWork);
+                            // client_organisation(data.prospect);
+                            indContactId = data.prospect;
+                            $.getJSON(urlRoot+'contacts/'+indContactId,function(data){
+                                if(data.contact_organisation){
+                                    $('#website').val(data.contact_organisation.organisation.website);
+                                }
+                                $('#addContact_title').val(data.title);
+                                var nameArr = data.name.split(' ');
+                                $('#individual_fname').val(nameArr[0]);
+                                $('#individual_mname').val(nameArr.length == 2? '':nameArr[1]);
+                                $('#individual_lname').val(nameArr.length > 1? nameArr[2]:nameArr[1]);
+                                var formatted = $.datepicker.formatDate("dd/mm/yy", new Date(data.dob));
+                                $('#individual_dob').val(formatted);
+                            });
                         }else{
                             $('#GSTIN').val(data.gstin);
                             $('#TANNO').val(data.tan_no);
@@ -103,6 +120,7 @@ $(document).ready(function () {
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#HUF_date').val(commencement_date);
                                 $('#HUF_nameOfKarta').val(data.karta_name);
+                                $('#HUF_name').val(data.title);
                                 client_organisation(data.prospect);
                             }else if(legal == 3){
                                 $('#client_legalstatus').val(legal).trigger('change');
@@ -364,8 +382,9 @@ $(document).ready(function () {
         url: urlRoot+'contacts/form-data',
         datatype: 'JSON',
         type: 'GET',
+        async: true,
         success: function (data) {
-            // glob2 = data;
+            globalContact = data;
             for (var i = 0; i < data.titles.length; i++) {
                 $('.selTitle').append('<option value=' + data.titles[i].id + '>' + data.titles[i].title + '</option>');
             }
@@ -399,7 +418,6 @@ $(document).ready(function () {
             datatype: 'JSON',
             type: 'GET',
             success: function (contact) {
-                //Fill the form with details about the contact
                 AddBranch(contact.contact_organisation.organisation.branches);
 
                 $('.selTitle').val(contact.title);
@@ -1148,7 +1166,7 @@ $(document).ready(function () {
     var ctid;
     $(document).on('change','.selected',function(){
         ctid = cC_table.rows('.selected').data()[0][1];
-        alert('changed');
+        // alert('changed');
     });
 
     $('#add_clientsContact').on('click', function () {
@@ -1458,6 +1476,54 @@ $(document).ready(function () {
         return true;
     }
 
+    function createQuickContact(contact) {
+
+        var newId;
+        $.ajax({
+            url: urlRoot + 'contacts/?',
+            datatype: 'JSON',
+            async: false,
+            method: 'POST',
+            data: JSON.stringify(contact),
+            processData: false,
+            headers: {
+                "content-type": "application/json",
+                "cache-control": "no-cache"
+            },
+            success: function (newContact) {
+                newId = newContact.id;
+            },
+            error: function (err) {
+                console.log('Not going ahead: ' + err.responseText);
+            }
+        });
+        return newId;
+    }
+
+    function createUpdateContact(contact,id){
+        
+        var newId;
+        $.ajax({
+            url: urlRoot + 'contacts/'+id+'/?',
+            datatype: 'JSON',
+            async: false,
+            method: 'PUT',
+            data: JSON.stringify(contact),
+            processData: false,
+            headers: {
+                "content-type": "application/json",
+                "cache-control": "no-cache"
+            },
+            success: function (newContact) {
+                newId = newContact.id;
+            },
+            error: function (err) {
+                console.log('Not going ahead: ' + err.responseText);
+            }
+        });
+        return newId;
+    }
+
     //Save Client details in the DB
     var urlRooT = urlRoot+"clients/";
     $(document).on('click', '#clientSubmit', function () {
@@ -1479,13 +1545,31 @@ $(document).ready(function () {
                 clientData.services = [];
                 clientData.services.push(1); //Change later
                 
+
                 if (legalStatus == 1) {
+                    var titleId = $('#addContact_title').val();
+                    var fname = $('#individual_fname').val();
+                    var mname = $('#individual_mname').val();
+                    var lname = $('#individual_lname').val();
+                    var dob = getFormateDateToServer($('#individual_dob').val());
+                    var website = $('#website').val();
+                    var Name = fname +' '+ mname+ ' ' +lname;
+                    var indContact = new Object();
+                    indContact.title = titleId;
+                    indContact.name = Name; 
+                    indContact.dob = dob;
+                    indContact.email_addresses = [];
+                    indContact.phone_numbers = [];
+                    indContact.social_media_links = [];
+                    var c_org = new Object();
+                    var org = new Object();
+                    org.website = website;
+                    c_org.organisation = org;
+                    indContact.contact_organisation = c_org;
+                    clientData.prospect = createUpdateContact(indContact,indContactId);
+
                     clientData.aadhar_no = $('#individual_aadhar').val();
-                    if (client != undefined){
-                        clientData.prospect = client;
-                    }else if(contact!=undefined){
-                        clientData.prospect = contact;
-                    }
+                    clientData.typeOfWork = $('#individual_typeWork').val();
                     var pocObjArr = [];
                     var pocRows = cC_table.rows().data();
                     for (var c = 0; c < pocRows.length; c++) {
@@ -1526,7 +1610,6 @@ $(document).ready(function () {
                         var purpose = row[7]; //purpose
                         var newId = row[1]; //id
             
-                        
                         pocObjArr.push({
                             "contact":newId,
                             "purpose":purpose,
@@ -1544,6 +1627,7 @@ $(document).ready(function () {
 
                         clientData.commencement_date = getFormateDateToServer($('#HUF_date').val());
                         clientData.karta_name = $('#HUF_nameOfKarta').val();
+                        clientData.title = $('#HUF_name').val();
                         // clientData.name = $('#HUF_name').val();
                         // clientData.businessName = $('#HUF_nameofBusiness').val();
 
@@ -1575,9 +1659,9 @@ $(document).ready(function () {
                     } else if (legalStatus == 5) {//LLP
                         
                         var partners = $('#partners_noopartner').val();
+                        var oparsObj = [];
                         if(partners.indexOf(',')){
                             var Opartners = partners.split(',');
-                            var oparsObj = [];
                             for (let i = 0; i < Opartners.length; i++) {
                                 var pars = new Object();
                                 pars.name = Opartners[i];
@@ -1611,9 +1695,9 @@ $(document).ready(function () {
                     } else if (legalStatus == 7) {//AOP-BOI
                         
                         var memberArr = $('#members').val();
-                        if(memberArr.indexOf>0){
+                        var memObj = [];
+                        if(memberArr.indexOf(',')>0){
                             var members = memberArr.split(',');
-                            var memObj = [];
                             for (let i = 0; i < members.length; i++) {
                                 var mem = new Object()
                                 mem.name = members[i];
@@ -1685,10 +1769,33 @@ $(document).ready(function () {
                 
                 if (legalStatus == 1) {//Individuals
 
+                    
+                    var titleId = $('#addContact_title').val();
+                    var fname = $('#individual_fname').val();
+                    var mname = $('#individual_mname').val();
+                    var lname = $('#individual_lname').val();
+                    // var gender = $('#individual_gender').val();
+                    var Name = fname + ' ' +mname + ' ' + lname;
+                    var dob = getFormateDateToServer($('#individual_dob').val());
+                    var website = $('#website').val();
+
+                    var indContact = new Object();
+                    indContact.title = titleId;
+                    indContact.name = Name;
+                    indContact.dob = dob;
+                    indContact.email_addresses = [];
+                    indContact.phone_numbers = [];
+                    indContact.email_addresses = [];
+                    var c_org = new Object();
+                    var org = new Object();
+                    org.website = website;
+                    c_org.organisation = org;
+                    c_org.organisation = org;
+                    indContact.contact_organisation = c_org;
+                    clientData.prospect = createQuickContact(indContact);
+
                     clientData.aadhar_no = $('#individual_aadhar').val();
-                    if (currentClientId != undefined){
-                        clientData.prospect = currentClientId;
-                    }
+                    clientData.typeOfWork = $('#individual_typeWork').val();
 
                     //Creating POCs for individuals
                     var pocObjArr = [];
@@ -1776,9 +1883,9 @@ $(document).ready(function () {
                     } else if (legalStatus == 5) {//LLP
                         
                         var partners = $('#partners_noopartner').val();
-                        if(partners.indexOf(',')){
+                        var oparsObj = [];
+                        if(partners.indexOf(',')>0){
                             var Opartners = partners.split(',');
-                            var oparsObj = [];
                             for (let i = 0; i < Opartners.length; i++) {
                                 var pars = new Object();
                                 pars.name = Opartners[i];
@@ -1808,9 +1915,9 @@ $(document).ready(function () {
                     } else if (legalStatus == 7) {//AOP-BOI
                         
                         var memberArr = $('#members').val();
-                        if(memberArr.indexOf>0){
+                        var memObj = [];
+                        if(memberArr.indexOf(',')>0){
                             var members = memberArr.split(',');
-                            var memObj = [];
                             for (let i = 0; i < members.length; i++) {
                                 var mem = new Object()
                                 mem.name = members[i];
@@ -1828,7 +1935,7 @@ $(document).ready(function () {
                     } else if (legalStatus == 8) {//Trusts
                         
                         // clientData.businessName = $('#trust_name').val();
-                        clientData.commencement_date = $('#trust_doc').val();
+                        clientData.commencement_date = getFormateDateToServer($('#trust_doc').val());
                         var trusteeArr = $('#trusteeName').val();
                         var truObj = [];
                         if(trusteeArr.indexOf(',')>0){

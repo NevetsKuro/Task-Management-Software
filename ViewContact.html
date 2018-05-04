@@ -337,56 +337,56 @@
 
                                                     <div class="tab-pane fade" id="tab2">
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-3 col-sm-offset-1">
                                                                 <label class="label">
                                                                     Address:
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-6 col-sm-offset-1">
                                                                 <span id="addorg">
                                                                 </span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-6 ">
+                                                            <div class="col-sm-3 col-sm-offset-1">
                                                                 <label class="label">
                                                                     Link:
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-6 col-sm-offset-1">
                                                                 <span id="weblink" href="">
                                                                 </span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-3 col-sm-offset-1">
                                                                 <label class="label">
                                                                     Industry Type:
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-6 col-sm-offset-1">
                                                                 <span id="industrytpe">
                                                                 </span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-3 col-sm-offset-1">
                                                                 <label class="label">
                                                                     Nature of Business:
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-6 col-sm-offset-1">
                                                                 <span id="businessnature">
                                                                 </span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-3 col-sm-offset-1">
                                                                 <label class="label">
                                                                     Business Type:
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-6 col-sm-offset-1">
                                                                 <span id="businesstype">
                                                                 </span>
                                                             </div>
@@ -504,6 +504,13 @@
     <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
 
     <script>
+        $(document).ready(function () {
+
+            //global functions
+            App.init();
+
+
+        });
         /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
         $.widget.bridge('uibutton', $.ui.button);
         $.widget.bridge('uitooltip', $.ui.tooltip);
@@ -515,7 +522,7 @@
     <script src="assets/js/jquery.nanoscroller.min.js" type="text/javascript"></script>
     <script src="assets/js/nicescroll.min.js" type="text/javascript"></script>
     <script src="assets/js/animsition.min.js" type="text/javascript"></script>
-    <!-- <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script> -->
+    <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script>
     <script src="assets/js/jquery.cookie.min.js"></script>
     <script src="assets/js/device.min.js"></script>
     <script src="assets/js/isotope.pkgd.min.js"></script>
@@ -523,96 +530,33 @@
     <script src="assets/js/scrollTo.min.js"></script>
     <script src="assets/js/rippler.min.js" type="text/javascript"></script>
     <!-- SKY FORM JS PLUGINS-->
-    <script src="assets/js/jquery.form.min.js"></script>
-    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/jquery.form.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="assets/js/jquery.maskedinput.min.js"></script>
     <script src="assets/js/jquery.modal.js"></script>
     <script src="assets/js/select2.full.min.js" type="text/javascript"></script>
     <script src="assets/js/select2.js" type="text/javascript"></script>
-    <!--[if lt IE 10]>
-                <script src="../../assets/vendors/skyforms/jquery.placeholder.min.js"></script>
-        <![endif]-->
-    <!--[if lt IE 9]>
-                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-                <script src="../../assets/vendors/skyforms/sky-forms-ie8.js"></script>
-        <![endif]-->
-    <!-- END SKY FORM JS PLUGINS-->
-    <!--================================/
-        /* START GLOBAL JS PLUGINS
-        /*================================-->
-
-
     <!-- SKY FORM JS PLUGINS-->
-    <script src="assets/vendors/skyforms/js/jquery.form.min.js"></script>
+    <!-- <script src="assets/vendors/skyforms/js/jquery.form.min.js"></script>
     <script src="assets/vendors/skyforms/js/jquery.validate.min.js"></script>
     <script src="assets/vendors/skyforms/js/jquery.maskedinput.min.js"></script>
-    <script src="assets/vendors/skyforms/js/jquery.modal.js"></script>
-
-    <!--================================/
-        /* START JS PLUGINS FOR THIS PAGE
-        /*================================-->
-    <!-- <script src="assets/js/jquery.peity.min.js"></script> -->
-    <!--<script src="assets/js/echarts.js"></script>-->
+    <script src="assets/vendors/skyforms/js/jquery.modal.js"></script>-->
+    <script src="assets/js/jquery.peity.min.js"></script>
     <script src="assets/js/skycons.js"></script>
     <script src="assets/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
     <script src="assets/vendors/bootstrap-fileupload/js/bootstrap-fileupload.js"></script>
-
-    <!--================================/
-        /* END JS PLUGINS FOR THIS PAGE
-        /*================================-->
-
-
-    <!--================================/
-            /* START COMMON SCRIPT FOR ALL PAGES
-            /*================================-->
-
     <script src="assets/js/forms/form-wizard.js" type="text/javascript"></script>
-    <!--================================/
-            /* END COMMON SCRIPT FOR ALL PAGES
-            /*================================-->
-
-
-
-    <!--================================/
-        /* START SCRIPT THIS PAGE ONLY
-        /*================================-->
-    <!-- <script src="assets/js/dashboard.js" type="text/javascript"></script> -->
-    <!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
+    <script src="assets/js/dashboard.js" type="text/javascript"></script>
     <script src="assets/js/widget-weather.js" type="text/javascript"></script>
-    <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
     <script src="assets/js/widget-list.js" type="text/javascript"></script>
-
-    <!--================================/
-        /* END SCRIPT THIS PAGE ONLY
-        /*================================-->
-
-
-    <!--================================/
-        /* START CUSTOM SCRIPTS
-        /*================================-->
-
-
-    <script type="text/javascript">
-
-            //$('#divHeader').load('http://localhost:8080/header.html');
-            // $('#divSide').load('http://localhost:8080/sidebar.html');
-            // $('#divFooter').load('http://localhost:8080/footer.html');
-
-
-    </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
     <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-    <script src="assets/pages/jquery.ui-sliders.js"></script>
-    <script src="assets/pages/theme.min.js"></script>
-
+    <script src="assets/js/theme.min.js" type="text/javascript"></script>
     <script src="assets/js/subFunc.js" type="text/javascript"></script>
-    <!-- <script src="assets/js/custom_contact.js" type="text/javascript"></script> -->
-    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
     <script src="assets/js/addheader.js" type="text/javascript"></script>
     <script src="assets/js/addSidebar.js" type="text/javascript"></script>
-    <script type="text/javascript" src="assets/js/viewContact.js"></script>
+    <script src="assets/js/viewContact.js" type="text/javascript"></script>
     <!--================================/
         /* END CUSTOM SCRIPTS
         /*================================-->

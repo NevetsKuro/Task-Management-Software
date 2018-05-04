@@ -284,12 +284,31 @@ $(document).ready(function(){
                 var orgJSON = JSON.stringify(orgData);
                 console.log('current organisation id is = '+orgId);
                 console.log('The json file is = \n'+orgJSON);
-                
+
+                // function getCookie(name) {
+                //     var cookieValue = null;
+                //     if (document.cookie && document.cookie !== '') {
+                //         var cookies = document.cookie.split(';');
+                //         for (var i = 0; i < cookies.length; i++) {
+                //             var cookie = jQuery.trim(cookies[i]);
+                //             // Does this cookie string begin with the name we want?
+                //             if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                //                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                //                 break;
+                //             }
+                //         }
+                //     }
+                //     return cookieValue;
+                // }
+                // var csrftoken = getCookie('csrftoken');
                 $.ajax({
                     url: urlRoot + 'organisations/?',
                     type:'POST',
                     datatype:'JSON',
                     contentType:'application/json',
+                    headers:{
+                        "X-CSRFToken": csrftoken
+                    },
                     data: orgJSON,
                     success:function(data){
                         swal('Organisation Added!!!');
