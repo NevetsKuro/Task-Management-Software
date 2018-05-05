@@ -29,9 +29,15 @@ span.select2-selection.select2-selection--multiple{
 	background-color: white!important;
 }
 .custom_inline{
-	display: inline-flex;
+	display: inline-flex!important;
 	margin-left: 15px;
 }
 .mNega5 {
 	margin: -5px;
+}
+.lNega10{
+	margin-left: -10px;
+}
+.toggle .toggle-group .toggle-handle{
+	background-color: white!important;
 }

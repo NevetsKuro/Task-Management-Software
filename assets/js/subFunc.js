@@ -9,14 +9,16 @@
                 changeMonth:true,
                 changeYear:true,
                 yearRange: "1850:"+currDate,
-                dateFormat:'dd/mm/yy'
+                dateFormat:'dd/mm/yy',
+                autoclose: true
             });
             
             $(".datepickr").datepicker({
                 changeMonth:true,
                 changeYear:true,
                 yearRange: "1850:3000",
-                dateFormat:'dd/mm/yy'
+                dateFormat:'dd/mm/yy',
+                autoclose: true
             });
         
             window.inputChanges = function(){
@@ -334,6 +336,7 @@
             var splitDate = dt.split('/');
             return splitDate[2] + '-' + splitDate[1] + '-' + splitDate[0];
         }
+
 
 });
 

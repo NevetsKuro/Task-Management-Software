@@ -168,8 +168,7 @@ $(document).ready(function(){
         
         if(!currentContactsId || currentContactsId == undefined){
             id = $(this).attr('id');
-        }
-        else{
+        }else{
             id = currentContactsId;
         }
 
@@ -247,8 +246,8 @@ $(document).ready(function(){
                         }
                     }
                 }
+
                 for(let i = 0; i < multiNums.length; i++) {
-                    
                     if(i>0){
                         addContactRows();
                         $('#contact-row .new:last .contactnumber_category').val(multiNums[i].category).trigger('change');
@@ -260,7 +259,6 @@ $(document).ready(function(){
                         $('#contact-row .new .addContact_contactNumbers').val(parseInt(multiNums[i].number.toString().slice(3),10));
                         $('#contact-row .new .cn_is_primary').attr('checked',multiNums[i].is_primary);
                     }
-
                 }
                   
                 for(let i = 0; i < multiEmail.length; i++){
@@ -286,7 +284,6 @@ $(document).ready(function(){
                         $('#website-row .new .social_media_link').val(multiSocial[i].link);
                     }
                 }
-
                 
                 console.log(data.name+" details are added to the form!!");
                 // $('select').trigger('change');

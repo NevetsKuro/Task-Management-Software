@@ -1246,8 +1246,8 @@ $(document).ready(function () {
     var edit = true;
     var editC = true;
     $('#clientsContact_datatable tbody').on('click', 'div.cc_update', function () {
-        
-        if(legal == 1){
+        var legalStats = $('#client_legalstatus').val();
+        if(legal == 1 && legalStats == 1){
             if(edit){
                 var relation = cC_table.row($(this).parents('tr')).data()[5];
                 $(this).parents('tr').children()[4].innerHTML = '<select id="cc_relation" width="100%"></select>';
@@ -1275,7 +1275,7 @@ $(document).ready(function () {
                 $(this).children().removeClass('glyphicon-ok').addClass('glyphicon-pencil');
                 edit = true;
             }
-        }else{
+        }else if(legal > 1 && legalStats == 1){
             if(editC){
                 var purpose = cC_table.row($(this).parents('tr')).data()[7];
                 $(this).parents('tr').children()[5].innerHTML = '<input id="cc_purpose" type="text" width="100%" value='+ purpose +'>';
@@ -1446,37 +1446,39 @@ $(document).ready(function () {
                 return false;
             }
         }
-        if(legal != 1){
-            if(currentOrganisationsId == undefined){
-                swal('Please select a Organisation');
-                return false;
-            }
-            if(legal == 6){
-                var company_type = $('#company_types').val();
-                if(company_type == null){
-                    swal('Please add a Company');
+        if(legal){
+            if(legal != 1){
+                if(currentOrganisationsId == undefined){
+                    swal('Please select a Organisation');
                     return false;
                 }
-            }
-            if(legal == 4){
-                var partners = getPartnersRow();
-                if(partners == []){
-                    swal('Please add a partner');
+                if(legal == 6){
+                    var company_type = $('#company_types').val();
+                    if(company_type == null){
+                        swal('Please add a Company');
+                        return false;
+                    }
+                }
+                if(legal == 4){
+                    var partners = getPartnersRow();
+                    if(partners == []){
+                        swal('Please add a partner');
+                        return false;
+                    }
+                }
+            }else if(legal == 1){
+                var fname = $('#individual_fname').val();
+                var lname = $('#individual_lname').val();
+                if(fname == "" || lname == ""){
+                    swal('Please Enter full Name');
                     return false;
                 }
-            }
-        }else if(legal == 1){
-            var fname = $('#individual_fname').val();
-            var lname = $('#individual_lname').val();
-            if(fname == "" || lname == ""){
-                swal('Please Enter full Name');
-                return false;
             }
         }
         return true;
     }
 
-    function createQuickContact(contact) {
+    function createQuickContact(contact){
 
         var newId;
         $.ajax({
