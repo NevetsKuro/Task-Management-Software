@@ -5,7 +5,7 @@
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-        <title>Add Tasks</title>
+        <title>Add Proposal</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,9 +26,7 @@
         <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="Libraries/timepicker/jquery.timepicker.css">
-        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-
+    
         <div id="css"></div>
         
             
@@ -61,7 +59,7 @@
                                     <nav class="c_breadcrumbs">
                                         <ul>
                                             <li><a href="#">Home</a></li>
-                                            <li class="active"><a href="#">Tasks</a></li>
+                                            <li class="active"><a href="#">Proposal</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -84,108 +82,87 @@
 
                                     <div class="panel-body">
                                         
-                                        <h1><strong> Basic Details </strong></h1>
-                                        <hr>
-                                        <form id="emp_Form" class="sky-form">
+                                        <form class="sky-form">
                                             <div class="row">
-                                                <label class="label"></label>
-                                                <label class="input m-l-30">
-                                                    <input id="taskType" type="checkbox">
-                                                </label>
-                                            </div>
-                                            <div class="row m-t-10">
-                                                <div class="col-lg-12">
-                                                    <label class="label">Client:</label>
+                                                <div class="col-lg-6">
+                                                    <label class="label">ToClient:</label>
                                                     <label class="select">
-                                                        <select id="taskClients" class="select2-multiple" multiple></select>
+                                                        <select id="ProposalToClient" class="select2"></select>
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="label">ToPerson:</label>
+                                                    <label class="select">
+                                                        <select id="ProposalToPerson" class="select2"></select>
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <label class="label">Name Of Service:</label>
-                                                    <label class="input">
-                                                        <input id="taskService" type="text">
+                                                    <label class="label">FromEntity:</label>
+                                                    <label class="select">
+                                                        <select id="ProposalFromEntity" class="select2"></select>
                                                     </label>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <label class="label">Priority:</label>
-                                                    <label class="input">
-                                                        <input type="text" id="range_02">
+                                                    <label class="label">FromEmployee:</label>
+                                                    <label class="select">
+                                                        <select id="FromEmployee" class="select2"></select>
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <label class="label">Start Time:</label>
-                                                    <label class="input col-lg-6 lNega10">
-                                                        <input id="taskSdate" type="text" class="datepickr" placeholder="Date">
-                                                    </label>
-                                                    <label class="input col-lg-6">
-                                                        <input id="taskStime" type="text" class="timepicker" placeholder="Time">
+                                                    <label class="label">Date:</label>
+                                                    <label class="input">
+                                                        <input id="ProposalDate" type="text" class="datepickr">
                                                     </label>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <label class="label">End Time:</label>
-                                                    <label class="input col-lg-6 lNega10">
-                                                        <input id="taskEdate" type="text" class="datepickr" placeholder="Date">
-                                                    </label>
-                                                    <label class="input col-lg-6">
-                                                        <input id="taskEtime" type="text" class="timepicker" placeholder="Time">
+                                                    <label class="label">Time:</label>
+                                                    <label class="input">
+                                                        <input id="ProposalTime" type="text" class="timepicker">
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <label class="label">Duration:</label>
+                                                    <label class="label">Subject:</label>
                                                     <label class="input">
-                                                        <input id="taskDuration" type="text" class="" placeholder="HH:MM">
+                                                        <input id="ProposalSubject" type="text">
                                                     </label>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <label class="label">Statutory Due Date:</label>
+                                                    <label class="label">Background:</label>
                                                     <label class="input">
-                                                        <input id="taskStats" type="text" class="datepickr">
+                                                        <input id="ProposalBackground" type="text">
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label class="label">ScopeOfWork:</label>
+                                                    <label class="input">
+                                                        <input id="ProposalScopeOfWork" type="text">
+                                                    </label>
+                                                </div>
                                                 <div class="col-lg-6">
                                                     <label class="label">Status:</label>
                                                     <label class="select">
-                                                        <select id="taskStatus" class="select2"></select>
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="label">Originator:</label>
-                                                    <label class="select">
-                                                        <select id="taskOrgin" class="select2"></select>
+                                                        <select id="ProposalStatus" class="select2"></select>
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <label class="label">Controller:</label>
-                                                    <label class="select">
-                                                        <select id="taskController" class="select2"></select>
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="label">Approver:</label>
-                                                    <label class="select">
-                                                        <select id="taskApprover" class="select2"></select>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6 custom_inline">
-                                                    <label class="label m-5">Client View</label>
-                                                    <label class="checkbox f-s-20">
-                                                        <input id="taskClients" type="checkbox" class=""><i class='rounded-x m-l-10'></i>
+                                                    <label class="label">Fees</label>
+                                                    <label class="input">
+                                                        <input class="" type="number">
                                                     </label>
                                                 </div>
                                             </div>
                                         </form>
+
                                     </div>
                                 
                                 </div>
@@ -195,7 +172,7 @@
                                     <div class="panel-body">
                                             <footer class="text-right m-t-20">
                                             <button type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Reset</button>
-                                            <button id="submitTask" type="submit" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Submit</button>
+                                            <button id="taskProposalSubmit" type="submit" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Submit</button>
                                             <div class="note"><strong>Note:</strong> Fields marked with <span class="text-danger" >*</span> are to be filled mandatorily.</div>
                                         </footer>
                                     </div>
@@ -330,11 +307,9 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
 <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-<script type="text/javascript" src="Libraries/timepicker/jquery.timepicker.js"></script>
-<!-- <script type="text/javascript" src="Libraries/toggle/toggles.js"></script> -->
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
 <script src="assets/js/subFunc.js" type="text/javascript"></script>
-<script src="assets/js/add_tasks_basic.js" type="text/javascript"></script>
+<script src="assets/js/add_employee.js" type="text/javascript"></script>
 <script src="assets/js/addheader.js" type="text/javascript"></script>
 <script src="assets/js/addSidebar.js" type="text/javascript"></script>
 <!--================================/

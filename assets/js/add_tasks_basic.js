@@ -3,10 +3,6 @@ $(document).ready(function(){
     var taskParams = GetURLParams();
     var tid = taskParams['tid'];
 
-    $('.timepicker').timepicker({
-        dropdown: false
-    });
-
     $('#taskType').bootstrapToggle({
         off: 'Internal',
         on: 'External',
@@ -22,6 +18,14 @@ $(document).ready(function(){
         max: 10,
         from: 5
     });
+
+    ///////////////////////////////////////////////// Prfilled Data /////////////////////////////////////////////
+    $.getJSON(urlRoot+'contacts/form-data',function(data){
+        for (let i = 0; i < data.services.length; i++) {
+            $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
+        }
+    });
+
     ///////////////////////////////////////////////// GET REQUEST ////////////////////////////////////////////////////////
     if(tid){
         $.getJSON(urlRoot+'tasks/'+tid,function(data){
@@ -30,6 +34,7 @@ $(document).ready(function(){
             }else if(data.isExternal == false){
                 $('#taskType').bootstrapToggle('off');  
             }
+            $('#taskTitle').val(data.title);
             $('#taskClients').val(data.clients);
             $('#taskService').val(data.service);
             $('#range_02').val(data.priority);
@@ -37,12 +42,12 @@ $(document).ready(function(){
             var ST = data.startTime.split('T');
             var formatted1 = $.datepicker.formatDate("dd/mm/yy", new Date(ST[0]));
             $('#taskSdate').val(formatted1);
-            $('#taskStime').val(ST[1]);
+            $('#taskStime').val(ST[1].slice(0,-1));
             
             var ET = data.endTime.split('T');
             var formatted2 = $.datepicker.formatDate("dd/mm/yy", new Date(ET[0]));
             $('#taskEdate').val(formatted2);
-            $('#taskEtime').val(ET[1]);
+            $('#taskEtime').val(ET[1].slice(0,-1));
             $('#taskDuration').val(data.duration);
             $('#taskStats').val(data.statutoryDueDate);
             $('#taskStatus').val(data.status);
@@ -57,25 +62,33 @@ $(document).ready(function(){
         
         var tasksData = new Object();
         var isExternal= $('#taskType').prop('checked');
-        tasksData.title = "theTitle";
-        tasksData.clients = 1//$('#taskClients').val();
-        tasksData.service = $('#taskService').val();
-        tasksData.priority = $('#range_02').val();
-        tasksData.startTime = getFormateDateToServer($('#taskSdate').val()) +' '+ $('#taskStime').val();
-        tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +' '+ $('#taskEtime').val();
-        tasksData.duration = $('#taskDuration').val();
-        tasksData.statutoryDueDate = $('#taskStats').val();
-        tasksData.status = 1//$('#taskStatus').val();
-        tasksData.originator = 1//$('#taskOrgin').val();
-        tasksData.controller = 1//$('#taskController').val();
-        tasksData.approver = 1//$('#taskApprover').val();
+        tasksData.title = $('#taskTitle').val();
+        tasksData.isExternal = isExternal;
+        tasksData.client = "1";//$('#taskClients').val();
+        tasksData.originator = "1";//$('#taskOrgin').val();
+        tasksData.controller = "1";//$('#taskController').val();
+        tasksData.status = "1";//$('#taskStatus').val();
         tasksData.showToClient = $('#taskClientsView').prop('checked');
+        tasksData.service = $('#taskService').val();
+        tasksData.approver = "1";//$('#taskApprover').val();
+        tasksData.priority = $('#range_02').val();
+        tasksData.startTime = getFormateDateToServer($('#taskSdate').val()) +'T'+ $('#taskStime').val().slice(0,-2)+':00Z';
+        tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val().slice(0,-2)+':00Z';
+        tasksData.duration = $('#taskDuration').val();
+        tasksData.statutoryDueDate = getFormateDateToServer($('#taskStats').val());
         var taskJSON = JSON.stringify(tasksData);
-        
+        console.log(taskJSON);
         $.ajax({
+            async: true,
+            crossDomain: true,
             url:urlRoot+'tasks/',
             datatype:'JSON',
             type:'POST',
+            headers: {
+                "content-type": "application/json",
+                "cache-control": "no-cache"
+              },
+            processData: false,
             data:taskJSON,
             success:function(){
                 swal('Task Created!!');
@@ -83,7 +96,7 @@ $(document).ready(function(){
             error:function(error){
                 swal(error.responseText);
             }
-        })
+        });
     });
 
 });

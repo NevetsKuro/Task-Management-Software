@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+
+<html lang="en" class="desktop landscape chrome">
+<!--<![endif]-->
+<!-- START HEAD -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <title>Add Tasks</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Calibre is imple and easy admin template">
+    <meta name="keywords" content="calibre bootstrap template, calibre admin, bootstrap, admin template, bootstrap admin">
+    <meta name="author" content="LanceCoder">
+
+    <meta property="og:site_name" content="-CUSTOMER VALUE-">
+    <meta property="og:title" content="-CUSTOMER VALUE-">
+    <meta property="og:description" content="-CUSTOMER VALUE-">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="-CUSTOMER VALUE-">
+    <meta property="og:url" content="-CUSTOMER VALUE-">
+
+
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Libraries/timepicker/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="assets/vendors/rwd-table/rwd-table.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.3/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="assets/vendors/sweetalert/sweetalert.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+    <div id="css"></div>
+
+
+
+</head>
+
+<body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
+    <i class="btn-theme-switcher icon-cog hidden-xs"></i>
+
+    <!-- Page Loader -->
+    <div class="page-loader" style="display: none;"></div>
+
+    <!-- START WRAPPER -->
+    <div class="wrapper">
+
+        <div id="divHeader"></div>
+
+        <div id="divSide"></div>
+
+
+        <div class="main-content small_content">
+
+            <!-- START MAIN CONTAINER -->
+            <div class="main-container">
+
+                <!-- START PAGE HEADER -->
+                <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
+                    <div class="page-header-content slideshow">
+                        <div class="page-header-overlay">
+
+                            <div class="page-breadcrumb">
+                                <nav class="c_breadcrumbs">
+                                    <ul>
+                                        <li>
+                                            <a href="#">Home</a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="#">Tasks</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- END PAGE HEADER -->
+
+                <!-- START PAGE CONTENT -->
+                <div class="page-content">
+
+                    <!-- START ROW -->
+                    <div class="row">
+
+                        <!-- START COL-MD-12 -->
+                        <div class="col-md-12">
+
+                            <!-- START PANEL - TASK FORM -->
+                            <div class="panel">
+                            <form class="sky-form" id="task">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-6 m-b-10">
+                                            <label class="label"></label>
+                                            <label class="input">
+                                                <input id="taskType" type="checkbox">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row m-t-10">
+                                        <div class="col-lg-12">
+                                            <label class="label">Client:</label>
+                                            <label class="select">
+                                                <select id="taskClients" class="select2-multiple" multiple></select>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-sm-4">
+                                                <label class="label">Title:</label>
+                                                <label class="input">
+                                                    <input id="taskTitle" type="text">
+                                                </label>
+                                            </div>
+                                        <div class="col-lg-4">
+                                            <label class="label">Name Of Service:</label>
+                                            <label class="select">
+                                                <select id="taskService" class="select2"></select>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="label">Priority:</label>
+                                            <label class="input">
+                                                <input type="text" id="range_02">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label class="label">Start Time:</label>
+                                            <label class="input col-lg-6 lNega10">
+                                                <input id="taskSdate" type="text" class="datepickr" placeholder="Date">
+                                            </label>
+                                            <label class="input col-lg-6">
+                                                <input id="taskStime" type="text" class="timepicker" placeholder="Time">
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="label">End Time:</label>
+                                            <label class="input col-lg-6 lNega10">
+                                                <input id="taskEdate" type="text" class="datepickr" placeholder="Date">
+                                            </label>
+                                            <label class="input col-lg-6">
+                                                <input id="taskEtime" type="text" class="timepicker" placeholder="Time">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label class="label">Duration:</label>
+                                            <label class="input">
+                                                <input id="taskDuration" type="text" class="" placeholder="HH:MM">
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="label">Statutory Due Date:</label>
+                                            <label class="input">
+                                                <input id="taskStats" type="text" class="datepickr">
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="label">Status:</label>
+                                            <label class="select">
+                                                <select id="taskStatus" class="select2"></select>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label class="label">Originator:</label>
+                                            <label class="select">
+                                                <select id="taskOrgin" class="select2"></select>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="label">Controller:</label>
+                                            <label class="select">
+                                                <select id="taskController" class="select2"></select>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label class="label">Approver:</label>
+                                            <label class="select">
+                                                <select id="taskApprover" class="select2"></select>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 custom_inline">
+                                            <label class="label m-5">Allow Client View</label>
+                                            <label class="checkbox f-s-20">
+                                                <input id="taskClients" type="checkbox" class="">
+                                                <i class='rounded-x m-l-10'></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            </div>
+                            <!-- END PANEL -->
+
+
+                            <!--<form class="sky-form hide" id="subtaskForm">
+                                <div class="row well">
+                                    <label class="label col-sm-10 m-l-10">SubTask:
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="row">
+                                    <div id="#######" class="table table-small-font table-striped display-all">
+                                        <div class="row text-bold well">
+                                            <div class="col-xs-2">
+                                                Name
+                                            </div>
+                                            <div class="col-xs-1">
+                                                Duration
+                                            </div>
+                                            <div class="col-xs-2">
+                                                Deadline
+                                            </div>
+                                            <div class="col-xs-2">
+                                                Assignee
+                                            </div>
+                                            <div class="col-xs-1">
+                                                Weightage
+                                            </div>
+                                            <div class="col-xs-1">
+                                                % Completed
+                                            </div>
+                                            <div class="col-xs-2">
+                                                Status
+                                            </div>
+                                            <div class="col-xs-1">
+                                                Action
+                                            </div>
+                                        </div>
+
+                                        <div id="hoaddress-row">
+                                            <div id="" class="new row well">
+                                                <div class="col-xs-2">
+                                                    <label class="input">
+                                                        <input id="SubTask_name" type="text">
+                                                    </label>
+                                                </div>
+                                                <div class="col-xs-1">
+                                                    <label class="input">
+                                                        <input id="SubTask_duration" type="text" placeholder="HH.MM">
+                                                    </label>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <label class="input">
+                                                        <input id="SubTask_Deadline_Date" type="text" class="datepickr">
+                                                        <input id="SubTask_Deadline_Time" type="text" class="timepicker">
+                                                    </label>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <label class="select">
+                                                        <select id="SubTask_Assignee" class="select2"></select>
+                                                    </label>
+                                                </div>
+                                                <div class="col-xs-1">
+                                                    <label class="input">
+                                                        <input id="SubTask_Weightage" type="text">
+                                                    </label>
+                                                </div>
+                                                <div class="col-xs-1">
+                                                    <label class="input">
+                                                        <input id="SubTask_perCompleted" type="text">
+                                                    </label>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <label class="select">
+                                                        <select id="SubTask_Status" class="select2"></select>
+                                                    </label>
+                                                </div>
+                                                <div class="col-xs-1">
+                                                    <div class="btn-group open">
+                                                        <button class="btn btn-sm btn-primary">
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        </button>
+                                                        <button data-toggle="dropdown" class="btn btn-sm btn-primary dropdown-toggle">
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li>
+                                                                <a href="#">Action</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">Another action</a>
+                                                            </li>
+                                                            <li class="divider"></li>
+                                                            <li>
+                                                                <a href="#">Separated link</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form> -->
+                            
+                            <div class="panel sky-form">
+                                <div class="panel-body">
+                                    <div class="well row">
+                                        <label class="text-bold f-s-20 col-sm-10">SubTasks</label>
+                                        <span id='addSubTask' class=" col-sm-1"><i class="glyphicon glyphicon-plus m-l-20" title="Add New Sub_Tasks"></i></span>
+                                    </div>
+                                    <div class="table-responsive">
+                                            <table id="subTaskTable" class="table table-small-font table-bordered table-striped m-b-0 ">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="20%">Name</th>
+                                                        <th width="9%">Duration</th>
+                                                        <th width="12%">DeadLine</th>
+                                                        <th width="18%">Assignee</th>
+                                                        <th width="9%">Weightage</th>
+                                                        <th width="10%">% Complete</th>
+                                                        <th width="14%">Status</th>
+                                                        <th width="8%">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="input">
+                                                                <input id="SubTask_name" type="text">
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                <input id="SubTask_duration" type="text" placeholder="HH.MM">
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                <input id="SubTask_Deadline_Date" type="text" class="datepickr">
+                                                                <input id="SubTask_Deadline_Time" type="text" class="timepicker">
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="select">
+                                                                <select id="SubTask_Assignee" class="select2"></select>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                <input id="SubTask_Weightage" type="text">
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                <input id="SubTask_perCompleted" type="text">
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="select">
+                                                                <select id="SubTask_Status" class="select2"></select>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <button class="btn btn-xs btn-primary">
+                                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                                </button>
+                                                                <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle">
+                                                                    <span class="caret"></span>
+                                                                </button>
+                                                                <ul class="dropdown-menu pull-right">
+                                                                    <li>
+                                                                        <a href="#">Action</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Another action</a>
+                                                                    </li>
+                                                                    <li class="divider"></li>
+                                                                    <li>
+                                                                        <a href="#">Separated link</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <footer class="text-right m-t-20">
+                                        <button type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Reset</button>
+                                        <button id="submitTask" type="submit" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Submit</button>
+                                        <div class="note">
+                                            <strong>Note:</strong> Fields marked with
+                                            <span class="text-danger">*</span> are to be filled mandatorily.</div>
+                                    </footer>
+                                </div>
+                            </div>
+                            <!-- MODAL S -->
+                            
+                            <div class="modal" id="add-new-data-modal" data-easein="fadeInDown" data-easeout="fadeOutDown" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated fadeInDown fadeOut">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                                                <h4 class="modal-title"><strong>Add</strong> new data</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label for="name1">Name</label>
+                                                        <input type="text" id="name1" class="form-control name" placeholder="Name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="position1">Position</label>
+                                                        <input type="text" id="position1" class="form-control position" placeholder="Position">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="office1">Office</label>
+                                                        <input type="text" id="office1" class="form-control office" placeholder="Office">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="age1">Age</label>
+                                                        <input type="number" id="age1" class="form-control age" placeholder="Age">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default btn-raised rippler rippler-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary btn-raised rippler rippler-default" id="btn-save-new-data">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            
+                            <div class="modal" id="update-data-modal" data-easein="fadeInDown" data-easeout="fadeOutDown" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated fadeInDown">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                                                <h4 class="modal-title"><strong>Update</strong> data</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <input type="hidden" class="form-control row">
+                                                    <div class="form-group">
+                                                        <label for="name2">Name</label>
+                                                        <input type="text" id="name2" class="form-control name" placeholder="Name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="position2">Position</label>
+                                                        <input type="text" id="position2" class="form-control position" placeholder="Position">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="office2">Office</label>
+                                                        <input type="text" id="office2" class="form-control office" placeholder="Office">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="age2">Age</label>
+                                                        <input type="number" id="age2" class="form-control age" placeholder="Age">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default btn-raised rippler rippler-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary btn-raised rippler rippler-default" id="btn-update-data">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <!-- MODAL S -->
+
+                        </div>
+                        <!-- END COL-MD-12 -->
+
+                    </div>
+                    <!-- END ROW -->
+
+                </div>
+
+                <!-- END PAGE CONTENT -->
+
+                <!-- START PAGE FOOTER -->
+                <footer class="page-footer">
+                    <center>
+                        <b class="f-s-20">Footer..</b>
+                    </center>
+                </footer>
+                <!-- END PAGE FOOTER -->
+
+            </div>
+            <!-- END MAIN CONTAINER -->
+
+
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script>
+        /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.min.js" type="text/javascript"></script>
+    <script src="assets/js/velocity.ui.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.nanoscroller.min.js" type="text/javascript"></script>
+    <script src="assets/js/nicescroll.min.js" type="text/javascript"></script>
+    <script src="assets/js/animsition.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.cookie.min.js"></script>
+    <script src="assets/js/device.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/scrollTo.min.js"></script>
+    <script src="assets/js/rippler.min.js" type="text/javascript"></script>
+
+    <script src="assets/vendors/rwd-table/rwd-table.js" ></script>
+    <!-- <script src="assets/vendors/datatable/js/jquery.dataTables.min.js" ></script>
+    <script src="assets/vendors/datatable/bootstrap/dataTables.bootstrap.js" ></script> -->
+    
+    
+    <script src="assets/js/theme.min.js" type="text/javascript"></script>
+    <script src="assets/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="assets/js/select2.js" type="text/javascript"></script>
+    <!--[if lt IE 10]>
+            <script src="../../assets/vendors/skyforms/jquery.placeholder.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="../../assets/vendors/skyforms/sky-forms-ie8.js"></script>
+    <![endif]-->
+    <!-- END SKY FORM JS PLUGINS-->
+    <!--================================/
+    /* START GLOBAL JS PLUGINS
+    /*================================-->
+
+
+    <!-- SKY FORM JS PLUGINS-->
+    <script src="assets/vendors/skyforms/js/jquery.form.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.validate.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.maskedinput.min.js"></script>
+    <script src="assets/vendors/skyforms/js/jquery.modal.js"></script>
+
+    <!--================================/
+    /* START JS PLUGINS FOR THIS PAGE
+    /*================================-->
+    <!-- <script src="assets/js/jquery.peity.min.js"></script> -->
+    <!--<script src="assets/js/echarts.js"></script>-->
+    <script src="assets/js/skycons.js"></script>
+    <script src="assets/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="assets/vendors/bootstrap-fileupload/js/bootstrap-fileupload.js"></script>
+
+    <!--================================/
+    /* END JS PLUGINS FOR THIS PAGE
+    /*================================-->
+
+
+    <!--================================/
+        /* START COMMON SCRIPT FOR ALL PAGES
+        /*================================-->
+
+    <script src="assets/js/forms/forms.js" type="text/javascript"></script>
+    <script src="assets/js/forms/form-wizard.js" type="text/javascript"></script>
+    <!--================================/
+        /* END COMMON SCRIPT FOR ALL PAGES
+        /*================================-->
+
+
+
+    <!--================================/
+    /* START SCRIPT THIS PAGE ONLY
+    /*================================-->
+    <!-- <script src="assets/js/dashboard.js" type="text/javascript"></script> -->
+    <!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
+    <script src="assets/js/widget-weather.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
+    <script src="assets/js/widget-list.js" type="text/javascript"></script>
+
+    <!--================================/
+    /* END SCRIPT THIS PAGE ONLY
+    /*================================-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //global functions
+            App.init();
+            $('#divSide').load('addSiderbar.html');
+        });
+    </script>
+
+    <!--================================/
+    /* START CUSTOM SCRIPTS
+    /*================================-->
+    <script src="assets/js/addCss.js"></script>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+    <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
+    <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+    <script type="text/javascript" src="Libraries/timepicker/jquery.timepicker.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.3/jquery.timepicker.min.js"></script> -->
+    <!-- <script type="text/javascript" src="Libraries/toggle/toggles.js"></script> -->
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="assets/js/subFunc.js" type="text/javascript"></script>
+    <script src="assets/vendors/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+    <script src="assets/js/add_tasks_basic.js" type="text/javascript"></script>
+    <script src="assets/js/sub_tasks.js" type="text/javascript"></script>
+    <script src="assets/js/addheader.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/addSidebar.js" type="text/javascript"></script> -->
+    <!--================================/
+    /* END CUSTOM SCRIPTS
+    /*================================-->
+    
+</body>
+
+
+</html>

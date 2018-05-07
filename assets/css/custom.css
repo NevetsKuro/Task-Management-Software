@@ -14,7 +14,8 @@ input.uppercase { text-transform: uppercase; }
 .serc-btn { position: absolute;top: 7px;right: 10px;font-size: 22px;color: grey;cursor: pointer; }
 .well { margin-bottom: 0px!important; padding:10px;}
 .panel-bodyContact { transform: scale(0.95); }
-.panel-bodyClient, .panel-body { transform: scale(0.9); }
+.panel-bodyClient { transform: scale(0.9); }
+.panel-bodyTask { transform: scale(0.9); }
 
 .se-pre-con {
 	position: fixed;
@@ -40,4 +41,7 @@ span.select2-selection.select2-selection--multiple{
 }
 .toggle .toggle-group .toggle-handle{
 	background-color: white!important;
+}
+body > div.ui-timepicker-wrapper{
+	width: 111px!important;
 }

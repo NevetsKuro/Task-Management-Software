@@ -5,22 +5,30 @@
     window.urlRoot = 'http://35.202.86.61/office-management/';
 
             var currDate = new Date().getFullYear();
-            $(".dobdatepickr").datepicker({
-                changeMonth:true,
-                changeYear:true,
-                yearRange: "1850:"+currDate,
-                dateFormat:'dd/mm/yy',
-                autoclose: true
-            });
-            
-            $(".datepickr").datepicker({
-                changeMonth:true,
-                changeYear:true,
-                yearRange: "1850:3000",
-                dateFormat:'dd/mm/yy',
-                autoclose: true
-            });
-        
+
+            window.datetime = function(){
+                $(".dobdatepickr").datepicker({
+                    changeMonth:true,
+                    changeYear:true,
+                    yearRange: "1850:"+currDate,
+                    dateFormat:'dd/mm/yy',
+                    autoclose: true
+                });
+                
+                $(".datepickr").datepicker({
+                    changeMonth:true,
+                    changeYear:true,
+                    yearRange: "1850:3000",
+                    dateFormat:'dd/mm/yy',
+                    autoclose: true
+                });
+
+                $('input.timepicker').timepicker({
+                    dropdown:false,
+                    dynamic:true
+                });
+            }
+            datetime();        
             window.inputChanges = function(){
                 var $form = $('#addContact_form'),
                 origForm = $form.serialize();
