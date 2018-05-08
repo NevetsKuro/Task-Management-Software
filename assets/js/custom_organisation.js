@@ -306,9 +306,9 @@ $(document).ready(function(){
                     type:'POST',
                     datatype:'JSON',
                     contentType:'application/json',
-                    headers:{
-                        "X-CSRFToken": csrftoken
-                    },
+                    // headers:{
+                    //     "X-CSRFToken": csrftoken
+                    // },
                     data: orgJSON,
                     success:function(data){
                         swal('Organisation Added!!!');

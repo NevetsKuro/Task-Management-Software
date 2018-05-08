@@ -49,11 +49,11 @@
 
     <!-- START WRAPPER -->
     <div class="wrapper">
-
+        <!--HEADER  -->
+        
         <div id="divHeader"></div>
 
-        <div id="divSide"></div>
-
+         <div id="divSide"></div>
 
         <div class="main-content small_content">
 
@@ -193,7 +193,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4 custom_inline">
-                                            <label class="label m-5">Allow Client View</label>
+                                            <label class="label m-t-5 m-b-5">Allow Client View</label>
                                             <label class="checkbox f-s-20">
                                                 <input id="taskClients" type="checkbox" class="">
                                                 <i class='rounded-x m-l-10'></i>
@@ -329,41 +329,41 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <tr class="new">
                                                         <td>
                                                             <label class="input">
-                                                                <input id="SubTask_name" type="text">
+                                                                <input class="SubTask_name" type="text">
                                                             </label>
                                                         </td>
                                                         <td>
                                                             <label class="input">
-                                                                <input id="SubTask_duration" type="text" placeholder="HH.MM">
+                                                                <input class="SubTask_duration" type="text" placeholder="HH.MM">
                                                             </label>
                                                         </td>
                                                         <td>
                                                             <label class="input">
-                                                                <input id="SubTask_Deadline_Date" type="text" class="datepickr">
-                                                                <input id="SubTask_Deadline_Time" type="text" class="timepicker">
+                                                                <input class="SubTask_Deadline_Date datepickr" type="text" >
+                                                                <input class="SubTask_Deadline_Time timepicker" type="text" >
                                                             </label>
                                                         </td>
                                                         <td>
                                                             <label class="select">
-                                                                <select id="SubTask_Assignee" class="select2"></select>
+                                                                <select class="SubTask_Assignee select2"></select>
                                                             </label>
                                                         </td>
                                                         <td>
                                                             <label class="input">
-                                                                <input id="SubTask_Weightage" type="text">
+                                                                <input class="SubTask_Weightage" type="text">
                                                             </label>
                                                         </td>
                                                         <td>
                                                             <label class="input">
-                                                                <input id="SubTask_perCompleted" type="text">
+                                                                <input class="SubTask_perCompleted" type="text">
                                                             </label>
                                                         </td>
                                                         <td>
                                                             <label class="select">
-                                                                <select id="SubTask_Status" class="select2"></select>
+                                                                <select class="SubTask_Status select2"></select>
                                                             </label>
                                                         </td>
                                                         <td>
@@ -376,14 +376,10 @@
                                                                 </button>
                                                                 <ul class="dropdown-menu pull-right">
                                                                     <li>
-                                                                        <a href="#">Action</a>
+                                                                        <div>Transfer</div>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="#">Another action</a>
-                                                                    </li>
-                                                                    <li class="divider"></li>
-                                                                    <li>
-                                                                        <a href="#">Separated link</a>
+                                                                        <div class="st_remove">Remove</div>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -406,79 +402,6 @@
                                     </footer>
                                 </div>
                             </div>
-                            <!-- MODAL S -->
-                            
-                            <div class="modal" id="add-new-data-modal" data-easein="fadeInDown" data-easeout="fadeOutDown" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content animated fadeInDown fadeOut">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                                                <h4 class="modal-title"><strong>Add</strong> new data</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="name1">Name</label>
-                                                        <input type="text" id="name1" class="form-control name" placeholder="Name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="position1">Position</label>
-                                                        <input type="text" id="position1" class="form-control position" placeholder="Position">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="office1">Office</label>
-                                                        <input type="text" id="office1" class="form-control office" placeholder="Office">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="age1">Age</label>
-                                                        <input type="number" id="age1" class="form-control age" placeholder="Age">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default btn-raised rippler rippler-default" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary btn-raised rippler rippler-default" id="btn-save-new-data">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                            
-                            <div class="modal" id="update-data-modal" data-easein="fadeInDown" data-easeout="fadeOutDown" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content animated fadeInDown">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                                                <h4 class="modal-title"><strong>Update</strong> data</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <input type="hidden" class="form-control row">
-                                                    <div class="form-group">
-                                                        <label for="name2">Name</label>
-                                                        <input type="text" id="name2" class="form-control name" placeholder="Name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="position2">Position</label>
-                                                        <input type="text" id="position2" class="form-control position" placeholder="Position">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="office2">Office</label>
-                                                        <input type="text" id="office2" class="form-control office" placeholder="Office">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="age2">Age</label>
-                                                        <input type="number" id="age2" class="form-control age" placeholder="Age">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default btn-raised rippler rippler-default" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary btn-raised rippler rippler-default" id="btn-update-data">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                            <!-- MODAL S -->
 
                         </div>
                         <!-- END COL-MD-12 -->
@@ -510,6 +433,9 @@
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
     <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="assets/js/addheader.js" type="text/javascript"></script>
+    <script src="assets/js/addSidebar.js" type="text/javascript"></script>
+
 
     <script>
         /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
@@ -600,7 +526,7 @@
 
             //global functions
             App.init();
-            $('#divSide').load('addSiderbar.html');
+            // $('#divSide').load('addSiderbar.html');
         });
     </script>
 
@@ -618,9 +544,6 @@
     <script src="assets/js/subFunc.js" type="text/javascript"></script>
     <script src="assets/vendors/sweetalert/sweetalert.min.js" type="text/javascript"></script>
     <script src="assets/js/add_tasks_basic.js" type="text/javascript"></script>
-    <script src="assets/js/sub_tasks.js" type="text/javascript"></script>
-    <script src="assets/js/addheader.js" type="text/javascript"></script>
-    <!-- <script src="assets/js/addSidebar.js" type="text/javascript"></script> -->
     <!--================================/
     /* END CUSTOM SCRIPTS
     /*================================-->

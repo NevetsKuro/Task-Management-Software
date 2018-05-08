@@ -13,9 +13,9 @@ input.uppercase { text-transform: uppercase; }
 .label-font {  font-weight: 700;color:grey;font-size:13px;color:#777; }
 .serc-btn { position: absolute;top: 7px;right: 10px;font-size: 22px;color: grey;cursor: pointer; }
 .well { margin-bottom: 0px!important; padding:10px;}
-.panel-bodyContact { transform: scale(0.95); }
+/* .panel-bodyContact { transform: scale(0.95); }
 .panel-bodyClient { transform: scale(0.9); }
-.panel-bodyTask { transform: scale(0.9); }
+.panel-bodyTask { transform: scale(0.9); } */
 
 .se-pre-con {
 	position: fixed;

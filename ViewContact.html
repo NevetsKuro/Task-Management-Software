@@ -34,9 +34,10 @@
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="assets/js/addCss.js"></script> -->
 
-    <script type="text/javascript">
+    <link rel="stylesheet" href="Libraries/timepicker/jquery.timepicker.min.css">
+    <!-- <script type="text/javascript">
         $('#css').load('http://ungeek.in/calibre/css.html');
-    </script>
+    </script> -->
     
 </head>
 
@@ -500,21 +501,24 @@
 
 
     <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
-
+    
     <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
-
+    
+    <script src="assets/js/addheader.js" type="text/javascript"></script>
+    <script src="assets/js/addSidebar.js" type="text/javascript"></script>
+    <script src="assets/js/addCss.js" type="text/javascript"></script>
     <script>
         $(document).ready(function () {
-
+            
             //global functions
             App.init();
-
-
+            
+            
         });
         /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
         $.widget.bridge('uibutton', $.ui.button);
         $.widget.bridge('uitooltip', $.ui.tooltip);
-
+        
     </script>
     <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="assets/js/velocity.min.js" type="text/javascript"></script>
@@ -538,7 +542,7 @@
     <script src="assets/js/select2.js" type="text/javascript"></script>
     <!-- SKY FORM JS PLUGINS-->
     <!-- <script src="assets/vendors/skyforms/js/jquery.form.min.js"></script>
-    <script src="assets/vendors/skyforms/js/jquery.validate.min.js"></script>
+        <script src="assets/vendors/skyforms/js/jquery.validate.min.js"></script>
     <script src="assets/vendors/skyforms/js/jquery.maskedinput.min.js"></script>
     <script src="assets/vendors/skyforms/js/jquery.modal.js"></script>-->
     <script src="assets/js/jquery.peity.min.js"></script>
@@ -552,15 +556,14 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
     <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-    <script src="assets/js/theme.min.js" type="text/javascript"></script>
     <script src="assets/js/subFunc.js" type="text/javascript"></script>
-    <script src="assets/js/addheader.js" type="text/javascript"></script>
-    <script src="assets/js/addSidebar.js" type="text/javascript"></script>
+    <script src="assets/js/theme.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="Libraries/timepicker/jquery.timepicker.min.js"></script>
     <script src="assets/js/viewContact.js" type="text/javascript"></script>
     <!--================================/
         /* END CUSTOM SCRIPTS
         /*================================-->
-</body>
-
-
+    </body>
+    
+    
 </html>

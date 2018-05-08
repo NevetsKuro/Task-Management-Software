@@ -125,45 +125,47 @@ $(document).ready(function () {
 
 
     ///////////////////////////////////////////  GET REQUEST   /////////////////
-    $.getJSON(urlRoot+'employees'+empId,function(data){
-        
-        $('#employee_name').val(data.name);
-        $('#employee_title').val(data.title);
-        $('#employee_dob').val(data.dob);
-        $('#employee_designation').val(data.designation);
-        $('#employee_location').val(data.location);
-        $('#employee_department').val(data.department);
-        $('#employee_ctc').val(data.ctc);
-        $('#employee_reportingManager').val(data.reportingManager);
-        var multiNums = data.phone_numbers;
-        var multiEmail = data.email_addresses;
-        for(let i = 0; i < multiNums.length; i++) {
-            if(i>0){
-                addContactRows();
-                $('#contact-row .new:last .contactnumber_category').val(multiNums[i].category).trigger('change');
-                $('#contact-row .new:last .addContact_contactNumbers').val(parseInt(multiNums[i].number.toString().slice(3),10));
-                $('#contact-row .new:last .cn_is_primary').attr('checked',multiNums[i].is_primary);
-                
-            }else{
-                $('#contact-row .new .contactnumber_category').val(multiNums[i].category).trigger('change');
-                $('#contact-row .new .addContact_contactNumbers').val(parseInt(multiNums[i].number.toString().slice(3),10));
-                $('#contact-row .new .cn_is_primary').attr('checked',multiNums[i].is_primary);
+    if(empId){
+        $.getJSON(urlRoot+'employees/'+empId,function(data){
+            
+            $('#employee_name').val(data.name);
+            $('#employee_title').val(data.title);
+            $('#employee_dob').val(data.dob);
+            $('#employee_designation').val(data.designation);
+            $('#employee_location').val(data.location);
+            $('#employee_department').val(data.department);
+            $('#employee_ctc').val(data.ctc);
+            $('#employee_reportingManager').val(data.reportingManager);
+            var multiNums = data.phone_numbers;
+            var multiEmail = data.email_addresses;
+            for(let i = 0; i < multiNums.length; i++) {
+                if(i>0){
+                    addContactRows();
+                    $('#contact-row .new:last .contactnumber_category').val(multiNums[i].category).trigger('change');
+                    $('#contact-row .new:last .addContact_contactNumbers').val(parseInt(multiNums[i].number.toString().slice(3),10));
+                    $('#contact-row .new:last .cn_is_primary').attr('checked',multiNums[i].is_primary);
+                    
+                }else{
+                    $('#contact-row .new .contactnumber_category').val(multiNums[i].category).trigger('change');
+                    $('#contact-row .new .addContact_contactNumbers').val(parseInt(multiNums[i].number.toString().slice(3),10));
+                    $('#contact-row .new .cn_is_primary').attr('checked',multiNums[i].is_primary);
+                }
             }
-        }
-          
-        for(let i = 0; i < multiEmail.length; i++){
-            if(i>0){
-                addEmailRows();
-                $('#email-row .new:last .email_category').val(multiEmail[i].category).trigger('change');
-                $('#email-row .new:last .addContact_emailIds').val(multiEmail[i].email);
-                $('#email-row .new:last .ea_is_primary').attr('checked',multiEmail[i].is_primary);
-            }else{
-                $('#email-row .new .email_category').val(multiEmail[i].category).trigger('change');
-                $('#email-row .new .addContact_emailIds').val(multiEmail[i].email);
-                $('#email-row .new .ea_is_primary').attr('checked',multiEmail[i].is_primary);
+            
+            for(let i = 0; i < multiEmail.length; i++){
+                if(i>0){
+                    addEmailRows();
+                    $('#email-row .new:last .email_category').val(multiEmail[i].category).trigger('change');
+                    $('#email-row .new:last .addContact_emailIds').val(multiEmail[i].email);
+                    $('#email-row .new:last .ea_is_primary').attr('checked',multiEmail[i].is_primary);
+                }else{
+                    $('#email-row .new .email_category').val(multiEmail[i].category).trigger('change');
+                    $('#email-row .new .addContact_emailIds').val(multiEmail[i].email);
+                    $('#email-row .new .ea_is_primary').attr('checked',multiEmail[i].is_primary);
+                }
             }
-        }
-    });
+        });
+    }
 
 
     $(document).on('click','submit_employee',function(){
