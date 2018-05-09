@@ -148,11 +148,31 @@ $(document).ready(function(){
             console.log('Pre filled data added!!!');
         },
         error:function(error){
-            swal('Cannot fetch organisation form list' + data);
+            swal('Cannot fetch organisation form list');
             console.log(error.responseText);
         }
     });
     
+    $.ajax({
+        url:urlRooT+'employees/',
+        datatype:'JSON',
+        type:'GET',
+        success:function(data){
+            // glob2 = data;
+            for (var i = 0; i < data.length; i++) {
+                $('#addContact_assignee').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+            }
+            for (var i = 0; i < data.length; i++) {
+                $('#addContact_originator').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+            }
+            
+            console.log('Pre filled data added!!!');
+        },
+        error:function(error){
+            swal('Cannot fetch organisation form list');
+            console.log(error.responseText);
+        }
+    });
     var currentContactData;
     var currentOrganisationsId = "";
     var currentContactsId = "";
@@ -218,12 +238,13 @@ $(document).ready(function(){
                     $('#addContact_potential_service').val(data.lead.potential_services).trigger('change');
                     $('#addContact_lead_status').val(data.lead.status).trigger('change');
                     $('#addContact_source').val(data.lead.source).trigger('change');
-                    $('#addContact_reference').val(data.lead.reference);
+                    $('#addContact_reference').val(data.lead.reference).trigger('change');
                     $('#addContact_notes').val(data.lead.notes);
                     var rangeSlider = $("#range_02").data('ionRangeSlider');
                     rangeSlider.update({from:data.lead.priority});
-                    $('#addContact_assignee').val(data.lead.originators);
-                    $('#addContact_comments').val(data.lead.comments);
+                    $('#addContact_originator').val(data.lead.originators).trigger('change');
+                    // $('#addContact_assignee').val(data.lead.assignees).trigger('change');
+                    // $('#addContact_comments').val(data.lead.comments);
                 }
 
                 var multiNums = data.phone_numbers;
@@ -654,16 +675,16 @@ $(document).ready(function(){
     function getLeads(){
         var CF_leadStatus = $('#addContact_lead_status').val();
         var CF_priority = $('#range_02').val();
-        var CF_originator = $('#addContact_originator').val();
-        var CF_assignee = $('#addContact_assignee').val();
+        var CF_originator = [1];// $('#addContact_originator').val();
+        var CF_assignee = [1];// $('#addContact_assignee').val();
         var CF_potentialService = $('#addContact_potential_service').val();
         var CF_source = $('#addContact_source').val();
         var CF_reference = $('#addContact_reference').val();
         var CF_notes = $('#addContact_notes').val();
 
         var leads = {}
-            leads.originators = [1] // CF_originator;
-            leads.assignees = [1] // CF_assignee;
+            leads.originators = CF_originator;
+            leads.assignees = CF_assignee;
             leads.status = CF_leadStatus;
             leads.source = CF_source;
             leads.reference = CF_reference;
@@ -676,7 +697,7 @@ $(document).ready(function(){
 
     function getOrg(){
         var CF_designation = $('#addContact_designation').val();
-        var CF_department = 1;//$('#addContact_department').val();
+        var CF_department = $('#addContact_department').val();
         var CF_branch = $('.hoaddress_from').attr('id');
 
         var contact_organisation = {}
@@ -827,8 +848,8 @@ $(document).ready(function(){
                 var CF_leadStatus = $('#addContact_lead_status').val();
                 var CF_priority = $('#range_02').val();
                 var CF_originator = $('#addContact_originator').val();
-                var CF_assignee = $('#addContact_assignee').val();
-                var CF_potentialService = $('#addContact_potential_service').val();
+                var CF_assignee = [1];//$('#addContact_assignee').val();
+                var CF_potentialService = [1];//$('#addContact_potential_service').val();
                 var CF_source = $('#addContact_source').val();
                 var CF_reference = $('#addContact_reference').val();
                 var CF_notes = $('#addContact_notes').val();
@@ -839,8 +860,8 @@ $(document).ready(function(){
                 var CF_branch = $('.hoaddress_from:checked').attr('id');
                 
                 var leads = {}
-                leads.originators = [1] // CF_originator;
-                leads.assignees = [1] // CF_assignee;
+                leads.originators = CF_originator;
+                leads.assignees = CF_assignee;
                 leads.source = CF_source;
                 leads.reference = CF_reference;
                 leads.status = CF_leadStatus;

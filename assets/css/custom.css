@@ -16,7 +16,9 @@ input.uppercase { text-transform: uppercase; }
 /* .panel-bodyContact { transform: scale(0.95); }
 .panel-bodyClient { transform: scale(0.9); }
 .panel-bodyTask { transform: scale(0.9); } */
-
+#task > div > div:nth-child(1) > div > label.input > div > div > span {
+	display: none;
+}
 .se-pre-con {
 	position: fixed;
 	left: 0px;

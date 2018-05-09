@@ -8,6 +8,7 @@ $(document).ready(function () {
 
     var urlParams = GetURLParams();
     var globalContact = [];
+    var globalClient = [];
     var contact = urlParams['contact']; //type number
     var client = urlParams['client'];   //type number
     var legal = urlParams['legal'];     //type number
@@ -20,6 +21,98 @@ $(document).ready(function () {
     $('#file3').on('change',function(){
         $('#stat_document').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
     });
+
+
+    
+    /////////////////////////////////// Prefilled Data  //////////////////////////////////////////////////
+
+    $.ajax({
+        url: urlRoot+'organisations/groups',
+        datatype: 'JSON',
+        type: 'GET',
+        success: function (groups) {
+            for (var i = 0; i < groups.length; i++) {
+                $('#client_group').append('<option value=' + groups[i].id + '>' + groups[i].group + '</option>');
+            }
+        }
+    });
+
+    //form data from Organisation
+    $.ajax({
+        url: urlRoot+'organisations/form-data',
+        datatype: 'JSON',
+        type: 'GET',
+        success: function (data) {
+            glob = data;
+            for (var i = 0; i < data.business_natures.length; i++) {
+                $('#nature_business').append('<option value=' + data.business_natures[i].id + '>' + data.business_natures[i].business_nature + '</option>');
+            }
+
+            for (var i = 0; i < data.industry_types.length; i++) {
+                $('#industryType').append('<option value=' + data.industry_types[i].id + '>' + data.industry_types[i].industry_type + '</option>');
+            }
+
+            for (var i = 0; i < data.business_types.length; i++) {
+                $('#businessType').append('<option value=' + data.business_types[i].id + '>' + data.business_types[i].business_type + '</option>');
+            }
+            console.log('Company Prefilled data Added.');
+
+        },
+        error: function (data) {
+            swal('Server is not working:' + data);
+        }
+    });
+
+    //form data from clients
+    $.ajax({
+        url: urlRoot+'clients/form-data',
+        datatype: 'JSON',
+        type: 'GET',
+        success: function (data) {
+            globalClient = data
+            for (var i = 0; i < data.company_type.length; i++) {
+                $('#company_types').append('<option value=' + data.company_type[i].id + '>' + data.company_type[i].company_type + '</option>');
+            }
+            for (var i = 0; i < data.stock_exchange.length; i++) {
+                $('#company_stock').append('<option value=' + data.stock_exchange[i].id + '>' + data.stock_exchange[i].stock_exchange + '</option>');
+            }
+        }
+    });
+
+    //auto filling forms prefilled data
+    $.ajax({
+        async:true,
+        url: urlRoot+'contacts/form-data',
+        datatype: 'JSON',
+        type: 'GET',
+        async: true,
+        success: function (data) {
+            globalContact = data;
+            for (var i = 0; i < data.titles.length; i++) {
+                $('.selTitle').append('<option value=' + data.titles[i].id + '>' + data.titles[i].title + '</option>');
+            }
+
+            for (var i = 0; i < data.categories.length; i++) {
+                $('.contactnumber_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
+                $('.email_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
+                $('.address_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
+            }
+
+            for (var i = 0; i < data.services.length; i++) {
+                $('#services').append('<option value=' + data.services[i].id + '>' + data.services[i].service + '</option>');
+            }
+
+            for(var i = 0; i < data.genders.length; i++){
+                $('#clientsContact_Gender').append('<option value=' + data.genders[i].id + '>' + data.genders[i].gender + '</option>');
+            }
+
+            console.log('Pre filled data added!!!');
+        },
+        error: function (data) {
+            swal('Server is not working:' + data);
+        }
+    });
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     var indContactId;
     if(contact!=undefined||client!=undefined){
@@ -64,22 +157,31 @@ $(document).ready(function () {
                         $('#PANNO').val(data.pan_no);
                         var poc = data.pocs;
                         
-                        //getting POC by contact id 
+                        //getting POC by contact id
                         cC_table.clear().draw();
                         for (let i = 0; i < poc.length; i++) {
                             var id = poc[i].contact;
+                            if(poc[i].relation){
+                                var rel = globalClient.relation.find(function(rel){ return poc[i].relation == rel.id}).relation;
+                            }
+                            if(poc[i].purpose){
+                                var pur = poc[i].purpose;
+                            }
                             $.getJSON(urlRoot+'contacts/'+id,function(data){
 
                                     var row = data;
                                     var p_email = '';
                                     var p_phone = '';
+
+                                    if(data.contact_organisation){
+                                        var dess = globalContact.designations.find(function(des){ return data.contact_organisation.designation == des.id}).designation;
+                                    }
+
                                     if(row.email_addresses.length > 0){
-                                        var is_Primary = row.email_addresses.findIndex(x=>x.is_primary == true);
-                                        p_email = row.email_addresses[is_Primary].email;
+                                        var p_email = row.email_addresses.find(x=>x.is_primary == true).email;
                                     }
                                     if(row.phone_numbers.length > 0){
-                                        var is_Primary = row.phone_numbers.findIndex(x=>x.is_primary == true);
-                                        p_phone = row.phone_numbers[is_Primary].number;
+                                        var p_phone = row.phone_numbers.find(x=>x.is_primary == true).number;
                                     }
                                     cC_table.row.add([
                                         '',
@@ -87,9 +189,9 @@ $(document).ready(function () {
                                         row.title+' '+row.name,
                                         p_email,
                                         p_phone,
-                                        '',                                                                                                   //relation
-                                        row.contact_organisation?row.contact_organisation.designation:'Not Mentioned',            //designation
-                                        '',                                                                                                   //purpose
+                                        rel?rel:'Not Mentioned',                                                                                                   //relation
+                                        dess?dess:'Not Mentioned',            //designation
+                                        pur?pur:'Not Mentioned',                                                                                          //purpose
                                         '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
                                     ]).draw(false);
                             });
@@ -98,12 +200,13 @@ $(document).ready(function () {
                         if(legal==1){
                             $('#individual_aadhar').val(data.aadhar_no);
                             $('#individual_typeWork').val(data.typeOfWork);
+                            $('#website').val(data.website);
                             // client_organisation(data.prospect);
                             indContactId = data.prospect;
                             $.getJSON(urlRoot+'contacts/'+indContactId,function(data){
-                                if(data.contact_organisation){
-                                    $('#website').val(data.contact_organisation.organisation.website);
-                                }
+                                // if(data.contact_organisation){
+                                //     $('#website').val(data.contact_organisation.organisation.website);
+                                // }
                                 $('#addContact_title').val(data.title);
                                 var nameArr = data.name.split(' ');
                                 $('#individual_fname').val(nameArr[0]);
@@ -322,93 +425,6 @@ $(document).ready(function () {
         window.open('addOrganisation.html?ctid='+client,'',"menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450");
     });
 
-
-    //////////////////////////////////////////////////
-
-    $.ajax({
-        url: urlRoot+'organisations/groups',
-        datatype: 'JSON',
-        type: 'GET',
-        success: function (groups) {
-            for (var i = 0; i < groups.length; i++) {
-                $('#client_group').append('<option value=' + groups[i].id + '>' + groups[i].group + '</option>');
-            }
-        }
-    });
-
-    //form data from Organisation
-    $.ajax({
-        url: urlRoot+'organisations/form-data',
-        datatype: 'JSON',
-        type: 'GET',
-        success: function (data) {
-            glob = data;
-            for (var i = 0; i < data.business_natures.length; i++) {
-                $('#nature_business').append('<option value=' + data.business_natures[i].id + '>' + data.business_natures[i].business_nature + '</option>');
-            }
-
-            for (var i = 0; i < data.industry_types.length; i++) {
-                $('#industryType').append('<option value=' + data.industry_types[i].id + '>' + data.industry_types[i].industry_type + '</option>');
-            }
-
-            for (var i = 0; i < data.business_types.length; i++) {
-                $('#businessType').append('<option value=' + data.business_types[i].id + '>' + data.business_types[i].business_type + '</option>');
-            }
-            console.log('Company Prefilled data Added.')
-
-        },
-        error: function (data) {
-            swal('Server is not working:' + data);
-        }
-    });
-
-    //form data from clients
-    $.ajax({
-        url: urlRoot+'clients/form-data',
-        datatype: 'JSON',
-        type: 'GET',
-        success: function (data) {
-            for (var i = 0; i < data.company_type.length; i++) {
-                $('#company_types').append('<option value=' + data.company_type[i].id + '>' + data.company_type[i].company_type + '</option>');
-            }
-            for (var i = 0; i < data.stock_exchange.length; i++) {
-                $('#company_stock').append('<option value=' + data.stock_exchange[i].id + '>' + data.stock_exchange[i].stock_exchange + '</option>');
-            }
-        }
-    });
-
-    //auto filling forms prefilled data
-    $.ajax({
-        url: urlRoot+'contacts/form-data',
-        datatype: 'JSON',
-        type: 'GET',
-        async: true,
-        success: function (data) {
-            globalContact = data;
-            for (var i = 0; i < data.titles.length; i++) {
-                $('.selTitle').append('<option value=' + data.titles[i].id + '>' + data.titles[i].title + '</option>');
-            }
-
-            for (var i = 0; i < data.categories.length; i++) {
-                $('.contactnumber_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
-                $('.email_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
-                $('.address_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
-            }
-
-            for (var i = 0; i < data.services.length; i++) {
-                $('#services').append('<option value=' + data.services[i].id + '>' + data.services[i].service + '</option>');
-            }
-
-            for(var i = 0; i < data.genders.length; i++){
-                $('#clientsContact_Gender').append('<option value=' + data.genders[i].id + '>' + data.genders[i].gender + '</option>');
-            }
-
-            console.log('Pre filled data added!!!');
-        },
-        error: function (data) {
-            swal('Server is not working:' + data);
-        }
-    });
 
     // Convert to client has been selected
     var currentOrganisationsId;
@@ -1246,8 +1262,8 @@ $(document).ready(function () {
     var edit = true;
     var editC = true;
     $('#clientsContact_datatable tbody').on('click', 'div.cc_update', function () {
-        var legalStats = $('#client_legalstatus').val();
-        if(legal == 1 && legalStats == 1){
+        // var legalStats = $('#client_legalstatus').val();
+        if(legal == 1){
             if(edit){
                 var relation = cC_table.row($(this).parents('tr')).data()[5];
                 $(this).parents('tr').children()[4].innerHTML = '<select id="cc_relation" width="100%"></select>';
@@ -1275,7 +1291,7 @@ $(document).ready(function () {
                 $(this).children().removeClass('glyphicon-ok').addClass('glyphicon-pencil');
                 edit = true;
             }
-        }else if(legal > 1 && legalStats == 1){
+        }else if(legal > 1){
             if(editC){
                 var purpose = cC_table.row($(this).parents('tr')).data()[7];
                 $(this).parents('tr').children()[5].innerHTML = '<input id="cc_purpose" type="text" width="100%" value='+ purpose +'>';
@@ -1564,14 +1580,15 @@ $(document).ready(function () {
                     indContact.phone_numbers = [];
                     indContact.social_media_links = [];
                     var c_org = new Object();
-                    var org = new Object();
-                    org.website = website;
-                    c_org.organisation = org;
-                    indContact.contact_organisation = c_org;
+                    // var org = new Object();
+                    // org.website = website;
+                    // c_org.organisation = org;
+                    // indContact.contact_organisation = c_org;
                     clientData.prospect = createUpdateContact(indContact,indContactId);
 
                     clientData.aadhar_no = $('#individual_aadhar').val();
                     clientData.typeOfWork = $('#individual_typeWork').val();
+                    clientData.website = website;
                     var pocObjArr = [];
                     var pocRows = cC_table.rows().data();
                     for (var c = 0; c < pocRows.length; c++) {
@@ -1789,15 +1806,16 @@ $(document).ready(function () {
                     indContact.phone_numbers = [];
                     indContact.email_addresses = [];
                     var c_org = new Object();
-                    var org = new Object();
-                    org.website = website;
-                    c_org.organisation = org;
-                    c_org.organisation = org;
-                    indContact.contact_organisation = c_org;
+                    // var org = new Object();
+                    // org.website = website;
+                    // c_org.organisation = org;
+                    // c_org.organisation = org;
+                    // indContact.contact_organisation = c_org;
                     clientData.prospect = createQuickContact(indContact);
 
                     clientData.aadhar_no = $('#individual_aadhar').val();
                     clientData.typeOfWork = $('#individual_typeWork').val();
+                    clientData.website = website;
 
                     //Creating POCs for individuals
                     var pocObjArr = [];
