@@ -190,6 +190,9 @@ $(document).ready(function () {
                 url:urlRoot+'employees',
                 datatype:'JSON',
                 type:'POST',
+                headers:{
+                    "X-CSRFToken": csrftoken
+                },
                 data:empJSON,
                 success:function(data){
                     swal('Employee was Added!');
@@ -203,6 +206,9 @@ $(document).ready(function () {
                 url:urlRoot+'employees',
                 datatype:'JSON',
                 type:'PUT',
+                headers:{
+                    "X-CSRFToken": csrftoken
+                },
                 data:empJSON,
                 success:function(data){
                     swal('Employee was updated!');

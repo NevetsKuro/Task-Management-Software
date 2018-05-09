@@ -283,6 +283,7 @@ $(document).ready(function(){
                 datatype:'JSON',
                 type:'POST',
                 headers: {
+                    "X-CSRFToken": csrftoken,
                     "content-type": "application/json",
                     "cache-control": "no-cache"
                 },
@@ -306,6 +307,7 @@ $(document).ready(function(){
                 datatype:'JSON',
                 type:'PUT',
                 headers: {
+                    "X-CSRFToken": csrftoken,
                     "content-type": "application/json",
                     "cache-control": "no-cache"
                 },

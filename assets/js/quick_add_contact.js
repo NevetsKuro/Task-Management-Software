@@ -197,6 +197,9 @@ $(document).ready(function(){
             datatype: 'JSON',
             async: false,
             method: 'POST',
+            headers:{
+                "X-CSRFToken": csrftoken
+            },
             data: JSON.stringify(contact),
             processData: false,
             headers: {

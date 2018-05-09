@@ -1761,6 +1761,9 @@ $(document).ready(function () {
                     async: true,
                     crossDomain: true,
                     url: url+''+id+'/',
+                    headers:{
+                        "X-CSRFToken": csrftoken
+                    },
                     type: 'PUT',
                     headers: {
                         "content-type": "application/json",
@@ -1983,6 +1986,9 @@ $(document).ready(function () {
                     url: url,
                     type: 'POST',
                     contentType: 'application/json',
+                    headers:{
+                        "X-CSRFToken": csrftoken
+                    },
                     data: clientJSON,
                     success: function (data) {
                         swal('Client added');

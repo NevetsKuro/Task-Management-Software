@@ -811,6 +811,9 @@ $(document).ready(function(){
                     crossDomain: true,
                     url:urlRooT+'contacts/'+currentContactsId+'/?',
                     datatype:'JSON',
+                    headers:{
+                        "X-CSRFToken": csrftoken
+                    },
                     type:'PUT',
                     headers: {
                         "content-type": "application/json",
@@ -896,6 +899,9 @@ $(document).ready(function(){
                 $.ajax({
                     url:urlRooT+'contacts/?',
                     type:'POST',
+                    headers:{
+                        "X-CSRFToken": csrftoken
+                    },
                     contentType:'application/json',
                     datatype:'JSON',
                     data:contactJSON,
