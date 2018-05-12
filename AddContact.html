@@ -38,8 +38,8 @@
 
 <body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
 
-    <div class="page-loader" style="display: none;"></div>
-    
+    <!-- <div class="page-loader" style="display: none;"></div> -->
+    <!-- <div id="loader"></div> -->
     <i class="btn-theme-switcher icon-cog hidden-xs"></i>
     
     <!-- Page Loader -->
@@ -200,36 +200,37 @@
                                 </div>
                                 <div>
                                     <!--****** Start Colored Modal Footer******-->
-                                    <div class="modal modal-warning bg-header" id="organisation-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content animated fadeOut">
-                                                    <div class="modal-header">
-                                                        <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                        <h4 class="modal-title">
-                                                            <strong>Organisations</strong>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col-xs-4 col-sm-4 text-bold f-s-12">Sr. No</div>
-                                                            <div class="col-xs-4 col-sm-4 text-bold f-s-12">Name</div>
-                                                            <div class="col-xs-1 col-sm-1 text-bold f-s-12">Group</div>
-                                                        </div>
-                                                        <hr>
-                                                        <br/>
-                                                        <div class="row" id="orgList">
-                                                            <!-- DATA FROM JSON -->
-                                                        </div>
-                                                    </div>
+                                <div class="modal modal-warning bg-header" id="organisation-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated fadeOut">
+                                            <div class="modal-header">
+                                                <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                                <h4 class="modal-title">
+                                                    <strong>Organisations</strong>
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-xs-4 col-sm-4 text-bold f-s-12">Sr. No</div>
+                                                    <div class="col-xs-4 col-sm-4 text-bold f-s-12">Name</div>
+                                                    <div class="col-xs-1 col-sm-1 text-bold f-s-12">Group</div>
+                                                </div>
+                                                <hr>
+                                                <br/>
+                                                <div class="row" id="orgList">
+                                                    <!-- DATA FROM JSON -->
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--****** Start Colored Modal Footer******-->
+                                    </div>
                                 </div>
-
-
+                                <!--****** Start Colored Modal Footer******-->
+                                </div>
+                                
+                             
+                                
                             <div class="panel">
 
                                 <div class="panel-body panel-bodyContact">
@@ -820,10 +821,17 @@
         
         //paste this code under the head tag or in a separate js file.
         // Wait for window load
-        $(window).load(function() {
-            // Animate loader off screen
-            $(".se-pre-con").fadeOut("slow");;
-        });
+        // $(window).load(function() {
+        //     // Animate loader off screen
+        //     $(".se-pre-con").fadeOut("slow");;
+        // });
+        // function showPage(){
+        //     $('.wrapper').removeClass('hide');
+        //     $('.loader').addClass('hide');
+        // }
+        // $(document).ready(function(){
+        //     setTimeout(showPage(),5000);
+        // });
 
         /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
         $.widget.bridge('uibutton', $.ui.button);

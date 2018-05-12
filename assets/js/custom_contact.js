@@ -719,7 +719,7 @@ $(document).ready(function(){
         var website = getWebsiteRow().link == ""?getWebsiteRow():[];
         var potential_services = $('#addContact_potential_service').val();
         var branch = $('.hoaddress_from').attr('id');
-        var branchChk = $("input[name='branchChecked']").prop('checked');
+        var branchChk = $("input[name='branchChecked']").is(':checked');//$("input[name='branchChecked']").prop('checked');
 
         if(title == null){
             swal('Please select a title!');

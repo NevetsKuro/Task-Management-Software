@@ -39,7 +39,7 @@ $(document).ready(function(){
     //new tabs for hoaddress
     function addHoAddress(){
         $('#hoaddress-row').append(`
-        <div class='row well new'>
+        <div class='row well new' bid="null">
         
             <div class='col-xs-1 col-sm-1'>
                 <label class='checkbox'>
@@ -110,10 +110,12 @@ $(document).ready(function(){
                         for(let i=0; i< branches.length; i++){
                             if(i > 0){
                                 addHoAddress();
+                                $('#hoaddress-row .row:last').attr('bid',branches[i].id);
                                 $('#hoaddress-row .row:last .hoBranchName').val(branches[i].name);
                                 $('#hoaddress-row .row:last .hoaddresses').val(branches[i].address);        
                                 $('#hoaddress-row .row:last .hoaddress_isHO').selected(branches[i].is_head_office);
                             }else{
+                                $('#hoaddress-row .row').attr('bid',branches[i].id);
                                 $('#hoaddress-row .row .hoBranchName').val(branches[i].name);
                                 $('#hoaddress-row .row .hoaddresses').val(branches[i].address);
                                 $('#hoaddress-row .row .hoaddress_isHO').selected(branches[i].is_head_office);
@@ -194,7 +196,6 @@ $(document).ready(function(){
                                     }
                                     break;
                             }
-
                             orgData[dataType] = Val;
                         });
                     });

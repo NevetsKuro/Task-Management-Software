@@ -524,7 +524,7 @@ $(document).ready(function () {
     //         }
     //     });
     // });
-
+    
     $(document).on('change','#client_group',function(){
         var groupId = $(this).val();
         $.ajax({
@@ -1548,7 +1548,7 @@ $(document).ready(function () {
         var clientData = new Object();
         var url = '';
         var pocIdArr = $('#clientsContact_datatable').DataTable().rows(1).data();
-        clientData.send_mail = $('#branch_notify').prop('checked');        
+        clientData.send_mail = $('#branch_notify').prop('checked');
 
         var valid = validator();
         if(valid){
@@ -1571,6 +1571,11 @@ $(document).ready(function () {
                     var lname = $('#individual_lname').val();
                     var dob = getFormateDateToServer($('#individual_dob').val());
                     var website = $('#website').val();
+                    if (website.indexOf('http://') > -1 || website.indexOf('https://') > -1) {
+                        website = website;
+                    } else {
+                        website = "http://" + website;
+                    }
                     var Name = fname +' '+ mname+ ' ' +lname;
                     var indContact = new Object();
                     indContact.title = titleId;
@@ -1800,7 +1805,11 @@ $(document).ready(function () {
                     var Name = fname + ' ' +mname + ' ' + lname;
                     var dob = getFormateDateToServer($('#individual_dob').val());
                     var website = $('#website').val();
-
+                    if (website.indexOf('http://') > -1 || website.indexOf('https://') > -1) {
+                        website = website;
+                    } else {
+                        website = "http://" + website;
+                    }
                     var indContact = new Object();
                     indContact.title = titleId;
                     indContact.name = Name;

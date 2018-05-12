@@ -321,7 +321,13 @@
             websiteCategorySelected = $(this).find('.socialmedia_category').val();
             website = new Object();
             website['social_media'] = websiteCategorySelected;
-            website['link'] = $(this).find('.social_media_link').val();
+            var webs = $(this).find('.social_media_link').val();
+            if (webs.indexOf('http://') > -1 || webs.indexOf('https://') > -1) {
+                    webs = webs;
+                } else {
+                    webs = "http://" + webs;
+                }
+            website['link'] = 
             websiteArr.push(website);
         });
         return websiteArr;
@@ -332,6 +338,10 @@
         $('#hoaddress-row .new').each(function( index ) {
             branches = new Object();
             console.log(index + ' has been selected : ' + ($(this).find('.hoaddress_from').is(":checked")==true?true:false));
+            var bid = $(this).attr("bid");
+            if(bid != "null"){ 
+                branches['id'] = bid;
+             }
             branches['name'] = $(this).find('.hoBranchName').val();            
             branches['address'] = $(this).find('.hoaddresses').val();           
             branches['is_head_office'] = $(this).find('.hoaddress_isHO').is(':checked');

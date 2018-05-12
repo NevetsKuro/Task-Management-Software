@@ -129,13 +129,12 @@ $(document).ready(function(){
         });
     }
 
-    function createStasks(tiD){
+    function createStasks(){
         var subTasks = [];
         var subTask = {};
         $('#subTaskTable .new').each(function(index){
             subTask = new Object();
             subTask.title = $(this).find('.SubTask_name').val();
-            subTask.task = tiD;
             subTaskID = $(this).attr('id');
             subTask.duration = $(this).find('.SubTask_duration').val();
             subTask.deadline = getFormateDateToServer($(this).find('.SubTask_Deadline_Date').val())+'T'+$(this).find('.SubTask_Deadline_Time').val().slice(0,-2)+':00Z';
@@ -143,53 +142,10 @@ $(document).ready(function(){
             subTask.weightage = $(this).find('.SubTask_Weightage').val();
             subTask.completed = $(this).find('.SubTask_perCompleted').val();
             subTask.status = 1;//$(this).find('.SubTask_Status').val();
-            // subTasks.push(subTask);
-            var subtaskJSON = JSON.stringify(subTask);
-            console.log(subTask);
-            if(!subTaskID){
-                $.ajax({
-                    async: true,
-                    crossDomain: true,
-                    url:urlRoot+'subtasks/',
-                    datatype:'JSON',
-                    type:'POST',
-                    headers: {
-                        "content-type": "application/json",
-                        "cache-control": "no-cache"
-                    },
-                    processData: false,
-                    data:subtaskJSON,
-                    success:function(){
-                        swal('Task Created!!');
-                        console.log('Sub-Task added!');
-                    },
-                    error:function(error){
-                        swal(error.responseText);
-                    }
-                });
-            }else if(subTaskID){
-                $.ajax({
-                    async: true,
-                    crossDomain: true,
-                    url:urlRoot+'subtasks/'+subTaskID+'/?',
-                    datatype:'JSON',
-                    type:'PUT',
-                    headers: {
-                        "content-type": "application/json",
-                        "cache-control": "no-cache"
-                    },
-                    processData: false,
-                    data:subtaskJSON,
-                    success:function(){
-                        swal('Task Updated!!');
-                        console.log('Sub-Task Updated!');
-                    },
-                    error:function(error){
-                        swal(error.responseText);
-                    }
-                });
-            }
-        });
+            subTasks.push(subTask);
+            console.log(subTasks);
+            });
+        return subTasks;
     }
     ///////////////////////////////////////////////// Prefilled Data /////////////////////////////////////////////
     $.getJSON(urlRoot+'contacts/form-data',function(data){
@@ -254,6 +210,7 @@ $(document).ready(function(){
 
     $(document).on('click','#submitTask',function(){
         
+        var RecurTask = new Object();
         var tasksData = new Object();
         var isExternal= $('#taskType').prop('checked');
         tasksData.title = $('#taskTitle').val();
@@ -270,14 +227,18 @@ $(document).ready(function(){
         tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val().slice(0,-2)+':00Z';
         tasksData.duration = $('#taskDuration').val();
         tasksData.statutoryDueDate = getFormateDateToServer($('#taskStats').val()) + 'T04:13:13Z';
-        var taskJSON = JSON.stringify(tasksData);
-        console.log(taskJSON);
+        RecurTask.startDateTime = getFormateDateToServer($('#taskRdate').val()) +'T'+ $('#taskRtime').val().slice(0,-2)+':00Z';
+        RecurTask.periods = $('#taskPeriods').val();
+        RecurTask.frequency = $('#taskFrequeny').val();
+        RecurTask.task = tasksData;
+        RecurTask.subtasks = createStasks();
+        var RecurJSON = JSON.stringify(RecurTask);
         
         if(!tid){
             $.ajax({
                 async: true,
                 crossDomain: true,
-                url:urlRoot+'tasks/',
+                url:urlRoot+'tasks/recurrings/',
                 datatype:'JSON',
                 type:'POST',
                 headers: {
@@ -286,22 +247,20 @@ $(document).ready(function(){
                     "cache-control": "no-cache"
                 },
                 processData: false,
-                data:taskJSON,
+                data:RecurJSON,
                 success:function(data){
-                    swal('Task Created!!');
-                    console.log('Task added!');
-                    createStasks(data.id);
+                    swal('Recurring Task Created!!');
+                    console.log('Recurring Task added!');
                 },
                 error:function(error){
                     swal(error.responseText);
                 }
             });
-            // var subTaskJSON = createStasks();
         }else if(tid){
             $.ajax({
                 async: true,
                 crossDomain: true,
-                url:urlRoot+'tasks/'+tid+'/?',
+                url:urlRoot+'tasks/recurrings/'+tid+'/?',
                 datatype:'JSON',
                 type:'PUT',
                 headers: {
@@ -310,11 +269,10 @@ $(document).ready(function(){
                     "cache-control": "no-cache"
                 },
                 processData: false,
-                data:taskJSON,
+                data:RecurJSON,
                 success:function(data){
-                    swal('Task Updated!!');
-                    console.log('Task Updated!');
-                    createStasks(data.id);
+                    swal('Recurring Task Updated!!');
+                    console.log('Recurring Task Updated!');
                 },
                 error:function(error){
                     swal(error.responseText);

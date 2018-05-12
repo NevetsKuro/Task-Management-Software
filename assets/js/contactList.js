@@ -132,7 +132,7 @@ $(document).ready(function () {
     });
     }else if(listOf === 'client'){
         $.ajax({
-            url:urlRoot+'clients/', 
+            url:urlRoot+'clients/allclients', 
             datatype: "JSON",
             type: 'GET',
             success: function (clientListData) {

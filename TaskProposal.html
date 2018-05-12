@@ -204,7 +204,7 @@
                                                     <hr>
                                                     <div class="row custom_inline">
                                                         <div class="col-sm-12">
-                                                        <label class="label">Employee Cost:</label>
+                                                        <label class="label" title="Select an employee">Employee Cost:</label>
                                                         </div>
                                                         <label class="label"><span id="empCost"></span></label>
                                                     </div><br>
@@ -216,18 +216,27 @@
                                                     </div><br>
                                                     <div class="row custom_inline">
                                                         <div class="col-sm-12">
+                                                        <label class="label">Total Cost:</label>
+                                                        </div>
+                                                        <label class="label"><span id="totalCost"></span></label>
+                                                    </div><br>
+                                                    <div class="row custom_inline">
+                                                        <div class="col-sm-12">
                                                         <label class="label">Margin:</label>
                                                         </div>
-                                                        <label class="input"><input id="adminCost" type="number"></label>
+                                                        <label class="input"><span id="marginCost"></span>
                                                     </div><br>
                                                     <hr>
                                                     <div class="row custom_inline">
                                                         <div class="col-sm-12">
-                                                        <label class="label">Fee Total:</label>
+                                                        <label class="label">Fee:</label>
                                                         </div>
-                                                        <label class="input"><input id="totalCost" type="number" disabled></label>
+                                                        <label class="input"><input id="totalFee" type="text" disabled></label>
                                                         <div class="col-sm-4">
-                                                            <input class="btn btn-raised buttonDefSize btn-success" value="Insert">
+                                                            <input class="btn btn-raised buttonDefSize btn-success feeCheck" value="Check">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input class="btn btn-raised buttonDefSize btn-success feeSubmit" value="Insert">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -237,7 +246,7 @@
                                     <!--****** Start Colored Modal Footer******-->
                                 <div class="panel">
                                     <div class="panel-body">
-                                            <footer class="text-right m-t-20">
+                                        <footer class="text-right m-t-20">
                                             <button type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Reset</button>
                                             <button id="taskProposalSubmit" type="submit" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Submit</button>
                                             <div class="note"><strong>Note:</strong> Fields marked with <span class="text-danger" >*</span> are to be filled mandatorily.</div>
