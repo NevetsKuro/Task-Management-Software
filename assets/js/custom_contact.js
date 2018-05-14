@@ -850,9 +850,9 @@ $(document).ready(function(){
                 //lead status form data
                 var CF_leadStatus = $('#addContact_lead_status').val();
                 var CF_priority = $('#range_02').val();
-                var CF_originator = $('#addContact_originator').val();
+                var CF_originator = [1];//$('#addContact_originator').val();
                 var CF_assignee = [1];//$('#addContact_assignee').val();
-                var CF_potentialService = [1];//$('#addContact_potential_service').val();
+                var CF_potentialService = $('#addContact_potential_service').val();
                 var CF_source = $('#addContact_source').val();
                 var CF_reference = $('#addContact_reference').val();
                 var CF_notes = $('#addContact_notes').val();

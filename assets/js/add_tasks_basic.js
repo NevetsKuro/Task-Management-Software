@@ -68,7 +68,7 @@ $(document).ready(function(){
                 <td class="btn-group">
                     <button class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
                     <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle"> <span class="caret"></span></button>
-                    <ul class="dropdown-menu pull-right">
+                    <ul class="dropdown-menu pull-right idStored">
                     <li class="custom_inline"><a href="#">Transfer</a><i class="glyphicon glyphicon-transfer"></i></li><br>
                     <li class="custom_inline st_remove"><a href="#">Remove</a><i class="glyphicon glyphicon-remove"></i></li>
                     </ul>
@@ -84,7 +84,35 @@ $(document).ready(function(){
     $(document).on('click',"#addSubTask",addSTasksRow);
 
     $(document).on('click','.st_remove',function(){
-        $(this).parentsUntil('tbody').remove();
+        swal({
+            title: "Are you sure?",
+            text: "You want to delete this record!!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                let ssid = $(this).parents('tr').attr('id');
+                if(ssid != null){
+                    $.ajax({
+                        url: urlRoot + "subtasks/" +ssid+'/',
+                        type: 'DELETE',
+                        datatype: "JSON",
+                        success: function (data) {
+                            swal('Subtask has been deleted!!');
+                        }
+                    });
+                }
+                
+                $(this).parentsUntil('tbody').remove();
+                swal("Poof! Your record has been deleted!", {
+                    icon: "success",
+                });
+            } else {
+                swal("The selected row is not deleted!");
+            }
+        });
     });
     
     function fillSubTask(tid){
@@ -199,26 +227,34 @@ $(document).ready(function(){
     });
 
     ///////////////////////////////////////////////// GET REQUEST ///////////////////////////////////////////////
-   
-    $(document).on('change','#taskService',function(){
-            var service = $(this).val();
-            $.getJSON(urlRoot+'subtasks/templates?service='+service,function(templates){
-                $('#subTaskTable .new:last .SubTask_name').val('');
-                $('#subTaskTable .new:last .SubTask_duration').val('');
-                for(let i=0; i < templates.length; i++){
-                    if(i > 0){
-                            addSTasksRow();
-                            $('#subTaskTable .new:last .SubTask_name').val(templates[i].title);
-                            $('#subTaskTable .new:last .SubTask_duration').val(templates[i].duration);
-                    }else{
-                            $('#subTaskTable .new .SubTask_name').val(templates[i].title);
-                            $('#subTaskTable .new .SubTask_duration').val(templates[i].duration);
-                    }
-                }   
-            });
-    });
+   var data_added = false;
+   var templates  = function(){
+        var service = $(this).val();
+        if(data_added){
+            $('#subTaskTable .new input').val('');
+            $('#subTaskTable .new').not('.new:first').empty();
+        }
+        $.getJSON(urlRoot+'subtasks/templates?service='+service,function(templates){
+            $('#subTaskTable .new:last .SubTask_name').val('');
+            $('#subTaskTable .new:last .SubTask_duration').val('');
+            for(let i=0; i < templates.length; i++){
+                if(i > 0){
+                        addSTasksRow();
+                        $('#subTaskTable .new:last .SubTask_name').val(templates[i].title);
+                        $('#subTaskTable .new:last .SubTask_duration').val(templates[i].duration);
+                }else{
+                        $('#subTaskTable .new .SubTask_name').val(templates[i].title);
+                        $('#subTaskTable .new .SubTask_duration').val(templates[i].duration);
+                }
+            }
+            data_added = true;
+        });
+    }
+
+    $(document).on('change','#taskService',templates);
 
     if(tid){
+        $(document).off('change','#taskService',templates);    
         $.getJSON(urlRoot+'tasks/'+tid,function(data){
             if(data.isExternal == true){
                 $('#taskType').bootstrapToggle('on');  

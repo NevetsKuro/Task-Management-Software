@@ -329,7 +329,7 @@ $(document).ready(function () {
                 contactListBody(searchResult);
             },
             error: function (err) {
-                swal('server not coonected!!!' + err);
+                swal('server not conected!!!' + err);
             },
             complete: function (data) {
                 if($('.cList').children().length == 0){

@@ -16,13 +16,15 @@ $(document).ready(function () {
     // var urlRoot = 'http://office-management-demo.herokuapp.com/';
     var urlRoot = 'http://35.202.86.61/office-management/';
 
-    $('.nameofBusiness').attr('disabled',true);
-
+    
     $('#file3').on('change',function(){
         $('#stat_document').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
     });
-
-
+    
+    $('.nameofBusiness').attr('disabled',true);
+    if(client && legal){
+        $('#client_group').attr('disabled',true);
+    }
     
     /////////////////////////////////// Prefilled Data  //////////////////////////////////////////////////
 
@@ -65,6 +67,7 @@ $(document).ready(function () {
 
     //form data from clients
     $.ajax({
+        async:true,
         url: urlRoot+'clients/form-data',
         datatype: 'JSON',
         type: 'GET',
@@ -155,6 +158,7 @@ $(document).ready(function () {
                         var commencement_date = $.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date));
                         $('#client_legalstatus').val(legal).trigger('change');
                         $('#PANNO').val(data.pan_no);
+                        $('#branch_notify').attr('checked',true);
                         var poc = data.pocs;
                         
                         //getting POC by contact id
@@ -189,9 +193,9 @@ $(document).ready(function () {
                                         row.title+' '+row.name,
                                         p_email,
                                         p_phone,
-                                        rel?rel:'Not Mentioned',                                                                                                   //relation
+                                        rel?rel:'Not Mentioned',                                                                        //relation
                                         dess?dess:'Not Mentioned',            //designation
-                                        pur?pur:'Not Mentioned',                                                                                          //purpose
+                                        pur?pur:'Not Mentioned',                                            //purpose
                                         '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
                                     ]).draw(false);
                             });
@@ -201,12 +205,9 @@ $(document).ready(function () {
                             $('#individual_aadhar').val(data.aadhar_no);
                             $('#individual_typeWork').val(data.typeOfWork);
                             $('#website').val(data.website);
-                            // client_organisation(data.prospect);
-                            indContactId = data.prospect;
+                            // indContactId = data.prospect;
+                            indContactId = data.prospect['id'];
                             $.getJSON(urlRoot+'contacts/'+indContactId,function(data){
-                                // if(data.contact_organisation){
-                                //     $('#website').val(data.contact_organisation.organisation.website);
-                                // }
                                 $('#addContact_title').val(data.title);
                                 var nameArr = data.name.split(' ');
                                 $('#individual_fname').val(nameArr[0]);
@@ -1241,7 +1242,7 @@ $(document).ready(function () {
                     var cid = cC_table.row($(this).parent()).data()[1];
                     
                     $.ajax({
-                        url: "https://office-management-demo.herokuapp.com/contacts/" +cid+'/',
+                        url: urlRoot + "contacts/" +cid+'/',
                         type: 'DELETE',
                         datatype: "JSON",
                         success: function (data) {
@@ -1262,8 +1263,8 @@ $(document).ready(function () {
     var edit = true;
     var editC = true;
     $('#clientsContact_datatable tbody').on('click', 'div.cc_update', function () {
-        // var legalStats = $('#client_legalstatus').val();
-        if(legal == 1){
+        var legalS = $('#client_legalstatus').val();
+        if(legalS == 1){
             if(edit){
                 var relation = cC_table.row($(this).parents('tr')).data()[5];
                 $(this).parents('tr').children()[4].innerHTML = '<select id="cc_relation" width="100%"></select>';
@@ -1291,7 +1292,7 @@ $(document).ready(function () {
                 $(this).children().removeClass('glyphicon-ok').addClass('glyphicon-pencil');
                 edit = true;
             }
-        }else if(legal > 1){
+        }else if(legalS > 1){
             if(editC){
                 var purpose = cC_table.row($(this).parents('tr')).data()[7];
                 $(this).parents('tr').children()[5].innerHTML = '<input id="cc_purpose" type="text" width="100%" value='+ purpose +'>';
@@ -1562,7 +1563,6 @@ $(document).ready(function () {
                 clientData.pan_no = $('#PANNO').val();
                 clientData.services = [];
                 clientData.services.push(1); //Change later
-                
 
                 if (legalStatus == 1) {
                     var titleId = $('#addContact_title').val();
@@ -1577,23 +1577,29 @@ $(document).ready(function () {
                         website = "http://" + website;
                     }
                     var Name = fname +' '+ mname+ ' ' +lname;
-                    var indContact = new Object();
-                    indContact.title = titleId;
-                    indContact.name = Name; 
-                    indContact.dob = dob;
-                    indContact.email_addresses = [];
-                    indContact.phone_numbers = [];
-                    indContact.social_media_links = [];
+                    var indContactData = new Object();
+                    indContactData.title = titleId;
+                    indContactData.name = Name; 
+                    indContactData.dob = dob;
+                    indContactData.email_addresses = [];
+                    indContactData.phone_numbers = [];
+                    indContactData.social_media_links = [];
                     var c_org = new Object();
-                    // var org = new Object();
-                    // org.website = website;
-                    // c_org.organisation = org;
-                    // indContact.contact_organisation = c_org;
-                    clientData.prospect = createUpdateContact(indContact,indContactId);
+                    clientData.prospect = createUpdateContact(indContactData,indContactId);
 
                     clientData.aadhar_no = $('#individual_aadhar').val();
                     clientData.typeOfWork = $('#individual_typeWork').val();
                     clientData.website = website;
+                    // var globalClient2 = [];
+                    // $.ajax({
+                    //     async:true,
+                    //     url: urlRoot+'clients/form-data',
+                    //     datatype: 'JSON',
+                    //     type: 'GET',
+                    //     success: function (data) {
+                    //         globalClient2 = data
+                    //     }
+                    // });
                     var pocObjArr = [];
                     var pocRows = cC_table.rows().data();
                     for (var c = 0; c < pocRows.length; c++) {
@@ -1602,11 +1608,12 @@ $(document).ready(function () {
                         //Create contact for each POC
                         var relation = row[5]; //relation
                         var newId = row[1]; //id
-            
+                        
+                        var rel_Id = globalClient.relation.find(function(rel){return rel.relation == relation}).id
                         
                         pocObjArr.push({
                             "contact":newId,
-                            "relation":relation,
+                            "relation":rel_Id,
                             "is_primary":false
                         });
                     }
@@ -1810,20 +1817,20 @@ $(document).ready(function () {
                     } else {
                         website = "http://" + website;
                     }
-                    var indContact = new Object();
-                    indContact.title = titleId;
-                    indContact.name = Name;
-                    indContact.dob = dob;
-                    indContact.email_addresses = [];
-                    indContact.phone_numbers = [];
-                    indContact.email_addresses = [];
+                    var indContactData = new Object();
+                    indContactData.title = titleId;
+                    indContactData.name = Name;
+                    indContactData.dob = dob;
+                    indContactData.email_addresses = [];
+                    indContactData.phone_numbers = [];
+                    indContactData.email_addresses = [];
                     var c_org = new Object();
                     // var org = new Object();
                     // org.website = website;
                     // c_org.organisation = org;
                     // c_org.organisation = org;
-                    // indContact.contact_organisation = c_org;
-                    clientData.prospect = createQuickContact(indContact);
+                    // indContactData.contact_organisation = c_org;
+                    clientData.prospect = createQuickContact(indContactData);
 
                     clientData.aadhar_no = $('#individual_aadhar').val();
                     clientData.typeOfWork = $('#individual_typeWork').val();
@@ -1870,7 +1877,7 @@ $(document).ready(function () {
                         //Create contact for each POC
                         var purpose = row[7]; //purpose
                         var newId = row[1]; //id
-            
+                        console.log(globalClient);
                         
                         pocObjArr.push({
                             "contact":newId,

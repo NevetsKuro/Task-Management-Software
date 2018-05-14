@@ -327,7 +327,7 @@
                 } else {
                     webs = "http://" + webs;
                 }
-            website['link'] = 
+            website['link'] = webs;
             websiteArr.push(website);
         });
         return websiteArr;
