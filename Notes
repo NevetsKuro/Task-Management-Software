@@ -1,13 +1,10 @@
 ////////////////////04-05-2018 bugs
-designation cannot be null
 6. contacts. vcard and image require url instead of string
 7. one client list - for all legal statuses
 
 Backend:
     change managers to employees
     branches is not getting updated in organisation.
-    purpose in companies is shown required?? - Same in every legal statuses.
-    HUF - change title into name of huf API
 
 ----------Drop client until issues fixed.----------------
 
@@ -16,11 +13,11 @@ Backend:
 //Images
 
 UI changes & scripting to b written
--add gstin in organisation
--change relation to dropdown
+-done
 
 
 Done-----
+designation cannot be null
 22. HUFs update. The change is only reflected in the response but not in the back end.
 19. What is title in huf? //Answer :-- Name _change_ name of huf. 
 17. TO-DO s how to add pocs from clients data to client form for editing //Answer :-- using id of contacts

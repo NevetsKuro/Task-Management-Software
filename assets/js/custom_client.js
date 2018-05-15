@@ -1609,7 +1609,12 @@ $(document).ready(function () {
                         var relation = row[5]; //relation
                         var newId = row[1]; //id
                         
-                        var rel_Id = globalClient.relation.find(function(rel){return rel.relation == relation}).id
+                        var rel_Id;
+                        if(relation.length > 2){ 
+                            rel_Id = globalClient.relation.find(function(rel){return rel.relation == relation}).id;
+                        }else{
+                            rel_Id = relation;
+                        }
                         
                         pocObjArr.push({
                             "contact":newId,

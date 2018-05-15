@@ -53,9 +53,15 @@ $(document).ready(function(){
                 </label>
             </div>
 
-            <div class='col-xs-6 col-sm-6'>
+            <div class='col-xs-3 col-sm-3'>
                 <label class='textarea textarea-expandable'>
                     <textarea update-orgCtrl="branches" class='hoaddresses'></textarea>
+                </label>
+            </div>
+
+            <div class="col-xs-3 col-sm-3">
+                <label class="input">
+                    <input update-orgCtrl="branches" type="number" class="hoGstin">
                 </label>
             </div>
             
@@ -113,16 +119,17 @@ $(document).ready(function(){
                                 $('#hoaddress-row .row:last').attr('bid',branches[i].id);
                                 $('#hoaddress-row .row:last .hoBranchName').val(branches[i].name);
                                 $('#hoaddress-row .row:last .hoaddresses').val(branches[i].address);        
+                                $('#hoaddress-row .row:last .hoGstin').val(branches[i].gstin);        
                                 $('#hoaddress-row .row:last .hoaddress_isHO').selected(branches[i].is_head_office);
                             }else{
                                 $('#hoaddress-row .row').attr('bid',branches[i].id);
                                 $('#hoaddress-row .row .hoBranchName').val(branches[i].name);
                                 $('#hoaddress-row .row .hoaddresses').val(branches[i].address);
+                                $('#hoaddress-row .row .hoGstin').val(branches[i].gstin);
                                 $('#hoaddress-row .row .hoaddress_isHO').selected(branches[i].is_head_office);
                             }
                         }
                         console.log('code ran once!!');
-                        
                     },
                     error:function(data){
                         alert('server is down'+ data);
@@ -222,10 +229,6 @@ $(document).ready(function(){
                             swal('Organisation data updated !!');
                                 
                             currentContactId = urlParam['cid'];
-                            // var urL = 'AddContact.html?contact='+currentContactId;
-                            // $(location).attr('href',urL);
-                            // window.opener.updatedOrgId = orgId;
-                            // console.log('updateOrgId: ' + window.opener.updatedOrgId);
                             console.log('current Organisation Id'+ orgId);
                             if(isContactForm){
                                 window.opener.contact_organisation(orgId);

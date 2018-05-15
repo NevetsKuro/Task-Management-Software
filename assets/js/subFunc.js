@@ -87,7 +87,7 @@
             
         });
 
-        $(document).on('change',".din_valid", function(){    
+        $(document).on('change',".din_valid", function(){
             var inputvalues = $(this).val();
             var dinformat = new RegExp('^[0-9]{8}$');
             
@@ -343,7 +343,8 @@
                 branches['id'] = bid;
              }
             branches['name'] = $(this).find('.hoBranchName').val();            
-            branches['address'] = $(this).find('.hoaddresses').val();           
+            branches['address'] = $(this).find('.hoaddresses').val();
+            branches['gstin'] = $(this).find('.hoGstin').val();
             branches['is_head_office'] = $(this).find('.hoaddress_isHO').is(':checked');
             branchesHead.push(branches);
         });

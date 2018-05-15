@@ -84,37 +84,49 @@ $(document).ready(function(){
     $(document).on('click',"#addSubTask",addSTasksRow);
 
     $(document).on('click','.st_remove',function(){
-        swal({
-            title: "Are you sure?",
-            text: "You want to delete this record!!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                let ssid = $(this).parents('tr').attr('id');
-                if(ssid != null){
-                    $.ajax({
-                        url: urlRoot + "subtasks/" +ssid+'/',
-                        type: 'DELETE',
-                        datatype: "JSON",
-                        success: function (data) {
-                            swal('Subtask has been deleted!!');
-                        }
+        let ssid = $(this).parents('tr').attr('id');
+        if(ssid){
+            swal({
+                title: "Are you sure?",
+                text: "You want to delete this record!!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    
+                    if(ssid != null){
+                        $.ajax({
+                            url: urlRoot + "subtasks/" +ssid+'/',
+                            type: 'DELETE',
+                            datatype: "JSON",
+                            success: function (data) {
+                                swal('Subtask has been deleted!!');
+                            }
+                        });
+                    }
+                    
+                    $(this).parentsUntil('tbody').remove();
+                    swal("Poof! Your record has been deleted!", {
+                        icon: "success",
                     });
+                } else {
+                    swal("The selected row is not deleted!");
                 }
-                
-                $(this).parentsUntil('tbody').remove();
-                swal("Poof! Your record has been deleted!", {
-                    icon: "success",
-                });
-            } else {
-                swal("The selected row is not deleted!");
-            }
-        });
+            });
+        }else{
+            $(this).parentsUntil('tbody').remove();
+        }
     });
     
+    $(document).on('change','.calc',function(){
+        let id = $('#taskProposal').val()
+        $.getJSON(urlRoot+'tasks/proposals/'+id,function(data){
+            $('#taskProposalFee').val(data.fees);            
+        });
+    })
+
     function fillSubTask(tid){
         $.getJSON(urlRoot+'/subtasks/?task='+tid,function(data){
             
@@ -223,6 +235,12 @@ $(document).ready(function(){
     $.getJSON(urlRoot+'contacts/form-data',function(data){
         for (let i = 0; i < data.services.length; i++) {
             $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
+        }
+    });
+
+    $.getJSON(urlRoot+'tasks/proposals',function(data){
+        for (let i = 0; i < data.length; i++) {
+            $('#taskProposal').append('<option value='+data[i].proposalNumber+'>'+data[i].proposalNumber+'</option>');
         }
     });
 
@@ -337,7 +355,7 @@ $(document).ready(function(){
             $.ajax({
                 async: true,
                 crossDomain: true,
-                url:urlRoot+'tasks/'+tid+'/?',
+                url:urlRoot+'tasks/'+tid+'/',
                 datatype:'JSON',
                 type:'PUT',
                 headers: {
