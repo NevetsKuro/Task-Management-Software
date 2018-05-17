@@ -123,7 +123,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label class="label">StartDate Time:</label>
+                                            <label class="label">Start DateTime:
+                                                <span class="text-danger">*</span></label>
                                             <label class="input col-lg-6 lNega10">
                                                 <input id="taskRdate" type="text" class="datepickr" placeholder="Date">
                                             </label>
@@ -160,7 +161,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label class="label">Start Time:</label>
+                                            <label class="label">Start Date/Time:
+                                                <span class="text-danger">*</span></label>
                                             <label class="input col-lg-6 lNega10">
                                                 <input id="taskSdate" type="text" class="datepickr" placeholder="Date">
                                             </label>
@@ -169,7 +171,8 @@
                                             </label>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="label">End Time:</label>
+                                            <label class="label">End Date/Time:
+                                                <span class="text-danger">*</span></label>
                                             <label class="input col-lg-6 lNega10">
                                                 <input id="taskEdate" type="text" class="datepickr" placeholder="Date">
                                             </label>
@@ -186,7 +189,8 @@
                                             </label>
                                         </div>
                                         <div class="col-lg-4">
-                                            <label class="label">Statutory Due Date:</label>
+                                            <label class="label">Statutory Due Date:
+                                                <span class="text-danger">*</span></label>
                                             <label class="input">
                                                 <input id="taskStats" type="text" class="datepickr">
                                             </label>
@@ -199,12 +203,12 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4">
+                                        <!-- <div class="col-lg-4">
                                             <label class="label">Originator:</label>
                                             <label class="select">
                                                 <select id="taskOrgin" class="select2"></select>
                                             </label>
-                                        </div>
+                                        </div> -->
                                         <div class="col-lg-4">
                                             <label class="label">Controller:</label>
                                             <label class="select">
@@ -243,9 +247,10 @@
                                             <table id="subTaskTable" class="table table-small-font table-bordered table-striped m-b-0 ">
                                                 <thead>
                                                     <tr>
-                                                        <th width="20%">Name</th>
+                                                        <th width="20%">Name<span class="text-danger">*</span></th>
                                                         <th width="9%">Duration</th>
-                                                        <th width="12%">DeadLine</th>
+                                                        <th width="12%">DeadLine
+                                                            <span class="text-danger">*</span></th>
                                                         <th width="18%">Assignee</th>
                                                         <th width="9%">Weightage</th>
                                                         <th width="10%">% Complete</th>

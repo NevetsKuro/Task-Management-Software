@@ -331,7 +331,9 @@
                                                             </div>
                                                             
                                                             <div class="col-sm-6">
-                                                                <label class="label">Date of Birth:</label>
+                                                                <label class="label">Date of Birth:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
                                                                 <label class="input">
                                                                     <input update-ctrl="dob" id="addContact_dob" class="dobdatepickr" type="text" placeholder="e.g. dd/mm/yy">
                                                                 </label>
@@ -623,7 +625,7 @@
                                                         </div>
 
                                                         <div class="row well">
-                                                            <label class="label col-sm-10 m-l-10">Email-Id's:
+                                                            <label class="label col-sm-10 m-l-10">Branches:
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                         </div>
@@ -690,13 +692,10 @@
                                                                 </label>
                                                             </div>
 
-                                                            <div class="refer_hide col-sm-6">
-                                                                <label class="label">Reference:</label>
-                                                                <label class="select">
-                                                                    <select update-ctrl="lead" id="addContact_reference" class="select2 editselect" multiple>
-                                                                        <option value="1">Client</option>
-                                                                        <option value="2">Contact</option>
-                                                                    </select>
+                                                            <div class="col-sm-6 refer_label">
+                                                                <label class="label">Event:</label>
+                                                                <label class="input">
+                                                                    <input update-ctrl="lead" id="addContact_refer" type="text">
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -730,7 +729,9 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <label class="label">Assignee:</label>
+                                                                <label class="label">Assignee:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
                                                                 <label class="select">
                                                                     <select update-ctrl="lead" id="addContact_assignee" class="select2-multiple" multiple required>
                                                                         
@@ -740,7 +741,9 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-6">
-                                                                <label class="label col-sm-10">Potential Service:</label>
+                                                                <label class="label col-sm-10">Potential Service:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
                                                                 <label class="select">
                                                                     <select update-ctrl="lead" id="addContact_potential_service" class="select2-multiple editselect" multiple>
                                                                         

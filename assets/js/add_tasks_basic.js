@@ -69,8 +69,8 @@ $(document).ready(function(){
                     <button class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
                     <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle"> <span class="caret"></span></button>
                     <ul class="dropdown-menu pull-right idStored">
-                    <li class="custom_inline"><a href="#">Transfer</a><i class="glyphicon glyphicon-transfer"></i></li><br>
-                    <li class="custom_inline st_remove"><a href="#">Remove</a><i class="glyphicon glyphicon-remove"></i></li>
+                    <li class="custom_inline st_transfer"><a href="#"><span class="glyphicon glyphicon-transfer"></span></a></li><br>
+                    <li class="custom_inline st_remove"><a href="#"><span class="glyphicon glyphicon-remove"></span></a></li>
                     </ul>
                 </td>
             </tr>
@@ -180,8 +180,8 @@ $(document).ready(function(){
             subTask.duration = $(this).find('.SubTask_duration').val();
             subTask.deadline = getFormateDateToServer($(this).find('.SubTask_Deadline_Date').val())+'T'+$(this).find('.SubTask_Deadline_Time').val().slice(0,-2)+':00Z';
             subTask.assignee = 1;//$(this).find('.SubTask_Assignee').val();
-            subTask.weightage = $(this).find('.SubTask_Weightage').val();
-            subTask.completed = $(this).find('.SubTask_perCompleted').val();
+            subTask.weightage = $(this).find('.SubTask_Weightage').val()?$(this).find('.SubTask_Weightage').val():0;
+            subTask.completed = $(this).find('.SubTask_perCompleted').val()?$(this).find('.SubTask_perCompleted').val():0;
             subTask.status = 1;//$(this).find('.SubTask_Status').val();
             // subTasks.push(subTask);
             var subtaskJSON = JSON.stringify(subTask);
@@ -243,6 +243,17 @@ $(document).ready(function(){
             $('#taskProposal').append('<option value='+data[i].proposalNumber+'>'+data[i].proposalNumber+'</option>');
         }
     });
+    $.getJSON(urlRoot+'employees',function(data){
+        for (let i = 0; i < data.length; i++) {
+            $('#taskController').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        }
+        for (let i = 0; i < data.length; i++) {
+            $('#taskApprover').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        }
+        for (let i = 0; i < data.length; i++) {
+            $('.SubTask_Assignee').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        }
+    });
 
     ///////////////////////////////////////////////// GET REQUEST ///////////////////////////////////////////////
    var data_added = false;
@@ -298,7 +309,7 @@ $(document).ready(function(){
             var formatted3 = $.datepicker.formatDate("dd/mm/yy", new Date(data.statutoryDueDate));
             $('#taskStats').val(formatted3);
             $('#taskStatus').val(data.status);
-            $('#taskOrgin').val(data.originator);
+            // $('#taskOrgin').val(data.originator);
             $('#taskController').val(data.controller);
             $('#taskApprover').val(data.approver);
             $('#taskClientsView').val(data.showToClient);
@@ -306,76 +317,134 @@ $(document).ready(function(){
         });
     }
 
+
+    function checkValidation(){
+        var statDate = $('#taskStats').val();
+        var title = $('#taskTitle').val();
+        var serName = $('#taskService').val();
+        var dur = $('#taskDuration').val();
+        var sDate = $('#taskSdate').val();
+        var eDate = $('#taskStime').val();
+        var sTime = $('#taskEdate').val();
+        var eTime = $('#taskEtime').val();
+        var name = $('#subTaskTable > tbody > tr > td:nth-child(1) > label > input').val();
+        var Sdate = $('#subTaskTable > tbody > tr > td:nth-child(3) > label > input:first').val();
+        var Stime = $('#subTaskTable > tbody > tr > td:nth-child(3) > label > input:nth-child(2)').val();
+        var assignee = 1;//$('#subTaskTable > tbody > tr > td:nth-child(4) > label > input').val();
+        var duration = $('#subTaskTable > tbody > tr > td:nth-child(2) > label > input').val();
+
+        if(!title){
+            swal('Enter Title Please!');
+            return false;
+        }
+        if(!serName){
+            swal('Enter Title Please!');
+            return false;
+        }
+        if(!dur){
+            swal('Enter Duration Please!');
+            return false;
+        }
+        if(!statDate){
+            swal('Enter the Statutory Date Please!');
+            return false;
+        }
+        if(!sDate&&!eDate&&!sTime&&!eTime){
+            swal('Enter the Dates Please!');
+            return false;
+        }
+        if(!name){
+            swal('Enter the name for subtask Please!');
+            return false;
+        }
+        if(!duration){
+            swal('Enter the duration for subtask Please!');
+            return false;
+        }
+        if(!Sdate&&!Stime){
+            swal('Enter the Dates for subtask created Please!');
+            return false;
+        }
+        if(!assignee){
+            swal('Enter the assignees for subtask Please!');
+            return false;
+        }
+        return true;
+    }
+
     $(document).on('click','#submitTask',function(){
         
-        var tasksData = new Object();
-        var isExternal= $('#taskType').prop('checked');
-        tasksData.title = $('#taskTitle').val();
-        tasksData.isExternal = isExternal;
-        tasksData.client = "1";//$('#taskClients').val();
-        tasksData.originator = "1";//$('#taskOrgin').val();
-        tasksData.controller = "1";//$('#taskController').val();
-        tasksData.status = "1";//$('#taskStatus').val();
-        tasksData.showToClient = $('#taskClientsView').prop('checked');
-        tasksData.service = $('#taskService').val();
-        tasksData.approver = "1";//$('#taskApprover').val();
-        tasksData.priority = $('#range_02').val();
-        tasksData.startTime = getFormateDateToServer($('#taskSdate').val()) +'T'+ $('#taskStime').val().slice(0,-2)+':00Z';
-        tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val().slice(0,-2)+':00Z';
-        tasksData.duration = $('#taskDuration').val();
-        tasksData.statutoryDueDate = getFormateDateToServer($('#taskStats').val()) + 'T04:13:13Z';
-        var taskJSON = JSON.stringify(tasksData);
-        console.log(taskJSON);
+        var valid = checkValidation();
+        if(valid){    
+            var tasksData = new Object();
+            var isExternal= $('#taskType').prop('checked');
+            tasksData.title = $('#taskTitle').val();
+            tasksData.isExternal = isExternal;
+            tasksData.client = "1";//$('#taskClients').val();
+            tasksData.originator = "1";//$('#taskOrgin').val();
+            tasksData.controller = "1";//$('#taskController').val();
+            tasksData.status = "1";//$('#taskStatus').val();
+            tasksData.showToClient = $('#taskClientsView').prop('checked');
+            tasksData.service = $('#taskService').val();
+            tasksData.approver = "1";//$('#taskApprover').val();
+            tasksData.priority = $('#range_02').val();
+            tasksData.startTime = getFormateDateToServer($('#taskSdate').val()) +'T'+ $('#taskStime').val().slice(0,-2)+':00Z';
+            tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val().slice(0,-2)+':00Z';
+            tasksData.duration = $('#taskDuration').val();
+            tasksData.statutoryDueDate = getFormateDateToServer($('#taskStats').val()) + 'T04:13:13Z';
+            var taskJSON = JSON.stringify(tasksData);
+            console.log(taskJSON);
         
-        if(!tid){
-            $.ajax({
-                async: true,
-                crossDomain: true,
-                url:urlRoot+'tasks/',
-                datatype:'JSON',
-                type:'POST',
-                headers: {
-                    "X-CSRFToken": csrftoken,
-                    "content-type": "application/json",
-                    "cache-control": "no-cache"
-                },
-                processData: false,
-                data:taskJSON,
-                success:function(data){
-                    swal('Task Created!!');
-                    console.log('Task added!');
-                    createStasks(data.id);
-                },
-                error:function(error){
-                    swal(error.responseText);
-                }
-            });
-            // var subTaskJSON = createStasks();
-        }else if(tid){
-            $.ajax({
-                async: true,
-                crossDomain: true,
-                url:urlRoot+'tasks/'+tid+'/',
-                datatype:'JSON',
-                type:'PUT',
-                headers: {
-                    "X-CSRFToken": csrftoken,
-                    "content-type": "application/json",
-                    "cache-control": "no-cache"
-                },
-                processData: false,
-                data:taskJSON,
-                success:function(data){
-                    swal('Task Updated!!');
-                    console.log('Task Updated!');
-                    createStasks(data.id);
-                },
-                error:function(error){
-                    swal(error.responseText);
-                }
-            });
-        }
 
+            if(!tid){
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url:urlRoot+'tasks/',
+                    datatype:'JSON',
+                    type:'POST',
+                    headers: {
+                        "X-CSRFToken": csrftoken,
+                        "content-type": "application/json",
+                        "cache-control": "no-cache"
+                    },
+                    processData: false,
+                    data:taskJSON,
+                    success:function(data){
+                        swal('Task Created!!');
+                        console.log('Task added!');
+                        createStasks(data.id);
+                    },
+                    error:function(error){
+                        swal(error.responseText);
+                    }
+                });
+                // var subTaskJSON = createStasks();
+            }else if(tid){
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url:urlRoot+'tasks/'+tid+'/',
+                    datatype:'JSON',
+                    type:'PUT',
+                    headers: {
+                        "X-CSRFToken": csrftoken,
+                        "content-type": "application/json",
+                        "cache-control": "no-cache"
+                    },
+                    processData: false,
+                    data:taskJSON,
+                    success:function(data){
+                        swal('Task Updated!!');
+                        console.log('Task Updated!');
+                        createStasks(data.id);
+                    },
+                    error:function(error){
+                        swal(error.responseText);
+                    }
+                });
+            }
+        }
 
     });
     

@@ -208,8 +208,49 @@ $(document).ready(function(){
         });
     }
 
+    function checkValidation(){
+        var statDate = $('#taskStats').val();
+        var title = $('#taskTitle').val();
+        var serName = $('#taskService').val();
+        var sDate = $('#taskSdate').val();
+        var eDate = $('#taskStime').val();
+        var sTime = $('#taskEdate').val();
+        var eTime = $('#taskEtime').val();
+        var Sdate = $('#SubTask_Deadline_Date').val();
+        var Stime = $('#SubTask_Deadline_Time').val();
+
+        if(!title){
+            swal('Enter Title Please!');
+            return false;
+        }
+        if(!serName){
+            swal('Enter Title Please!');
+            return false;
+        }
+        if(!statDate){
+            swal('Enter the Statutory Date Please!');
+            return false;
+        }
+        if(!sDate&&!eDate&&!sTime&&!eTime){
+            swal('Enter the Dates Please!');
+            return false;
+        }
+        if(Sdate&&Stime){
+            swal('Enter the Dates for subtask created Please!');
+            return false;
+        }
+        if(assignee){
+            swal('Enter the assignees for subtask Please!');
+            return false;
+        }
+        return true;
+    }
+
     $(document).on('click','#submitTask',function(){
         
+    var valid = checkValidation();
+
+    if(valid){
         var RecurTask = new Object();
         var tasksData = new Object();
         var isExternal= $('#taskType').prop('checked');
@@ -279,7 +320,7 @@ $(document).ready(function(){
                 }
             });
         }
-
+    }
 
     });
     

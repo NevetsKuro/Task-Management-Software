@@ -101,77 +101,146 @@ $(document).ready(function(){
         }
     });
     
-    $(document).on('click','#submitProposal',function(){
-        var toClient = $('#ProposalToClient').val();
-        var toPerson = $('#ProposalToPerson').val();
-        var fromEntity = $('#ProposalFromEntity').val();
-        var fromEmployee = $('#FromEmployee').val();
+    function checkValidation(){
+        var toClient = 1;// $('#ProposalToClient').val();
+        var toPerson = 1;//$('#ProposalToPerson').val();
+        var fromEntity = 1;//$('#ProposalFromEntity').val();
+        var fromEmployee = 1;//$('#FromEmployee').val();
         var date = $('#ProposalDate').val();
         var time = $('#ProposalTime').val();
         var subj = $('#ProposalSubject').val();
         var background = $('#ProposalBackground').val();
         var scopeOfWork = $('#ProposalScopeOfWork').val();
-        var fees = parseInt($('.ProposalFee').val()).toFixed(2);
-        var status = $('#ProposalStatus').val();
-        var ProposalDate  = getFormateDateToServer(date) +'T'+ time.slice(0,-2)+':00Z';
-
-        var ProposalData = new Object();
-        ProposalData.toClient = 1;//toClient;
-        ProposalData.toPerson = 1;//toPerson;
-        ProposalData.fromEntity = 1;//fromEntity;
-        ProposalData.fromEmployee = 1;//fromEmployee;
-        ProposalData.ProposalDate = ProposalDate;
-        ProposalData.subject = subj;
-        ProposalData.scopeOfWork = scopeOfWork;
-        ProposalData.background = background;
-        ProposalData.fees = fees;
-        ProposalData.taskProposalStatus = status;
-
-        var ProposalJSON = JSON.stringify(ProposalData);
-        console.log(ProposalJSON);
+        var fees = $('.ProposalFee').val();
         
-        if(!pid){
-            $.ajax({
-                async: true,
-                crossDomain: true,
-                url:urlRoot+'tasks/proposals/',
-                datatype:'JSON',
-                method:'POST',
-                headers: {
-                    "X-CSRFToken": csrftoken,
-                    "content-type": "application/json",
-                    "cache-control": "no-cache"
-                },
-                processData: false,
-                data:ProposalJSON,
-                success:function(){
-                    swal('Proposal Added');
-                },
-                error:function(error){
-                    swal(error.responseText);
-                }
-            });
-        }else if(pid){
-            $.ajax({
-                async: true,
-                crossDomain: true,
-                url:urlRoot+'tasks/proposals/'+pid+'/',
-                datatype:'JSON',
-                type:'PUT',
-                headers: {
-                    "X-CSRFToken": csrftoken,
-                    "content-type": "application/json",
-                    "cache-control": "no-cache"
-                },
-                processData: false,
-                data:ProposalJSON,
-                success:function(){
-                    swal('Proposal Updated');
-                },
-                error:function(){
-                    swal(' -- ');
-                }
-            });
+        if(toClient == null){
+            swal('Select a Client to send to');
+            $('#ProposalToClient').focus();
+            return false;
+        }
+        if(toPerson == null){
+            swal('Select a person to send to');
+            $('#ProposalToPerson').focus();
+            return false;
+        }
+        if(fromEntity == null){
+            swal('Select a person from entity');
+            $('#ProposalFromEntity').focus();
+            return false;
+        }
+        if(fromEmployee == null){
+            swal('Select a person from employee');
+            $('#FromEmployee').focus();
+            return false;
+        }
+        if(date==''){
+            swal('PLease add a date/time');
+            $('#ProposalDate').focus();
+            return false;
+        }
+        if(time==''){
+            swal('PLease add a date/time');
+            $('#ProposalTime').focus();
+            return false;
+        }
+        if(subj==''){
+            swal('Please add Subject');
+            $('#ProposalSubject').focus();
+            return false;
+        }
+        if(background==''){
+            swal('Please add background');
+            $('#ProposalBackground').focus();
+            return false;
+        }
+        if(scopeOfWork==''){
+            swal('Please add scope of work');
+            $('#ProposalScopeOfWork').focus();
+            return false;
+        }
+        if(fees==''){
+            swal('Please add fees');
+            return false;
+        }
+        return true;    
+    }
+
+    $(document).on('click','#submitProposal',function(){
+        
+        var valid = checkValidation();
+
+        if(valid){
+            var toClient = $('#ProposalToClient').val();
+            var toPerson = $('#ProposalToPerson').val();
+            var fromEntity = $('#ProposalFromEntity').val();
+            var fromEmployee = $('#FromEmployee').val();
+            var date = $('#ProposalDate').val();
+            var time = $('#ProposalTime').val();
+            var subj = $('#ProposalSubject').val();
+            var background = $('#ProposalBackground').val();
+            var scopeOfWork = $('#ProposalScopeOfWork').val();
+            var fees = parseInt($('.ProposalFee').val()).toFixed(2);
+            var status = $('#ProposalStatus').val();
+            var ProposalDate  = getFormateDateToServer(date) +'T'+ time.slice(0,-2)+':00Z';
+
+            var ProposalData = new Object();
+            ProposalData.toClient = 1;//toClient;
+            ProposalData.toPerson = 1;//toPerson;
+            ProposalData.fromEntity = 1;//fromEntity;
+            ProposalData.fromEmployee = 1;//fromEmployee;
+            ProposalData.ProposalDate = ProposalDate;
+            ProposalData.subject = subj;
+            ProposalData.scopeOfWork = scopeOfWork;
+            ProposalData.background = background;
+            ProposalData.fees = fees;
+            ProposalData.taskProposalStatus = status;
+
+            var ProposalJSON = JSON.stringify(ProposalData);
+            console.log(ProposalJSON);
+            
+            if(!pid){
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url:urlRoot+'tasks/proposals/',
+                    datatype:'JSON',
+                    method:'POST',
+                    headers: {
+                        "X-CSRFToken": csrftoken,
+                        "content-type": "application/json",
+                        "cache-control": "no-cache"
+                    },
+                    processData: false,
+                    data:ProposalJSON,
+                    success:function(){
+                        swal('Proposal Added');
+                    },
+                    error:function(error){
+                        swal(error.responseText);
+                    }
+                });
+            }else if(pid){
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url:urlRoot+'tasks/proposals/'+pid+'/',
+                    datatype:'JSON',
+                    type:'PUT',
+                    headers: {
+                        "X-CSRFToken": csrftoken,
+                        "content-type": "application/json",
+                        "cache-control": "no-cache"
+                    },
+                    processData: false,
+                    data:ProposalJSON,
+                    success:function(){
+                        swal('Proposal Updated');
+                    },
+                    error:function(){
+                        swal(' -- ');
+                    }
+                });
+            }
         }
     });
 });

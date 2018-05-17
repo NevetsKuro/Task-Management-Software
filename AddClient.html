@@ -88,6 +88,23 @@
                                 <div class="panel-body panel-bodyClient">
 
                                     <fieldset class="sky-form m-20">
+                                        <div class="organis hide">
+                                            <div class="row m-t-30 m-b-30">
+                                                <div class="col-sm-7 contact-search">
+                                                    <label class="label">Organisation:</label>
+                                                    <label class="input">
+                                                        <input type="text" id="searchOrgKeyword" class=" " placeholder="Search...">
+                                                        <i id="search_organisations" class="fa fa-search serc-btn"></i>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input class="btn btn-success buttonDefSize btn-raised m-t-25 addNewOrg" value="Add"/>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input id="editOrganisation" oid="null" class="btn btn-success buttonDefSize btn-raised m-t-25" value="Edit" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <label class="label">Group:</label>
@@ -197,7 +214,9 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-6">
-                                                                <label class="label">Date of Birth:</label>
+                                                                <label class="label">Date of Birth:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
                                                                 <label class="input">
                                                                     <input id="individual_dob" type="text" class="inputdob dobdatepickr">
                                                                 </label>
@@ -211,7 +230,9 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-6">
-                                                                <label class="label">Aadhar No.:</label>
+                                                                <label class="label">Aadhar No.:
+                                                                        <span class="text-danger">*</span>
+                                                                </label>
                                                                 <label class="input">
                                                                     <input id="individual_aadhar" class="aadhar_valid" placeholder="1234-5678-9012">
                                                                 </label>
@@ -223,8 +244,8 @@
                                                     <!-- HUF -->
                                                     <div id="HUF" class="elem">
 
-                                                            <div class="well f-s-25 p-l-20 text-bold">Hindu Undivided Family(HUF)</div>
-                                                            <span class="m-10"></span>
+                                                        <div class="well f-s-25 p-l-20 text-bold">Hindu Undivided Family(HUF)</div>
+                                                        <span class="m-10"></span>
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Name of HUF:</label>
@@ -345,24 +366,33 @@
                                                                     <label class="label col-sm-10">Details of Partners:</label>
                                                                     <i id='addpartners' class="glyphicon glyphicon-plus m-l-30 col-sm-1" title="Add New Partners"></i>
                                                                 </div>
-                                                                <div class="new row well">
+                                                                <div class="row well">
                                                                     <div class="col-sm-6">
                                                                         <label class="label">Partner's Name
                                                                             <span class="text-danger">*</span>
                                                                         </label>
+                                                                    </div>
+                                                                    <div class="col-sm-5">
+                                                                        <label class="label">Partnership Share(in %)</label>
+                                                                    </div>
+                                                                    <div class="col-sm-1">
+                                                                        <label class="label">Remove</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="new row well">
+                                                                    <div class="col-sm-6">
                                                                         <label class="input">
                                                                             <input class="partnerName" type="text" required>
                                                                         </label>
                                                                     </div>
                                                                     <div class="col-sm-5">
-                                                                        <label class="label">Partnership Share(in %)</label>
                                                                         <label class="input">
                                                                             <input class="partnershare" type="number" min="0" max="100">
                                                                         </label>
                                                                     </div>
                                                                     <div class="col-sm-1">
-                                                                        <label class="label">
-                                                                            Remove
+                                                                        <label id="removepartner" class="text-center text-danger">
+                                                                            <i class="glyphicon glyphicon-remove m-t-13 fa-lg"></i>
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -418,21 +448,32 @@
                                                                 <label class="label col-sm-10 m-l-20">Details of Designated Partners</label>
                                                                 <i id='addDpartners' class="glyphicon glyphicon-plus col-sm-1 m-l-50" title="Add New Partners"></i>
                                                             </div>
-                                                            <div class="new row well">
+                                                            <div class="row well">
                                                                 <div class="col-sm-6">
                                                                     <label class="label">Name of Designated Partner:</label>
+                                                                </div>
+                                                                <div class="col-sm-5">
+                                                                    <label class="label">Corresponding DIN of Designated Partner:</label>
+                                                                </div>
+                                                                <div class="col-sm-1">
+                                                                    <label class="label">Remove</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="new row well">
+                                                                <div class="col-sm-6">
                                                                     <label class="input">
                                                                         <input id="LLP_designatedpartner" class="LLP_designatedpartner" type="text">
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-sm-5">
-                                                                    <label class="label">Corresponding DIN of Designated Partner:</label>
                                                                     <label class="input">
                                                                         <input id="LLP_din_designatedpartner" class="LLP_din_designatedpartner" class="din_valid" type="number">
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-sm-1">
-                                                                    <label class="label">Remove</label>
+                                                                    <div id="removedirector" class="text-center text-danger">
+                                                                        <i class="glyphicon glyphicon-remove fa-lg"></i>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <!-- <div class="col-sm-12 m-20">
@@ -509,21 +550,32 @@
                                                                     <label class="label col-md-10 m-l-20">Directors:</label>
                                                                     <i id='addDirectors' class="glyphicon glyphicon-plus m-l-50 col-sm-1" title="Add New Directors"></i>
                                                                 </div>
-                                                                <div class="new row well">
+                                                                <div class="row well">
                                                                     <div class="col-sm-5">
                                                                         <label class="label">Name of Directors:</label>
+                                                                    </div>
+                                                                    <div class="col-sm-5">
+                                                                        <label class="label">Corresponding DIN of Directors:</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <label class="label">Remove</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="new row well">
+                                                                    <div class="col-sm-5">
                                                                         <label class="input">
                                                                             <input class="company_directors" id="company_directors" type="text">
                                                                         </label>
                                                                     </div>
                                                                     <div class="col-sm-5">
-                                                                        <label class="label">Corresponding DIN of Directors:</label>
                                                                         <label class="input">
                                                                             <input id="company_din_directors" class="company_din_directors din_valid" type="number">
                                                                         </label>
                                                                     </div>
                                                                     <div class="col-sm-2">
-                                                                        <label class="label">Remove</label>
+                                                                        <span id="remove-Dpartner">
+                                                                            <i class="glyphicon glyphicon-remove fa-lg m-t-15"></i> 
+                                                                        </span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -566,7 +618,9 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <label class="label">Registration No.:</label>
+                                                                <label class="label">Registration No.:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
                                                                 <label class="input">
                                                                     <input id="AOP_registration" type="text">
                                                                 </label>
@@ -603,24 +657,6 @@
                                                                     <input id="trust_doc" type="text" class="datepickr">
                                                                 </label>
                                                             </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="organis hide">
-                                                        <div class="row m-t-30 m-b-30">
-                                                            <div class="col-sm-7 contact-search">
-                                                                <label class="label">Organisation:</label>
-                                                                <label class="input">
-                                                                    <input type="text" id="searchOrgKeyword" class=" " placeholder="Search...">
-                                                                    <i id="search_organisations" class="fa fa-search serc-btn"></i>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                <input class="btn btn-success buttonDefSize btn-raised m-t-25 addNewOrg" value="Add"/>
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                    <input id="editOrganisation" oid="null" class="btn btn-success buttonDefSize btn-raised m-t-25" value="Edit" disabled>
-                                                                </div>
                                                         </div>
                                                     </div>
                                                     
@@ -737,15 +773,15 @@
                                                         </div> -->
                                                         <div class="row m-t-20">
                                                             <div class="col-sm-6">
-                                                                <label class="label">PAN No:</label>
-                                                                <label class="input">
-                                                                    <input id="PANNO" class="pannumber_valid" type="text" placeholder="e.g. AAAAA1111A" value="AHAGS3545A">
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-6">
                                                                 <label class="label">Website:</label>
                                                                 <label class="input">
                                                                     <input id="website" class="disable_webs" type="text" placeholder="http://www.example.com">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label">PAN No:</label>
+                                                                <label class="input">
+                                                                    <input id="PANNO" class="pannumber_valid" type="text" placeholder="e.g. AAAAA1111A" value="AHAGS3545A">
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -753,40 +789,39 @@
 
                                                     <div id="companyCommon" class="elem">
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Nature of Business:</label>
                                                                 <label class="select">
                                                                     <select id="nature_business" class="select2-multiple editselect" multiple disabled></select>
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Types of Industry:</label>
                                                                 <label class="select">
                                                                     <select id="industryType" class="select-multiple editselect" multiple disabled></select>
                                                                 </label>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Types of Business:</label>
                                                                 <label class="select">
                                                                     <select id="businessType" class="select2-multiple editselect" multiple disabled></select>
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">GSTIN:</label>
                                                                 <label class="input">
                                                                     <input id="GSTIN" type="text" class="gstinnumber" placeholder="e.g.22AAAAA0000A1Z5" value="22AAAAA0000A1Z5">
                                                                 </label>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">TAN No:</label>
                                                                 <label class="input">
                                                                     <input id="TANNO" type="text" class="pannumber_valid" placeholder="e.g. AAAAA1111A" value="AAAAA4444A">
                                                                 </label>
                                                             </div>
+                                                            
                                                         </div>
                                                     </div>
 
@@ -799,36 +834,45 @@
                                                                     <i class="glyphicon glyphicon-plus f-s-15 m-l-50" id="addbranch"></i>
                                                                 </div> -->
                                                             </div>
-                                                            <div class="new row well">
+                                                            <div class="row well">
                                                                 <div class="col-sm-3">
                                                                     <label class="label">Name:</label>
-                                                                    <label class="input">
-                                                                        <input id="branch_name" class="branch_name" type="text" disabled>
-                                                                    </label>
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <label class="label">Address:</label>
-                                                                    <label class="textarea textarea-expandable">
-                                                                        <textarea id="branch_address" class="branch_address" type="text" disabled></textarea>
-                                                                    </label>
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <label class="label">GSTIN:</label>
-                                                                    <label class="input">
-                                                                        <input id="branch_GSTIN" class="branch_gst gstinnumber" type="number" disabled>
-                                                                    </label>
                                                                 </div>
                                                                 <div class="col-sm-1">
                                                                     <label class="label">Remove</label>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                            <!-- <div class="row m-20">
-                                                                <div class="col-sm-2">
-                                                                    <input id="addbranch" type="button" class="btn btn-success buttonDefSize btn-raised" value="Add">
+                                                            <div class="new row well">
+                                                                <div class="col-sm-3">
+                                                                    <label class="input">
+                                                                        <input id="branch_name" class="branch_name" type="text" disabled>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <label class="textarea textarea-expandable">
+                                                                        <textarea id="branch_address" class="branch_address" type="text" disabled></textarea>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <label class="input">
+                                                                        <input id="branch_GSTIN" class="branch_gst gstinnumber" type="number" disabled>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-sm-1">
+                                                                    <!-- <label id="removebranch" class="text-center text-danger">
+                                                                        <span class="centerAlign p-t-10">
+                                                                            <i class="glyphicon glyphicon-remove fa-lg"></i>
+                                                                        <span>
+                                                                    </label> -->
                                                                 </div>
                                                             </div>
-                                                             -->
+                                                        </div>
                                                     </div>
                                                     <span class="m-20"></span>
                                                 </div>

@@ -103,7 +103,7 @@
                                                 </li>
                                                 <li role="presentation">
                                                     <a href="#tab2" data-toggle="tab">
-                                                        <i class="icon-user"></i> Revenue Details
+                                                        <i class="icon-user"></i> Financial Details
                                                     </a>
                                                 </li>
                                                 <li role="presentation">
@@ -141,41 +141,27 @@
                                                                         </div>
                                                                         <div class="row">
                                                                                 <div class="col-sm-4">
-                                                                                    <label class="label">Title:</label>
+                                                                                    <label class="label">Title:
+                                                                                        <span class="text-danger">*</span>
+                                                                                    </label>
                                                                                     <label class="input">
                                                                                         <input id="taskTitle" type="text">
                                                                                     </label>
                                                                                 </div>
                                                                             <div class="col-lg-4">
-                                                                                <label class="label">Name Of Service:</label>
+                                                                                <label class="label">Name Of Service:
+                                                                                    <span class="text-danger">*</span>
+                                                                                </label>
                                                                                 <label class="select">
                                                                                     <select id="taskService" class="select2"></select>
                                                                                 </label>
                                                                             </div>
                                                                             <div class="col-lg-4">
-                                                                                <label class="label">Priority:</label>
+                                                                                <label class="label">Priority:
+                                                                                    <span class="text-danger">*</span>
+                                                                                </label>
                                                                                 <label class="input">
                                                                                     <input type="text" id="range_02">
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-lg-6">
-                                                                                <label class="label">Start Time:</label>
-                                                                                <label class="input col-lg-6 lNega10">
-                                                                                    <input id="taskSdate" type="text" class="datepickr" placeholder="Date">
-                                                                                </label>
-                                                                                <label class="input col-lg-6">
-                                                                                    <input id="taskStime" type="text" class="timepicker" placeholder="Time">
-                                                                                </label>
-                                                                            </div>
-                                                                            <div class="col-lg-6">
-                                                                                <label class="label">End Time:</label>
-                                                                                <label class="input col-lg-6 lNega10">
-                                                                                    <input id="taskEdate" type="text" class="datepickr" placeholder="Date">
-                                                                                </label>
-                                                                                <label class="input col-lg-6">
-                                                                                    <input id="taskEtime" type="text" class="timepicker" placeholder="Time">
                                                                                 </label>
                                                                             </div>
                                                                         </div>
@@ -187,7 +173,7 @@
                                                                                 </label>
                                                                             </div>
                                                                             <div class="col-lg-4">
-                                                                                <label class="label">Statutory Due Date:</label>
+                                                                                <label class="label">Statutory Due Date:<span class="text-danger">*</span></label>
                                                                                 <label class="input">
                                                                                     <input id="taskStats" type="text" class="datepickr">
                                                                                 </label>
@@ -200,12 +186,14 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-lg-4">
-                                                                                <label class="label">Originator:</label>
+                                                                            <!-- <div class="col-lg-4">
+                                                                                <label class="label">Originator:
+                                                                                    <span class="text-danger">*</span>
+                                                                                </label>
                                                                                 <label class="select">
                                                                                     <select id="taskOrgin" class="select2"></select>
                                                                                 </label>
-                                                                            </div>
+                                                                            </div> -->
                                                                             <div class="col-lg-4">
                                                                                 <label class="label">Controller:</label>
                                                                                 <label class="select">
@@ -218,13 +206,31 @@
                                                                                     <select id="taskApprover" class="select2"></select>
                                                                                 </label>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-lg-4 custom_inline">
-                                                                                <label class="label m-t-5 m-b-5">Allow Client View</label>
+                                                                            <div class="col-lg-3 custom_inline">
+                                                                                <label class="label m-t-5 col-lg-6">Allow Client View</label>
                                                                                 <label class="checkbox f-s-20">
                                                                                     <input id="taskClientsView" type="checkbox" class="">
                                                                                     <i class='rounded-x m-l-10'></i>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6">
+                                                                                <label class="label col-lg-6">Start Date:<span class="text-danger">*</span></label><label class="label col-lg-6">Start Time:<span class="text-danger">*</span></label>
+                                                                                <label class="input col-lg-6 lNega10">
+                                                                                    <input id="taskSdate" type="text" class="datepickr" placeholder="Date">
+                                                                                </label>
+                                                                                <label class="input col-lg-6">
+                                                                                    <input id="taskStime" type="text" class="timepicker" placeholder="Time">
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-lg-6">
+                                                                                <label class="label col-lg-6">End Date:<span class="text-danger">*</span></label><label class="label col-lg-6">End Time:<span class="text-danger">*</span></label>
+                                                                                <label class="input col-lg-6 lNega10">
+                                                                                    <input id="taskEdate" type="text" class="datepickr" placeholder="Date">
+                                                                                </label>
+                                                                                <label class="input col-lg-6">
+                                                                                    <input id="taskEtime" type="text" class="timepicker" placeholder="Time">
                                                                                 </label>
                                                                             </div>
                                                                         </div>
@@ -322,7 +328,7 @@
                                             <div id="" class="new row well">
                                                 <div class="col-xs-2">
                                                     <label class="input">
-                                                        <input id="SubTask_name" type="text">
+                                                        <input id="SubTask_name" type="text" value='sdawdas'>
                                                     </label>
                                                 </div>
                                                 <div class="col-xs-1">
@@ -388,16 +394,16 @@
                                 <div class="panel-body">
                                     <div class="well row">
                                         <label class="text-bold f-s-20 col-sm-10">SubTasks</label>
-                                        <span id='addSubTask' class=" col-sm-1"><i class="glyphicon glyphicon-plus m-l-20" title="Add New Sub_Tasks"></i></span>
+                                        <span id='addSubTask' class=" col-sm-1"><i class="glyphicon glyphicon-plus m-l-20 text-danger" title="Add New Sub_Tasks"></i></span>
                                     </div>
                                     <div class="table-responsive">
                                             <table id="subTaskTable" class="table table-small-font table-bordered table-striped m-b-0 ">
                                                 <thead>
                                                     <tr>
-                                                        <th width="20%">Name</th>
+                                                        <th width="20%">Name<span class="text-danger">*</span></th>
                                                         <th width="9%">Duration</th>
-                                                        <th width="12%">DeadLine</th>
-                                                        <th width="18%">Assignee</th>
+                                                        <th width="12%">DeadLine<span class="text-danger">*</span></th>
+                                                        <th width="18%">Assignee<span class="text-danger">*</span></th>
                                                         <th width="9%">Weightage</th>
                                                         <th width="10%">% Complete</th>
                                                         <th width="14%">Status</th>
@@ -443,11 +449,11 @@
                                                             </label>
                                                         </td>
                                                         <td class="btn-group">
-                                                            <button class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                            <button class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil "></i></button>
                                                             <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle"> <span class="caret"></span></button>
                                                             <ul class="dropdown-menu pull-right">
-                                                            <li class="custom_inline"><a href="#">Transfer</a></li><br>
-                                                            <li class="custom_inline st_remove"><a href="#">Remove</a></li>
+                                                            <li class="custom_inline st_transfer"><a href="#"><span class="glyphicon glyphicon-transfer" title="Transfer"></span></a></li><br>
+                                                            <li class="custom_inline st_remove"><a href="#"><span class="glyphicon glyphicon-remove" title="remove"></span></a></li>
                                                             </ul>
                                                         </td>
                                                     </tr>

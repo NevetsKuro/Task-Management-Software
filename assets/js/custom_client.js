@@ -926,11 +926,7 @@ $(document).ready(function () {
             </label>
         </div>
         <div class="col-sm-1">
-            <div id="removebranch" class="text-center text-danger">
-                <span class="centerAlign p-t-10">
-                    <i class="glyphicon glyphicon-remove fa-lg"></i>
-                <span>
-            </div>
+            
         </div>
         </div>
         `;
@@ -1044,8 +1040,7 @@ $(document).ready(function () {
         </div>
         <div class="col-sm-1">
             <div id="removedirector" class="text-center text-danger">
-                    <i class="glyphicon glyphicon-remove fa-lg"></i>
-                </div>
+                <i class="glyphicon glyphicon-remove fa-lg"></i>
             </div>
         </div>
         `;
@@ -1460,6 +1455,7 @@ $(document).ready(function () {
             var is_Selected = cC_table.row('.selected').data();
             if( is_Selected == null){
                 swal('Please select a POC');
+                $('#horizontal-wizard > ul > li:nth-child(2) > a').tab('show');
                 return false;
             }
         }
@@ -1473,6 +1469,7 @@ $(document).ready(function () {
                     var company_type = $('#company_types').val();
                     if(company_type == null){
                         swal('Please add a Company');
+                        $('#horizontal-wizard > ul > li:nth-child(1) > a').tab('show');
                         return false;
                     }
                 }
@@ -1480,14 +1477,28 @@ $(document).ready(function () {
                     var partners = getPartnersRow();
                     if(partners == []){
                         swal('Please add a partner');
+                        $('#horizontal-wizard > ul > li:nth-child(1) > a').tab('show');
                         return false;
                     }
                 }
             }else if(legal == 1){
                 var fname = $('#individual_fname').val();
                 var lname = $('#individual_lname').val();
+                var aadharNo  = $("#individual_aadhar").val();
+                var dob = $(".dobdatepickr").val();
+                if(dob == ''){
+                    $('#horizontal-wizard > ul > li:nth-child(1) > a').tab('show');
+                    swal('Please Enter Date Of Birth');
+                    return false;
+                }
                 if(fname == "" || lname == ""){
+                    $('#horizontal-wizard > ul > li:nth-child(1) > a').tab('show');
                     swal('Please Enter full Name');
+                    return false;
+                }
+                if(aadharNo == ''){
+                    $('#horizontal-wizard > ul > li:nth-child(1) > a').tab('show');
+                    swal('Please Enter the aadhar no.');
                     return false;
                 }
             }

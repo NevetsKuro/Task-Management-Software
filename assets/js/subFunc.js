@@ -328,7 +328,9 @@
                     webs = "http://" + webs;
                 }
             website['link'] = webs;
-            websiteArr.push(website);
+            if($(this).find('.social_media_link').val()){
+                websiteArr.push(website);
+            }
         });
         return websiteArr;
         }

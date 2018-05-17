@@ -510,12 +510,9 @@ $(document).ready(function(){
     });
 
     $('#addContact_source').on('change',function(){
-        optionValue = $("#addContact_source option:selected").text();
-        if(optionValue == 'Reference'){
-            $('.refer_hide').removeClass('hide');
-        }else{
-            $('.refer_hide').addClass('hide');
-        }
+        var optionValue = $("#addContact_source option:selected").text();
+        // $('#addContact_refer').
+        $('.refer_label > label:first').empty().text(optionValue);
     });
     
 

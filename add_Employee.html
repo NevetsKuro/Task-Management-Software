@@ -88,7 +88,9 @@
                                     <form class="sky-form" id="HR_Form">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <label class="label">Employee Name:</label>
+                                                <label class="label">Employee Name:
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                                 <label class="input">
                                                     <input id="employee_name" type="text" placeholder="">
                                                 </label>
@@ -96,7 +98,9 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label class="label">Title:</label>
+                                                <label class="label">Title:
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                                 <label class="select">
                                                     <select id="employee_title" class="select2">
 
@@ -104,7 +108,9 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-6">
-                                                <label class="label">Date of Birth:</label>
+                                                <label class="label">Date of Birth:
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                                 <label class="input">
                                                     <input id="employee_dob" type="text" class="datepickr">
                                                 </label>
@@ -122,13 +128,15 @@
                                             <div class="col-sm-6">
                                                 <label class="label">Location:</label>
                                                 <label class="input">
-                                                    <input id="employee_location" class="" type="text">
+                                                    <input id="employee_location" class="" type="text" value="312">
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label class="label">Department:</label>
+                                                <label class="label">Department:
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                                 <label class="select">
                                                     <select id="employee_department" class="select2">
 
@@ -183,7 +191,9 @@
                                                     </div>
                                                     <div class="col-xs-2 col-sm-2 p-b-12">
                                                         <div>
-                                                            <label>&nbsp;</label>
+                                                            <div id='remove-contact' class='text-center text-danger'>
+                                                                <span class='centerAlign'><i class='glyphicon glyphicon-remove fa-lg'></i></span>
+                                                            </div> 
                                                         </div>
                                                     </div>
                                                 </div>
@@ -223,19 +233,19 @@
                                                     </div>
                                                     <div class="col-xs-3 col-sm-3 p-b-12">
                                                         <label class="select">
-                                                            <select update-ctrl="email_addresses" class="email_category select2 editselect" required>
+                                                            <select update-ctrl="email_addresses" class="email_category select2 editselect" disabled>
 
                                                             </select>
                                                         </label>
                                                     </div>
                                                     <div class="col-xs-5 col-sm-5 p-b-12">
                                                         <label class="input">
-                                                            <input update-ctrl="email_addresses" type="email" class="addContact_emailIds email_valid" placeholder="e.g. abc@gmail.com" required>
+                                                            <input update-ctrl="email_addresses" type="text" class="addContact_emailIds email_valid" placeholder="e.g. abc@gmail.com">
                                                         </label>
                                                     </div>
-                                                    <div class="col-xs-2 col-sm-2 p-b-12">
-                                                        <div>
-                                                            <label>&nbsp;</label>
+                                                    <div class='col-xs-2 col-sm-2 p-b-12'>
+                                                        <div id='remove-email' class='text-center text-danger'>
+                                                            <span class='centerAlign'><i class='glyphicon glyphicon-remove fa-lg'></i></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -264,8 +274,8 @@
                                 <div class="panel">
                                     <div class="panel-body">
                                             <footer class="text-right m-t-20">
-                                            <button type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Reset</button>
-                                            <button id="submitTask" form="HR_Form" type="submit" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Submit</button>
+                                            <input type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30" value="Reset">
+                                            <input id="submit_employee" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30" value="Submit">
                                             <div class="note"><strong>Note:</strong> Fields marked with <span class="text-danger" >*</span> are to be filled mandatorily.</div>
                                         </footer>
                                     </div>
