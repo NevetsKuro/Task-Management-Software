@@ -1470,6 +1470,7 @@ $(document).ready(function () {
                     if(company_type == null){
                         swal('Please add a Company');
                         $('#horizontal-wizard > ul > li:nth-child(1) > a').tab('show');
+                        $('#company_type').focus();
                         return false;
                     }
                 }

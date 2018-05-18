@@ -162,10 +162,16 @@ $(document).ready(function () {
                     addEmailRows();
                     $('#email-row .new:last .email_category').val(multiEmail[i].category).trigger('change');
                     $('#email-row .new:last .addContact_emailIds').val(multiEmail[i].email);
+                    if(multiEmail[i].category == 1){
+                        $('#email-row .new:last .addContact_emailIds').attr('disabled',true);
+                    }
                     $('#email-row .new:last .ea_is_primary').attr('checked',multiEmail[i].is_primary);
                 }else{
                     $('#email-row .new .email_category').val(multiEmail[i].category).trigger('change');
                     $('#email-row .new .addContact_emailIds').val(multiEmail[i].email);
+                    if(multiEmail[i].category == 1){
+                        $('#email-row .new:last .addContact_emailIds').attr('disabled',true);
+                    }
                     $('#email-row .new .ea_is_primary').attr('checked',multiEmail[i].is_primary);
                 }
             }

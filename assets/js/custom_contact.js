@@ -513,6 +513,7 @@ $(document).ready(function(){
         var optionValue = $("#addContact_source option:selected").text();
         // $('#addContact_refer').
         $('.refer_label > label:first').empty().text(optionValue);
+        if(optionValue==''){}
     });
     
 
@@ -756,6 +757,15 @@ $(document).ready(function(){
 
         var valid = checkValidation();
         if(valid){
+
+
+            // f = FormData(document.getElementById('form'))
+            // f.set('date', newdate)
+            // e = getEmailRow();
+            // for (i=0 to e.length)
+            //     f.append(email_addresses[], e[i])
+
+
 
             //personal form data
             console.log(currentContactsId);

@@ -41,13 +41,15 @@ $(document).ready(function(){
                 </td>
                 <td>
                     <label class="input">
-                        <input class="SubTask_Deadline_Date datepickr" type="text">
-                        <input class="SubTask_Deadline_Time timepicker" type="text">
+                        <input class="SubTask_Deadline_Date datepickr" type="text" placeholder="Date>
+                        <input class="SubTask_Deadline_Time timepicker" type="text" placeholder="Time">
                     </label>
                 </td>
                 <td>
                     <label class="select">
-                        <select class="SubTask_Assignee select2"></select>
+                        <select class="SubTask_Assignee select2">
+                            <option default value=""></option>
+                        </select>
                     </label>
                 </td>
                 <td>
@@ -62,7 +64,9 @@ $(document).ready(function(){
                 </td>
                 <td>
                     <label class="select">
-                        <select class="SubTask_Status select2"></select>
+                        <select class="SubTask_Status select2">
+                            <option default value=""></option>
+                        </select>
                     </label>
                 </td>
                 <td class="btn-group">
@@ -176,7 +180,6 @@ $(document).ready(function(){
             subTask = new Object();
             subTask.title = $(this).find('.SubTask_name').val();
             subTask.task = tiD;
-            subTaskID = $(this).attr('id');
             subTask.duration = $(this).find('.SubTask_duration').val();
             subTask.deadline = getFormateDateToServer($(this).find('.SubTask_Deadline_Date').val())+'T'+$(this).find('.SubTask_Deadline_Time').val().slice(0,-2)+':00Z';
             subTask.assignee = 1;//$(this).find('.SubTask_Assignee').val();
@@ -185,7 +188,8 @@ $(document).ready(function(){
             subTask.status = 1;//$(this).find('.SubTask_Status').val();
             // subTasks.push(subTask);
             var subtaskJSON = JSON.stringify(subTask);
-            console.log(subTask);
+            subTaskID = $(this).attr('id');
+            console.log('subtask'+subTask);
             if(!subTaskID){
                 $.ajax({
                     async: true,
@@ -424,7 +428,7 @@ $(document).ready(function(){
                 $.ajax({
                     async: true,
                     crossDomain: true,
-                    url:urlRoot+'tasks/'+tid+'/',
+                    url:urlRoot+'tasks/'+tid+'/?',
                     datatype:'JSON',
                     type:'PUT',
                     headers: {

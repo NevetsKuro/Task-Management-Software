@@ -1,7 +1,7 @@
 
   $(document).ready(function(){
 
-
+    $('.toggle-sidebar>span').trigger('click');
     window.urlRoot = 'http://35.202.86.61/office-management/';
 
             var currDate = new Date().getFullYear();
@@ -234,6 +234,14 @@
             });
         }
             editSelect();
+
+            // $('.select2').select2({
+            //     placeholder:{
+            //         id: "-1",
+            //     text: "Select an option",
+            //     selected:'selected'
+            //     }
+            // })
 
 
         window.GetURLParams = function(){

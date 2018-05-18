@@ -1,0 +1,78 @@
+<html>
+    <head></head>
+    <body>
+        <form id="form101" name="form1" enctype="multipart/form-data">
+            <input type="file" id="file1">
+            <input type="text" id="filename">
+            <input type="button" id="formsubmit" value="Submit">
+        </form>
+        <script src="assets/js/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        let csrftoken = getCookie('csrftoken');
+
+
+            function getBase64(file) {
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    console.log(reader.result);
+                };
+                reader.onerror = function (error) {
+                    console.log('Error: ', error);
+                };
+            }
+
+            $(document).on('click','#formsubmit',function(){
+                var file = $('#file1')[0].files[0];
+                var fileName = $('#filename').val();
+
+                // var form = new FormData();
+                // form.append('file',file);
+                // form.append('remark',fileName);
+
+                var ob = new Object();
+                ob.remark = fileName;
+                ob.file = getBase64(file); 
+
+                var JSONObj = JSON.stringify(ob);
+
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url: "http://35.202.86.61/office-management/uploads/up/",
+                    method: "POST",
+                    headers: {
+                        "x-csrftoken": csrftoken,
+                        "cache-control": "no-cache",
+                    },
+                    processData: false,
+                    contentType: false,
+                    mimeType: "multipart/form-data",
+                    data: JSONObj,
+                    success:function(data){
+                        console.log(data);
+                    },
+                    error:function(error){
+                        console.log(error.responseText);
+                    }
+                })
+            });
+        </script>
+    </body>
+</html>

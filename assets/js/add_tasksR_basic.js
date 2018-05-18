@@ -87,47 +87,47 @@ $(document).ready(function(){
         $(this).parentsUntil('tbody').remove();
     });
     
-    function fillSubTask(tid){
-        $.getJSON(urlRoot+'/subtasks/?task='+tid,function(data){
+    // function fillSubTask(tid){
+    //     $.getJSON(urlRoot+'/subtasks/?task='+tid,function(data){
             
-            var stasksIDs = [];
-            stasksIDs = data.map(a => a.id);
-            var datetime;
-            for(let i=0; i < stasksIDs.length; i++){
-                if(i > 0){
-                    $.getJSON(urlRoot+'subtasks/'+stasksIDs[i],function(multistasks){
-                        datetime = multistasks.deadline.split('T');
-                        addSTasksRow();
-                        $('#subTaskTable .new:last').attr('id',multistasks.id);
-                        $('#subTaskTable .new:last .SubTask_name').val(multistasks.title);
-                        $('#subTaskTable .new:last .SubTask_duration').val(multistasks.duration);
-                        var formatted4 = $.datepicker.formatDate("dd/mm/yy", new Date(datetime[0]));
-                        $('#subTaskTable .new:last .SubTask_Deadline_Date').val(formatted4);
-                        $('#subTaskTable .new:last .SubTask_Deadline_Time').val(datetime[1].slice(0,-1));
-                        $('#subTaskTable .new:last .SubTask_Assignee').val(multistasks.assignee);
-                        $('#subTaskTable .new:last .SubTask_Weightage').val(multistasks.weightage);
-                        $('#subTaskTable .new:last .SubTask_perCompleted').val(multistasks.completed);
-                        $('#subTaskTable .new:last .SubTask_Status').val(multistasks.status);
-                    });
-                }else{
-                    $.getJSON(urlRoot+'subtasks/'+stasksIDs[i],function(multistasks){            
-                        $('#subTaskTable .new').attr('id',multistasks.id);
-                        datetime = multistasks.deadline.split('T');
-                        $('#subTaskTable .new .SubTask_name').val(multistasks.title);
-                        $('#subTaskTable .new .SubTask_duration').val(multistasks.duration);
-                        var formatted4 = $.datepicker.formatDate("dd/mm/yy", new Date(datetime[0]));
-                        $('#subTaskTable .new .SubTask_Deadline_Date').val(formatted4);
-                        $('#subTaskTable .new .SubTask_Deadline_Time').val(datetime[1].slice(0,-1));
-                        $('#subTaskTable .new .SubTask_Assignee').val(multistasks.assignee);
-                        $('#subTaskTable .new .SubTask_Weightage').val(multistasks.weightage);
-                        $('#subTaskTable .new .SubTask_perCompleted').val(multistasks.completed);
-                        $('#subTaskTable .new .SubTask_Status').val(multistasks.status);
-                    });
-                }
+    //         var stasksIDs = [];
+    //         stasksIDs = data.map(a => a.id);
+    //         var datetime;
+    //         for(let i=0; i < stasksIDs.length; i++){
+    //             if(i > 0){
+    //                 $.getJSON(urlRoot+'subtasks/'+stasksIDs[i],function(multistasks){
+    //                     datetime = multistasks.deadline.split('T');
+    //                     addSTasksRow();
+    //                     $('#subTaskTable .new:last').attr('id',multistasks.id);
+    //                     $('#subTaskTable .new:last .SubTask_name').val(multistasks.title);
+    //                     $('#subTaskTable .new:last .SubTask_duration').val(multistasks.duration);
+    //                     var formatted4 = $.datepicker.formatDate("dd/mm/yy", new Date(datetime[0]));
+    //                     $('#subTaskTable .new:last .SubTask_Deadline_Date').val(formatted4);
+    //                     $('#subTaskTable .new:last .SubTask_Deadline_Time').val(datetime[1].slice(0,-1));
+    //                     $('#subTaskTable .new:last .SubTask_Assignee').val(multistasks.assignee);
+    //                     $('#subTaskTable .new:last .SubTask_Weightage').val(multistasks.weightage);
+    //                     $('#subTaskTable .new:last .SubTask_perCompleted').val(multistasks.completed);
+    //                     $('#subTaskTable .new:last .SubTask_Status').val(multistasks.status);
+    //                 });
+    //             }else{
+    //                 $.getJSON(urlRoot+'subtasks/'+stasksIDs[i],function(multistasks){            
+    //                     $('#subTaskTable .new').attr('id',multistasks.id);
+    //                     datetime = multistasks.deadline.split('T');
+    //                     $('#subTaskTable .new .SubTask_name').val(multistasks.title);
+    //                     $('#subTaskTable .new .SubTask_duration').val(multistasks.duration);
+    //                     var formatted4 = $.datepicker.formatDate("dd/mm/yy", new Date(datetime[0]));
+    //                     $('#subTaskTable .new .SubTask_Deadline_Date').val(formatted4);
+    //                     $('#subTaskTable .new .SubTask_Deadline_Time').val(datetime[1].slice(0,-1));
+    //                     $('#subTaskTable .new .SubTask_Assignee').val(multistasks.assignee);
+    //                     $('#subTaskTable .new .SubTask_Weightage').val(multistasks.weightage);
+    //                     $('#subTaskTable .new .SubTask_perCompleted').val(multistasks.completed);
+    //                     $('#subTaskTable .new .SubTask_Status').val(multistasks.status);
+    //                 });
+    //             }
                 
-            }
-        });
-    }
+    //         }
+    //     });
+    // }
 
     function createStasks(){
         var subTasks = [];
@@ -135,6 +135,7 @@ $(document).ready(function(){
         $('#subTaskTable .new').each(function(index){
             subTask = new Object();
             subTask.title = $(this).find('.SubTask_name').val();
+            subTask.task = 1;
             subTaskID = $(this).attr('id');
             subTask.duration = $(this).find('.SubTask_duration').val();
             subTask.deadline = getFormateDateToServer($(this).find('.SubTask_Deadline_Date').val())+'T'+$(this).find('.SubTask_Deadline_Time').val().slice(0,-2)+':00Z';
@@ -154,6 +155,17 @@ $(document).ready(function(){
         }
     });
 
+    $.getJSON(urlRoot+'employees',function(data){
+        for (let i = 0; i < data.length; i++) {
+            $('#taskController').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        }
+        for (let i = 0; i < data.length; i++) {
+            $('#taskApprover').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        }
+        for (let i = 0; i < data.length; i++) {
+            $('.SubTask_Assignee').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        }
+    });
     ///////////////////////////////////////////////// GET REQUEST ///////////////////////////////////////////////
    
     $(document).on('change','#taskService',function(){
@@ -212,12 +224,15 @@ $(document).ready(function(){
         var statDate = $('#taskStats').val();
         var title = $('#taskTitle').val();
         var serName = $('#taskService').val();
+        var dur = $('#taskDuration').val();
         var sDate = $('#taskSdate').val();
         var eDate = $('#taskStime').val();
         var sTime = $('#taskEdate').val();
         var eTime = $('#taskEtime').val();
         var Sdate = $('#SubTask_Deadline_Date').val();
         var Stime = $('#SubTask_Deadline_Time').val();
+        var assignee = 1;//$('#subTaskTable > tbody > tr > td:nth-child(4) > label > input').val();
+        var duration = $('#subTaskTable > tbody > tr > td:nth-child(2) > label > input').val();
 
         if(!title){
             swal('Enter Title Please!');
@@ -225,6 +240,10 @@ $(document).ready(function(){
         }
         if(!serName){
             swal('Enter Title Please!');
+            return false;
+        }
+        if(!dur){
+            swal('Enter Duration Please!');
             return false;
         }
         if(!statDate){
@@ -239,7 +258,11 @@ $(document).ready(function(){
             swal('Enter the Dates for subtask created Please!');
             return false;
         }
-        if(assignee){
+        if(!duration){
+            swal('Enter the duration for subtask Please!');
+            return false;
+        }
+        if(!assignee){
             swal('Enter the assignees for subtask Please!');
             return false;
         }
@@ -268,10 +291,11 @@ $(document).ready(function(){
         tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val().slice(0,-2)+':00Z';
         tasksData.duration = $('#taskDuration').val();
         tasksData.statutoryDueDate = getFormateDateToServer($('#taskStats').val()) + 'T04:13:13Z';
+        
         RecurTask.startDateTime = getFormateDateToServer($('#taskRdate').val()) +'T'+ $('#taskRtime').val().slice(0,-2)+':00Z';
         RecurTask.periods = $('#taskPeriods').val();
         RecurTask.frequency = $('#taskFrequeny').val();
-        RecurTask.task = tasksData;
+        RecurTask.templateTask = tasksData;
         RecurTask.subtasks = createStasks();
         var RecurJSON = JSON.stringify(RecurTask);
         
