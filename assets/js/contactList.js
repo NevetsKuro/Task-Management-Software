@@ -15,13 +15,21 @@ $(document).ready(function () {
         
         if(currentList){
             currentList.forEach(element => {
+                var img='';
+                if(element.person_image!=null){
+                    img=element.person_image;
+                    img=urlRoot+img.substr(img.indexOf("media"));
+                    console.log(img);
+                }
+                //var 
+                //cosole.log(img2);
                 listContact += `
                 <div class="col-sm-4 col-lg-4">
                     <div class="counter-widget variant-1 color-1">
                         <div class="counter-icon">
                             <div class="front-content">
                                 <a class="pull-left" href="#">
-                                    <img height="60px" class="img-circle" src="assets/images/avatar3.jpg" alt="">
+                                    <img height="60px" width="60px" class="img-circle personimg" src="${img}" alt="">
                                 </a>
 
                                 <h4 class="m-t-0 m-b-5 header-title">
@@ -116,6 +124,7 @@ $(document).ready(function () {
             });
         $('.cList').html(listClient);
         }
+        $('.personimg').attr('height',$('.personimg').attr('width'));
     }
 
     if(listOf === 'contact'){
@@ -144,7 +153,6 @@ $(document).ready(function () {
         });
         $('.CTC').addClass('hide');
     }
-
 
     $(document).on('click', '.deleteContact', function () {
         var id = $(this).attr('id');
