@@ -4,7 +4,7 @@ $(document).ready(function(){
     var glob = '';
     var glob2 = '';
     var origForm;
-  
+
     // var urlRooT = 'https://office-management-demo.herokuapp.com/';
     var urlRooT = 'http://35.202.86.61/office-management/';
     
@@ -516,23 +516,7 @@ $(document).ready(function(){
         if(optionValue==''){}
     });
     
-    // function appendArray(form_data, values, name){
-    //     if(!values && name)
-    //         form_data.append(name, '');
-    //     else{
-    //         if(typeof values == 'object'){
-    //             for(key in values){
-    //                 if(typeof values[key] == 'object')
-    //                     appendArray(form_data, values[key], name + '[' + key + ']');
-    //                 else
-    //                     form_data.append(name + '[' + key + ']', values[key]);
-    //             }
-    //         }else
-    //             form_data.append(name, values);
-    //     }
-    
-    //     return form_data;
-    // }
+
     //searching list for organisations
     $(document).on('click','#search_organisations',function(event){
         //event.preventDefault();
@@ -584,6 +568,7 @@ $(document).ready(function(){
             contentType:'application/json',
             datatype:'JSON',
             success:function(data){
+
                 $('#addContact_orgName').html(data.name);
                 $('#addContact_website').html(data.website);
                 $('#addContact_group').html(data.group);
@@ -765,29 +750,27 @@ $(document).ready(function(){
         return true;
     }
 
-var CF_userimg='' ;
-var CF_cardimg='';
     //integrating new form data into the api
     $(document).on('click','#addContact_submit',function(event){
     //  $(document).on('click',"#frmHorizontalWizard",function(event){
         
 
-        var leads = {}
-        leads.originators =1;
-        leads.assignees = 1;
-        leads.source = 1;
-        leads.reference = "" ;
-        leads.status = 1;
-        leads.priority = 5;
-        leads.potential_services = [1];
-        leads.notes = " ";
-
         var valid = checkValidation();
         if(valid){
+
+
+            // f = FormData(document.getElementById('form'))
+            // f.set('date', newdate)
+            // e = getEmailRow();
+            // for (i=0 to e.length)
+            //     f.append(email_addresses[], e[i])
+
+
+
             //personal form data
             console.log(currentContactsId);
             if( currentContactsId != undefined){
-                
+                var form = new FormData();
                     var contactData = new Object();
                 if(UpdateCont != undefined && UpdateCont.length > 0 ){
                     
@@ -815,6 +798,8 @@ var CF_cardimg='';
                                     break;
                                     console.log(dataType + "changed");
                                 }
+                                form.append('dataType',Val);
+                                
                                 contactData[dataType] = Val;
                             });
                             
@@ -858,10 +843,11 @@ var CF_cardimg='';
                 });
 
             }else{
-                
+
                 var CF_title = $('#addContact_title').val();
                 var CF_fullName = getFullName();
                 var CF_gender = $('#addContact_gender').val();
+                var CF_dob = $('#addContact_dob').val();
                 var CF_address = $('#addContact_addresses').val();
                 var CF_state = $('#addContact_state').val();
                 var CF_city = $('#addContact_city').val();
@@ -869,7 +855,7 @@ var CF_cardimg='';
                 var CF_ModAddress = getFullAddress();
                 var CF_image = $('#addContact_image').val();
                 var CF_vcard = $('#addContact_vcard').val();
-                var CF_dob = $('#addContact_dob').val();
+                
                 //lead status form data
                 var CF_leadStatus = $('#addContact_lead_status').val();
                 var CF_priority = $('#range_02').val();
@@ -915,17 +901,10 @@ var CF_cardimg='';
                 contactData.social_media_links = getWebsiteRow();
                 contactData.contact_organisation = contactOrg;
                 contactData.lead = leads;
-               
-                if(CF_userimg!=''){
-                    contactData.person_image=CF_userimg;
-                }
-                if(CF_cardimg!=''){
-                    contactData.card_image=CF_cardimg;
-                }
-                contactJSON = JSON.stringify(contactData);
-                console.log("The JSON is: "+contactJSON);
-                // var email=getEmailRow();
-                
+
+                var contactJSON = JSON.stringify(contactData);
+                console.log('The json file for new contact is = \n'+contactJSON);
+                    
                 $.ajax({
                     url:urlRooT+'contacts/?',
                     type:'POST',
@@ -937,7 +916,7 @@ var CF_cardimg='';
                     data:contactJSON,
                     success:function(data){
                         swal('contact added to server');
-                        var urL = urlRooT+'ContactList.html?listOf=contact';
+                        var urL = 'ContactList.html?listOf=contact';
                         $(location).attr('href',urL);
                     },
                     error:function(error){
@@ -946,47 +925,7 @@ var CF_cardimg='';
                     }
                 });
             }
-        }
-    });
-    
-   
 
-
-    $('#file2').on('change' ,function(){    
-        var mimeType=$(this)[0].files[0]['type'];
-        //$('#addContact_vcard').val($(this).val());
-        //if(mimeType.split('/')[0]=='image'){
-            var ggg2=$(this)[0].files[0];
-            var reader = new FileReader();
-            reader.readAsDataURL(ggg2);
-            reader.onload = function () {
-                console.log('cardimg:'+reader.result);
-                CF_cardimg=reader.result;
-            }
-        // }
-        // else{
-        //     $('#addContact_vcard').val("");
-        //     swal('Select image. Wrong file format used');
-        //     return false;
-        // }
-    });
-
-    $('#file').on('change', function(){
-        var mimeType=$(this)[0].files[0]['type'];
-        //$('#addContact_image').val($(this).val());
-        if(mimeType.split('/')[0]=='image'){
-            var ggg1=$(this)[0].files[0];
-            var reader = new FileReader();
-            reader.readAsDataURL(ggg1);
-            reader.onload = function () {
-                console.log('personimg:'+reader.result);
-                CF_userimg=reader.result;
-            }
-        }
-        else{
-            $('#addContact_image').val("");
-            swal('Select image. Wrong file format used');
-            return false;
         }
     });
 

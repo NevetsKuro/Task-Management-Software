@@ -7,7 +7,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-
     <title>Add Tasks</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,9 +35,6 @@
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
     <div id="css"></div>
-
-
-
 </head>
 
 <body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
@@ -320,7 +316,7 @@
                                                                                 </label>
                                                                             </td>
                                                                             <td class="btn-group">
-                                                                                <button class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil "></i></button>
+                                                                                <button class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil" id="editstask"></i></button>
                                                                                 <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle"> <span class="caret"></span></button>
                                                                                 <ul class="dropdown-menu pull-right">
                                                                                 <li class="custom_inline st_transfer"><a href="#"><span class="glyphicon glyphicon-transfer" title="Transfer"></span></a></li><br>
@@ -372,30 +368,85 @@
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="tab3">
-                                                        
+                                                        <div class="row m-b-30">
+                                                            <div class="col-lg-12">
+                                                                <table id="knowledgetable" cellpadding="10" class="table table-bordered">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Document Type</th>
+                                                                            <th>Document</th>
+                                                                            <th>Document Title</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="docss">
+                                                                        <tr><td colspan='3'>Please Select A Service.</td></tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row well">
+                                                            <div class="col-sm-12">
+                                                                <h2>Add Knowledge</h2>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row well">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Document Title:</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="doctitle">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label class="label col-sm-10">Document Type:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="select">
+                                                                    <select id="doctype" class="editselect" multiple="" tabindex="-1" aria-hidden="true">
+                                                                        <option default="" value=""></option>
+                                                                    </select>
+                                                                </label>
+                                                            </div>
+                                                            <!-- <div class="col-sm-6">
+                                                                <label class="label">Document Type:</label>
+                                                                <label class="input">
+                                                                    <input type="text" id="docttype">
+                                                                </label>
+                                                            </div> -->
+                                                        </div>
+                                                        <div class="row m-b-30 well">
+                                                            <div class="col-sm-6">
+                                                                <label class="label">Document:</label>
+                                                                <div class="input input-file">
+                                                                    <div class="button">
+                                                                        <input name="file" id="doc1" type="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
+                                                                    </div>
+                                                                    <input id="doc1txt" type="text" readonly="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3 m-t-20">
+                                                                <button id="addKnowledge" class="btn btn-success btn-raised border-rounded buttonDefSize float-right m-r-50 m-b-20 p-l-30 p-r-30" value="Add">Add</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </form>
                                     </div>
                                 </div>
-
-                            
-
                             </div>
                             <!-- END PANEL -->
 
                             <div class="panel">
                                 <div class="panel-body">
                                     <footer class="text-right m-t-20">
-                                        <input type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30" value="reset">
+                                        <input type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30" value="Reset">
                                         <input id="submitTask" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30" value="Submit">
                                         <div class="note">
                                             <strong>Note:</strong> Fields marked with
-                                            <span class="text-danger">*</span> are to be filled mandatorily.</div>
+                                            <span class="text-danger">*</span> are to be filled mandatorily.
+                                        </div>
                                     </footer>
                                 </div>
                             </div>
-
                         </div>
                         <!-- END COL-MD-12 -->
 

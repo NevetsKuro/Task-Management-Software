@@ -4,7 +4,8 @@ $(document).ready(function(){
     var tid = params['tid'];
     var mode =params['mode'];
     var staskId =params['staskId'];
-
+    var servs='';
+    
     $('#taskType').bootstrapToggle({
         off: 'Internal',
         on: 'External',
@@ -90,6 +91,7 @@ $(document).ready(function(){
             }
         });
     }
+
     $(document).on('click',"#addSubTask",addSTasksRow);
 
     $(document).on('click','.st_remove',function(){
@@ -148,16 +150,18 @@ $(document).ready(function(){
                     $.getJSON(urlRoot+'subtasks/'+stasksIDs[i],function(multistasks){
                         datetime = multistasks.deadline.split('T');
                         addSTasksRow();
+                        fillAssignee();
                         $('#subTaskTable .new:last').attr('id',multistasks.id);
                         $('#subTaskTable .new:last .SubTask_name').val(multistasks.title);
                         $('#subTaskTable .new:last .SubTask_duration').val(multistasks.duration);
                         var formatted4 = $.datepicker.formatDate("dd/mm/yy", new Date(datetime[0]));
                         $('#subTaskTable .new:last .SubTask_Deadline_Date').val(formatted4);
                         $('#subTaskTable .new:last .SubTask_Deadline_Time').val(datetime[1].slice(0,-1));
-                        $('#subTaskTable .new:last .SubTask_Assignee').val(multistasks.assignee);
+                        $('#subTaskTable .new:last .SubTask_Assignee').val(multistasks.assignee).trigger('change');
+                        //$('.SubTask_Assignee option:contains("'+multistasks.assignee+'")').prop('selected',true);
                         $('#subTaskTable .new:last .SubTask_Weightage').val(multistasks.weightage);
                         $('#subTaskTable .new:last .SubTask_perCompleted').val(multistasks.completed);
-                        $('#subTaskTable .new:last .SubTask_Status').val(multistasks.status);
+                        $('#subTaskTable .new:last .SubTask_Status').val(multistasks.status).trigger('change');
                     });
                     fetchData;
                 }else{
@@ -169,10 +173,10 @@ $(document).ready(function(){
                         var formatted4 = $.datepicker.formatDate("dd/mm/yy", new Date(datetime[0]));
                         $('#subTaskTable .new .SubTask_Deadline_Date').val(formatted4);
                         $('#subTaskTable .new .SubTask_Deadline_Time').val(datetime[1].slice(0,-1));
-                        $('#subTaskTable .new .SubTask_Assignee').val(multistasks.assignee);
+                        $('#subTaskTable .new .SubTask_Assignee').val(multistasks.assignee).trigger('change');
                         $('#subTaskTable .new .SubTask_Weightage').val(multistasks.weightage);
                         $('#subTaskTable .new .SubTask_perCompleted').val(multistasks.completed);
-                        $('#subTaskTable .new .SubTask_Status').val(multistasks.status);
+                        $('#subTaskTable .new .SubTask_Status').val(multistasks.status).trigger('change');
                     });
                 }
                 
@@ -180,6 +184,8 @@ $(document).ready(function(){
         });
     }
 
+if(tid)
+    fillSubTask(tid);
     function createStasks(tiD){
         var subTasks = [];
         var subTask = {};
@@ -254,7 +260,7 @@ $(document).ready(function(){
             $('#taskProposal').append('<option value='+data[i].proposalNumber+'>'+data[i].proposalNumber+'</option>');
         }
     });
-
+   var emp='';
     $.getJSON(urlRoot+'employees',function(data){
         for (let i = 0; i < data.length; i++) {
             $('#taskController').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
@@ -262,13 +268,45 @@ $(document).ready(function(){
         for (let i = 0; i < data.length; i++) {
             $('#taskApprover').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
         }
-        for (let i = 0; i < data.length; i++) {
-            $('.SubTask_Assignee').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
-        }
+        emp=data;
+        fillAssignee();
     });
+
+    function fillAssignee(){    
+        for (let i = 0; i < emp.length; i++) {
+            $('.SubTask_Assignee').append('<option value='+emp[i].id+'>'+emp[i].name+'</option>');
+        }
+    }
     ///////////////////////////////////////////////// GET REQUEST ///////////////////////////////////////////////
-   var data_added = false;
-   var templates  = function(){
+    function docAdder(){
+        if(servs!=''){
+            var text='';
+            $.ajax({
+                url:'http://35.202.86.61/office-management/tasks/knowledge/?service='+servs,
+                type:'GET',
+                contentType:'application/json',
+                datatype:'JSON',
+                success:function(data){
+                    if(data!=''){
+                        console.log(data);
+                        for(var i=0;i<data.length;i++){
+                            text=text+'<tr><td>'+data[i].documentType+'</td><td><a href="'+data[i].document+'">'+data[i].title+'</a></td><td>'+data[i].title+'</td></tr>'
+                            $('#docss').html(text);
+                        }
+                    }  
+                    else{
+                        $('#docss').html('<tr><td colspan="3">No knowledge available.</td></tr>');
+                    }
+                }
+            });
+        }
+        else{
+            $('#docss').html('<tr><td colspan="3">Please Select A Service.</td></tr>');
+        }
+   }
+    
+    var data_added = false;
+    var templates  = function(){
         var service = $(this).val();
         if(data_added){
             $('#subTaskTable .new input').val('');
@@ -279,16 +317,19 @@ $(document).ready(function(){
             $('#subTaskTable .new:last .SubTask_duration').val('');
             for(let i=0; i < templates.length; i++){
                 if(i > 0){
-                        addSTasksRow();
-                        $('#subTaskTable .new:last .SubTask_name').val(templates[i].title);
-                        $('#subTaskTable .new:last .SubTask_duration').val(templates[i].duration);
-                }else{
-                        $('#subTaskTable .new .SubTask_name').val(templates[i].title);
-                        $('#subTaskTable .new .SubTask_duration').val(templates[i].duration);
+                    addSTasksRow();
+                    $('#subTaskTable .new:last .SubTask_name').val(templates[i].title);
+                    $('#subTaskTable .new:last .SubTask_duration').val(templates[i].duration);
+                }
+                else{
+                    $('#subTaskTable .new .SubTask_name').val(templates[i].title);
+                    $('#subTaskTable .new .SubTask_duration').val(templates[i].duration);
                 }
             }
             data_added = true;
         });
+        servs=service;
+        docAdder();
     }
 
     $(document).on('change','#taskService',templates);
@@ -302,8 +343,8 @@ $(document).ready(function(){
                 $('#taskType').bootstrapToggle('off');  
             }
             $('#taskTitle').val(data.title);
-            $('#taskClients').val(data.clients);
-            $('#taskService').val(data.service);
+            $('#taskClients').val(data.clients).trigger('change');
+            $('#taskService').val(data.service).trigger('change');
             var rangeSlider = $("#range_02").data('ionRangeSlider');
             rangeSlider.update({from:data.priority});
             
@@ -319,16 +360,15 @@ $(document).ready(function(){
             $('#taskDuration').val(data.duration);
             var formatted3 = $.datepicker.formatDate("dd/mm/yy", new Date(data.statutoryDueDate));
             $('#taskStats').val(formatted3);
-            $('#taskStatus').val(data.status);
+            $('#taskStatus').val(data.status).trigger('change');
             // $('#taskOrgin').val(data.originator);
-            $('#taskController').val(data.controller);
-            $('#taskApprover').val(data.approver);
+            $('#taskController').val(data.controller).trigger('change');
+            $('#taskApprover').val(data.approver).trigger('change');
             $('#taskClientsView').val(data.showToClient);
             fillSubTask(tid);
         });
     }
-
-
+    
     function checkValidation(){
         var statDate = $('#taskStats').val();
         var title = $('#taskTitle').val();
@@ -382,7 +422,7 @@ $(document).ready(function(){
         }
         return true;
     }
-
+    
     $(document).on('click','#submitTask',function(){
         
         var valid = checkValidation();
@@ -403,9 +443,11 @@ $(document).ready(function(){
             tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val().slice(0,-2)+':00Z';
             tasksData.duration = $('#taskDuration').val();
             tasksData.statutoryDueDate = getFormateDateToServer($('#taskStats').val()) + 'T04:13:13Z';
+            tasksData.document
+            
             var taskJSON = JSON.stringify(tasksData);
             console.log(taskJSON);
-        
+            
 
             if(!tid){
                 $.ajax({
@@ -430,6 +472,7 @@ $(document).ready(function(){
                         swal(error.responseText);
                     }
                 });
+
                 // var subTaskJSON = createStasks();
             }else if(tid){
                 $.ajax({
@@ -454,9 +497,57 @@ $(document).ready(function(){
                         swal(error.responseText);
                     }
                 });
+
             }
         }
 
     });
-    
+    var doco='';
+    $(document).on('change','#doc1', function(){
+        var mimeType=$(this)[0].files[0]['type'];
+            var ggg1=$(this)[0].files[0];
+            var reader = new FileReader();
+            //$('#doc1txt').val($('#doc1').val());
+            reader.readAsDataURL(ggg1);
+            reader.onload = function () {
+                console.log('FILE :'+reader.result);
+                doco=reader.result;
+            }
+    });
+    $(document).on('click','#addKnowledge',function(){
+        var knowledgeData = new Object();
+        knowledgeData.title=$('#doctitle').val();
+        knowledgeData.documentType=$('#docttype').val();
+        knowledgeData.document=doco;
+        knowledgeData.service=servs;
+        var knoJSON=JSON.stringify(knowledgeData);
+        console.log(knoJSON);
+        $.ajax({
+            async: true,
+            crossDomain: true,
+            url:urlRoot+'tasks/knowledge/',
+            datatype:'JSON',
+            type:'POST',
+            headers: {
+                "X-CSRFToken": csrftoken,
+                "content-type": "application/json",
+                "cache-control": "no-cache"
+            },
+            processData: false,
+            data:knoJSON,
+            success:function(data){
+                docAdder();
+                $('#doctitle').val('');
+                $('#docttype').val('');
+                swal("Knowledge added");
+            },
+            error:function(error){
+                console.log(error.responseText)
+                swal("Knowledge cannot be added");
+            }
+        });
+    });  
+    $(document).on('click','#addKnowledge',function(){
+
+    });
 });
