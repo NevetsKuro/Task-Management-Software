@@ -6,7 +6,7 @@ $(document).ready(function(){
     var origForm;
 
     // var urlRooT = 'https://office-management-demo.herokuapp.com/';
-    var urlRooT = 'http://35.202.86.61/office-management/';
+    // var urlRooT = 'http://35.202.86.61/office-management/';
     
     $('#file').on('change',function(){
         $('#addContact_vcard').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
@@ -45,7 +45,7 @@ $(document).ready(function(){
     
         if(name!='' && name!=undefined){
         $.ajax({
-                url:urlRooT+'contacts',
+                url:urlRoot+'contacts',
                 datatype: 'JSON' ,
                 type: 'GET' ,
                 data: 'name='+name+'&phone='+phone+'&email='+email+'&organisation='+organisation ,
@@ -95,7 +95,7 @@ $(document).ready(function(){
     
     //auto filling forms prefilled data
     $.ajax({
-        url:urlRooT+'contacts/form-data',
+        url:urlRoot+'contacts/form-data',
         datatype:'JSON',
         type:'GET',
         success:function(data){
@@ -154,7 +154,7 @@ $(document).ready(function(){
     });
     
     $.ajax({
-        url:urlRooT+'employees/',
+        url:+'employees/',
         datatype:'JSON',
         type:'GET',
         success:function(data){

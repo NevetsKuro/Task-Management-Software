@@ -2,7 +2,7 @@ $(document).ready(function(){
     
     var UpdateCont = inputChanges();
 
-    var urlRoot = 'http://35.202.86.61/office-management/';
+    // var urlRoot = 'http://35.202.86.61/office-management/';
     // function formData(formDataId,formDataArr){
     //     for (var i = 0; i < formData.length; i++) {
     //         $(formDataId).append(` <option value="${formDataArr[i].id}">${formDataArr[i][1]}</option> `);

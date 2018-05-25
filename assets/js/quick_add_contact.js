@@ -11,7 +11,7 @@ $(document).ready(function(){
     var client_formData = [];
 
     $.ajax({
-        url: urlRoot + 'contacts/form-data',
+        url: urlRoot + 'common/form-data',
         datatype: 'JSON',
         type: 'GET',
         success: function (data) {

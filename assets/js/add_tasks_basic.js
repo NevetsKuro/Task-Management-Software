@@ -66,7 +66,10 @@ $(document).ready(function(){
                 <td>
                     <label class="select">
                         <select class="SubTask_Status select2">
-                            <option default value=""></option>
+                            <option default value="">Select...</option>
+                            <option value="1">Created</option>
+                            <option value="2">Started</option>
+                            <option value="3">Completed</option>
                         </select>
                     </label>
                 </td>
@@ -163,7 +166,6 @@ $(document).ready(function(){
                         $('#subTaskTable .new:last .SubTask_perCompleted').val(multistasks.completed);
                         $('#subTaskTable .new:last .SubTask_Status').val(multistasks.status).trigger('change');
                     });
-                    fetchData;
                 }else{
                     $.getJSON(urlRoot+'subtasks/'+stasksIDs[i],function(multistasks){            
                         $('#subTaskTable .new').attr('id',multistasks.id);

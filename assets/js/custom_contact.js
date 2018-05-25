@@ -5,8 +5,8 @@ $(document).ready(function(){
     var glob2 = '';
     var origForm;
   
-    // var urlRooT = 'https://office-management-demo.herokuapp.com/';
-    var urlRooT = 'http://35.202.86.61/office-management/';
+    // var urlRoot = 'https://office-management-demo.herokuapp.com/';
+    // var urlRoot = 'http://35.202.86.61/office-management/';
     
     $('#file').on('change',function(){
         $('#addContact_vcard').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
@@ -45,7 +45,7 @@ $(document).ready(function(){
     
         if(name!='' && name!=undefined){
         $.ajax({
-                url:urlRooT+'contacts',
+                url:urlRoot+'contacts',
                 datatype: 'JSON' ,
                 type: 'GET' ,
                 data: 'name='+name+'&phone='+phone+'&email='+email+'&organisation='+organisation ,
@@ -95,7 +95,7 @@ $(document).ready(function(){
     
     //auto filling forms prefilled data
     $.ajax({
-        url:urlRooT+'contacts/form-data',
+        url:urlRoot+'contacts/form-data',
         datatype:'JSON',
         type:'GET',
         success:function(data){
@@ -154,7 +154,7 @@ $(document).ready(function(){
     });
     
     $.ajax({
-        url:urlRooT+'employees/',
+        url:urlRoot+'employees/',
         datatype:'JSON',
         type:'GET',
         success:function(data){
@@ -195,7 +195,7 @@ $(document).ready(function(){
         console.log('click function running...');
         
         $.ajax({
-            url:urlRooT+'contacts/'+id,
+            url:urlRoot+'contacts/'+id,
             datatype:'JSON',
             type:'GET',
             success:function(data){
@@ -540,7 +540,7 @@ $(document).ready(function(){
 
         if(searchOrgKeyword != ""){
         $.ajax({
-            url:urlRooT+"organisations/?name="+searchOrgKeyword,
+            url:urlRoot+"organisations/?name="+searchOrgKeyword,
             method:'GET',
             datatype:'JSON',
             success:function(orgList){
@@ -579,7 +579,7 @@ $(document).ready(function(){
     window.contact_organisation = function (orgId){
             
         $.ajax({
-            url:urlRooT+'organisations/display/'+orgId,
+            url:urlRoot+'organisations/display/'+orgId,
             type:'GET',
             contentType:'application/json',
             datatype:'JSON',
@@ -833,7 +833,7 @@ var CF_cardimg='';
                 $.ajax({
                     async: true,
                     crossDomain: true,
-                    url:urlRooT+'contacts/'+currentContactsId+'/?',
+                    url:urlRoot+'contacts/'+currentContactsId+'/?',
                     datatype:'JSON',
                     headers:{
                         "X-CSRFToken": csrftoken
@@ -927,7 +927,7 @@ var CF_cardimg='';
                 // var email=getEmailRow();
                 
                 $.ajax({
-                    url:urlRooT+'contacts/?',
+                    url:urlRoot+'contacts/?',
                     type:'POST',
                     headers:{
                         "X-CSRFToken": csrftoken
@@ -937,7 +937,7 @@ var CF_cardimg='';
                     data:contactJSON,
                     success:function(data){
                         swal('contact added to server');
-                        var urL = urlRooT+'ContactList.html?listOf=contact';
+                        var urL = urlRoot+'ContactList.html?listOf=contact';
                         $(location).attr('href',urL);
                     },
                     error:function(error){
