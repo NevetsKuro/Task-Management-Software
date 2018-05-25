@@ -21,10 +21,10 @@ $(document).ready(function () {
                     img=urlRoot+img.substr(img.indexOf("media"));
                     console.log(img);
                 }
-                //var 
+                //var
                 //cosole.log(img2);
                 listContact += `
-                <div class="col-sm-4 col-lg-4">
+                <div class="cards col-sm-4 col-lg-4">
                     <div class="counter-widget variant-1 color-1">
                         <div class="counter-icon">
                             <div class="front-content">
@@ -346,6 +346,12 @@ $(document).ready(function () {
             }
         });
 
+    });
+
+    $('#easyPaginate').easyPaginate({
+        paginateElement: 'div',
+        elementsPerPage: 8,
+        effect: 'fade'
     });
 
 });

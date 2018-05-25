@@ -41,7 +41,7 @@ $(document).ready(function(){
                 </td>
                 <td>
                     <label class="input">
-                        <input class="SubTask_Deadline_Date datepickr" type="text" placeholder="Date>
+                        <input class="SubTask_Deadline_Date datepickr" type="text" placeholder="Date">
                         <input class="SubTask_Deadline_Time timepicker" type="text" placeholder="Time">
                     </label>
                 </td>
@@ -84,6 +84,11 @@ $(document).ready(function(){
             allowClear: true
         });
         datetime();
+        $.getJSON(urlRoot+'employees',function(data){
+            for (let i = 0; i < data.length; i++) {
+                $('.SubTask_Assignee').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+            }
+        });
     }
     $(document).on('click',"#addSubTask",addSTasksRow);
 
@@ -137,6 +142,7 @@ $(document).ready(function(){
             var stasksIDs = [];
             stasksIDs = data.map(a => a.id);
             var datetime;
+            $('#subTaskTable .new').not('.new:first').empty();
             for(let i=0; i < stasksIDs.length; i++){
                 if(i > 0){
                     $.getJSON(urlRoot+'subtasks/'+stasksIDs[i],function(multistasks){
@@ -153,6 +159,7 @@ $(document).ready(function(){
                         $('#subTaskTable .new:last .SubTask_perCompleted').val(multistasks.completed);
                         $('#subTaskTable .new:last .SubTask_Status').val(multistasks.status);
                     });
+                    fetchData;
                 }else{
                     $.getJSON(urlRoot+'subtasks/'+stasksIDs[i],function(multistasks){            
                         $('#subTaskTable .new').attr('id',multistasks.id);
@@ -236,7 +243,7 @@ $(document).ready(function(){
         });
     }
     ///////////////////////////////////////////////// Prefilled Data /////////////////////////////////////////////
-    $.getJSON(urlRoot+'contacts/form-data',function(data){
+    $.getJSON(urlRoot+'common/form-data',function(data){
         for (let i = 0; i < data.services.length; i++) {
             $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
         }
@@ -247,6 +254,7 @@ $(document).ready(function(){
             $('#taskProposal').append('<option value='+data[i].proposalNumber+'>'+data[i].proposalNumber+'</option>');
         }
     });
+
     $.getJSON(urlRoot+'employees',function(data){
         for (let i = 0; i < data.length; i++) {
             $('#taskController').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
@@ -258,7 +266,6 @@ $(document).ready(function(){
             $('.SubTask_Assignee').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
         }
     });
-
     ///////////////////////////////////////////////// GET REQUEST ///////////////////////////////////////////////
    var data_added = false;
    var templates  = function(){

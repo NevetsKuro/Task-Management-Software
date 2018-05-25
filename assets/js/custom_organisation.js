@@ -11,11 +11,10 @@ $(document).ready(function(){
     // }
 
     $.ajax({
-        url:urlRoot + 'organisations/form-data',
+        url:urlRoot + 'common/form-data',
         datatype:'JSON',
         type:'GET',
         success:function(data){
-            //formData('#addContact_group',data.groups);
 
             for (var i = 0; i < data.groups.length; i++) {
                 $('#addContact_group').append('<option value='+data.groups[i].id+'>'+data.groups[i].group+'</option>');
