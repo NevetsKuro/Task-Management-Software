@@ -5,7 +5,6 @@
     window.urlRoot = 'http://35.202.86.61/office-management/';
 
             var currDate = new Date().getFullYear();
-
             window.datetime = function(){
                 $(".dobdatepickr").datepicker({
                     changeMonth:true,
@@ -297,7 +296,6 @@
 
         }
         
-    
        window.getContactRow = function (){
         contactArr=[]
         $('#contact-row .new').each(function(index){
