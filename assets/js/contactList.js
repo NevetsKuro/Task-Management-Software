@@ -24,7 +24,7 @@ $(document).ready(function () {
                 //var 
                 //cosole.log(img2);
                 listContact += `
-                <div class="col-sm-4 col-lg-4">
+                <div class="col-sm-4 col-lg-4" class="lilement">
                     <div class="counter-widget variant-1 color-1">
                         <div class="counter-icon">
                             <div class="front-content">
@@ -65,13 +65,12 @@ $(document).ready(function () {
                             <a title="Convert to Client" href="${clientLink}${element.id}" class="btn btn-primary btn-sm CTC">
                                 <i class="glyphicon glyphicon-random"></i>
                             </a> 
-
                         </div>
                     </div>
-
                 </div>
                 `
             });
+            listContact+="</div>"
         $('.cList').html(listContact);
         }
     }
