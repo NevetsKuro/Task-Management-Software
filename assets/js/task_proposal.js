@@ -67,10 +67,12 @@ $(document).ready(function(){
         var EmpCost = 0;
         var AdminCost = 0;
         var TotalCost = 0;
+        var margin = 0;
         $('.empName').each(function(){
             empName = $(this).val();
             ctc = globalEmployee.find(function(data){ return data.name==empName}).ctc; // check if ctc field is correct
             empDuration = $(this).parentsUntil('row').find('.empDuration').val()
+            margin = $('#marginCost').val()
             perEmp = ctc * empDuration;
             EmpCost += perEmp; //total employees cost * by its duration.
             console.log(EmpCost);
@@ -85,8 +87,8 @@ $(document).ready(function(){
             $('#empCost').empty().html(EmpCost);
             $('#adminCost').empty().html(AdminCost);
             $('#totalCost').empty().html(TotalCost);
-            $('#marginCost').empty().html(marginCost);
-            var t = parseInt(marginCost) + parseInt(TotalCost);
+            // $('#marginCost').empty().html(marginCost);
+            var t = parseInt(margin) + parseInt(TotalCost);
             $('#totalFee').val(t);
             console.log(TotalCost+':'+marginCost);
         });

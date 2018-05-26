@@ -5,6 +5,8 @@ $(document).ready(function(){
     var mode =params['mode'];
     var staskId =params['staskId'];
     var servs='';
+    var transferredTo; //subtask id
+    var assig = 0; //assignee for transfer to
     
     $('#taskType').bootstrapToggle({
         off: 'Internal',
@@ -25,6 +27,10 @@ $(document).ready(function(){
     $('.table-responsive').responsiveTable({
         addFocusBtn:false
     });
+
+    $('#SelectAssignee').select2({
+        dropdownParent: $('#AssigneeTransferModal')
+    })
     
     ///////////////////////////////////////////////// interface Codes //////////////////////////////////////////
     function addSTasksRow(){
@@ -89,7 +95,7 @@ $(document).ready(function(){
         });
         datetime();
         $.getJSON(urlRoot+'employees',function(data){
-            for (let i = 0; i < data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
                 $('.SubTask_Assignee').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
             }
         });
@@ -98,7 +104,7 @@ $(document).ready(function(){
     $(document).on('click',"#addSubTask",addSTasksRow);
 
     $(document).on('click','.st_remove',function(){
-        let ssid = $(this).parents('tr').attr('id');
+        var ssid = $(this).parents('tr').attr('id');
         if(ssid){
             swal({
                 title: "Are you sure?",
@@ -135,10 +141,24 @@ $(document).ready(function(){
     });
     
     $(document).on('change','.calc',function(){
-        let id = $('#taskProposal').val()
+        var id = $('#taskProposal').val()
         $.getJSON(urlRoot+'tasks/proposals/'+id,function(data){
             $('#taskProposalFee').val(data.fees);            
         });
+    })
+
+    $(document).on('click','.st_transfer',function(){
+        $('#AssigneeTransferModal').modal('show');
+        $('#Subtask_namey').val($(this).parents('tr').find('td:nth-child(1) > label > input').val());
+        $('#SelectAssignee').select2({
+            dropdownParent: $('#AssigneeTransferModal')
+        })
+    });
+
+    $(document).on('click','#AssigneeTransfer',function(){
+        assig = $('#SelectAssignee').val();
+        transferredTo = $('#Subtask_namey').val();
+        $('#submitTask').trigger('click');
     })
 
     function fillSubTask(tid){
@@ -147,8 +167,8 @@ $(document).ready(function(){
             var stasksIDs = [];
             stasksIDs = data.map(a => a.id);
             var datetime;
-            $('#subTaskTable .new').not('.new:first').empty();
-            for(let i=0; i < stasksIDs.length; i++){
+            // $('#subTaskTable .new').not('.new:first').empty();
+            for(var i=0; i < stasksIDs.length; i++){
                 if(i > 0){
                     $.getJSON(urlRoot+'subtasks/'+stasksIDs[i],function(multistasks){
                         datetime = multistasks.deadline.split('T');
@@ -159,7 +179,7 @@ $(document).ready(function(){
                         $('#subTaskTable .new:last .SubTask_duration').val(multistasks.duration);
                         var formatted4 = $.datepicker.formatDate("dd/mm/yy", new Date(datetime[0]));
                         $('#subTaskTable .new:last .SubTask_Deadline_Date').val(formatted4);
-                        $('#subTaskTable .new:last .SubTask_Deadline_Time').val(datetime[1].slice(0,-1));
+                        $('#subTaskTable .new:last .SubTask_Deadline_Time').val(datetime[1].slice(0,-4));
                         $('#subTaskTable .new:last .SubTask_Assignee').val(multistasks.assignee).trigger('change');
                         //$('.SubTask_Assignee option:contains("'+multistasks.assignee+'")').prop('selected',true);
                         $('#subTaskTable .new:last .SubTask_Weightage').val(multistasks.weightage);
@@ -174,21 +194,21 @@ $(document).ready(function(){
                         $('#subTaskTable .new .SubTask_duration').val(multistasks.duration);
                         var formatted4 = $.datepicker.formatDate("dd/mm/yy", new Date(datetime[0]));
                         $('#subTaskTable .new .SubTask_Deadline_Date').val(formatted4);
-                        $('#subTaskTable .new .SubTask_Deadline_Time').val(datetime[1].slice(0,-1));
+                        $('#subTaskTable .new .SubTask_Deadline_Time').val(datetime[1].slice(0,-4));
                         $('#subTaskTable .new .SubTask_Assignee').val(multistasks.assignee).trigger('change');
                         $('#subTaskTable .new .SubTask_Weightage').val(multistasks.weightage);
                         $('#subTaskTable .new .SubTask_perCompleted').val(multistasks.completed);
                         $('#subTaskTable .new .SubTask_Status').val(multistasks.status).trigger('change');
                     });
                 }
-                
             }
+            $('#SelectAssignee').select2({
+                dropdownParent: $('#AssigneeTransferModal')
+            })
         });
     }
 
-if(tid)
-    fillSubTask(tid);
-    function createStasks(tiD){
+    function createStasks(tiD, transferred, assig){
         var subTasks = [];
         var subTask = {};
         $('#subTaskTable .new').each(function(index){
@@ -197,14 +217,18 @@ if(tid)
             subTask.task = tiD;
             subTask.duration = $(this).find('.SubTask_duration').val();
             subTask.deadline = getFormateDateToServer($(this).find('.SubTask_Deadline_Date').val())+'T'+$(this).find('.SubTask_Deadline_Time').val().slice(0,-2)+':00Z';
-            subTask.assignee = 1;//$(this).find('.SubTask_Assignee').val();
+            subTask.assignee = $(this).find('.SubTask_Assignee').val();
             subTask.weightage = $(this).find('.SubTask_Weightage').val()?$(this).find('.SubTask_Weightage').val():0;
             subTask.completed = $(this).find('.SubTask_perCompleted').val()?$(this).find('.SubTask_perCompleted').val():0;
-            subTask.status = 1;//$(this).find('.SubTask_Status').val();
+            subTask.status = $(this).find('.SubTask_Status').val();
+            if(transferred == subTask.title){
+                subTask.isTransferred = true;
+                subTask.transferredTo = assig;
+            }
             // subTasks.push(subTask);
             var subtaskJSON = JSON.stringify(subTask);
             subTaskID = $(this).attr('id');
-            console.log('subtask'+subTask);
+            console.log('subtask'+subtaskJSON);
             if(!subTaskID){
                 $.ajax({
                     async: true,
@@ -223,7 +247,7 @@ if(tid)
                         console.log('Sub-Task added!');
                     },
                     error:function(error){
-                        swal(error.responseText);
+                        console.log(error.responseText);
                     }
                 });
             }else if(subTaskID){
@@ -244,7 +268,7 @@ if(tid)
                         console.log('Sub-Task Updated!');
                     },
                     error:function(error){
-                        swal(error.responseText);
+                        console.log(error.responseText);
                     }
                 });
             }
@@ -252,31 +276,32 @@ if(tid)
     }
     ///////////////////////////////////////////////// Prefilled Data /////////////////////////////////////////////
     $.getJSON(urlRoot+'common/form-data',function(data){
-        for (let i = 0; i < data.services.length; i++) {
+        for (var i = 0; i < data.services.length; i++) {
             $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
         }
     });
 
     $.getJSON(urlRoot+'tasks/proposals',function(data){
-        for (let i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             $('#taskProposal').append('<option value='+data[i].proposalNumber+'>'+data[i].proposalNumber+'</option>');
         }
     });
    var emp='';
     $.getJSON(urlRoot+'employees',function(data){
-        for (let i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             $('#taskController').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
         }
-        for (let i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             $('#taskApprover').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
         }
         emp=data;
         fillAssignee();
     });
 
-    function fillAssignee(){    
-        for (let i = 0; i < emp.length; i++) {
+    function fillAssignee(){
+        for (var i = 0; i < emp.length; i++) {
             $('.SubTask_Assignee').append('<option value='+emp[i].id+'>'+emp[i].name+'</option>');
+            $('#SelectAssignee').append('<option value='+emp[i].id+'>'+emp[i].name+'</option>');
         }
     }
     ///////////////////////////////////////////////// GET REQUEST ///////////////////////////////////////////////
@@ -317,7 +342,7 @@ if(tid)
         $.getJSON(urlRoot+'subtasks/templates?service='+service,function(templates){
             $('#subTaskTable .new:last .SubTask_name').val('');
             $('#subTaskTable .new:last .SubTask_duration').val('');
-            for(let i=0; i < templates.length; i++){
+            for(var i=0; i < templates.length; i++){
                 if(i > 0){
                     addSTasksRow();
                     $('#subTaskTable .new:last .SubTask_name').val(templates[i].title);
@@ -445,7 +470,7 @@ if(tid)
             tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val().slice(0,-2)+':00Z';
             tasksData.duration = $('#taskDuration').val();
             tasksData.statutoryDueDate = getFormateDateToServer($('#taskStats').val()) + 'T04:13:13Z';
-            tasksData.document
+            // tasksData.document
             
             var taskJSON = JSON.stringify(tasksData);
             console.log(taskJSON);
@@ -468,14 +493,16 @@ if(tid)
                     success:function(data){
                         swal('Task Created!!');
                         console.log('Task added!');
-                        createStasks(data.id);
+                        if(transferredTo){
+                            createStasks(data.id,transferredTo,assig);
+                        }else{
+                            createStasks(data.id);
+                        }
                     },
                     error:function(error){
                         swal(error.responseText);
                     }
                 });
-
-                // var subTaskJSON = createStasks();
             }else if(tid){
                 $.ajax({
                     async: true,
@@ -493,7 +520,14 @@ if(tid)
                     success:function(data){
                         swal('Task Updated!!');
                         console.log('Task Updated!');
-                        createStasks(data.id);
+                        if(transferredTo){
+                            // var urL = 'tasks_Form.html?tid=' + data.tid; 
+                            createStasks(data.id,transferredTo,assig);
+                            swal('Updated and transferred');
+                            // $(location).attr('href',urL);
+                        }else{
+                            createStasks(data.id);
+                        }
                     },
                     error:function(error){
                         swal(error.responseText);

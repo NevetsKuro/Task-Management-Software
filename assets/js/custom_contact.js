@@ -95,7 +95,7 @@ $(document).ready(function(){
     
     //auto filling forms prefilled data
     $.ajax({
-        url:urlRoot+'contacts/form-data',
+        url:urlRoot+'common/form-data',
         datatype:'JSON',
         type:'GET',
         success:function(data){
@@ -124,7 +124,7 @@ $(document).ready(function(){
             // for (var i = 0; i < data.managers.length; i++) {
             //     $('#assignee').append('<option value=' + data.managers[i].id+'>'+data.managers[i].name+'</option>');
             // }
-    
+            
             for (var i = 0; i < data.designations.length; i++) {
                 $('#addContact_designation').append('<option value=' + data.designations[i].id+'>'+data.designations[i].designation+'</option>');
             }
