@@ -21,7 +21,7 @@ $(document).ready(function () {
                     img=urlRoot+img.substr(img.indexOf("media"));
                     console.log(img);
                 }
-                //var 
+                //var
                 //cosole.log(img2);
                 listContact += `
                 <div class="col-sm-4 col-lg-4" class="lilement">
@@ -345,6 +345,12 @@ $(document).ready(function () {
             }
         });
 
+    });
+
+    $('#easyPaginate').easyPaginate({
+        paginateElement: 'div',
+        elementsPerPage: 8,
+        effect: 'fade'
     });
 
 });

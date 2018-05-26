@@ -10,7 +10,7 @@ $(document).ready(function () {
     }
     // var urlRoot = 'http://35.202.86.61/office-management/';
     ////////////////////////////////////      FORM DATA       ///////////////////////////////////////////////////////
-    $.getJSON(urlRoot+'contacts/form-data',function(data){
+    $.getJSON(urlRoot+'common/form-data',function(data){
         glob2 = data
         for (var i = 0; i < data.designations.length; i++) {
             $('#employee_designation').append('<option value=' + data.designations[i].id+'>'+data.designations[i].designation+'</option>');

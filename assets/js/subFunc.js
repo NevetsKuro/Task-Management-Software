@@ -197,13 +197,13 @@
             }
         });
 
-        $(document).on('focus', 'form :input:not(select)' ,function(){
-            $('html, body').animate({
-                scrollTop : $(this).offset().top - 180
-            },
-            'slow');
-            // console.log($(this).offset().top);
-        });
+        // $(document).on('focus', 'form :input:not(select)' ,function(){
+        //     $('html, body').animate({
+        //         scrollTop : $(this).offset().top - 180
+        //     },
+        //     'slow');
+        //     // console.log($(this).offset().top);
+        // });
 
         window.editSelect = function(){
             $(".editselect").select2({
@@ -360,8 +360,10 @@
         }
 
         window.getFormateDateToServer=function(dt){
-            var splitDate = dt.split('/');
-            return splitDate[2] + '-' + splitDate[1] + '-' + splitDate[0];
+            if(dt){
+                var splitDate = dt.split('/');
+                return splitDate[2] + '-' + splitDate[1] + '-' + splitDate[0];
+            }
         }
 
         function getCookie(name) {

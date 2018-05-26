@@ -6,7 +6,7 @@ $(document).ready(function(){
 	$.ajax({
 		async: true,
 		crossDomain: true,
-		url:urlRoot+'contacts/form-data',
+		url:urlRoot+'common/form-data',
 		type:'GET',
 		datatype:'JSON',
 		headers: {

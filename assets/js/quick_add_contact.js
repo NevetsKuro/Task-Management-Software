@@ -11,10 +11,11 @@ $(document).ready(function(){
     var client_formData = [];
 
     $.ajax({
-        url: urlRoot + 'contacts/form-data',
+        url: urlRoot + 'common/form-data',
         datatype: 'JSON',
         type: 'GET',
         success: function (data) {
+            client_formData = data;
             contact_formData = data;
             for (var i = 0; i < data.titles.length; i++) {
                 $('.selTitle').append('<option value=' + data.titles[i].id + '>' + data.titles[i].title + '</option>');
@@ -28,22 +29,10 @@ $(document).ready(function(){
             for(var i = 0; i < data.services.length; i++){
                 $('#clientsContact_purpose').append('<option value=' + data.services[i].id + '>' + data.services[i].service + '</option>');
             }
-            console.log('Pre filled data added!!!');
-        },
-        error: function (data) {
-            swal('Cannot find contacts!');
-        }
-    });    
-
-    $.ajax({
-        url: urlRoot + 'clients/form-data',
-        datatype: 'JSON',
-        type: 'GET',
-        success: function (data) {
-            client_formData = data;
             for (var i = 0; i < data.relation.length; i++) {
                 $('#clientsContact_relation').append('<option value=' + data.relation[i].id + '>' + data.relation[i].relation + '</option>');
             }
+            console.log('Pre filled data added!!!');
         },
         error:function(){
             swal('Cannot fetch client form data');

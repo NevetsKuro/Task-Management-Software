@@ -41,11 +41,12 @@ $(document).ready(function () {
 
     //form data from Organisation
     $.ajax({
-        url: urlRoot+'organisations/form-data',
+        url: urlRoot+'common/form-data',
         datatype: 'JSON',
         type: 'GET',
         success: function (data) {
-            glob = data;
+            globalClient = data;
+            globalContact = data;
             for (var i = 0; i < data.business_natures.length; i++) {
                 $('#nature_business').append('<option value=' + data.business_natures[i].id + '>' + data.business_natures[i].business_nature + '</option>');
             }
@@ -57,44 +58,19 @@ $(document).ready(function () {
             for (var i = 0; i < data.business_types.length; i++) {
                 $('#businessType').append('<option value=' + data.business_types[i].id + '>' + data.business_types[i].business_type + '</option>');
             }
-            console.log('Company Prefilled data Added.');
-
-        },
-        error: function (data) {
-            swal('Server is not working:' + data);
-        }
-    });
-
-    //form data from clients
-    $.ajax({
-        async:true,
-        url: urlRoot+'clients/form-data',
-        datatype: 'JSON',
-        type: 'GET',
-        success: function (data) {
-            globalClient = data
+            
             for (var i = 0; i < data.company_type.length; i++) {
                 $('#company_types').append('<option value=' + data.company_type[i].id + '>' + data.company_type[i].company_type + '</option>');
             }
+
             for (var i = 0; i < data.stock_exchange.length; i++) {
                 $('#company_stock').append('<option value=' + data.stock_exchange[i].id + '>' + data.stock_exchange[i].stock_exchange + '</option>');
             }
-        }
-    });
-
-    //auto filling forms prefilled data
-    $.ajax({
-        async:true,
-        url: urlRoot+'contacts/form-data',
-        datatype: 'JSON',
-        type: 'GET',
-        async: true,
-        success: function (data) {
-            globalContact = data;
+            
             for (var i = 0; i < data.titles.length; i++) {
                 $('.selTitle').append('<option value=' + data.titles[i].id + '>' + data.titles[i].title + '</option>');
             }
-
+            
             for (var i = 0; i < data.categories.length; i++) {
                 $('.contactnumber_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
                 $('.email_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
@@ -108,7 +84,7 @@ $(document).ready(function () {
             for(var i = 0; i < data.genders.length; i++){
                 $('#clientsContact_Gender').append('<option value=' + data.genders[i].id + '>' + data.genders[i].gender + '</option>');
             }
-
+            
             console.log('Pre filled data added!!!');
         },
         error: function (data) {
@@ -1265,7 +1241,7 @@ $(document).ready(function () {
                 $(this).parents('tr').children()[4].innerHTML = '<select id="cc_relation" width="100%"></select>';
                 $(this).children().removeClass('glyphicon-pencil').addClass('glyphicon-ok');
                 $.ajax({
-                    url: urlRoot + 'clients/form-data',
+                    url: urlRoot + 'common/form-data',
                     datatype: 'JSON',
                     type: 'GET',
                     success: function (data) {

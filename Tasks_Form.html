@@ -150,7 +150,10 @@
                                                                             <label class="label">Status:</label>
                                                                             <label class="select">
                                                                                 <select id="taskStatus" class="select2">
-                                                                                    <option default value=""></option>
+                                                                                    <option default value="">Select...</option>
+                                                                                    <option value="1">Created</option>
+                                                                                    <option value="2">Started</option>
+                                                                                    <option value="3">Completed</option>
                                                                                 </select>
                                                                             </label>
                                                                         </div>
@@ -305,7 +308,10 @@
                                                                             <td>
                                                                                 <label class="select">
                                                                                     <select class="SubTask_Status select2">
-                                                                                        <option default value=""></option>
+                                                                                        <option default value="">Select...</option>
+                                                                                        <option value="1">Created</option>
+                                                                                        <option value="2">Started</option>
+                                                                                        <option value="3">Completed</option>
                                                                                     </select>
                                                                                 </label>
                                                                             </td>
@@ -340,9 +346,9 @@
                                                                     <input id="taskProposalFee" type="text">
                                                                 </label>
                                                             </div>
-                                                            <div class="col-lg-6">
+                                                            <!-- <div class="col-lg-6">
                                                                 <div class="btn btn-sm btn-success">Calculate</div>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-6">
@@ -395,8 +401,8 @@
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <label class="select">
-                                                                    <select id="doctype" class="editselect" multiple="" tabindex="-1" aria-hidden="true">
-                                                                        <option default="" value=""></option>
+                                                                    <select id="doctype" class="select2 editselect" multiple="" tabindex="-1" aria-hidden="true">
+                                                                        <option default selected value="Select..."></option>
                                                                     </select>
                                                                 </label>
                                                             </div>
@@ -428,13 +434,52 @@
                                 </div>
                             </div>
                             <!-- END PANEL -->
+                            <div class="modal modal-warning bg-header" id="AssigneeTransferModal" role="dialog" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog">
+                                    <div class="modal-content animated fadeOut">
+                                        <div class="modal-header">
+                                            <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                            <h4 class="modal-title">
+                                                <strong>Transfer To:</strong>
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body sky-form">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label class="label">Assignee:</label>
+                                                    <label class="select">
+                                                        <select id="SelectAssignee" class="select2">
 
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-4 hide">
+                                                        <label class="input">
+                                                            <input type="text" id="Subtask_namey">
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                            <div class="row"> 
+                                                <div class="col-lg-4 pull-right">
+                                                    <input id="AssigneeTransfer" class="btn btn-success buttonDefSize" type="button" value="Select">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="panel">
                                 <div class="panel-body">
-                                    <footer class="text-right m-t-20">
-                                        <input type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30" value="Reset">
-                                        <input id="submitTask" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30" value="Submit">
-                                        <div class="note">
+                                    <footer class="row m-t-20">
+                                        <div class="col-lg-2 pull-right">
+                                            <input type="reset" class="btn btn-danger btn-raised border-rounded buttonDefSize float-right" value="Reset">
+                                        </div>
+                                        <div class="col-lg-2 pull-right">
+                                            <input id="submitTask" type="button" class="btn btn-success btn-raised buttonDefSize" value="Submit">
+                                        </div>
+                                        <div class="note col-lg-12">
                                             <strong>Note:</strong> Fields marked with
                                             <span class="text-danger">*</span> are to be filled mandatorily.
                                         </div>
