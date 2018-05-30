@@ -147,7 +147,7 @@
                                                 <br/>
 
                                                 <span class="col-sm-3 col-sm-offset-9">
-                                                    <input class="btn btn-default btn-warning buttonDefSize btn-raised" id="btnsubmit" value="Check Duplicate">
+                                                    <input type="button" class="btn btn-default btn-warning buttonDefSize btn-raised" id="btnsubmit" value="Check">
                                                 </span>
                                                 <br/>
                                                 <span id="message" class="col-sm-12 text-danger text-italic text-center"></span>
@@ -228,6 +228,8 @@
                                 </div>
                                 <!--****** Start Colored Modal Footer******-->
                                 </div>
+
+                               
                                 
                              
                                 
@@ -239,7 +241,7 @@
                                     <div id="new-form" class="col-sm-12">
 
                                         <div id="horizontal-wizard" class="col-sm-12">
-                                            <ul class="nav nav-tabs" role="tablist">
+                                            <ul class="nav nav-tabs nav-justified" role="tablist">
                                                 <li role="presentation" class="active">
                                                     <a href="#tab1" data-toggle="tab" aria-expanded="true">
                                                         <i class="icon-user"></i> Personal Information
@@ -274,7 +276,7 @@
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <label class="select">
-                                                                    <select name="title" update-ctrl="title" id="addContact_title" class="select2 editselect" required>
+                                                                    <select name="title" update-ctrl="title" id="addContact_title" class="select2" required>
                                                                         <option disabled selected value>--select--</option>
                                                                     </select>
                                                                 </label>
@@ -319,7 +321,7 @@
                                                         </div>
 
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-3">
                                                                 <label class="label col-sm-10">Gender:
                                                                     <span class="text-danger">*</span>
                                                                 </label>
@@ -330,14 +332,31 @@
                                                                 </label>
                                                             </div>
                                                             
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Date of Birth:
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
+                                                            <div class="col-sm-3">
+                                                                <label class="label">Date of Birth:</label>
                                                                 <label class="input">
                                                                     <i class="icon-append icon-calendar-31 text-primary f-s-22"></i>
                                                                     <input update-ctrl="dob" id="addContact_dob" class="dobdatepickr" type="text" placeholder="e.g. dd/mm/yy">
                                                                 </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="label">Person's Image:
+                                                                </label>
+                                                                <div class="input input-file">
+                                                                    <div class="button">
+                                                                        <input update-ctrl="vcard" name="file" id="file" type="file" accept="image/*" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
+                                                                    <input id="addContact_image" type="text" readonly="">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                <label class="label">Card Image:
+                                                                </label>
+                                                                <div class="input input-file">
+                                                                    <div class="button">
+                                                                        <input update-ctrl="cardImage" name="file2" id="file2" type="file" image/* onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
+                                                                    <input id="addContact_vcard" type="text" readonly="" >
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         
@@ -346,18 +365,23 @@
                                                                 <label class="label">Address:</label>
                                                             </div>
                                                             <label class="textarea col-sm-9">
-                                                                <textarea update-ctrl="address" id="addContact_addresses" rows="5" placeholder="Address e.g. Laxmi Plaza, Laxmi Industrial Estate, New Link Road, Andheri West, Mumbai"></textarea>
+                                                                <textarea update-ctrl="address" id="addContact_addresses" rows="4" placeholder="Address e.g. Laxmi Plaza, Laxmi Industrial Estate, New Link Road, Andheri West, Mumbai"></textarea>
                                                             </label>
-                                                            <label class="input col-sm-3">
-                                                                <input update-ctrl="address" id="addContact_state" type="text" placeholder="State" class="m-b-5">
-                                                                <input update-ctrl="address" id="addContact_city" type="text" placeholder="City" class="m-b-5">
+                                                            <label class="input select col-sm-3">
+                                                                <select update-ctrl="address" id="addContact_state" type="text" class="select2">
+                                                                    <option selected value=""></option>
+                                                                    <option value="Maharashtra">Maharashtra</option>
+                                                                    <option value="Delhi">Delhi</option>
+                                                                    <option value="Kerala">Kerala</option>
+                                                                </select>
+                                                                <input update-ctrl="address" id="addContact_city" type="text" placeholder="City" class="m-b-2 m-t-2">
                                                                 <input update-ctrl="address" id="addContact_pincode" type="number" placeholder="Pincode">
                                                             </label>
                                                         </div>
 
                                                         <div class="row m-10">
                                                             <div class="row well">
-                                                                <label class="label col-sm-10 m-l-10">Contacts:
+                                                                <label class="label col-sm-10 m-l-10">Phone Number(s):
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <label class="col-sm-1 text-danger m-l-15">
@@ -402,8 +426,8 @@
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xs-2 col-sm-2 p-b-12">
-                                                                            <div>
-                                                                                <label>&nbsp;</label>
+                                                                            <div id='remove-contact' class='text-center text-danger'>
+                                                                                <span class='centerAlign'><i class='glyphicon glyphicon-remove fa-lg'></i></span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -414,7 +438,7 @@
 
                                                         <div class="row m-10">
                                                             <div class="row well">
-                                                                <label class="label col-sm-10 m-l-10">Email-Id's:
+                                                                <label class="label col-sm-10 m-l-10">Email(s):
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <label class="col-sm-1 text-danger m-l-15">
@@ -457,8 +481,8 @@
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xs-2 col-sm-2 p-b-12">
-                                                                            <div>
-                                                                                <label>&nbsp;</label>
+                                                                            <div id='remove-email' class='text-center text-danger'>
+                                                                                <span class='centerAlign'><i class='glyphicon glyphicon-remove fa-lg'></i></span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -493,13 +517,13 @@
                                                                         <div class="col-xs-4 col-sm-4 p-b-12">
                                                                             <label class="select">
                                                                                 <select update-ctrl="social_media_links" class="socialmedia_category select2 editselect">
-                                                                                    <option default selected value=""></option>
+                                                                                    <option default selected value="">Select...</option>
                                                                                 </select>
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xs-6 col-sm-6 p-b-12">
                                                                             <label class="input">
-                                                                                <input update-ctrl="social_media_links" type="text" class="social_media_link website_valid" placeholder="e.g. http://example.com" maxlength="254" required>
+                                                                                <input update-ctrl="social_media_links" type="text" class="social_media_link website_valid" placeholder="e.g. http://www.example.com" maxlength="254" required>
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-xs-2 col-sm-2 p-b-12">
@@ -510,28 +534,6 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Person's Image:
-                                                                </label>
-                                                                <div class="input input-file">
-                                                                    <div class="button">
-                                                                        <input update-ctrl="vcard" name="file" id="file" type="file" accept="image/*" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
-                                                                    <input id="addContact_vcard" type="text" readonly="">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Card Image:
-                                                                </label>
-                                                                <div class="input input-file">
-                                                                    <div class="button">
-                                                                        <input update-ctrl="cardImage" name="file2" id="file2" type="file" image/* onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
-                                                                    <input id="addContact_image" type="text" readonly="" >
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -549,55 +551,51 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input class="btn btn-success buttonDefSize btn-raised m-t-25 addNewOrg" value="Add"/>
+                                                                <input type="button" class="btn btn-success buttonDefSize btn-raised m-t-25 addNewOrg" value="Add">
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input id="editOrganisation" oid="null" class="btn btn-success buttonDefSize btn-raised m-t-25" value="Edit" disabled>
+                                                                <input type="button" id="editOrganisation" oid="null" class="btn btn-success buttonDefSize btn-raised m-t-25" value="Edit" disabled>
                                                             </div>
                                                         </div>
 
                                                         <div class="row m-t-30 m-b-30">
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-2">
                                                                 <label class="label">Organisation Name:</label>
                                                             </div>
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-2">
                                                                 <div id="addContact_orgName"></div>
                                                             </div>
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-2">
                                                                 <label class="label">Website:</label>
                                                             </div>
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-2">
                                                                 <div id="addContact_website"></div>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="row m-t-30 m-b-30">
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-2">
                                                                 <label class="label">Group:</label>
                                                             </div>
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-2">
                                                                 <div id="addContact_group"></div>
-                                                            </div>
-                                                        
-                                                            <div class="col-sm-3">
-                                                                <label class="label">Business Type:</label>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                    <div id="addContact_business_type"></div>
                                                             </div>
                                                         </div>
 
                                                         <div class="row m-t-30 m-b-30">
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-2">
+                                                                <label class="label">Business Type:</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                    <div id="addContact_business_type"></div>
+                                                            </div>
+                                                            <div class="col-sm-2">
                                                                 <label class="label">Industry type:</label>
                                                             </div>
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-2">
                                                                 <div id="addContact_industry"></div>
                                                             </div>
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-2">
                                                                 <label class="label">Business nature:</label>
                                                             </div>
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-2">
                                                                 <div id="addContact_business_nature"></div>
                                                             </div>
                                                         </div>
@@ -607,7 +605,7 @@
                                                                 <label class="label">Designation:</label>
                                                                 <label class="select">
                                                                     <select update-ctrl="contact_organisation" class="select2 editselect" id="addContact_designation">
-                                                                        <option default value=""></option>
+                                                                        <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
                                                             </div>
@@ -615,7 +613,7 @@
                                                                 <label class="label">Department:</label>
                                                                 <label class="select">
                                                                     <select update-ctrl="contact_organisation" class="select2 editselect" id="addContact_department">
-                                                                        <option default value=""></option>
+                                                                        <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
                                                             </div>
@@ -624,7 +622,6 @@
 
                                                         <div class="row well">
                                                             <label class="label col-sm-10 m-l-10">Branches:
-                                                                <span class="text-danger">*</span>
                                                             </label>
                                                         </div>
                                                         <div class="row">
@@ -685,7 +682,7 @@
                                                                 <label class="label col-sm-10">Source:</label>
                                                                 <label class="select">
                                                                     <select update-ctrl="lead" id="addContact_source" class="select2 editselect" required>
-                                                                        <option default value=""></option>
+                                                                        <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
                                                             </div>
@@ -703,13 +700,13 @@
                                                                 <label class="label col-sm-10">Status:</label>
                                                                 <label class="select">
                                                                     <select update-ctrl="lead" id="addContact_lead_status" class="select2 editselect" required>
-                                                                        <option default value=""></option>
+                                                                        <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
                                                             </div>
 
                                                             <div class="col-sm-6">
-                                                                <label class="label">Priority</label>
+                                                                <label class="label">Priority:</label>
                                                                 <div class="col-sm-12">
                                                                     <input update-ctrl="lead" type="text" id="range_02">
                                                                 </div>
@@ -722,7 +719,7 @@
                                                                 </label>
                                                                 <label class="select">
                                                                     <select id="addContact_originator" class="select2" required>
-                                                                        <option default value=""></option>
+                                                                        <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
                                                             </div>
@@ -732,7 +729,7 @@
                                                                 </label>
                                                                 <label class="select">
                                                                     <select update-ctrl="lead" id="addContact_assignee" class="select2-multiple" multiple required>
-                                                                        <option default value=""></option>
+                                                                        <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
                                                             </div>
@@ -744,7 +741,7 @@
                                                                 </label>
                                                                 <label class="select">
                                                                     <select update-ctrl="lead" id="addContact_potential_service" class="select2-multiple editselect" multiple>
-                                                                        <option default value=""></option>
+                                                                        <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
                                                             </div>        
@@ -775,10 +772,10 @@
                                 <div class="panel-body panel-bodyContact">
                                     <div class="row m-t-20">
                                         <div class="col-sm-2 pull-right">
-                                            <input form="addContact_form" type="reset" class="btn btn-danger btn-raised border-rounded float-right buttonDefSize btn-raised" value="Reset">
+                                            <input type="button" class="btn btn-danger btn-raised border-rounded float-right buttonDefSize btn-raised" value="Reset">
                                         </div>
                                         <div class="col-sm-2 pull-right">
-                                            <input form="addContact_form" id="addContact_submit" class="btn btn-success btn-raised border-rounded float-right buttonDefSize btn-raised" value="Submit">
+                                            <input type="button" id="addContact_submit" class="btn btn-success btn-raised border-rounded float-right buttonDefSize btn-raised" value="Submit">
                                         </div>
                                         <div class="note col-sm-12">
                                             <strong>Note:</strong> Fields marked with <span class="text-danger">*</span> are to be filled mandatorily.

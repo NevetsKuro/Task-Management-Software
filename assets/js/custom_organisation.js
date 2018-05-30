@@ -11,15 +11,21 @@ $(document).ready(function(){
     // }
 
     $.ajax({
+        url: urlRoot+'organisations/groups',
+        datatype: 'JSON',
+        type: 'GET',
+        success: function (groups) {
+            for (var i = 0; i < groups.length; i++) {
+                $('#addContact_group').append('<option value='+groups[i].id+'>'+groups[i].group+'</option>');
+            }
+        }
+    });
+
+    $.ajax({
         url:urlRoot + 'common/form-data',
         datatype:'JSON',
         type:'GET',
         success:function(data){
-
-            for (var i = 0; i < data.groups.length; i++) {
-                $('#addContact_group').append('<option value='+data.groups[i].id+'>'+data.groups[i].group+'</option>');
-            }
-
             for (var i = 0; i < data.industry_types.length; i++) {
                 $('#addContact_industry').append('<option value='+data.industry_types[i].id+'>'+data.industry_types[i].industry_type+'</option>');
             }
@@ -83,6 +89,27 @@ $(document).ready(function(){
         $(this).parents('.new').remove();
 
         UpdateCont.push($(this));
+    });
+
+    var selectedAddress;
+    $(document).on('focus','.hoaddresses',function(){
+        $('#address-modal').modal('show');
+        selectedAddress = "";
+        selectedAddress = $(this);
+    });
+
+    $(document).on('click','#addBAddress',function(){
+        var address = $('#modal-address').val();
+        var city = $('#modal-city').val();
+        var pincode = $('#modal-pincode').val();
+        var state = $('#modal-state').val();
+        var fulladdress = [];
+        fulladdress.push(address);
+        fulladdress.push(city);
+        fulladdress.push(pincode);
+        fulladdress.push(state);
+        $(selectedAddress).val(fulladdress.join('_'));
+        $('#address-modal').modal('hide');
     });
 
     var urlParam = GetURLParams();

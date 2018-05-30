@@ -92,6 +92,17 @@ span.select2-selection.select2-selection--multiple{
 body > div.ui-timepicker-wrapper{
 	width: 111px!important;
 }
+
+.orgbtn1Align {
+	position: relative;
+	right: 34px;
+	bottom: 5px;
+}
+.orgbtn2Align {
+	position: relative;
+	bottom: 5px;
+}
+
 @media (min-width: 858px) {
 	html {
 			font-size: 12px;
@@ -115,6 +126,9 @@ body > div.ui-timepicker-wrapper{
 @media (max-width: 623px) {
 	html {
 			font-size: 8px;
+	}
+	#divSide {
+		display: none;
 	}
 }
 .sky-form .checkbox i {

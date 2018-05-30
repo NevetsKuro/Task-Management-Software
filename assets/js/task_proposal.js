@@ -3,6 +3,21 @@ $(document).ready(function(){
     var params = GetURLParams();
     var pid = params['pid'];
     
+    function addRowCount(tableAttr) {
+        $(tableAttr).each(function(){
+            $('th:first-child, thead td:first-child', this).each(function(){
+            var tag = $(this).prop('tagName');
+            $(this).before('<'+tag+'>#</'+tag+'>');
+            });
+            $('td:first-child', this).each(function(i){
+            $(this).before('<td>'+(i+1)+'</td>');
+            });
+        });
+    }
+      
+      // Call the function with table attr on which you want automatic serial number
+    addRowCount('.js-serial');
+
     if(pid){
         $.getJSON(urlRoot+'tasks/proposals/'+pid,function(proposal){
             $('#ProposalToClient').val(proposal.toClient);
@@ -49,6 +64,33 @@ $(document).ready(function(){
         $(this).parentsUntil('.rowEntry').remove();
     });
     
+    $(document).on('click','.addMilestone',function(){
+        $('.rowMile').append(`
+                <tr class="new">
+                    <td>
+                        <label class="input">
+                            <input class="milestones" type="text" placeholder="">
+                        </label>
+                    </td>
+                    <td>
+                        <label class="input">
+                            <input class="feePerc" type="number valid_share" min="1" max="100">
+                        </label>
+                    </td>
+                    </td>
+                    <td>
+                        <div class="text-danger m-l-25">
+                            <i class="mile_remove glyphicon glyphicon-remove"></i>
+                        </div> 
+                    </td>
+                </tr>
+        `);
+    });
+
+    $(document).on('click','.mile_remove',function(){
+        $(this).parentsUntil('.rowMile').remove();
+    });
+
     var globalEmployee = [
         {
             'name':'steven',

@@ -96,18 +96,21 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row">
-                                                <div class="col-sm-2 col-sm-offset-6">
+                                                <div class="col-sm-1 col-sm-offset-6">
                                                     <a href="" id="btncnv1">
-                                                        <button id="btncnvertcl" class="btn btn-success buttonDefSize">Convert</button>
+                                                        <button id="btncnvertcl" class="btn btn-info"><i></i>Convert</button>
                                                     </a>
                                                 </div>
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-1">
                                                     <a href="" id="btndef1">
-                                                        <button id="edit" class="btn btn-success buttonDefSize">Edit</button>
+                                                        <button id="edit" class="btn btn-success p-r-25 p-l-27"><i></i>Edit</button>
                                                     </a>
                                                 </div>
-                                                <div class="col-sm-2">
-                                                    <button id="" class="btn btn-success buttonDefSize delete">Delete</button>
+                                                <div class="col-sm-1">
+                                                    <button id="" class="btn btn-danger p-l-18 p-r-18 delete"><i></i>Delete</button>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <button id="" class="btn btn-success p-l-18 p-r-18 export"><i></i>Export</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,21 +126,12 @@
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <label class="input">
-                                                        Title:
-                                                    </label>
-                                                </div>
-                                                <div class="col-sm-10" id="title">
-                                                    Title
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-2">
-                                                    <label class="input">
                                                         Name:
                                                     </label>
                                                 </div>
-                                                <div class="col-sm-10" id="name">
-                                                    Name
+                                                <div class="col-sm-6">
+                                                    <span id="title">Title</span>
+                                                    <span id="name">Name</span>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -146,46 +140,39 @@
                                                         Organisation:
                                                     </label>
                                                 </div>
-                                                <div class="col-sm-5" id="organisation">
+                                                <div class="col-sm-2" id="organisation">
                                                     Organisation
                                                 </div>
-                                                <div class="col-sm-1">
-                                                    <label class="input">
-                                                        Group:
-                                                    </label>
-                                                </div>
-                                                <div class="col-sm-4" id="group">
-                                                    Group
-                                                </div>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-sm-2">
                                                     <label class="input">
                                                         Branch:
                                                     </label>
                                                 </div>
-                                                <div class="col-sm-10" id="branch">
+                                                <div class="col-sm-2" id="branch">
                                                     Branch
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <label class="input">
+                                                        Group:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-2" id="group">
+                                                    Group
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label class="input">
                                                         Designation:
                                                     </label>
                                                 </div>
-                                                <div class="col-sm-10" id="desig">
+                                                <div class="col-sm-2" id="desig">
                                                     Designation
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!--TABS-->
-                                    <div class="row">
-                                        <div class="col-sm-12">
-
-                                        </div>
-                                    </div>
                                     <div>
 
                                         <div class="">
@@ -225,7 +212,7 @@
                                     </div>
 
                                     <hr/>
-                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    
                                 </div>
                             </div>
                             <!-- END PANEL -->
@@ -249,9 +236,9 @@
                                     </div-->
                                     <!-- ADDITIOAL INFORMATION -->
                                     <div id="new-form" class="col-sm-12">
-                                        <div id="horizontal-wizard" class="col-sm-10 col-sm-offset-1">
+                                        <div id="horizontal-wizard" class="col-sm-12">
                                             <ul class="nav nav-tabs" role="tablist">
-                                                <li role="presentation" class="active">
+                                                <li role="presentation" class="active m-l-50">
                                                     <a href="#tab1" data-toggle="tab" aria-expanded="true">
                                                         <i class="icon-user"></i> Personal Information
                                                     </a>
@@ -278,175 +265,179 @@
                                                 <div class="tab-content p-b-50">
                                                     <div class="tab-pane fade active in" id="tab1">
                                                         <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Phone Number:</label>
+                                                            <div class="col-sm-2 f-s-15 " dir="rtl">
+                                                                <!-- <label class="label">Gender:</label> -->
+                                                                :Gender
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="pphone">
+                                                            <div class="col-sm-3 label f-s-15" id="gender" dir="ltr">
+                                                                Gender
+                                                            </div>
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                <!-- <label class="label">Phone Number:</label> -->
+                                                                :Phone Number
+                                                            </div>
+                                                            <div class="col-sm-4 label f-s-15" id="pphone" dir="ltr">
                                                                 Phone number
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Email ID:</label>
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                <!-- <label class="label">Date Of Birth:</label> -->
+                                                                :Date Of Birth
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="pemail">
-                                                                Email id
+                                                            <div class="col-sm-3 label f-s-15" id="dob" dir="ltr">
+                                                                Date Of Birth
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Other Phone Numbers:</label>
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                <!-- <label class="label">Other Ph. Numbers:</label> -->
+                                                                :Other Ph. Numbers
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="ophone">
+                                                            <div class="col-sm-4 label f-s-15" id="ophone" dir="ltr">
                                                                 Other phone number
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Other Email ID:</label>
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                <!-- <label class="label">Address:</label> -->
+                                                                :Address
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="omail">
-                                                                Other email id
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Address:</label>
-                                                            </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="address">
+                                                            <div class="col-sm-3 label f-s-15" id="address"dir="ltr">
                                                                 Address
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Date Of Birth:</label>
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                <div>
+                                                                    <!-- <label class="label">Email ID:</label> -->
+                                                                    :Email ID
+                                                                </div>
+                                                                <div>
+                                                                    :Other Email ID
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="dob">
-                                                                Date Of Birth
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Gender:</label>
-                                                            </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="gender">
-                                                                Gender
+                                                            <div class="col-sm-4 label f-s-15">
+                                                                <div id="pemail" dir="ltr">
+                                                                    Email Id
+                                                                </div>
+                                                                <!-- <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                    <label class="label">Other Email ID:</label> -->
+                                                                    <!-- Other Email ID:
+                                                                </div>  -->
+                                                                <div id="omail" class="m-t-2" dir="ltr">
+                                                                    Other email id
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!--END OF TAB1 -->
+                                                    <!--END OF TAB2 -->
 
                                                     <div class="tab-pane fade" id="tab2">
                                                         <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">
-                                                                    Address:
-                                                                </label>
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                :Website
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1">
-                                                                <span id="addorg">
+                                                            <div class="col-sm-4 f-s-15">
+                                                                <span id="weblink" href="" class="label">
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                :Industry Type
+                                                            </div>
+                                                            <div class="col-sm-4 f-s-15">
+                                                                <span id="industrytpe" class="label">
                                                                 </span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">
-                                                                    Link:
-                                                                </label>
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                :Address
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1">
-                                                                <span id="weblink" href="">
+                                                            <div class="col-sm-4 f-s-15">
+                                                                <span id="addorg" class="label">
                                                                 </span>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">
-                                                                    Industry Type:
-                                                                </label>
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                <div>
+                                                                    <!-- <label class="label">Email ID:</label> -->
+                                                                    : Business Type
+                                                                </div>
+                                                                <div>
+                                                                    : Nature of Business
+                                                                </div>
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1">
-                                                                <span id="industrytpe">
+                                                            <div class="col-sm-4 f-s-15" dir="rtl">
+                                                                <span id="businesstype" class="label">
                                                                 </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">
-                                                                    Nature of Business:
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-6 col-sm-offset-1">
-                                                                <span id="businessnature">
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">
-                                                                    Business Type:
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-6 col-sm-offset-1">
-                                                                <span id="businesstype">
+                                                                <span id="businessnature" class="label">
                                                                 </span>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!-- END OF TAB2 -->
+
                                                     <div class="tab-pane fade" id="tab3">
                                                         <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Source:</label>
+                                                            <div class="col-sm-2 col-sm-offset-1 f-s-15">
+                                                                Source:
+                                                                <!-- <label class="label">Source:</label> -->
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="source">
+                                                            <div class="col-sm-2 col-sm-offset-1 label f-s-15" id="source">
                                                                 SOURCE
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Reference:</label>
+                                                            <div class="col-sm-2 f-s-15">
+                                                                Status:
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="reference">
-                                                                REFERENCE
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Status:</label>
-                                                            </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="status">
+                                                            <div class="col-sm-2 label f-s-15" id="status">
                                                                 STATUS
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Priority:</label>
+                                                            <div class="col-sm-2 col-sm-offset-1 f-s-15">
+                                                                Reference:
+                                                                <!-- <label class="label">Reference:</label> -->
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="priority">
+                                                            <div class="col-sm-2 col-sm-offset-1 label f-s-15" id="reference">
+                                                                REFERENCE
+                                                            </div>
+                                                            <div class="col-sm-2 f-s-15">
+                                                                Priority:
+                                                            </div>
+                                                            <div class="col-sm-2 label f-s-15" id="priority">
                                                                 PRIORITY
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-3 col-sm-offset-1">
-                                                                <label class="label">Potiential Services:</label>
+                                                            <div class="col-sm-2 col-sm-offset-1 f-s-15">
+                                                                Originator:
                                                             </div>
-                                                            <div class="col-sm-6 col-sm-offset-1" id="potent">
+                                                            <div class="col-sm-2 col-sm-offset-1 label f-s-15" id="originator">
+                                                                Originator
+                                                            </div>
+                                                            <div class="col-sm-2 f-s-15">
+                                                                Potiential Services:
+                                                            </div>
+                                                            <div class="col-sm-2 label f-s-15" id="potent">
                                                                 POTENTIAL SERVICES
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-2 col-sm-offset-1 f-s-15">
+                                                                Assignee:
+                                                            </div>
+                                                            <div class="col-sm-2 col-sm-offset-1 label f-s-15" id="assignee">
+                                                                Assignee
+                                                            </div>
+                                                            <div class="col-sm-2 f-s-15">
+                                                                Notes:
+                                                            </div>
+                                                            <div class="col-sm-2 label f-s-15" id="notes">
+                                                                Notes
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <!-- END OF TAB3-->
-
-
                                                 </div>
-                                                <!-- END OF TAB2 -->
-
-
-
+                                            </form>
                                         </div>
-                                        </form>
                                     </div>
-                                </div>
 
                                 <!-- END OF ADDITIONAL INFORMATION -->
                             </div>
@@ -508,13 +499,6 @@
     <script src="assets/js/addSidebar.js" type="text/javascript"></script>
     <script src="assets/js/addCss.js" type="text/javascript"></script>
     <script>
-        $(document).ready(function () {
-            
-            //global functions
-            App.init();
-            
-            
-        });
         /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
         $.widget.bridge('uibutton', $.ui.button);
         $.widget.bridge('uitooltip', $.ui.tooltip);
@@ -550,7 +534,7 @@
     <script src="assets/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
     <script src="assets/vendors/bootstrap-fileupload/js/bootstrap-fileupload.js"></script>
     <script src="assets/js/forms/form-wizard.js" type="text/javascript"></script>
-    <script src="assets/js/dashboard.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/dashboard.js" type="text/javascript"></script> -->
     <script src="assets/js/widget-weather.js" type="text/javascript"></script>
     <script src="assets/js/widget-list.js" type="text/javascript"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -560,6 +544,16 @@
     <script src="assets/js/theme.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="Libraries/timepicker/jquery.timepicker.min.js"></script>
     <script src="assets/js/viewContact.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        
+        $(document).ready(function () {
+            
+            //global functions
+            App.init();
+            
+        });
+    </script>
+    
     <!--================================/
         /* END CUSTOM SCRIPTS
         /*================================-->

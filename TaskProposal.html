@@ -85,29 +85,7 @@
                                         <form class="sky-form">
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <label class="label">ToClient:
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <label class="select">
-                                                        <select id="ProposalToClient" class="select2">
-                                                            <option default value=""></option>
-                                                        </select>
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="label">ToPerson:
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <label class="select">
-                                                        <select id="ProposalToPerson" class="select2">
-                                                            <option default value=""></option>
-                                                        </select>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <label class="label">FromEntity:
+                                                    <label class="label">From Entity:
                                                         <span class="text-danger">*</span>
                                                     </label>
                                                     <label class="select">
@@ -117,7 +95,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <label class="label">FromEmployee:
+                                                    <label class="label">From Employee:
                                                             <span class="text-danger">*</span>
                                                     </label>
                                                     <label class="select">
@@ -129,49 +107,35 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
+                                                    <label class="label">To Client:
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <label class="select">
+                                                        <select id="ProposalToClient" class="select2">
+                                                            <option default value=""></option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="label">To Person:
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <label class="select">
+                                                        <select id="ProposalToPerson" class="select2">
+                                                            <option default value=""></option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
                                                     <label class="label">Date:
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <label class="input">
+                                                    <label class="input custom_inline m-l-0">
                                                         <i class="icon-append icon-calendar-31 text-primary f-s-22"></i>
-                                                        <input id="ProposalDate" type="text" class="datepickr">
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="label">Time:
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <label class="input">
-                                                        <i class="icon-append icon-clock3 text-primary f-s-22"></i>
-                                                        <input id="ProposalTime" type="text" class="timepicker">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <label class="label">Subject:
-                                                            <span class="text-danger">*</span>
-                                                    </label>
-                                                    <label class="input">
-                                                        <input id="ProposalSubject" type="text">
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="label">Background:
-                                                            <span class="text-danger">*</span>
-                                                    </label>
-                                                    <label class="input">
-                                                        <input id="ProposalBackground" type="text">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <label class="label">ScopeOfWork:
-                                                            <span class="text-danger">*</span>
-                                                    </label>
-                                                    <label class="input">
-                                                        <input id="ProposalScopeOfWork" type="text">
+                                                        <input id="ProposalDate" type="text" class="datepickr m-r-40 p-r-90">
+                                                        <input id="ProposalTime" type="text" class="timepicker p-r-90">
                                                     </label>
                                                 </div>
                                                 <div class="col-lg-6">
@@ -185,6 +149,65 @@
                                                             <option value="S">S</option>
                                                             <option value="A">A</option>
                                                         </select>
+                                                    </label>
+                                                </div>
+                                                <!-- <div class="col-lg-6">
+                                                    <label class="label">Time:
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-append icon-clock3 text-primary f-s-22"></i>
+                                                        <input id="ProposalTime" type="text" class="timepicker">
+                                                    </label>
+                                                </div> -->
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <label class="label">Subject:
+                                                            <span class="text-danger">*</span>
+                                                    </label>
+                                                    <label class="textarea">
+                                                        <textarea id="ProposalSubject" class="textarea textarea-expandable" rows="3"></textarea>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <label class="label">Introductory Line:
+                                                            <span class="text-danger">*</span>
+                                                    </label>
+                                                    <label class="textarea">
+                                                        <textarea id="ProposalSubject" class="textarea" rows="3"></textarea>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <label class="label">Background:
+                                                            <span class="text-danger">*</span>
+                                                    </label>
+                                                    <label class="textarea">
+                                                        <textarea id="ProposalBackground" class="textarea" rows="3"></textarea>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <label class="label">ScopeOfWork:
+                                                            <span class="text-danger">*</span>
+                                                    </label>
+                                                    <label class="textarea">
+                                                        <textarea id="ProposalScopeOfWork" class="textarea textarea-expandable" rows="3"></textarea>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <label class="label">Deliverables:
+                                                            <span class="text-danger">*</span>
+                                                    </label>
+                                                    <label class="textarea">
+                                                        <textarea id="ProposalSubject" class="textarea textarea-expandable" rows="3"></textarea>
                                                     </label>
                                                 </div>
                                             </div>
@@ -202,6 +225,40 @@
                                                         <i class="glyphicon glyphicon-question-sign"></i>
                                                     </label>
                                                 </div>
+                                            </div>
+                                            <div class="well row">
+                                                <label class="text-bold f-s-20 col-sm-10">Payment Milestones:</label>
+                                                <span id='addMilestone' class=" col-sm-1"><i class="glyphicon glyphicon-plus m-l-20 text-danger" title="Add New Milestone"></i></span>
+                                            </div>
+                                            <div class="table-responsive">
+                                                    <table id="Milestone_table" class="table table-small-font table-bordered table-striped m-b-0 js-serial">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Milestone</th>
+                                                                <th>Share (in Percentage)</th>
+                                                                <th>Remove</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="rowMile">
+                                                            <tr class="new">
+                                                                <td>
+                                                                    <label class="input">
+                                                                        <input class="milestones" type="text" placeholder="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label class="input">
+                                                                        <input class="feePerc" type="number valid_share" min="1" max="100">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="text-danger m-l-25">
+                                                                        <i class="mile_remove glyphicon glyphicon-remove"></i>
+                                                                    </div> 
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                             </div>
                                         </form>
 

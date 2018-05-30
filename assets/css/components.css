@@ -639,6 +639,7 @@ File: Components
 .panel {
   border: none;
   margin-bottom: 20px;
+  border-radius: 8px;
 }
 .panel .panel-body {
   padding: 20px;

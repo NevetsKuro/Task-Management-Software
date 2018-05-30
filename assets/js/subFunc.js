@@ -196,6 +196,17 @@
                 $(this).focus();
             }
         });
+        
+        $(document).on('change',".valid_share", function(){
+            var share = $(this).val();
+            if(share <= 100){
+                return true
+            }else if(share > 100){
+                swal('Wrong format','Please Enter Valid Percentage','error');
+                $(this).val('');
+                $(this).focus();
+            }
+        });
 
         // $(document).on('focus', 'form :input:not(select)' ,function(){
         //     $('html, body').animate({

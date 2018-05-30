@@ -55,7 +55,7 @@
                     <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
                         <div class="page-header-content slideshow">
                             <div class="page-header-overlay">
-
+                                <div class="page-title">Add Employee</div>
                                 <div class="page-breadcrumb">
                                     <nav class="c_breadcrumbs">
                                         <ul>
@@ -83,16 +83,22 @@
 
                                     <div class="panel-body">
 
-                                    <h2 class="">Add Employee</h2>
-                                    <hr>
                                     <form class="sky-form" id="HR_Form">
                                         <div class="row">
-                                            <div class="col-sm-12">
-                                                <label class="label">Employee Name:
+                                            <div class="">
+                                                <label class="label col-sm-12">Employee Name:
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <label class="input">
-                                                    <input id="employee_name" type="text" placeholder="">
+                                                    <div class="col-sm-4">
+                                                        <input id="employee_fname" type="text" placeholder="First Name">
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input id="employee_mname" type="text" placeholder="Middle Name">
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input id="employee_lname" type="text" placeholder="Last Name">
+                                                    </div>
                                                 </label>
                                             </div>
                                         </div>
@@ -234,7 +240,7 @@
                                                     </div>
                                                     <div class="col-xs-3 col-sm-3 p-b-12">
                                                         <label class="select">
-                                                            <select update-ctrl="email_addresses" class="email_category select2 editselect" disabled>
+                                                            <select update-ctrl="email_addresses" class="email_category select2 editselect">
                                                                 <option default value=""></option>
                                                             </select>
                                                         </label>
@@ -263,7 +269,9 @@
                                             <div class="col-sm-6">
                                                 <label class="label">Reporting Manager(s)</label>
                                                 <label class="select">
-                                                    <select id="employee_reportingManager" class="select-multiple" multiple></select>
+                                                    <select id="employee_reportingManager" class="select2-multiple" multiple>
+
+                                                    </select>
                                                 </label>
                                             </div>
                                         </div>
@@ -275,8 +283,8 @@
                                 <div class="panel">
                                     <div class="panel-body">
                                             <footer class="text-right m-t-20">
-                                            <input type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30" value="Reset">
-                                            <input id="submit_employee" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30" value="Submit">
+                                            <input type="button" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30" value="Reset">
+                                            <input type="button" id="submit_employee" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30" value="Submit">
                                             <div class="note"><strong>Note:</strong> Fields marked with <span class="text-danger" >*</span> are to be filled mandatorily.</div>
                                         </footer>
                                     </div>

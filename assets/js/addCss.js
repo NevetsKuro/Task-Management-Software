@@ -20,7 +20,7 @@ cssVar += "        <link href=\"assets\/css\/sky-forms.min.css\" rel=\"styleshee
 cssVar += "        <link href=\"assets\/css\/select2.min.css\" rel=\"stylesheet\">";
 cssVar += "        <link href=\"assets\/css\/form_wizard.css\" rel=\"stylesheet\">";
 cssVar += "        <link href=\"assets\/plugins\/ion-rangeslider\/ion.rangeSlider.css\" rel=\"stylesheet\" type=\"text\/css\"\/>";
-cssVar += "        <link href=\"assets\/plugins\/ion-rangeslider\/ion.rangeSlider.skinFlat.css\" rel=\"stylesheet\" type=\"text\/css\"\/>";
+cssVar += "        <link href=\"https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/ion-rangeslider\/2.2.0\/css\/ion.rangeSlider.skinHTML5.css\" rel=\"stylesheet\" type=\"text\/css\"\/>";
 cssVar += "        <link href=\"assets\/plugins\/seiyria-bootstrap-slider\/dist\/css\/bootstrap-slider.min.css\" rel=\"stylesheet\" type=\"text\/css\"\/>";
 cssVar += "        <!--================================\/";
 cssVar += "        \/* END GLOBAL CSS PLUGINS";

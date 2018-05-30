@@ -161,6 +161,19 @@ $(document).ready(function(){
         $('#submitTask').trigger('click');
     })
 
+    $(document).on('change','#range_02',function(){
+        // console.log($(this).val()); 
+        var v = $(this).val(); 
+        var t = $('#tab3 > div:nth-child(2) > div:nth-child(2) > div > span > span.irs-slider.single'); 
+        switch(v){ 
+            case "1":case "2": t.css('transform','scale(0.5)');break;
+            case "3":case "4": t.css('transform','scale(0.7)');break; 
+            case "5":case "6": t.css('transform','scale(0.9)');break; 
+            case "7":case "8": t.css('transform','scale(1.1)');break;
+            case "3":case "4": t.css('transform','scale(1.3)');break;  
+        }  
+    });
+
     function fillSubTask(tid){
         $.getJSON(urlRoot+'/subtasks/?task='+tid,function(data){
             

@@ -34,6 +34,22 @@ $(document).ready(function(){
         from: 5
         });
 
+    $('addContact_state').select2({
+        placeholder: 'State'
+    })
+    $(document).on('change','#range_02',function(){
+        // console.log($(this).val()); 
+        var v = $(this).val(); 
+        var t = $('#tab3 > div:nth-child(2) > div:nth-child(2) > div > span > span.irs-slider.single'); 
+        switch(v){ 
+            case "1":case "2": t.css('transform','scale(0.5)');break;
+            case "3":case "4": t.css('transform','scale(0.7)');break; 
+            case "5":case "6": t.css('transform','scale(0.9)');break; 
+            case "7":case "8": t.css('transform','scale(1.1)');break;
+            case "3":case "4": t.css('transform','scale(1.3)');break;  
+        }  
+    });
+    
     $(document).on('click','#btnsubmit',function(){
     
         $('#colored-warning-header').modal('hide');
@@ -87,9 +103,7 @@ $(document).ready(function(){
                 error:function(err){
                     alert('cannot connect to server!: ' + err);
                 }
-        });
-    
-    
+            });
         }
     });
     
@@ -128,7 +142,7 @@ $(document).ready(function(){
             for (var i = 0; i < data.designations.length; i++) {
                 $('#addContact_designation').append('<option value=' + data.designations[i].id+'>'+data.designations[i].designation+'</option>');
             }
-
+            // $('#addContact_designation').append('<option value="1">Software engineer(HC)</option>');
             for (var i = 0; i < data.departments.length; i++) {
                 $('#addContact_department').append('<option value=' + data.departments[i].id+'>'+data.departments[i].department+'</option>');
             }
@@ -165,7 +179,6 @@ $(document).ready(function(){
             for (var i = 0; i < data.length; i++) {
                 $('#addContact_originator').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
             }
-            
             console.log('Pre filled data added!!!');
         },
         error:function(error){
@@ -216,8 +229,8 @@ $(document).ready(function(){
                 $('#addContact_addresses').val(addr.StreetAddress);
                 $('#addContact_city').val(addr.City);
                 $('#addContact_pincode').val(addr.Pincode);
-                $('#addContact_state').val(addr.State);
-                $('#addContact_image').val(data.image);
+                $('#addContact_state').val(addr.State).trigger('change');
+                $('#addContact_image').val(data.person_image);
                 $('#addContact_vcard').val(data.card_image);
                 
                 if(data.contact_organisation){
@@ -320,6 +333,7 @@ $(document).ready(function(){
     
     if(currentContactsId){
         filterContactData();
+        $('#accord').addClass('hide');
         UpdateCont = inputChanges();
         // origForm = inputChanges();
     }
@@ -474,7 +488,7 @@ $(document).ready(function(){
         <div class='row well new'>
         
             <div class='col-xs-1 col-sm-1'>
-                <label class='checkbox'>
+                <label class='checkbox m-l-10'>
                     <input type='radio' update-ctrl="branch" name="branchChecked" class='hoaddress_from'><i class='rounded-x m-l-10'></i>
                 </label>
             </div>
@@ -512,8 +526,11 @@ $(document).ready(function(){
     $('#addContact_source').on('change',function(){
         var optionValue = $("#addContact_source option:selected").text();
         // $('#addContact_refer').
-        $('.refer_label > label:first').empty().text(optionValue);
-        if(optionValue==''){}
+        if(optionValue == 'Reference'){
+            $('.refer_label > label:first').empty().text('Name of Referral:');
+        }else{
+            $('.refer_label > label:first').empty().text(optionValue+':');
+        }
     });
     
     // function appendArray(form_data, values, name){
@@ -908,7 +925,9 @@ var CF_cardimg='';
                 contactData.title = CF_title;
                 contactData.name = CF_fullName;
                 contactData.gender = CF_gender;
-                contactData.dob = getFormateDateToServer(CF_dob);
+                if(CF_dob){
+                    contactData.dob = getFormateDateToServer(CF_dob);
+                }
                 contactData.address = CF_ModAddress;
                 contactData.email_addresses = getEmailRow();
                 contactData.phone_numbers = getContactRow();
@@ -937,7 +956,7 @@ var CF_cardimg='';
                     data:contactJSON,
                     success:function(data){
                         swal('contact added to server');
-                        var urL = urlRoot+'ContactList.html?listOf=contact';
+                        var urL = 'ContactList.html?listOf=contact';
                         $(location).attr('href',urL);
                     },
                     error:function(error){

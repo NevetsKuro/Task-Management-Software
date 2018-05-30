@@ -27,7 +27,12 @@ $(document).ready(function () {
         }
     });
     
-
+    $.getJSON(urlRoot+'employees',function(data){
+        for (var i = 0; i < data.length; i++) {
+            $('#employee_reportingManager').append('<option value=' + data[i].id+'>'+data[i].name+'</option>');
+        }
+    });
+    
     
     ////////////////////////////////////      MULTIPLE ROWS     ///////////////////////////////////////////////////////
     var addContactRow = `
@@ -132,7 +137,7 @@ $(document).ready(function () {
     if(update){
         $.getJSON(urlRoot+'employees/'+empId,function(data){
             
-            $('#employee_name').val(data.name);
+            $('#employee_fname').val(data.name);
             $('#employee_title').val(data.title);
             var formatted9 = $.datepicker.formatDate("dd/mm/yy", new Date(data.dob));
             $('#employee_dob').val(formatted9);
@@ -179,7 +184,10 @@ $(document).ready(function () {
     }
 
     function checkValidation(){
-        let name = $('#employee_name').val();
+        let fname = $('#employee_fname').val();
+        let mname = $('#employee_mname').val();
+        let lname = $('#employee_lname').val();
+        let name = fname + mname + lname;
         let title = $('#employee_title').val();
         let dob = $('#employee_dob').val();
         let designation = $('#employee_designation').val();
@@ -229,7 +237,9 @@ $(document).ready(function () {
             var employeeObj = new Object();
             employeeObj.name = $('#employee_name').val();
             employeeObj.title = parseInt($('#employee_title').val());
-            employeeObj.dob = getFormateDateToServer($('#employee_dob').val());
+            if($('#employee_dob').val()){
+                employeeObj.dob = getFormateDateToServer($('#employee_dob').val());
+            }
             employeeObj.designation = $('#employee_designation').val();
             employeeObj.locations = "4";//$('#employee_location').val();
             employeeObj.department = parseInt($('#employee_department').val());

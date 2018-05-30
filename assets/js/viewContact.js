@@ -28,7 +28,7 @@ $(document).ready(function(){
     });
 
     $.ajax({
-        url: urlRoot + 'contacts/form-data',
+        url: urlRoot + 'common/form-data',
         type: 'GET',
         dataType:'JSON', 
         success: function(data){ 
@@ -50,15 +50,6 @@ $(document).ready(function(){
                 $(".delete").attr("id",id);
                 $("#title").html(data.title)
                 $("#name").html(data.name);
-                $("#organisation").html(data.contact_organisation.organisation.name);
-                $("#group").html(data.contact_organisation.organisation.group);
-                branchid=data.contact_organisation.branch;
-                $("#branch").html(data.contact_organisation.organisation.branches.find(function(branch){
-                    return branch.id === branchid;}).name);
-                //$("#desig").html(data.contact_organisation.designation);
-                
-                $("#desig").html(global.designations.find(function(desig){
-                    return desig.id === data.contact_organisation.designation;}).designation);
 
                 for(var i=0;i<phones.length;i++){
                     if(phones[i].is_primary===true)
@@ -92,35 +83,44 @@ $(document).ready(function(){
                 }
                 
                 if(data.address!="")
-                    $("#address").html(data.address);
+                    $("#address").html(data.address.split('_').join(', '));
                 
                 $("#dob").html(data.dob);
                 
                 $("#gender").html(data.gender);
                 
-                $("#addorg").html(data.contact_organisation.organisation.branches.find(function(branch){
-                    return branch.id === branchid;}).address);
+                
                 
                 if((website=data.contact_organisation.organisation.website)!=""){
+
+                    $("#organisation").html(data.contact_organisation.organisation.name);
+                    $("#group").html(data.contact_organisation.organisation.group);
+                    branchid=data.contact_organisation.branch;
+                    $("#addorg").html(data.contact_organisation.organisation.branches.find(function(branch){
+                        return branch.id === branchid;}).address);
+                    $("#branch").html(data.contact_organisation.organisation.branches.find(function(branch){
+                        return branch.id === branchid;}).name);
+                    $("#desig").html(global.designations.find(function(desig){
+                        return desig.id === data.contact_organisation.designation;}).designation);
                     $("#weblink").html(website);
                     $("#weblink").attr("href",website);
                 }
 
-                $("#industrytpe").html(data.contact_organisation.organisation.industry_types[0]);
-                
-                $("#businesstype").html(data.contact_organisation.organisation.business_types[0]);
-
-                $("#businessnature").html(data.contact_organisation.organisation.business_natures[0]);
-
-                $("#source").html(data.lead.source);
-
-                $("#reference").html(data.lead.reference);
-
-                $("#status").html(data.lead.status);
-
-                $("#priority").html(data.lead.priority);
-                
-                $("#potent").html(data.lead.potential_services);
+                if(data.contact_organisation){
+                    $("#industrytpe").html(data.contact_organisation.organisation.industry_types[0]);
+                    $("#businesstype").html(data.contact_organisation.organisation.business_types[0]);
+                    $("#businessnature").html(data.contact_organisation.organisation.business_natures[0]);
+                }
+                if(data.lead){
+                    $("#source").html(data.lead.source);
+                    $("#reference").html(data.lead.reference);
+                    $("#status").html(data.lead.status);
+                    $("#priority").html(data.lead.priority);
+                    $("#potent").html(data.lead.potential_services);
+                    $("#originator").html(data.lead.originators);
+                    $("#assignee").html(data.lead.assignees);
+                    $("#notes").html(data.lead.notes);
+                }
             }
 
         }

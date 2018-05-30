@@ -209,7 +209,10 @@ $(document).ready(function(){
         var titleId = $('#clientsContact_title').val();
         var titleText = $('#clientsContact_title').find('option:selected').text();
         
-        var Name = $('#clientsContact_Name').val();
+        var fName = $('#clientsContact_fName').val();
+        var mName = $('#clientsContact_mName').val();
+        var lName = $('#clientsContact_lName').val();
+        var Name = fName + mName +lName;
         var gender = $('#clientsContact_Gender').val();
         var email = $('#clientsContact_email').val();
         var phone = $('#clientsContact_phone').val();

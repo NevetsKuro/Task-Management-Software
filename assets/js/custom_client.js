@@ -26,6 +26,19 @@ $(document).ready(function () {
         $('#client_group').attr('disabled',true);
     }
     
+    $('[data-type="adhaar-number"]').keyup(function() {
+        var value = $(this).val();
+        value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
+        $(this).val(value);
+    });
+    
+    $('[data-type="adhaar-number"]').on("change, blur", function() {
+        var value = $(this).val();
+        var maxLength = $(this).attr("maxLength");
+        if (value.length != maxLength) {
+            swal('Please enter a valid Aadhar Number')
+        }
+    });
     /////////////////////////////////// Prefilled Data  //////////////////////////////////////////////////
 
     $.ajax({
@@ -561,7 +574,10 @@ $(document).ready(function () {
             $('#Individual').removeClass('hide');
             $('.a_branch').addClass('hide');
             $('#companyCommon').addClass('hide');
+            $('.llp').addClass('hide');
+            $('.cin').addClass('hide');
             $('.relation_tab').removeClass('hide');
+            $('.indi').removeClass('hide');
             $('.designation_tab').addClass('hide');
             $('.service_tab').addClass('hide');
             $('.organis').addClass('hide');
@@ -575,6 +591,9 @@ $(document).ready(function () {
             $('.a_branch').removeClass('hide');
             $('#companyCommon').removeClass('hide');
             $('.relation_tab').addClass('hide');
+            $('.llp').addClass('hide');
+            $('.cin').addClass('hide');
+            $('.indi').addClass('hide');
             $('.designation_tab').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
@@ -587,6 +606,9 @@ $(document).ready(function () {
             $('.a_branch').removeClass('hide');
             $('#companyCommon').removeClass('hide');
             $('.relation_tab').addClass('hide');
+            $('.llp').addClass('hide');
+            $('.cin').addClass('hide');
+            $('.indi').addClass('hide');
             $('.designation_tab').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
@@ -599,6 +621,9 @@ $(document).ready(function () {
             $('.a_branch').removeClass('hide');
             $('#companyCommon').removeClass('hide');
             $('.relation_tab').addClass('hide');
+            $('.indi').addClass('hide');
+            $('.llp').addClass('hide');
+            $('.cin').addClass('hide');
             $('.designation_tab').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
@@ -611,7 +636,10 @@ $(document).ready(function () {
             $('.a_branch').removeClass('hide');
             $('#companyCommon').removeClass('hide');
             $('.relation_tab').addClass('hide');
+            $('.indi').addClass('hide');
+            $('.cin').addClass('hide');
             $('.designation_tab').removeClass('hide');
+            $('.llp').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
             $('.disable_webs').attr('disabled',true);
@@ -623,7 +651,10 @@ $(document).ready(function () {
             $('.a_branch').removeClass('hide');
             $('#companyCommon').removeClass('hide');
             $('.relation_tab').addClass('hide');
+            $('.indi').addClass('hide');
+            $('.llp').addClass('hide');
             $('.designation_tab').removeClass('hide');
+            $('.cin').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
             $('.disable_webs').attr('disabled',true);
@@ -635,6 +666,9 @@ $(document).ready(function () {
             $('.a_branch').removeClass('hide');
             $('#companyCommon').removeClass('hide');
             $('.relation_tab').addClass('hide');
+            $('.indi').addClass('hide');
+            $('.llp').addClass('hide');
+            $('.cin').addClass('hide');
             $('.designation_tab').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
@@ -647,6 +681,9 @@ $(document).ready(function () {
             $('.a_branch').removeClass('hide');
             $('#companyCommon').removeClass('hide');
             $('.relation_tab').addClass('hide');
+            $('.indi').addClass('hide');
+            $('.llp').addClass('hide');
+            $('.cin').addClass('hide');
             $('.designation_tab').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
@@ -959,7 +996,7 @@ $(document).ready(function () {
         </div>
         <div class="col-sm-5">
             <label class="input">
-                <input class="partnershare" type="number" min="1" max="100">
+                <input class="partnershare valid_share" type="number" min="1" max="100">
             </label>
         </div>
         <div class="col-sm-1">
@@ -1825,7 +1862,9 @@ $(document).ready(function () {
                     // indContactData.contact_organisation = c_org;
                     clientData.prospect = createQuickContact(indContactData);
 
-                    clientData.aadhar_no = $('#individual_aadhar').val();
+                    if($('#individual_aadhar').val()){
+                        clientData.aadhar_no = $('#individual_aadhar').val().split('-').join('');
+                    }
                     clientData.typeOfWork = $('#individual_typeWork').val();
                     clientData.website = website;
 

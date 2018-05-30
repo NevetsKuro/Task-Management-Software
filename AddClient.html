@@ -55,9 +55,9 @@
                 <!-- START PAGE HEADER -->
                 <div class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
                     <div class="page-header-content slideshow">
-                        <div class="page-header-overlay">
-                            <h1 class="page-title">Add Client</h1>
-                            <div class="page-breadcrumb">
+                        <div class="page-header-overlay f-s-11">
+                            <h1 class="page-title col-sm-6">Add Client</h1>
+                            <div class="page-breadcrumb m-l-9">
                                 <nav class="c_breadcrumbs">
                                     <ul>
                                         <li>
@@ -98,10 +98,10 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <input class="btn btn-success buttonDefSize btn-raised m-t-25 addNewOrg" value="Add"/>
+                                                    <input type="button" class="btn btn-success btn-raised buttonDefSize orgbtn2Align m-t-25 addNewOrg" value="Add">
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <input id="editOrganisation" oid="null" class="btn btn-success buttonDefSize btn-raised m-t-25" value="Edit" disabled>
+                                                    <input type="button" id="editOrganisation" oid="null" class="btn btn-success btn-raised buttonDefSize orgbtn1Align m-t-25" disabled value="Edit">
                                                 </div>
                                             </div>
                                         </div>
@@ -138,6 +138,14 @@
                                                     </select>
                                                 </label>
                                             </div>
+                                            <div id="common">
+                                                <div class="col-sm-6">
+                                                    <label class="label">Website:</label>
+                                                    <label class="input">
+                                                        <input id="website" class="disable_webs" type="text" placeholder="http://www.example.com">
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </fieldset>
 
@@ -156,24 +164,24 @@
                                             </li>
                                             <li role="presentation">
                                                 <a href="#tab3" data-toggle="tab">
-                                                    <i class="icon-user"></i> Managers
+                                                    <i class="icon-user"></i> Lead Management
                                                 </a>
                                             </li>
                                             <li role="presentation">
                                                 <a href="#tab4" data-toggle="tab">
-                                                    <i class="icon-check"></i> Statutory Documents
+                                                    <i class="icon-check"></i> Statutory Data and Documents
                                                 </a>
                                             </li>
                                         </ul>
 
-                                        <div class="progress progress-sm m-t-20 m-b-0">
+                                        <!-- <div class="progress progress-sm m-t-20 m-b-0">
                                             <div class="progress-bar progress-bar-primary ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar"
                                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
                                                 <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div>
                                             </div>
-                                        </div>
+                                        </div> -->
 
-                                        <form id="client_form" class="m-t-20 sky-form" novalidate="novalidate" action="#">
+                                        <form id="client_form" class="sky-form" novalidate="novalidate" action="#">
                                             <div class="tab-content">
                                                 <div class="tab-pane active fade in" id="tab1">
 
@@ -186,7 +194,7 @@
                                                             <div class="col-sm-2">
                                                                 <label class="label">Title:</label>
                                                                 <label class="select">
-                                                                    <select id="addContact_title" class="select2 editselect selTitle"></select>
+                                                                    <select id="addContact_title" class="select2 selTitle"></select>
                                                                 </label>
                                                             </div>
                                                             <div class="col-sm-3">
@@ -213,7 +221,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Date of Birth:
                                                                     <span class="text-danger">*</span>
                                                                 </label>
@@ -222,20 +230,16 @@
                                                                     <input id="individual_dob" type="text" class="inputdob dobdatepickr">
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Type of Work:</label>
-                                                                <label class="input">
-                                                                    <input id="individual_typeWork" type="text" placeholder="">
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <label class="label">Aadhar No.:
-                                                                        <span class="text-danger">*</span>
-                                                                </label>
-                                                                <label class="input">
-                                                                    <input id="individual_aadhar" class="aadhar_valid" placeholder="1234-5678-9012">
+                                                                <label class="select">
+                                                                    <select id="individual_typeWork" class="select2">
+                                                                        <option selected value="">Select..</option>
+                                                                        <option value="Salaried">Salaried</option>
+                                                                        <option value="Business">Business</option>
+                                                                        <option value="Unemployed">Unemployed</option>
+                                                                        <option value="Retired">Retired</option>
+                                                                    </select>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -301,7 +305,7 @@
                                                                 <label class="label">Title:</label>
                                                                 <label class="select">
                                                                     <select id="prop_Title" class="select2 selTitle">
-                                                                        <option default value=""></option>
+                                                                        <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
                                                             </div>
@@ -370,7 +374,7 @@
                                                             <div id="partner-row" class="m-10">
                                                                 <div class="row well p-l-20 f-s-15">
                                                                     <label class="label col-sm-10">Details of Partners:</label>
-                                                                    <i id='addpartners' class="glyphicon glyphicon-plus m-l-30 col-sm-1" title="Add New Partners"></i>
+                                                                    <i id='addpartners' class="glyphicon glyphicon-plus m-l-30 col-sm-1 text-danger" title="Add New Partners"></i>
                                                                 </div>
                                                                 <div class="row well">
                                                                     <div class="col-sm-6">
@@ -393,7 +397,7 @@
                                                                     </div>
                                                                     <div class="col-sm-5">
                                                                         <label class="input">
-                                                                            <input class="partnershare" type="number" min="0" max="100">
+                                                                            <input class="partnershare valid_share" type="number" min="0" max="100">
                                                                         </label>
                                                                     </div>
                                                                     <div class="col-sm-1">
@@ -427,40 +431,39 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Date of Incorporation:</label>
                                                                 <label class="input">
                                                                     <i class="icon-append icon-calendar-31 text-primary f-s-22"></i>
                                                                     <input id="LLP_date" type="text" class="datepickr">
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Name of other Partners:</label>
                                                                 <label class="input">
                                                                     <input id="partners_noopartner" type="text">
                                                                 </label>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <!-- <div class="col-sm-4">
                                                                 <label class="label">LLPIN:</label>
                                                                 <label class="input">
                                                                     <input id="LLP_LLPIN" type="text" class="llpin_valid">
                                                                 </label>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                         <div id="dpartner-row" class="m-10">
                                                             <span class="m-10"></span>
                                                             <div class="row well f-s-15">
                                                                 <label class="label col-sm-10 m-l-20">Details of Designated Partners</label>
-                                                                <i id='addDpartners' class="glyphicon glyphicon-plus col-sm-1 m-l-50" title="Add New Partners"></i>
+                                                                <i id='addDpartners' class="glyphicon glyphicon-plus col-sm-1 m-l-50 text-danger" title="Add New Partners"></i>
                                                             </div>
                                                             <div class="row well">
                                                                 <div class="col-sm-6">
                                                                     <label class="label">Name of Designated Partner:</label>
                                                                 </div>
                                                                 <div class="col-sm-5">
-                                                                    <label class="label">Corresponding DIN of Designated Partner:</label>
+                                                                    <!-- <label class="label">Corresponding DIN of Designated Partner:</label> -->
+                                                                    <label class="label">DIN:</label>
                                                                 </div>
                                                                 <div class="col-sm-1">
                                                                     <label class="label">Remove</label>
@@ -514,7 +517,7 @@
                                                                     </label>
                                                                     <label class="select">
                                                                         <select id="company_types" class="select2" required>
-                                                                            <option default value=""></option>
+                                                                            <option default value="">Select...</option>
                                                                         </select>
                                                                     </label>
                                                                 </div>
@@ -527,43 +530,45 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-sm-6">
+                                                                <!-- <div class="col-sm-6">
                                                                     <label class="label">CIN</label>
                                                                     <label class="input">
-                                                                        <!-- <input id="company_cin" type="text" class="cin_valid" placeholder="e.g. A11111AA1111AAA111111"> -->
+                                                                        <input id="company_cin" type="text" class="cin_valid" placeholder="e.g. A11111AA1111AAA111111">
                                                                         <input id="company_cin" type="text" placeholder="e.g. A11111AA1111AAA1">
                                                                     </label>
-                                                                </div>
-                                                                <div class="col-sm-6">
+                                                                </div> -->
+                                                                <!-- <div class="col-sm-6">
                                                                     <label class="col-sm-2 checkbox m-t-30">
                                                                         <input type="checkbox" id="company_listedy" name="listed">
                                                                         <i></i>
                                                                         <span class="label-font">Listed</span>
                                                                     </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="nofE col-sm-6 hide">
-                                                                    <label class="label">Name(s) of Stock Exchange:</label>
+                                                                </div> -->
+                                                                <div class="nofE col-sm-6 ">
+                                                                    <label class="label">Name(s) of Stock Exchange(if listed):</label>
                                                                     <label class="select">
                                                                         <select id="company_stock" class="select2">
-                                                                            <option default value=""></option>
+                                                                            <option default value="">Select...</option>
                                                                         </select>
                                                                     </label>
                                                                 </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                
                                                             </div>
 
                                                             <div id="director-row" class="m-10">
                                                                 <div class="row well f-s-15">
                                                                     <label class="label col-md-10 m-l-20">Directors:</label>
-                                                                    <i id='addDirectors' class="glyphicon glyphicon-plus m-l-50 col-sm-1" title="Add New Directors"></i>
+                                                                    <i id='addDirectors' class="glyphicon glyphicon-plus m-l-50 col-sm-1 text-danger" title="Add New Directors"></i>
                                                                 </div>
                                                                 <div class="row well">
                                                                     <div class="col-sm-5">
                                                                         <label class="label">Name of Directors:</label>
                                                                     </div>
                                                                     <div class="col-sm-5">
-                                                                        <label class="label">Corresponding DIN of Directors:</label>
+                                                                        <!-- <label class="label">Corresponding DIN of Directors:</label> -->
+                                                                        <label class="label">DIN:</label>
                                                                     </div>
                                                                     <div class="col-sm-2">
                                                                         <label class="label">Remove</label>
@@ -581,7 +586,7 @@
                                                                         </label>
                                                                     </div>
                                                                     <div class="col-sm-2">
-                                                                        <span id="remove-Dpartner">
+                                                                        <span id="remove-Dpartner text-danger">
                                                                             <i class="glyphicon glyphicon-remove fa-lg m-t-15"></i> 
                                                                         </span>
                                                                     </div>
@@ -670,7 +675,7 @@
                                                         </div>
                                                     </div>
                                                     
-                                                    <div id="common">
+                                                    <!-- <div id="common"> -->
                                                         <!-- <div id="address-row">
                                                             <div class="row well m-t-40 m-b-20">
                                                                 <label class="label">Address</label>
@@ -781,23 +786,30 @@
                                                                 <input id="addEmail" type="button" class="btn btn-success buttonDefSize btn-raised" value="Add">
                                                             </div>
                                                         </div> -->
-                                                        <div class="row m-t-20">
+                                                        <!-- <div class="row m-t-20">
                                                             <div class="col-sm-6">
                                                                 <label class="label">Website:</label>
                                                                 <label class="input">
                                                                     <input id="website" class="disable_webs" type="text" placeholder="http://www.example.com">
                                                                 </label>
-                                                            </div>
-                                                            <div class="col-sm-6">
+                                                            </div> -->
+                                                            <!-- <div class="col-sm-6">
                                                                 <label class="label">PAN No:</label>
                                                                 <label class="input">
                                                                     <input id="PANNO" class="pannumber_valid" type="text" placeholder="e.g. AAAAA1111A" value="AHAGS3545A">
                                                                 </label>
+                                                            </div> -->
+                                                        <!-- </div>
+                                                    </div> -->
+
+                                                    <span class="m-5"></span>
+                                                    <div id="companyCommon" class="elem">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <h3>Organisation Details</h2>
+                                                                    <hr>
                                                             </div>
                                                         </div>
-                                                    </div>
-
-                                                    <div id="companyCommon" class="elem">
                                                         <div class="row">
                                                             <div class="col-sm-4">
                                                                 <label class="label">Nature of Business:</label>
@@ -818,21 +830,7 @@
                                                                 </label>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-4">
-                                                                <label class="label">GSTIN:</label>
-                                                                <label class="input">
-                                                                    <input id="GSTIN" type="text" class="gstinnumber" placeholder="e.g.22AAAAA0000A1Z5" value="22AAAAA0000A1Z5">
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <label class="label">TAN No:</label>
-                                                                <label class="input">
-                                                                    <input id="TANNO" type="text" class="pannumber_valid" placeholder="e.g. AAAAA1111A" value="AAAAA4444A">
-                                                                </label>
-                                                            </div>
-                                                            
-                                                        </div>
+                                                        
                                                     </div>
 
                                                     <!-- BRANCHES -->
@@ -937,7 +935,7 @@
                                                                 <label class="label">Service</label>
                                                                 <label class="select" id="service_1">
                                                                     <select id="services" class="select2 editselect">
-                                                                        <option default value=""></option>
+                                                                        <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
                                                             </div>
@@ -975,6 +973,51 @@
                                                     </div>-->
 
                                                     <fieldset>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <label class="label">PAN No:</label>
+                                                                <label class="input">
+                                                                    <input id="PANNO" class="pannumber_valid" type="text" placeholder="e.g. AAAAA1111A" value="AHAGS3545A">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label class="label">GSTIN:</label>
+                                                                <label class="input">
+                                                                    <input id="GSTIN" type="text" class="gstinnumber" placeholder="e.g.22AAAAA0000A1Z5" value="22AAAAA0000A1Z5">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label class="label">TAN No:</label>
+                                                                <label class="input">
+                                                                    <input id="TANNO" type="text" class="pannumber_valid" placeholder="e.g. AAAAA1111A" value="AAAAA4444A">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row m-b-10">
+                                                            <div class="col-sm-4 indi">
+                                                                <label class="label">Aadhar No.:
+                                                                        <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input type="text" id="individual_aadhar" data-type="adhaar-number" class="aadhar_valid " placeholder="1234-5678-9012" maxlength="14">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-4 llp">
+                                                                <label class="label">LLPIN:</label>
+                                                                <label class="input">
+                                                                    <input id="LLP_LLPIN" type="text" class="llpin_valid">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6 cin">
+                                                                <label class="label">CIN:</label>
+                                                                <label class="input">
+                                                                    <!-- <input id="company_cin" type="text" class="cin_valid" placeholder="e.g. A11111AA1111AAA111111"> -->
+                                                                    <input id="company_cin" type="text" placeholder="e.g. A11111AA1111AAA1">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
                                                         <table id="statDocs" class="display" style="width:100%">
                                                             <thead>
                                                                 <tr>
@@ -1111,7 +1154,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                </div>
                                     <!--****** Start Colored Modal Footer******-->
                             </div>
 
@@ -1120,10 +1163,10 @@
                                 <div class="panel-body panel-bodyClient">
                                     <div class="row">
                                         <div class="col-sm-2 col-sm-offset-8">
-                                            <input class="btn btn-danger buttonDefSize btn-raised" type="reset" value="Reset">
+                                            <button class="btn btn-danger buttonDefSize btn-raised">Reset</button>
                                         </div>
                                         <div class="col-sm-2">
-                                            <input id="clientSubmit" class="btn btn-success buttonDefSize btn-raised" value="Submit">
+                                            <button id="clientSubmit" class="btn btn-success buttonDefSize btn-raised">Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1232,7 +1275,7 @@
     <!--================================/
         /* START SCRIPT THIS PAGE ONLY
         /*================================-->
-    <script src="assets/js/dashboard.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/dashboard.js" type="text/javascript"></script> -->
     <!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
     <script src="assets/js/widget-weather.js" type="text/javascript"></script>
     <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->

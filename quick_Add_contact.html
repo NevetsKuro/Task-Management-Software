@@ -73,22 +73,23 @@
                                                             </select>
                                                         </label>
                                                     </div>
-                                                    <div class="col-sm-5">
+                                                    <div class="">
                                                         <label class="label">Name:
                                                             <span class="text-danger">*</span>
                                                         </label>
                                                         <label class="input">
-                                                            <input id="clientsContact_Name" class="inpFirstName" type="text" value="TestName"equired>
+                                                            <div class="col-md-3">
+                                                                <input id="clientsContact_fName" class="inpFirstName" type="text" placeholder="First Name" value="TestName" required>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input id="clientsContact_mName" class="inpFirstName" type="text" placeholder="Middle Name" value="TestName" required>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input id="clientsContact_lName" class="inpFirstName" type="text" placeholder="Last Name" value="TestName" required>
+                                                            </div>
                                                         </label>
                                                     </div>
-                                                    <div class="col-sm-5">
-                                                        <label class="label">Gender:</label>
-                                                        <label class="select">
-                                                            <select id="clientsContact_Gender" class="select2">
-                                                                    <option default value=""></option>
-                                                            </select>
-                                                        </label>
-                                                    </div>
+                                                    
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-6">
@@ -109,6 +110,24 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <label class="label">Gender:</label>
+                                                        <label class="select">
+                                                            <select id="clientsContact_Gender" class="select2">
+                                                                    <option default value=""></option>
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <div class="relation_tab col-sm-6">
+                                                        <label class="label">Relation:</label>
+                                                        <label class="select">
+                                                            <select id="clientsContact_relation" class="select2">
+                                                                <option default value=""></option>
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
                                                     <div class="designation_tab col-sm-6 hide">
                                                         <label class="label">Designation:</label>
                                                         <label class="select">
@@ -125,19 +144,9 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="relation_tab col-sm-6">
-                                                        <label class="label">Relation:</label>
-                                                        <label class="select">
-                                                            <select id="clientsContact_relation" class="select2">
-                                                                <option default value=""></option>
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                </div>
                                                 <div class="row m-t-30">
                                                     <div class="col-sm-offset-7 col-sm-2">
-                                                        <input id="add_to_clientsContact" class="btn btn-success buttonDefSize btn-raised p-l-20 p-r-20" value="Add">
+                                                        <button id="add_to_clientsContact" class="btn btn-success buttonDefSize btn-raised p-l-20 p-r-20">Add</button>
                                                     </div>
                                                 </div>
                                             </fieldset>
