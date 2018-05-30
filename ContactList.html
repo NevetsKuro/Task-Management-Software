@@ -145,7 +145,7 @@
                         </div>
                     </div>
 
-                    <div id="easyPaginate" class="row card-box cList">
+                    <div class="row card-box cList" id="easyPaginate">
                         <!-- <div class="col-sm-4 col-lg-4">
                             <div class="counter-widget variant-1 color-1">
                                 <div class="counter-icon">
@@ -153,7 +153,6 @@
                                         <a class="pull-left" href="#">
                                             <img height="60px" class="img-circle" src="assets/images/avatar3.jpg" alt="">
                                         </a>
-
                                         <h4 class="m-t-0 m-b-5 header-title">
                                             <b class="name">Anjali Kapoor</b>
                                         </h4>
@@ -167,7 +166,6 @@
                                         <p class="text-dark m-l-50">
                                             <small>ak@gmail.com</small>
                                         </p>
-
                                     </div>
                                 </div>
                                 <div class="counter-content">
@@ -188,12 +186,9 @@
                                     <a title="Convert to Client" class="btn btn-primary btn-sm">
                                         <i class="glyphicon glyphicon-random"></i>
                                     </a>
-                                    
                                 </div>
                             </div>
-                            
                         </div> -->
-                        
                     </div>
                 </div>
             </div>
@@ -205,6 +200,8 @@
         <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
         <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
         <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+        
+        <script src="assets/js/addCss.js"></script>
         <script src="assets/js/addheader.js" type="text/javascript"></script>
         <script src="assets/js/addSidebar.js" type="text/javascript"></script>
         <script src="assets/js/addCss.js"></script>
@@ -298,7 +295,19 @@
         <!-- <script src="sidebarr.js"></script> -->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="assets/js/subFunc.js" type="text/javascript"></script>
+        <script src="assets/js/paginate.js" type="text/javascript"></script>
         <script src="assets/js/contactList.js" type="text/javascript"></script>
+        <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+        <script src="jquery.easyPaginate.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $('#easyPaginate').easyPaginate({
+            paginateElement: '.lilement',
+            elementsPerPage: 3,
+            effect: 'climb'
+        });
+        </script>
+        
 </body>
 
 

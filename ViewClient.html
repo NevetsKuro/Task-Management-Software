@@ -281,7 +281,7 @@
                                                 Type Of Industry:
                                             </label>   
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-3" id="toi">
                                                 Type Of Industry
                                         </div>
                                         <div class="col-sm-2">
@@ -289,8 +289,18 @@
                                                 Nature Of Business:
                                             </label>   
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2" id="nob">
                                                 Nature Of Business
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label class="input">
+                                                Date Of Commencement:
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-1 doc">
+                                                Date
                                         </div>
                                     </div>
                                     <!-- LLPS -->
@@ -678,6 +688,7 @@
     <script src="assets/js/animsition.min.js" type="text/javascript"></script>
     <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script>
     <script src="assets/js/jquery.cookie.min.js"></script>
+    <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script>
     <script src="assets/js/device.min.js"></script>
     <script src="assets/js/isotope.pkgd.min.js"></script>
     <script src="assets/js/owl.carousel.min.js"></script>
@@ -688,6 +699,7 @@
     <script src="assets/js/jquery.validate.min.js"></script>
     <script src="assets/js/jquery.maskedinput.min.js"></script>
     <script src="assets/js/jquery.modal.js"></script>
+    <script src="assets/js/theme.min.js" type="text/javascript"></script>
     <script src="assets/js/select2.full.min.js" type="text/javascript"></script>
     <script src="assets/js/select2.js" type="text/javascript"></script>
     <!--[if lt IE 10]>
@@ -747,7 +759,14 @@
         /* END SCRIPT THIS PAGE ONLY
         /*================================-->
 
-
+        <script type="text/javascript">
+            $(document).ready(function () {
+    
+                //global functions
+                App.init();
+                // $('#divSide').load('addSiderbar.html');
+            });
+        </script>
     <!--================================/
         /* START CUSTOM SCRIPTS
         /*================================-->
