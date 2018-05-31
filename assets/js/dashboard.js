@@ -28,7 +28,7 @@ $(document).ready(function(){
 	$.ajax({
 		async: true,
 		crossDomain: true,
-		url:urlRoot+'employees/dashboard/',
+		url:urlRoot+'employees/dashboard',
 		type:'GET',
 		datatype:'JSON',
 		headers: {
