@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	var urlRoot = 'http://35.202.86.61/office-management/';
 	$("span.line").peity("line",{ width: 200 });
 	
 //formdata----------------------------
@@ -27,12 +28,12 @@ $(document).ready(function(){
 	$.ajax({
 		async: true,
 		crossDomain: true,
-		url:'http://35.202.86.61/office-management/employees/dashboard',
+		url:urlRoot+'employees/dashboard/',
 		type:'GET',
 		datatype:'JSON',
 		headers: {
 			"content-type": "application/json",
-			"cache-control": "no-cache"
+			"cache-control": "no-cache",
 		  },
 		success:function(data){
 			if(data!=null){
@@ -67,8 +68,8 @@ $(document).ready(function(){
 //employee call ends---------------------------------
 			}
 			else{
-				var urL = 'http://35.202.86.61/office-management-ui/login.html';
-				$(location).attr('href',urL);
+				//var urL = 'http://35.202.86.61/office-management-ui/';
+				$(location).attr('href','login.html');
 			}	
 		},
 		error:function(error){
@@ -83,15 +84,15 @@ $(document).ready(function(){
 		$.ajax({
 			async:true,
 			crossDomain:true,
-			url:'http://35.202.86.61/office-management/employees/logout',
+			url:urlRoot+'employees/logout/',
 			type:'GET',
 			headers: {
 				"content-type": "application/json",
 				"cache-control": "no-cache"
 			  },
 			success:function(data){
-				var urL = 'http://35.202.86.61/office-management-ui/login.html';
-				$(location).attr('href',urL);
+				//var urL = 'http://35.202.86.61/office-management-ui/login.html';
+				$(location).attr('href','login.html');
 			}	
 		});
 	});

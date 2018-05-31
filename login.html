@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     
-    <title>Login</title>
+    <title>Add Contact</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -62,7 +62,6 @@
                             <div>
                                 <label class="input">
                                     <i class="icon-prepend icon-lock"></i>
-                                    <i id="vis" class="icon-append icon-eye"></i>
                                     <input id="password" type="password" placeholder="Password">
                                 </label>
                             </div>
@@ -86,7 +85,7 @@
                         </fieldset>
 
                         <div>
-                            <input type="button" id="submitLogin" type="button" class="btn btn-raised btn-info btn-flat btn-warning btn-block" value="Login">
+                            <input id="submitLogin" type="button" class="btn btn-info btn-flat btn-block" value="Login">
                         </div>
                         
                     </form>
@@ -114,14 +113,7 @@
             
 
         });
-        $(document).on('click','#vis',function(){
-            var type = $('#password').attr('type');
-            if(type == 'password'){
-                $('#password').attr('type','text');
-            }else{
-                $('#password').attr('type','password');
-            }
-        })
+
         //paste this code under the head tag or in a separate js file.
         // Wait for window load
         $(window).load(function() {
@@ -207,6 +199,8 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
     <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+    <script type="text/javascript" src="Libraries/timepicker/jquery.timepicker.min.js"></script>
+    <script src="assets/js/subFunc.js" type="text/javascript"></script>
     <script src="assets/js/login.js"></script>
         
 </body>
