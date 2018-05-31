@@ -393,6 +393,9 @@
             return cookieValue;
         }
         window.csrftoken = getCookie('csrftoken');
+
+
+
 });
 
 

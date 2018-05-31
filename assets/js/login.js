@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    var params = GetURLParams();
+    var src=params['src'];
     var urlRoot = 'http://35.202.86.61/office-management/';
     $(document).on('click','#submitLogin',function(){
         var username = $('#username').val();
@@ -11,8 +13,10 @@ $(document).ready(function(){
             data:{'username':username,'password':password},
             success:function(employee){
                 console.log('done');
-                $(location).attr('href','dashboard.html');
-                
+                if(src!=null && src!='')
+                    $(location).attr('href',src);
+                else
+                    $(location).attr('href','dashboard.html');    
             },
             error:function(error){
                 console.log(error.responseText);
