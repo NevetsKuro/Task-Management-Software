@@ -347,10 +347,10 @@ $(document).ready(function () {
 
     });
 
-    $('#easyPaginate').easyPaginate({
-        paginateElement: 'div',
-        elementsPerPage: 8,
-        effect: 'fade'
-    });
+    // $('#easyPaginate').easyPaginate({
+    //     paginateElement: 'div',
+    //     elementsPerPage: 8,
+    //     effect: 'fade'
+    // });
 
 });
