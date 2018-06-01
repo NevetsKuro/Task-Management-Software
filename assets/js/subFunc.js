@@ -23,8 +23,8 @@
                 });
 
                 $('input.timepicker').timepicker({
-                    dropdown:false,
-                    dynamic:true
+                    timeFormat:'H:i',
+                    interval:60
                 });
             }
             datetime();        
@@ -374,6 +374,13 @@
             if(dt){
                 var splitDate = dt.split('/');
                 return splitDate[2] + '-' + splitDate[1] + '-' + splitDate[0];
+            }
+        }
+
+        window.getFormateDateFromServer = function(dt){
+            if(dt){
+                var formatted = $.datepicker.formatDate("dd/mm/yy", new Date(dt));
+                return formatted;
             }
         }
 

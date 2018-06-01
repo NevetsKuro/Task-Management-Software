@@ -35,7 +35,8 @@ File: Components
 .btn-default:focus,
 .btn-default:hover,
 .open > .dropdown-toggle.btn-default {
-  background-color: #5fbeaa !important;
+  background-color: whitesmoke !important;
+  color:black!important;
   border: 1px solid #5fbeaa !important;
 }
 .btn-white,

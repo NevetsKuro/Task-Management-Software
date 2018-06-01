@@ -3,6 +3,13 @@ $(document).ready(function(){
     var params = GetURLParams();
     var pid = params['pid'];
     
+    $('.summernote').summernote({
+        codemirror: { 
+            theme: 'cerulean'
+          },
+        placeholder: 'write here...'
+      });
+
     function addRowCount(tableAttr) {
         $(tableAttr).each(function(){
             $('th:first-child, thead td:first-child', this).each(function(){
@@ -60,36 +67,38 @@ $(document).ready(function(){
         `);
     });
 
-    $(document).on('click','.removeRow',function(){
-        $(this).parentsUntil('.rowEntry').remove();
-    });
+    // $(document).on('click','.removeRow',function(){
+    //     $(this).parentsUntil('.rowEntry').remove();
+    // });
     
-    $(document).on('click','.addMilestone',function(){
-        $('.rowMile').append(`
-                <tr class="new">
-                    <td>
-                        <label class="input">
-                            <input class="milestones" type="text" placeholder="">
-                        </label>
-                    </td>
-                    <td>
-                        <label class="input">
-                            <input class="feePerc" type="number valid_share" min="1" max="100">
-                        </label>
-                    </td>
-                    </td>
-                    <td>
-                        <div class="text-danger m-l-25">
-                            <i class="mile_remove glyphicon glyphicon-remove"></i>
-                        </div> 
-                    </td>
-                </tr>
-        `);
-    });
+    // $(document).on('click','#addMilestone',function(){
+    //     $('.rowMile').append(`
+    //             <tr class="new">
+    //                 <td>
+    //                 </td>
+    //                 <td>
+    //                     <label class="input">
+    //                         <input class="milestones" type="text" placeholder="">
+    //                     </label>
+    //                 </td>
+    //                 <td>
+    //                     <label class="input">
+    //                         <input class="feePerc" type="number valid_share" min="1" max="100">
+    //                     </label>
+    //                 </td>
+    //                 </td>
+    //                 <td>
+    //                     <div class="text-danger m-l-25">
+    //                         <i class="mile_remove glyphicon glyphicon-remove"></i>
+    //                     </div> 
+    //                 </td>
+    //             </tr>
+    //     `);
+    // });
 
-    $(document).on('click','.mile_remove',function(){
-        $(this).parentsUntil('.rowMile').remove();
-    });
+    // $(document).on('click','.mile_remove',function(){
+    //     $(this).parentsUntil('.rowMile').remove();
+    // });
 
     var globalEmployee = [
         {
@@ -110,11 +119,20 @@ $(document).ready(function(){
         var AdminCost = 0;
         var TotalCost = 0;
         var margin = 0;
+        var empf = 0;
         $('.empName').each(function(){
             empName = $(this).val();
-            ctc = globalEmployee.find(function(data){ return data.name==empName}).ctc; // check if ctc field is correct
+            
+            empf = globalEmployee.find(function(data){ return data.name==empName}); // check if ctc field is correct
+            if(empf){
+                ctc = empf.ctc
+            }
             empDuration = $(this).parentsUntil('row').find('.empDuration').val()
-            margin = $('#marginCost').val()
+            margin = $('#marginCost').val();
+            if(margin == ''){
+                swal('Please Enter a margin!');
+                return false;
+            }
             perEmp = ctc * empDuration;
             EmpCost += perEmp; //total employees cost * by its duration.
             console.log(EmpCost);

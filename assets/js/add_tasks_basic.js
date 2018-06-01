@@ -32,6 +32,28 @@ $(document).ready(function(){
         dropdownParent: $('#AssigneeTransferModal')
     })
     
+    $(document).on('change','#range_02',function(){
+        // console.log($(this).val()); 
+        var v = $(this).val(); 
+        var t = $('#tab1 > div.panel-body > div:nth-child(4) > div:nth-child(3) > label.input.state-success > span > span.irs-slider.single'); 
+        var bar_edge = $('#tab1 > div.panel-body > div:nth-child(4) > div:nth-child(3) > label.input.state-success > span > span.irs-bar-edge');
+        var bar = $('#tab1 > div.panel-body > div:nth-child(4) > div:nth-child(3) > label.input.state-success > span > span.irs-bar');
+        switch(v){ 
+            case "1":case "2": t.css('transform','scale(0.5)');bar_edge.css('background','#02f709');bar.css('background','#02f709');break;
+            case "3":case "4": t.css('transform','scale(0.7)');bar_edge.css('background','#02db08');bar.css('background','#02db08');break; 
+            case "5":case "6": t.css('transform','scale(0.9)');bar_edge.css('background','#02cc08');bar.css('background','#02cc08');break; 
+            case "7":case "8": t.css('transform','scale(1.1)');bar_edge.css('background','#00c106');bar.css('background','#00c106');break;
+            case "3":case "4": t.css('transform','scale(1.3)');bar_edge.css('background','#00b706');bar.css('background','#00b706');break;  
+        }  
+    });
+    
+    $(document).on("change", ".SubTask_Weightage", function() {
+        var sum = 0;var limit = 100;
+        $(".SubTask_Weightage").each(function(){
+            sum += +$(this).val();
+        });
+        if(sum>limit){ $(this).val('');$(this).focus(); swal('The Total Weightage Should be 100!')} console.log(sum);
+    });
     ///////////////////////////////////////////////// interface Codes //////////////////////////////////////////
     function addSTasksRow(){
         $("#subTaskTable").find('tbody').append(`
@@ -47,7 +69,7 @@ $(document).ready(function(){
                     </label>
                 </td>
                 <td>
-                    <label class="input">
+                    <label class="input custom_inline m-l-0">
                         <input class="SubTask_Deadline_Date datepickr" type="text" placeholder="Date">
                         <input class="SubTask_Deadline_Time timepicker" type="text" placeholder="Time">
                     </label>
@@ -164,14 +186,24 @@ $(document).ready(function(){
     $(document).on('change','#range_02',function(){
         // console.log($(this).val()); 
         var v = $(this).val(); 
-        var t = $('#tab3 > div:nth-child(2) > div:nth-child(2) > div > span > span.irs-slider.single'); 
+        var t = $('#tab1 > div.panel-body > div:nth-child(4) > div:nth-child(3) > label.input.state-success > span > span.irs-slider.single'); 
+        var bar_edge = $('#tab1 > div.panel-body > div:nth-child(4) > div:nth-child(3) > label.input.state-success > span > span.irs-bar-edge');
+        var bar = $('#tab1 > div.panel-body > div:nth-child(4) > div:nth-child(3) > label.input.state-success > span > span.irs-bar');
         switch(v){ 
-            case "1":case "2": t.css('transform','scale(0.5)');break;
-            case "3":case "4": t.css('transform','scale(0.7)');break; 
-            case "5":case "6": t.css('transform','scale(0.9)');break; 
-            case "7":case "8": t.css('transform','scale(1.1)');break;
-            case "3":case "4": t.css('transform','scale(1.3)');break;  
+            case "1":case "2": t.css('transform','scale(0.5)');bar_edge.css('background','#02f709');bar.css('background','#02f709');break;
+            case "3":case "4": t.css('transform','scale(0.7)');bar_edge.css('background','#02db08');bar.css('background','#02db08');break; 
+            case "5":case "6": t.css('transform','scale(0.9)');bar_edge.css('background','#02cc08');bar.css('background','#02cc08');break; 
+            case "7":case "8": t.css('transform','scale(1.1)');bar_edge.css('background','#00c106');bar.css('background','#00c106');break;
+            case "3":case "4": t.css('transform','scale(1.3)');bar_edge.css('background','#00b706');bar.css('background','#00b706');break;  
         }  
+    });
+    
+    $(document).on("change", ".SubTask_Weightage", function() {
+        var sum = 0;var limit = 100;
+        $(".SubTask_Weightage").each(function(){
+            sum += +$(this).val();
+        });
+        if(sum>limit){ $(this).val('');$(this).focus(); swal('The Total Weightage Should be 100!')} console.log(sum);
     });
 
     function fillSubTask(tid){
@@ -293,6 +325,13 @@ $(document).ready(function(){
             $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
         }
     });
+
+    // $.getJSON(urlRoot+'clients',function(data){
+    //     for (var i = 0; i < data.services.length; i++) {
+    //         $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
+    //     }
+    // });
+    
 
     $.getJSON(urlRoot+'tasks/proposals',function(data){
         for (var i = 0; i < data.length; i++) {

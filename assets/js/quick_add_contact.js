@@ -262,7 +262,7 @@ $(document).ready(function(){
             swal("Contact Added!", "success");
             window.close();
         } else {
-            swal('Please fill all the columns!!');
+            swal('Please fill all the fields!!');
         }
         
     }

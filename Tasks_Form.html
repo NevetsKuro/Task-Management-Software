@@ -147,13 +147,10 @@
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-lg-4">
-                                                                            <label class="label">Status:</label>
+                                                                            <label class="label">Client:</label>
                                                                             <label class="select">
-                                                                                <select id="taskStatus" class="select2">
-                                                                                    <option default value="">Select...</option>
-                                                                                    <option value="1">Created</option>
-                                                                                    <option value="2">Started</option>
-                                                                                    <option value="3">Completed</option>
+                                                                                <select id="taskClients" class="select2">
+                                                                                    <option default value=""></option>
                                                                                 </select>
                                                                             </label>
                                                                         </div>
@@ -184,10 +181,13 @@
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-lg-4">
-                                                                            <label class="label">Client:</label>
+                                                                            <label class="label">Status:</label>
                                                                             <label class="select">
-                                                                                <select id="taskClients" class="select2">
-                                                                                    <option default value=""></option>
+                                                                                <select id="taskStatus" class="select2">
+                                                                                    <option default value="">Select...</option>
+                                                                                    <option value="1">Created</option>
+                                                                                    <option value="2">Started</option>
+                                                                                    <option value="3">Completed</option>
                                                                                 </select>
                                                                             </label>
                                                                         </div>
@@ -216,35 +216,32 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <label class="label col-lg-6">Start Date:<span class="text-danger">*</span></label><label class="label col-lg-6">Start Time:<span class="text-danger">*</span></label>
-                                                                            <label class="input col-lg-6 lNega10">
+                                                                        <div class="col-lg-3">
+                                                                            <label class="label col-lg-12">Start:<span class="text-danger">*</span></label>
+                                                                            <label class="input col-lg-12 lNega10">
                                                                                 <i class="icon-append  icon-calendar-31 text-primary f-s-15 right-12"></i>
                                                                                 <input id="taskSdate" type="text" class="datepickr" placeholder="Date">
-                                                                            </label>
-                                                                            <label class="input col-lg-6">
-                                                                                    <i class="icon-append  icon-clock3 text-primary f-s-15 right-12"></i>
+                                                                                <i class="icon-append  icon-clock3 text-primary f-s-15 right-12"></i>
                                                                                 <input id="taskStime" type="text" class="timepicker" placeholder="Time">
                                                                             </label>
                                                                         </div>
-                                                                        <div class="col-lg-6">
-                                                                            <label class="label col-lg-6">End Date:<span class="text-danger">*</span></label><label class="label col-lg-6">End Time:<span class="text-danger">*</span></label>
-                                                                            <label class="input col-lg-6 lNega10">
+                                                                        <div class="col-lg-3">
+                                                                            <label class="label col-lg-12">End:<span class="text-danger">*</span></label>
+                                                                            <label class="input col-lg-12 lNega10">
                                                                                 <i class="icon-append  icon-calendar-31 text-primary f-s-15 right-12"></i>
                                                                                 <input id="taskEdate" type="text" class="datepickr" placeholder="Date">
-                                                                            </label>
-                                                                            <label class="input col-lg-6">
                                                                                 <i class="icon-append  icon-clock3 text-primary f-s-15 right-12"></i>
                                                                                 <input id="taskEtime" type="text" class="timepicker" placeholder="Time">
                                                                             </label>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-lg-3 custom_inline">
-                                                                            <label class="label m-t-5 col-lg-6">Allow Client View</label>
+                                                                        <div class="col-lg-5 custom_inline">
+                                                                            <label class="label m-t-5">Allow Client View</label>
                                                                             <label class="checkbox f-s-20">
                                                                                 <input id="taskClientsView" type="checkbox" class="">
                                                                                 <i class='rounded-x m-l-10'></i>
+                                                                            </label><span class="m-10"></span>
+                                                                            <label class="label pull-right">
+                                                                                <input type="button" class="btn btn-raised btn-primary" value="Add R_D">
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -260,12 +257,12 @@
                                                                         <tr>
                                                                             <th width="20%">Name of Subtask<span class="text-danger">*</span></th>
                                                                             <th width="9%">Duration</th>
-                                                                            <th width="12%">DeadLine<span class="text-danger">*</span></th>
-                                                                            <th width="18%">Assignee<span class="text-danger">*</span></th>
-                                                                            <th width="9%">Weightage</th>
-                                                                            <th width="10%">% Complete</th>
-                                                                            <th width="14%">Status</th>
-                                                                            <th width="8%">Action</th>
+                                                                            <th width="18%">DeadLine<span class="text-danger">*</span></th>
+                                                                            <th width="14%">Assignee<span class="text-danger">*</span></th>
+                                                                            <th width="7%">Weightage</th>
+                                                                            <th width="7%">% Complete</th>
+                                                                            <th width="10%">Status</th>
+                                                                            <th width="6%">Action</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -281,7 +278,7 @@
                                                                                 </label>
                                                                             </td>
                                                                             <td>
-                                                                                <label class="input">
+                                                                                <label class="input custom_inline m-l-0">
                                                                                     <!-- <i class="icon-append  icon-calendar-31 text-primary f-s-22"></i> -->
                                                                                     <input class="SubTask_Deadline_Date datepickr" type="text" placeholder="Date">
                                                                                     <!-- <i class="icon-append  icon-clock3 text-primary f-s-22"></i> -->
