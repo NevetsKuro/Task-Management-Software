@@ -60,9 +60,9 @@
                 <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
                     <div class="page-header-content slideshow">
                         <div class="page-header-overlay">
-
-                            <div class="page-breadcrumb">
-                                <nav class="c_breadcrumbs">
+                            <div class="page-title">Add Task</div>
+                            <div class="page-breadcrumb m-t-2">
+                                <nav class="c_breadcrumbs m-t-2">
                                     <ul>
                                         <li>
                                             <a href="#">Home</a>
@@ -234,14 +234,16 @@
                                                                                 <input id="taskEtime" type="text" class="timepicker" placeholder="Time">
                                                                             </label>
                                                                         </div>
-                                                                        <div class="col-lg-5 custom_inline">
-                                                                            <label class="label m-t-5">Allow Client View</label>
-                                                                            <label class="checkbox f-s-20">
+                                                                        <div class="col-lg-4 custom_inline">
+                                                                            <label class="label m-t-25">Allow Client View</label>
+                                                                            <label class="checkbox f-s-20 m-t-20">
                                                                                 <input id="taskClientsView" type="checkbox" class="">
                                                                                 <i class='rounded-x m-l-10'></i>
-                                                                            </label><span class="m-10"></span>
-                                                                            <label class="label pull-right">
-                                                                                <input type="button" class="btn btn-raised btn-primary" value="Add R_D">
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-sm-1">
+                                                                            <label class="label m-t-40">
+                                                                                <input id="Add_R_D" type="button" class="btn btn-raised btn-primary" value="Add R_D">
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -335,6 +337,12 @@
                                                                     </select>
                                                                 </label>
                                                             </div>
+                                                            <div class="col-lg-6">
+                                                                    <label class="label">Proposal's Title:</label>
+                                                                    <label class="textarea">
+                                                                        <textarea id="taskProposalTile" class="textarea textarea-expandable" rows="3"></textarea>
+                                                                    </label>
+                                                                </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-6">
@@ -467,6 +475,44 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Modal for Adding R&D Works -->
+                            <div class="modal modal-warning bg-header" id="R_D_Modal" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated fadeOut">
+                                            <div class="modal-header">
+                                                <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                                <h4 class="modal-title">
+                                                    <strong>R_D Work:</strong>
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body sky-form">
+                                                <table id="R_D_Table" class="table table-small-font table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>To Add</th>
+                                                            <th>Title</th>   
+                                                            <th>Assignee</th>   
+                                                            <th>Status</th>   
+                                                            <th>Completed</th>   
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="R_D_rows">
+                                                    </tbody>
+                                                </table>
+                                                <div class="row">
+                                                    <div class="col-lg-4 pull-right">
+                                                        <input id="AssigneeTransfer" class="btn btn-success buttonDefSize" type="button" value="Select">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            <!-- Panel for submit and reset button -->
                             <div class="panel">
                                 <div class="panel-body">
                                     <footer class="row m-t-20">
@@ -630,6 +676,7 @@
     /* END CUSTOM SCRIPTS
     /*================================-->
     
+
 </body>
 
 

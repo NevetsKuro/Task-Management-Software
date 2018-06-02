@@ -37,6 +37,29 @@ $(document).ready(function(){
             case "3":case "4": t.css('transform','scale(1.3)');break;
         }  
     });
+    $(document).on("change", ".SubTask_Weightage", function() {
+        var sum = 0;var limit = 100;
+        $(".SubTask_Weightage").each(function(){
+            sum += +$(this).val();
+        });
+        if(sum>limit){ 
+            $(this).val('');
+            $(this).focus(); 
+            swal('The Total Weightage Should be 100!')
+        } 
+        console.log(sum);
+    });
+    $(document).on("change", ".SubTask_duration", function() {
+        var dur = $(this).val();
+        var arr = dur.split('.');
+        if(arr[1]>60){ 
+            var res = arr[1] % 60;
+           $(this).val(arr[0] +'.'+res);
+         }
+         if($(this).val().indexOf() == -1){
+             $(this).val(dur +'.00');
+         }
+    });
     ///////////////////////////////////////////////// interface Codes //////////////////////////////////////////
     function addSTasksRow(){
         $("#subTaskTable").find('tbody').append(`
@@ -52,7 +75,7 @@ $(document).ready(function(){
                     </label>
                 </td>
                 <td>
-                    <label class="input">
+                    <label class="input custom_inline m-l-0">
                         <input class="SubTask_Deadline_Date datepickr" type="text">
                         <input class="SubTask_Deadline_Time timepicker" type="text">
                     </label>
@@ -299,12 +322,12 @@ $(document).ready(function(){
         tasksData.service = $('#taskService').val();
         tasksData.approver = "1";//$('#taskApprover').val();
         tasksData.priority = $('#range_02').val();
-        tasksData.startTime = getFormateDateToServer($('#taskSdate').val()) +'T'+ $('#taskStime').val().slice(0,-2)+':00Z';
-        tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val().slice(0,-2)+':00Z';
+        tasksData.startTime = getFormateDateToServer($('#taskSdate').val()) +'T'+ $('#taskStime').val()+':00Z';
+        tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val()+':00Z';
         tasksData.duration = $('#taskDuration').val();
         tasksData.statutoryDueDate = getFormateDateToServer($('#taskStats').val()) + 'T04:13:13Z';
         
-        RecurTask.startDateTime = getFormateDateToServer($('#taskRdate').val()) +'T'+ $('#taskRtime').val().slice(0,-2)+':00Z';
+        RecurTask.startDateTime = getFormateDateToServer($('#taskRdate').val()) +'T'+ $('#taskRtime').val()+':00Z';
         RecurTask.periods = $('#taskPeriods').val();
         RecurTask.frequency = $('#taskFrequeny').val();
         RecurTask.templateTask = tasksData;

@@ -52,7 +52,29 @@ $(document).ready(function(){
         $(".SubTask_Weightage").each(function(){
             sum += +$(this).val();
         });
-        if(sum>limit){ $(this).val('');$(this).focus(); swal('The Total Weightage Should be 100!')} console.log(sum);
+        if(sum>limit){ 
+            var diff = limit - sum;
+            $(this).val(diff);
+            $(this).val('');
+            $(this).focus();
+            swal('The Total Weightage cannot be more than 100!')
+        }
+        if(sum == 100){
+            swal('The Total Weightage Should be 100!')
+        }
+        console.log(sum);
+    });
+
+    $(document).on("change", ".SubTask_duration", function() {
+        var dur = $(this).val();
+        var arr = dur.split('.');
+        if(arr[1]>60){
+            var res = arr[1] % 60;
+           $(this).val(arr[0] +'.'+res);
+         }
+         if($(this).val().indexOf('.') == -1){
+             $(this).val(dur +'.00');
+         }
     });
     ///////////////////////////////////////////////// interface Codes //////////////////////////////////////////
     function addSTasksRow(){
@@ -162,10 +184,11 @@ $(document).ready(function(){
         }
     });
     
-    $(document).on('change','.calc',function(){
+    $(document).on('change','#taskProposal',function(){
         var id = $('#taskProposal').val()
         $.getJSON(urlRoot+'tasks/proposals/'+id,function(data){
-            $('#taskProposalFee').val(data.fees);            
+            $('#taskProposalFee').val(data.fees);
+            $('#taskProposalTile').val(data.subject);     
         });
     })
 
@@ -205,6 +228,11 @@ $(document).ready(function(){
         });
         if(sum>limit){ $(this).val('');$(this).focus(); swal('The Total Weightage Should be 100!')} console.log(sum);
     });
+
+    $(document).on('click','#Add_R_D',function(){
+        $('#R_D_Modal').modal('open');
+        
+    })
 
     function fillSubTask(tid){
         $.getJSON(urlRoot+'/subtasks/?task='+tid,function(data){
@@ -261,7 +289,7 @@ $(document).ready(function(){
             subTask.title = $(this).find('.SubTask_name').val();
             subTask.task = tiD;
             subTask.duration = $(this).find('.SubTask_duration').val();
-            subTask.deadline = getFormateDateToServer($(this).find('.SubTask_Deadline_Date').val())+'T'+$(this).find('.SubTask_Deadline_Time').val().slice(0,-2)+':00Z';
+            subTask.deadline = getFormateDateToServer($(this).find('.SubTask_Deadline_Date').val())+'T'+$(this).find('.SubTask_Deadline_Time').val()+':00Z';
             subTask.assignee = $(this).find('.SubTask_Assignee').val();
             subTask.weightage = $(this).find('.SubTask_Weightage').val()?$(this).find('.SubTask_Weightage').val():0;
             subTask.completed = $(this).find('.SubTask_perCompleted').val()?$(this).find('.SubTask_perCompleted').val():0;
@@ -335,7 +363,7 @@ $(document).ready(function(){
 
     $.getJSON(urlRoot+'tasks/proposals',function(data){
         for (var i = 0; i < data.length; i++) {
-            $('#taskProposal').append('<option value='+data[i].proposalNumber+'>'+data[i].proposalNumber+'</option>');
+            $('#taskProposal').append('<option value='+data[i].id+'>'+data[i].proposalNumber+'</option>');
         }
     });
    var emp='';
@@ -518,8 +546,8 @@ $(document).ready(function(){
             tasksData.service = $('#taskService').val();
             tasksData.approver = "1";//$('#taskApprover').val();
             tasksData.priority = $('#range_02').val();
-            tasksData.startTime = getFormateDateToServer($('#taskSdate').val()) +'T'+ $('#taskStime').val().slice(0,-2)+':00Z';
-            tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val().slice(0,-2)+':00Z';
+            tasksData.startTime = getFormateDateToServer($('#taskSdate').val()) +'T'+ $('#taskStime').val()+':00Z';
+            tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val()+':00Z';
             tasksData.duration = $('#taskDuration').val();
             tasksData.statutoryDueDate = getFormateDateToServer($('#taskStats').val()) + 'T04:13:13Z';
             // tasksData.document

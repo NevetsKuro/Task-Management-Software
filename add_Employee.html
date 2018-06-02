@@ -56,8 +56,8 @@
                         <div class="page-header-content slideshow">
                             <div class="page-header-overlay">
                                 <div class="page-title">Add Employee</div>
-                                <div class="page-breadcrumb">
-                                    <nav class="c_breadcrumbs">
+                                <div class="page-breadcrumb m-t-2">
+                                    <nav class="c_breadcrumbs m-t-2">
                                         <ul>
                                             <li><a href="#">Home</a></li>
                                             <li class="active"><a href="#">Employee</a></li>
@@ -85,25 +85,8 @@
 
                                     <form class="sky-form" id="HR_Form">
                                         <div class="row">
-                                            <div class="">
-                                                <label class="label col-sm-12">Employee Name:
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <label class="input">
-                                                    <div class="col-sm-4">
-                                                        <input id="employee_fname" type="text" placeholder="First Name">
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input id="employee_mname" type="text" placeholder="Middle Name">
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input id="employee_lname" type="text" placeholder="Last Name">
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
+                                            
+                                            <div class="col-sm-2">
                                                 <label class="label">Title:
                                                     <span class="text-danger">*</span>
                                                 </label>
@@ -113,6 +96,24 @@
                                                     </select>
                                                 </label>
                                             </div>
+                                            <div class="">
+                                                <label class="label col-sm-9 m-l-10">Employee Name:
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <label class="input m-b-0">
+                                                    <div class="col-sm-3">
+                                                        <input id="employee_fname" type="text" placeholder="First Name">
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <input id="employee_mname" type="text" placeholder="Middle Name">
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <input id="employee_lname" type="text" placeholder="Last Name">
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-sm-6">
                                                 <label class="label">Date of Birth:
                                                     <span class="text-danger">*</span>
@@ -120,6 +121,12 @@
                                                 <label class="input">
                                                     <i class="icon-append  icon-calendar-31 text-primary f-s-22"></i>
                                                     <input id="employee_dob" type="text" class="datepickr">
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="label">Location:</label>
+                                                <label class="input">
+                                                    <input id="employee_location" class="" type="text" value="312">
                                                 </label>
                                             </div>
                                         </div>
@@ -132,14 +139,6 @@
                                                     </select>
                                                 </label>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <label class="label">Location:</label>
-                                                <label class="input">
-                                                    <input id="employee_location" class="" type="text" value="312">
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-sm-6">
                                                 <label class="label">Department:
                                                     <span class="text-danger">*</span>

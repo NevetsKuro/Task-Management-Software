@@ -19,7 +19,7 @@ $(document).ready(function () {
                 if(element.person_image!=null){
                     img=element.person_image;
                     img=urlRoot+img.substr(img.indexOf("media"));
-                    console.log(img);
+                    // console.log(img);
                 }
                 //var
                 //cosole.log(img2);
@@ -79,9 +79,44 @@ $(document).ready(function () {
         var listClient = "";
         var clientLink = "AddClient.html?client=";
         var clientViewLink = "ViewClient.html"
-
+        var legal_stats,legal_No;
         if(currentList){
             currentList.forEach(element => {
+                switch(element.legalstatus){
+                    case 'I':
+                        legal_stats = 'Individuals';
+                        legal_No = 1;
+                        break;
+                    case 'H':
+                        legal_stats = 'Hufs';
+                        legal_No = 2;
+                        break;
+                    case 'N':
+                        legal_stats = 'Partnership';
+                        legal_No = 4;
+                        break;
+                    case 'P':
+                        legal_stats = 'Proprietors';
+                        legal_No = 3;
+                        break;
+                    case 'C':
+                        legal_stats = 'Company';
+                        legal_No = 6;
+                        break;
+                    case 'L':
+                        legal_stats = 'LLP';
+                        legal_No = 5;
+                        break;
+                    case 'A':
+                        legal_stats = 'AOP/BOI';
+                        legal_No = 7;
+                        break;
+                    case 'T':
+                        legal_stats = 'Trusts';
+                        legal_No = 8;
+                        break;
+                }
+
                 listClient += `
                 <div class="col-sm-4 col-lg-4">
                     <div class="counter-widget variant-1 color-1">
@@ -92,10 +127,16 @@ $(document).ready(function () {
                                     <b class="name">${element.name?element.name:'Name'}</b>
                                 </h4>
                                 <p class="text-dark">
-                                    <small>${element.group?element.group:'GROUP'}</small>
+                                    <small>${legal_stats?legal_stats:'Legal Status'}</small>
                                 </p>
                                 <p class="text-dark">
-                                    <small>${element.legal_status?element.legal_status:'Legal Status'}</small>
+                                    <small>${element.phone?element.phone:''}</small>
+                                </p>
+                                <p class="text-dark">
+                                    <small>${element.email?element.email:''}</small>
+                                </p>
+                                <p class="text-dark">
+                                    <small>${legal_stats == 'Individuals'?element.designation:''}</small>
                                 </p>
 
                             </div>
@@ -105,10 +146,10 @@ $(document).ready(function () {
                             <a title="Select/Deselect" class="btn bg-grey btn-sm selectable">
                                 <i class="glyphicon glyphicon-ok-circle"></i>
                             </a>
-                            <a title="View"  class="btn btn-success btn-sm">
+                            <a title="View" href="ViewClient.html?id=${element.id}&legalstats=${legal_No}" class="btn btn-success btn-sm">
                                 <i class="glyphicon glyphicon glyphicon-user"></i>
                             </a>
-                            <a title="Edit" href="${clientLink}${element.id}" class="btn btn-success btn-sm">
+                            <a title="Edit" href="${clientLink}${element.id}&legal=${legal_No}" class="btn btn-success btn-sm">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </a>
                             <a title="Delete" id="${element.id}" class="deleteClient btn btn-danger btn-sm">

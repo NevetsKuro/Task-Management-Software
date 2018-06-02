@@ -233,15 +233,15 @@ $(document).ready(function(){
                 $('#addContact_city').val(addr.City);
                 $('#addContact_pincode').val(addr.Pincode);
                 $('#addContact_state').val(addr.State).trigger('change');
-                $('#addContact_image').val(data.person_image);
-                $('#addContact_vcard').val(data.card_image);
+                $('#addContact_image').val(data.person_image.substring(data.person_image.lastIndexOf('/')+1));
+                $('#addContact_vcard').val(data.card_image.substring(data.card_image.lastIndexOf('/')+1));
                 
                 if(data.contact_organisation){
                     currentOrganisationsId = data.contact_organisation.organisation.id;
                     $('#editOrganisation').attr('oid',currentOrganisationsId).removeAttr('disabled');
                     $('#addContact_website').html(data.contact_organisation.organisation.website);
-                    $('#addContact_designation').val(data.contact_organisation.designation);
-                    $('#addContact_department').val(data.contact_organisation.department);
+                    $('#addContact_designation').val(data.contact_organisation.designation).trigger('change');
+                    $('#addContact_department').val(data.contact_organisation.department).trigger('change');
                     $('#addContact_orgName').html(data.contact_organisation.organisation.name);
                     $('#addContact_industry').html(data.contact_organisation.organisation.industry_types.join(', '));
                     $('#addContact_business_type').html(data.contact_organisation.organisation.business_types.join(', '));
@@ -259,7 +259,7 @@ $(document).ready(function(){
                     var rangeSlider = $("#range_02").data('ionRangeSlider');
                     rangeSlider.update({from:data.lead.priority});
                     $('#addContact_originator').val(data.lead.originators).trigger('change');
-                    // $('#addContact_assignee').val(data.lead.assignees).trigger('change');
+                    $('#addContact_assignee').val(data.lead.assignees).trigger('change');
                     // $('#addContact_comments').val(data.lead.comments);
                 }
 
