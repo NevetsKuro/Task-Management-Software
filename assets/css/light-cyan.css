@@ -1108,6 +1108,7 @@
 .counter-widget.variant-1.color-2,
 .counter-widget.variant-2.color-2,
 .counter-widget.variant-4.color-2 {
+    border-radius: 10px;
     background-color: #dab326;
     -moz-box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(218, 179, 38, 0.4);
     -webkit-box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(218, 179, 38, 0.4);
@@ -1117,6 +1118,7 @@
 .counter-widget.variant-1.color-3,
 .counter-widget.variant-2.color-3,
 .counter-widget.variant-4.color-3 {
+    border-radius: 10px;
     background-color: #da2677;
     -moz-box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(218, 38, 119, 0.4);
     -webkit-box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(218, 38, 119, 0.4);
@@ -1126,6 +1128,7 @@
 .counter-widget.variant-1.color-4,
 .counter-widget.variant-2.color-4,
 .counter-widget.variant-4.color-4 {
+    border-radius: 10px;
     background-color: #16b985;
     -moz-box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(22, 185, 133, 0.4);
     -webkit-box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(22, 185, 133, 0.4);
@@ -1559,4 +1562,10 @@
 
 .pricing-table.plan-4 .pricing-table-sign-up:after {
     border-color: #16b985 transparent transparent transparent
+}
+.sticky{
+    position: fixed;
+    top: 60px;
+    z-index: 16;
+    width: 1300px;
 }
