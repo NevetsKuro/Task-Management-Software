@@ -24,7 +24,7 @@ $(document).ready(function(){
 			}
 			else{
 				console.log($(location).attr('href').substring($(location).attr('href').lastIndexOf('/')+1));
-				// $(location).attr('href','login.html?src='+$(location).attr('href').substring($(location).attr('href').lastIndexOf('/')+1));
+				$(location).attr('href','login.html?src='+$(location).attr('href').substring($(location).attr('href').lastIndexOf('/')+1));
 			}	
 		},
 		error:function(error){

@@ -127,26 +127,7 @@ $(document).ready(function(){
                                                             <span class="text-danger">*</span>
                                                         </label>
                                                         <label class="input">
-                                                            <span class="irs js-irs-0">
-                                                                <span class="irs">
-                                                                    <span class="irs-line" tabindex="-1">
-                                                                        <span class="irs-line-left"></span>
-                                                                        <span class="irs-line-mid"></span>
-                                                                        <span class="irs-line-right"></span>
-                                                                    </span>
-                                                                    <span class="irs-min" style="visibility: visible;">1</span>
-                                                                    <span class="irs-max" style="visibility: visible;">10</span>
-                                                                    <span class="irs-from" style="visibility: hidden;">0</span>
-                                                                    <span class="irs-to" style="visibility: hidden;">0</span>
-                                                                    <span class="irs-single" style="left: 63.0376%;">7</span>
-                                                                </span>
-                                                                <span class="irs-grid"></span>
-                                                                <span class="irs-bar" style="left: 3.62903%; width: 61.828%;"></span>
-                                                                <span class="irs-bar-edge"></span>
-                                                                <span class="irs-shadow shadow-single" style="display: none;"></span>
-                                                                <span class="irs-slider single" style="left: 61.828%;"></span>
-                                                            </span>
-                                                            <input type="text" id="`+data[i].id+`range_02" class="irs-hidden-input" readonly="">
+                                                            <input type="text" id="`+data[i].id+`range_02" class="irs-hidden-input" readonly="true">
                                                         </label>
                                                     </div>
                                                 </fieldset>
@@ -157,7 +138,8 @@ $(document).ready(function(){
                         $("#"+data[i].id+"range_02").ionRangeSlider({
                             min: 1,
                             max: 10,
-                            from: 5
+                            from: 5,
+                            disable:1
                         });
                         var rangeSlider = $("#"+data[i].id+"range_02").data('ionRangeSlider').update({from:data[i].efficiency});
                         // rangeSlider.update({from:data[i].efficiency});
