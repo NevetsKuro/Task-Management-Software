@@ -27,11 +27,40 @@
         <link href="assets/css/jquery-ui.css" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
         <link rel="stylesheet" href="Libraries/timepicker/jquery.timepicker.min.css">
+
+        <link href='fullcalendar-3.9.0/fullcalendar.min.css' rel='stylesheet' />
+        <link href='fullcalendar-3.9.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+        
+        <script src='fullcalendar-3.9.0/lib/jquery.min.js'></script>
+        <script src='fullcalendar-3.9.0/lib/moment.min.js'></script>
+        <script src='fullcalendar-3.9.0/fullcalendar.min.js'></script>
         <div id="css"></div>
         
     </head>
+    <!-- <script>
 
+        $(document).ready(function() {
+      
+          
+      
+      </script> -->
+      <style>
+
+        body {
+          margin: 40px 10px;
+          padding: 0;
+          font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+          font-size: 14px;
+        }
+      
+        #calendar {
+          max-width: 900px;
+          margin: 0 auto;
+        }
+      
+      </style>
     <body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
+        
         <i class="btn-theme-switcher icon-cog hidden-xs"></i>
         
         <!-- Page Loader -->
@@ -78,16 +107,17 @@
                                 <div class="container">
                                 <div class="row m-t-20 p-b-20 m-l-20">
                                     <!-- todo List -->
-                                    <div class="col-sm-5 card-box">
+                                    <div class="col-sm-4 card-box">
                                         <fieldset>
                                             <legend>To Do List</legend>
                                         </fieldset>
                                     </div>
                                     <!-- todo List ends-->
                                     <!-- Calendar -->
-                                    <div class="col-sm-5 col-sm-offset-1 card-box">
+                                    <div class="col-sm-8 card-box">
                                         <fieldset>
                                             <legend>Calendar</legend>
+                                            <div id='calendar'></div>
                                         </fieldset>
                                     </div>
                                     <!-- Calendar -->
@@ -108,7 +138,7 @@
                                 <div class="row m-t-20 p-b-20 m-l-20">
                                      <!-- task -->
 
-                                    <div class="col-sm-11 card-box">
+                                    <div class="col-sm-6 card-box">
                                         <fieldset>
                                             <legend>Tasks</legend>
                                         </fieldset>
@@ -121,7 +151,7 @@
                                 </div>
                                 <div class="row m-t-20 p-b-20 m-l-20">
                                     <!-- Employee -->
-                                    <div class="col-sm-10" id="task">
+                                    <div class="col-sm-6" id="task">
                                     </div>
                                     <!-- Employee -->
                                 </div>
@@ -172,7 +202,7 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+        <!-- <script type="text/javascript" src="assets/js/jquery.min.js"></script> -->
         <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
         <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
