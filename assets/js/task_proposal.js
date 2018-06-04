@@ -51,64 +51,62 @@ $(document).ready(function(){
         $('#FeeProcess').modal('show');
     });
     
+
+    //Fee Structure
     $(document).on('click','.addRow',function(){
         $('.rowEntry').append(`
             <div class="row">
-                <label class="col-xs-4 col-sm-4 input">
-                    <input class="empName" type="text">
+                <label class="col-xs-4 col-sm-4 select">
+                    <select class="select2 empNameM"></select>
                 </label>
-                <label class="col-xs-4 col-sm-4 input">
-                    <input class="empDuration" type="text">
+                <label class="col-xs-3 col-sm-3 label">
+                    <span class="empDesignM pos-des"></span>
                 </label>
-                <label class="col-xs-2 col-sm-2 m-t-20">
+                <label class="col-xs-2 col-sm-2 input">
+                    <input class="empDurationM" type="text">
+                </label>
+                <label class="col-xs-2 col-sm-2 input">
+                    <input class="empCostM" type="text">
+                </label>
+                <label class="col-xs-1 col-sm-1 m-t-10">
                     <i class="glyphicon glyphicon-remove text-danger removeRow"></i>
                 </label>
             </div>
         `);
+        getEmp(globalEmployee);
     });
 
-    // $(document).on('click','.removeRow',function(){
-    //     $(this).parentsUntil('.rowEntry').remove();
-    // });
+    // var globalEmployee = [
+    //     {
+    //         'name':'steven',
+    //         'ctc':12.00
+    //     },{
+    //         'name':'stark',
+    //         'ctc':8.00
+    //     }
+    // ]
     
-    // $(document).on('click','#addMilestone',function(){
-    //     $('.rowMile').append(`
-    //             <tr class="new">
-    //                 <td>
-    //                 </td>
-    //                 <td>
-    //                     <label class="input">
-    //                         <input class="milestones" type="text" placeholder="">
-    //                     </label>
-    //                 </td>
-    //                 <td>
-    //                     <label class="input">
-    //                         <input class="feePerc" type="number valid_share" min="1" max="100">
-    //                     </label>
-    //                 </td>
-    //                 </td>
-    //                 <td>
-    //                     <div class="text-danger m-l-25">
-    //                         <i class="mile_remove glyphicon glyphicon-remove"></i>
-    //                     </div> 
-    //                 </td>
-    //             </tr>
-    //     `);
-    // });
-
-    // $(document).on('click','.mile_remove',function(){
-    //     $(this).parentsUntil('.rowMile').remove();
-    // });
-
-    var globalEmployee = [
-        {
-            'name':'steven',
-            'ctc':12.00
-        },{
-            'name':'stark',
-            'ctc':8.00
+    function getEmp(data){
+        for (var i = 0; i < data.length; i++) {
+            $('.empNameM').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
         }
-    ]
+        $('.empNameM').select2({
+            dropdownParent: $('#FeeProcess'),
+            placeholder:{id:'-1',text:'Select...'},
+            allowClear: true
+        })
+    }
+    
+    $.getJSON(urlRoot + 'employees/',function(data){
+        globalEmployee = data;
+        getEmp(globalEmployee);
+    });
+
+    $(document).on('change','.empNameM',function(){
+        var empid = $(this).val();
+        empObj = globalEmployee.find(function(data){ return data.id == empid });
+        $(this).parentsUntil('.rowEntry').find('.empDesignM').html(empObj.designation);
+    })
 
     $(document).on('click','.feeCheck',function(){
         var empName = '';
@@ -120,38 +118,34 @@ $(document).ready(function(){
         var TotalCost = 0;
         var margin = 0;
         var empf = 0;
-        $('.empName').each(function(){
+        $('.empNameM').each(function(){
             empName = $(this).val();
             
-            empf = globalEmployee.find(function(data){ return data.name==empName}); // check if ctc field is correct
-            if(empf){
-                ctc = empf.ctc
+            empObj = globalEmployee.find(function(data){ return data.id==empName}); // check if ctc field is correct
+            if(empObj){
+                ctcPerHour = empObj.ctcPerHour;
             }
-            empDuration = $(this).parentsUntil('row').find('.empDuration').val()
+            empDuration = $(this).parentsUntil('.rowEntry').find('.empDurationM').val();
             margin = $('#marginCost').val();
             if(margin == ''){
                 swal('Please Enter a margin!');
                 return false;
             }
-            perEmp = ctc * empDuration;
+            perEmp = ctcPerHour * empDuration;
             EmpCost += perEmp; //total employees cost * by its duration.
             console.log(EmpCost);
-            // $('.empDuration').each(function(){
-            //     empDuration += $(this).val();
-            //     perEmp = ctc * empDuration
-            //     AdminCost = parseInt(Admin + perEmp);
-            // });
-            AdminCost = (EmpCost*25/100);
-            TotalCost = AdminCost + EmpCost;
-            var marginCost = TotalCost*30/100;
-            $('#empCost').empty().html(EmpCost);
-            $('#adminCost').empty().html(AdminCost);
-            $('#totalCost').empty().html(TotalCost);
-            // $('#marginCost').empty().html(marginCost);
-            var t = parseInt(margin) + parseInt(TotalCost);
-            $('#totalFee').val(t);
-            console.log(TotalCost+':'+marginCost);
+            $(this).parentsUntil('.rowEntry').find('.empCostM').val(perEmp);
         });
+        AdminCost = (EmpCost*25/100);
+        TotalCost = AdminCost + EmpCost;
+        var marginCost = TotalCost*30/100;
+        $('#empCost').empty().html(EmpCost.toFixed(2));
+        $('#adminCost').empty().html(AdminCost.toFixed(2));
+        $('#totalCost').empty().html(TotalCost.toFixed(2));
+        // $('#marginCost').empty().html(marginCost);
+        var t = parseInt(margin) + parseInt(TotalCost);
+        $('#totalFee').val(t);
+        console.log(TotalCost+':'+marginCost);
     });
     $(document).on('focus','.feeSubmit',function(){ 
         var tots = $('#totalFee').val()
@@ -162,6 +156,11 @@ $(document).ready(function(){
             swal('Add an employee and its duration!');
         }
     });
+    
+    $(document).on('click','.removeRow',function(){
+        $(this).parentsUntil('.rowEntry').remove();
+    });
+    
     
     function checkValidation(){
         var toClient = 1;// $('#ProposalToClient').val();

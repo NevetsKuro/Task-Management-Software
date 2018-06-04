@@ -4,7 +4,23 @@ $(document).ready(function () {
     var urlParams = GetURLParams();
 
     var listOf = urlParams['listOf'];
-    var listOf = urlParams['listOf'];
+
+    window.onscroll = function() {myFunction()};
+
+    // Get the row
+    var navbar = $("#sticky_row");
+    
+    // Get the offset position of the row
+    var sticky = 260;
+    
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        navbar.addClass("sticky");
+      } else if(window.pageYOffset <= sticky)  {
+        navbar.removeClass("sticky");
+      }
+    }
 
     function contactListBody(currentList) {
 
@@ -295,12 +311,15 @@ $(document).ready(function () {
             $(this).parents('.counter-widget').addClass('color-4');
             $(this).children('.glyphicon').addClass('glyphicon-remove-circle');
             $('.actionBut').attr('disabled', false);
-            
+            $('.counter-widget.variant-1 .counter-icon .front-content p').addClass('color-white');
+            $('.header-title').addClass('color-white');
         } else if ($(this).children('.glyphicon').hasClass('glyphicon-remove-circle')) {
             $(this).children('.glyphicon').removeClass('glyphicon-remove-circle');
             $(this).parents('.counter-widget').removeClass('color-4');
             $(this).parents('.counter-widget').addClass('color-1');
             $(this).children('.glyphicon').addClass('glyphicon-ok-circle');
+            $('.counter-widget.variant-1 .counter-icon .front-content p').addClass('color-black');
+            $('.header-title').addClass('color-black');
         }
 
 
@@ -332,10 +351,16 @@ $(document).ready(function () {
         }
     });
 
-    function compareName(a, b) {
-        if (a.name <= b.name)
+    function compareFName(a, b) {
+        if (a.name.split(' ')[0] <= b.name.split(' ')[0])
             return -1;
-        if (a.name > b.name)
+        if (a.name.split(' ')[0] > b.name.split(' ')[0])
+            return 1;
+    }
+    function compareLName(a, b) {
+        if (a.name.split(' ')[a.name.split(' ').length-1] <= b.name.split(' ')[b.name.split(' ').length-1])
+            return -1;
+        if (a.name.split(' ')[a.name.split(' ').length-1] > b.name.split(' ')[b.name.split(' ').length-1])
             return 1;
     }
     function compareOrganisation(a, b) {
@@ -350,21 +375,33 @@ $(document).ready(function () {
         if (a.designation > b.designation)
             return 1;
     }
+    
 
-    $(document).on('click',".sortByName", function () {
-        var sortByName = currentList.sort(compareName);
-        contactListBody(sortByName);
+    $(document).on('click',".sortByFName", function () {
+        var sortByFName = currentList.sort(compareFName);
+        (listOf == 'contact'?contactListBody(sortByFName):clientListBody(sortByFName));
     });
-
+    $(document).on('click',".sortByLName", function () {
+        var sortByLName = currentList.sort(compareLName);
+        (listOf == 'contact'?contactListBody(sortByLName):clientListBody(sortByLName));
+    });
     $(document).on('click',".sortByOrganisation", function () {
         var sortByOrganisation = currentList.sort(compareOrganisation);
-        contactListBody(sortByOrganisation);
+        // for (let key in sortByOrganisation) {
+        //     if(sortByOrganisation[key].organisation == null){var f = sortByOrganisation[key]; sortByOrganisation.splice(sortByOrganisation.indexOf(sortByOrganisation[key]),1);sortByOrganisation.push(f) };
+        // }
+        //   console.log(sortByOrganisation);          
+        (listOf == 'contact'?contactListBody(sortByOrganisation):clientListBody(sortByOrganisation));
     });
-
     $(document).on('click',".sortByDesignation", function () {
         var sortByDesignation = currentList.sort(compareDesignation);
-        contactListBody(sortByDesignation);
+        (listOf == 'contact'?contactListBody(sortByDesignation):clientListBody(sortByDesignation));
     });
+    // $(document).on('click',".sortByOrganisation", function () {
+    //     var sortByDesignation = currentList.sort(compareDesignation);
+    //     contactListBody(sortByDesignation);
+    // });
+
     $(document).on('click','.searchContact', function (e) {
         e.preventDefault();
         var searchData = $('.searchContactText').val();

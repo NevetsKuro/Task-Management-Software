@@ -25068,3 +25068,6 @@ html.firefox .sky-form .checkbox input+i::after {
 .dropdown-backdrop {
     display: none !important
 }
+.color-white{
+    color:white
+}

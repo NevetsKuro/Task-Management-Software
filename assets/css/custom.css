@@ -137,4 +137,8 @@ body > div.ui-timepicker-wrapper{
 .right-12{
 	right:12px!important;
 }
-
+.pos-des{
+	position: absolute;
+    top: 6px;
+    left: 9px;
+}
