@@ -1,23 +1,24 @@
 
 $(document).ready(function(){
-    
+    var eventarr= new Array();
+
     console.log("TOKEN: "+localStorage.getItem('token'));
     
-    $.ajax({
-        async: true,
-        crossDomain:true,
-        url:urlRoot+'users/',
-        type:'GET',
-        datatype:'JSON',
-        headers:{
-            "Authorization": "Bearer "+localStorage.getItem('token'),
-            "content-type": "application/json",
-            "cache-control": "no-cache",
-        },
-        success:function(data){
-            console.log(data);
-        }
-    })
+    // $.ajax({
+    //     async: true,
+    //     crossDomain:true,
+    //     url:urlRoot+'users/',
+    //     type:'GET',
+    //     datatype:'JSON',
+    //     headers:{
+    //         "Authorization": "Bearer "+localStorage.getItem('token'),
+    //         "content-type": "application/json",
+    //         "cache-control": "no-cache",
+    //     },
+    //     success:function(data){
+    //         console.log(data);
+    //     }
+    // })
 
     $.ajax({
         async: true,
@@ -32,6 +33,15 @@ $(document).ready(function(){
         success:function(data){
             var tasktxt='';
             $(data).each(function(i,val){
+                var startt=data[i].startTime.split("T")[0];
+                //console.log("START TIME : "+start);
+                var endt=data[i].endTime.split("T")[0];
+
+                if(i<5)
+                    eventarr.push({title:data[i].title,start:startt,end:endt});
+                // eventarr[i].title=data[i].title;
+                // eventarr[i].start=data[i].startTime;
+                // eventarr[i].end=data[i].endTime;
                 var color='';
                 var complete=data[i].completed;
                 if(complete<10){
@@ -132,7 +142,6 @@ $(document).ready(function(){
                                                     </div>
                                                 </fieldset>
                                             </div>
-                        
                         `;
                         $('#'+data[i].task+' .panel-body').append(subtaskstxt);
                         $("#"+data[i].id+"range_02").ionRangeSlider({
@@ -149,12 +158,74 @@ $(document).ready(function(){
                     console.log(error.responseText);
                 }
             });
-
+            console.log(eventarr);
+            $('#calendar').fullCalendar({
+                defaultDate: '2018-03-12',
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events:eventarr,
+                aspectRatio: 2,
+                contentHeight: 600,
+                // events: [
+                //   {
+                //     title: 'All Day Event',
+                //     start: '2018-03-01'
+                //   },
+                //   {
+                //     title: 'Long Event',
+                //     start: '2018-03-07',
+                //     end: '2018-03-10'
+                //   },
+                //   {
+                //     id: 999,
+                //     title: 'Repeating Event',
+                //     start: '2018-03-09T16:00:00'
+                //   },
+                //   {
+                //     id: 999,
+                //     title: 'Repeating Event',
+                //     start: '2018-03-16T16:00:00'
+                //   },
+                //   {
+                //     title: 'Conference',
+                //     start: '2018-03-11',
+                //     end: '2018-03-13'
+                //   },
+                //   {
+                //     title: 'Meeting',
+                //     start: '2018-03-12T10:30:00',
+                //     end: '2018-03-12T12:30:00'
+                //   },
+                //   {
+                //     title: 'Lunch',
+                //     start: '2018-03-12T12:00:00'
+                //   },
+                //   {
+                //     title: 'Meeting',
+                //     start: '2018-03-12T14:30:00'
+                //   },
+                //   {
+                //     title: 'Happy Hour',
+                //     start: '2018-03-12T17:30:00'
+                //   },
+                //   {
+                //     title: 'Dinner',
+                //     start: '2018-03-12T20:00:00'
+                //   },
+                //   {
+                //     title: 'Birthday Party',
+                //     start: '2018-03-13T07:00:00'
+                //   },
+                //   {
+                //     title: 'Click for Google',
+                //     url: 'http://google.com/',
+                //     start: '2018-03-28'
+                //   }
+                // ]
+              });
         },
         error:function(error){
             console.log(error.responseText);
         }
-    });
-    
-    
+    });  
 });
