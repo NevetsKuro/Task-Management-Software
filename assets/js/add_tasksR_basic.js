@@ -97,7 +97,7 @@ $(document).ready(function(){
                 </td>
                 <td>
                     <label class="select">
-                        <select class="SubTask_Status select2"></select>
+                        <select entity="TaskStatus" class="SubTask_Status select2 editselect"></select>
                     </label>
                 </td>
                 <td class="btn-group">
@@ -188,6 +188,16 @@ $(document).ready(function(){
         for (let i = 0; i < data.services.length; i++) {
             $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
         }
+        for (var i = 0; i < data.task_status.length; i++) {
+            $('.SubTask_Status').append('<option value='+data.task_status[i].id+'>'+data.task_status[i].status+'</option>');
+            $('#taskStatus').append('<option value='+data.task_status[i].id+'>'+data.task_status[i].status+'</option>');
+        }
+    });
+
+    $.getJSON(urlRoot+'clients/allclients',function(data){
+        for (var i = 0; i < data.length; i++) {
+            $('#taskClients').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        }
     });
 
     $.getJSON(urlRoot+'employees',function(data){
@@ -197,10 +207,15 @@ $(document).ready(function(){
         for (let i = 0; i < data.length; i++) {
             $('#taskApprover').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
         }
-        for (let i = 0; i < data.length; i++) {
-            $('.SubTask_Assignee').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
-        }
+        emp=data;
+        fillAssignee();
     });
+    function fillAssignee(){
+        for (var i = 0; i < emp.length; i++) {
+            $('.SubTask_Assignee').append('<option value='+emp[i].id+'>'+emp[i].name+'</option>');
+            $('#SelectAssignee').append('<option value='+emp[i].id+'>'+emp[i].name+'</option>');
+        }
+    }
     ///////////////////////////////////////////////// GET REQUEST ///////////////////////////////////////////////
    
     $(document).on('change','#taskService',function(){

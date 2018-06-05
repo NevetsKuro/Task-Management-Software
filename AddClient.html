@@ -516,7 +516,7 @@
                                                                         <span class="text-danger">*</span>
                                                                     </label>
                                                                     <label class="select">
-                                                                        <select id="company_types" class="select2" required>
+                                                                        <select entity="CompanyType" id="company_types" class="select2 editselect" required>
                                                                             <option default value="">Select...</option>
                                                                         </select>
                                                                     </label>
@@ -547,7 +547,7 @@
                                                                 <div class="nofE col-sm-6 ">
                                                                     <label class="label">Name(s) of Stock Exchange(if listed):</label>
                                                                     <label class="select">
-                                                                        <select id="company_stock" class="select2">
+                                                                        <select entity="StockExchange" id="company_stock" class="select2 editselect">
                                                                             <option default value="">Select...</option>
                                                                         </select>
                                                                     </label>
@@ -934,8 +934,7 @@
                                                             <div class="col-md-4">
                                                                 <label class="label">Service</label>
                                                                 <label class="select" id="service_1">
-                                                                    <select id="services" class="select2 editselect">
-                                                                        <option default value="">Select...</option>
+                                                                    <selectt entity="Service" id="services" class="select2 editselect servicesCat">
                                                                     </select>
                                                                 </label>
                                                             </div>

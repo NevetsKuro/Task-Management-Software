@@ -414,7 +414,7 @@
                                                                         </div>
                                                                         <div class="col-xs-3 col-sm-3 ">
                                                                             <label class="select">
-                                                                                <select update-ctrl="phone_numbers" class="contactnumber_category select2 editselect" required>
+                                                                                <select entity="Category" update-ctrl="phone_numbers" class="contactnumber_category select2 editselect" required>
 
                                                                                 </select>
                                                                             </label>
@@ -470,7 +470,7 @@
                                                                         </div>
                                                                         <div class="col-xs-3 col-sm-3 p-b-12">
                                                                             <label class="select">
-                                                                                <select update-ctrl="email_addresses" class="email_category select2 editselect" required>
+                                                                                <select entity="Category" update-ctrl="email_addresses" class="email_category select2 editselect" required>
 
                                                                                 </select>
                                                                             </label>
@@ -516,7 +516,7 @@
                                                                     <div class="new row well">
                                                                         <div class="col-xs-4 col-sm-4 p-b-12">
                                                                             <label class="select">
-                                                                                <select update-ctrl="social_media_links" class="socialmedia_category select2 editselect">
+                                                                                <select  entity="SocialMedia" update-ctrl="social_media_links" class="socialmedia_category select2 editselect">
                                                                                     <option default selected value="">Select...</option>
                                                                                 </select>
                                                                             </label>
@@ -604,7 +604,7 @@
                                                             <div class="col-sm-6">
                                                                 <label class="label">Designation:</label>
                                                                 <label class="select">
-                                                                    <select update-ctrl="contact_organisation" class="select2 editselect" id="addContact_designation">
+                                                                    <select entity="Designation" update-ctrl="contact_organisation" class="select2 editselect" id="addContact_designation">
                                                                         <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
@@ -612,7 +612,7 @@
                                                             <div class="col-sm-6">
                                                                 <label class="label">Department:</label>
                                                                 <label class="select">
-                                                                    <select update-ctrl="contact_organisation" class="select2 editselect" id="addContact_department">
+                                                                    <select entity="Department" update-ctrl="contact_organisation" class="select2 editselect" id="addContact_department">
                                                                         <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
@@ -681,7 +681,7 @@
                                                             <div class="col-sm-6">
                                                                 <label class="label col-sm-10">Source:</label>
                                                                 <label class="select">
-                                                                    <select update-ctrl="lead" id="addContact_source" class="select2 editselect" required>
+                                                                    <select entity="Source" update-ctrl="lead" id="addContact_source" class="select2 editselect" required>
                                                                         <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
@@ -699,7 +699,7 @@
                                                             <div class="col-sm-6">
                                                                 <label class="label col-sm-10">Status:</label>
                                                                 <label class="select">
-                                                                    <select update-ctrl="lead" id="addContact_lead_status" class="select2 editselect" required>
+                                                                    <select entity="LeadStatus" update-ctrl="lead" id="addContact_lead_status" class="select2 editselect" required>
                                                                         <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>
@@ -740,7 +740,7 @@
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <label class="select">
-                                                                    <select update-ctrl="lead" id="addContact_potential_service" class="select2-multiple editselect" multiple>
+                                                                    <select entity="Service" update-ctrl="lead" id="addContact_potential_service" class="select2-multiple editselect" multiple>
                                                                         <option default value="">Select...</option>
                                                                     </select>
                                                                 </label>

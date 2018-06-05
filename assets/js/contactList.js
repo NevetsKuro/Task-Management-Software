@@ -61,11 +61,10 @@ $(document).ready(function () {
                                 <p class="text-dark m-l-50">
                                     <small>${(typeof element.email !== "" || typeof element.email !== 'null') ? element.email : 'Not available'}</small>
                                 </p>
-
                             </div>
                         </div>
                         <div class="counter-content">
-                            <h3>Actions</h3>
+                            <h3 class="color-white">Actions</h3>
                             <a title="Select/Deselect" class="btn bg-grey btn-sm selectable">
                                 <i class="glyphicon glyphicon-ok-circle"></i>
                             </a>
@@ -80,6 +79,9 @@ $(document).ready(function () {
                             </a>
                             <a title="Convert to Client" href="${clientLink}${element.id}" class="btn btn-primary btn-sm CTC">
                                 <i class="glyphicon glyphicon-random"></i>
+                            </a>
+                            <a title="Export .PDF/.DOC" href="" class="btn btn-info btn-sm sm">
+                                <i class="linear-icons li icon-cloud-upload f-s-18"></i>
                             </a> 
                         </div>
                     </div>
@@ -158,7 +160,7 @@ $(document).ready(function () {
                             </div>
                         </div>
                         <div class="counter-content">
-                            <h3>Actions</h3>
+                            <h3 class="color-white">Actions</h3>
                             <a title="Select/Deselect" class="btn bg-grey btn-sm selectable">
                                 <i class="glyphicon glyphicon-ok-circle"></i>
                             </a>
@@ -364,6 +366,8 @@ $(document).ready(function () {
             return 1;
     }
     function compareOrganisation(a, b) {
+        if (a.organisation==null)
+            return 1;
         if (a.organisation <= b.organisation)
             return -1;
         if (a.organisation > b.organisation)

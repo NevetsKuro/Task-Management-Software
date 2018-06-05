@@ -115,11 +115,8 @@ $(document).ready(function(){
                 </td>
                 <td>
                     <label class="select">
-                        <select class="SubTask_Status select2">
+                        <select entity="TaskStatus" class="SubTask_Status select2 editselect">
                             <option default value="">Select...</option>
-                            <option value="1">Created</option>
-                            <option value="2">Started</option>
-                            <option value="3">Completed</option>
                         </select>
                     </label>
                 </td>
@@ -229,10 +226,65 @@ $(document).ready(function(){
         if(sum>limit){ $(this).val('');$(this).focus(); swal('The Total Weightage Should be 100!')} console.log(sum);
     });
 
+    var globalRDSubs;
     $(document).on('click','#Add_R_D',function(){
-        $('#R_D_Modal').modal('open');
-        
-    })
+        $('#R_D_Modal').modal('show');
+        $.getJSON(urlRoot+'subtasks/?isExternal=false',function(data){
+            globalRDSubs = data;
+            $('.R_D_rows').empty();
+            for(var i=0;i<data.length;i++){
+                $('.R_D_rows').append(`
+                    <tr>
+                        <td>
+                            <label class="checkbox m-l-15">
+                            <input subid="${data[i].id}" type='checkbox' name="SChecked" class='check_Subs'><i class='rounded-x m-l-10'></i>
+                            </label>
+                        </td>
+                        <td>${data[i].title}</td>
+                    </tr>
+                `);
+            }
+        });
+        $(document).on('click','#R_DWork',function(){
+            var RDsubs=[];
+            $('.R_D_rows').find('tr').each(function(){
+                if($(this).find('input').is(':checked') == true){
+                    RDsubs.push($(this).find('input').attr('subid'));
+                }
+            });
+            for(var i=0;i<RDsubs.length;i++){
+                var ChangeSub = globalRDSubs.find(function(s){return s.id == RDsubs[i]})
+                var subtask = {
+                    "title": ChangeSub.title,
+                    "task": tid,
+                    "assignee": ChangeSub.assignee,
+                }
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url:urlRoot+"subtasks/"+ChangeSub.id+'/',
+                    datatype:'JSON',
+                    type:'PUT',
+                    headers: {
+                        "X-CSRFToken": csrftoken,
+                        "content-type": "application/json",
+                        "cache-control": "no-cache"
+                    },
+                    processData: false,
+                    data:JSON.stringify(subtask),
+                    success:function(){
+                        console.log('subtasks updated');
+                    },
+                    error:function(error){
+                        console.log(error.responseText);
+                    }
+
+                });
+
+            }
+            $('#R_D_Modal').modal('show');
+        });
+    });
 
     function fillSubTask(tid){
         $.getJSON(urlRoot+'/subtasks/?task='+tid,function(data){
@@ -310,6 +362,7 @@ $(document).ready(function(){
                     datatype:'JSON',
                     type:'POST',
                     headers: {
+                        "X-CSRFToken": csrftoken,
                         "content-type": "application/json",
                         "cache-control": "no-cache"
                     },
@@ -352,14 +405,17 @@ $(document).ready(function(){
         for (var i = 0; i < data.services.length; i++) {
             $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
         }
+        for (var i = 0; i < data.task_status.length; i++) {
+            $('.SubTask_Status').append('<option value='+data.task_status[i].id+'>'+data.task_status[i].status+'</option>');
+            $('#taskStatus').append('<option value='+data.task_status[i].id+'>'+data.task_status[i].status+'</option>');
+        }
     });
 
-    // $.getJSON(urlRoot+'clients',function(data){
-    //     for (var i = 0; i < data.services.length; i++) {
-    //         $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
-    //     }
-    // });
-    
+    $.getJSON(urlRoot+'clients/allclients',function(data){
+        for (var i = 0; i < data.length; i++) {
+            $('#taskClients').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        }
+    });
 
     $.getJSON(urlRoot+'tasks/proposals',function(data){
         for (var i = 0; i < data.length; i++) {
@@ -447,7 +503,8 @@ $(document).ready(function(){
             if(data.isExternal == true){
                 $('#taskType').bootstrapToggle('on');  
             }else if(data.isExternal == false){
-                $('#taskType').bootstrapToggle('off');  
+                $('#taskType').bootstrapToggle('off');
+                $('#Add_R_D').removeClass('hide');
             }
             $('#taskTitle').val(data.title);
             $('#taskClients').val(data.clients).trigger('change');

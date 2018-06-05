@@ -353,7 +353,7 @@ $(document).ready(function(){
         </div>
         <div class='col-xs-3 col-sm-3'>
             <label class='select'>
-                <select update-ctrl="phone_numbers" class='contactnumber_category select2 editselect'>
+                <select entity="Category" update-ctrl="phone_numbers" class='contactnumber_category select2 editselect'>
                     
                 </select>
             </label>
@@ -379,7 +379,7 @@ $(document).ready(function(){
         </div>
         <div class='col-xs-3 col-sm-3'>
             <label class='select'>
-                <select update-ctrl="email_addresses" class='email_category select2 editselect'>
+                <select entity="Category" update-ctrl="email_addresses" class='email_category select2 editselect'>
                     
                 </select>
             </label>
@@ -449,7 +449,7 @@ $(document).ready(function(){
         <div class='new row well'>
             <div class='col-xs-4 col-sm-4'>
                 <label class='select'>
-                    <select update-ctrl="social_media_links" class='socialmedia_category select2 editselect'>
+                    <select entity="SocialMedia" update-ctrl="social_media_links" class='socialmedia_category select2 editselect'>
 
                     </select>
                 </label>
@@ -949,6 +949,8 @@ var CF_cardimg='';
                 // var email=getEmailRow();
                 
                 $.ajax({
+                    async: true,
+                    crossDomain: true,
                     url:urlRoot+'contacts/?',
                     type:'POST',
                     headers:{

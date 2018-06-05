@@ -24542,7 +24542,7 @@ a.thumbnail:hover img {
     -o-transition: all .5s ease;
     -webkit-transition: all .5s ease;
     transition: all .5s ease;
-    background-color: #fff;
+    background-color: #fcc016;
     backface-visibility: hidden;
     transform-style: preserve-3d;
     -moz-transform: translateY(110px) rotateX(-90deg);

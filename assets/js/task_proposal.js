@@ -8,7 +8,33 @@ $(document).ready(function(){
             theme: 'cerulean'
           },
         placeholder: 'write here...'
-      });
+    });
+
+    //////////////////////////////////////.Form - Data
+    $.getJSON(urlRoot+'clients/allclients',function(data){
+        for (var i = 0; i < data.length; i++) {
+            $('#ProposalToClient').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        }
+    });
+    $.getJSON(urlRoot+'organisations/?isOwned=True',function(data){
+        for (var i = 0; i < data.length; i++) {
+            $('#ProposalFromEntity').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        }
+    });
+    $.getJSON(urlRoot+'employees/',function(data){
+        for (var i = 0; i < data.length; i++) {
+            $('#FromEmployee').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        }
+    });
+    // $(document).on('change','#ProposalToClient',function(){
+    //     var clientId = $(this).val();
+
+    //     $.getJSON(urlRoot+'/',function(data){
+    //         for (var i = 0; i < data.length; i++) {
+    //             $('#FromEmployee').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+    //         }
+    //     }); 
+    // });
 
     function addRowCount(tableAttr) {
         $(tableAttr).each(function(){

@@ -91,7 +91,7 @@ $(document).ready(function () {
             }
 
             for (var i = 0; i < data.services.length; i++) {
-                $('#services').append('<option value=' + data.services[i].id + '>' + data.services[i].service + '</option>');
+                $('.servicesCat').append('<option value=' + data.services[i].id + '>' + data.services[i].service + '</option>');
             }
 
             for(var i = 0; i < data.genders.length; i++){
@@ -1250,6 +1250,8 @@ $(document).ready(function () {
                     var cid = cC_table.row($(this).parent()).data()[1];
                     
                     $.ajax({
+                        async: true,
+                        crossDomain: true,
                         url: urlRoot + "contacts/" +cid+'/',
                         type: 'DELETE',
                         datatype: "JSON",
@@ -1524,9 +1526,10 @@ $(document).ready(function () {
 
         var newId;
         $.ajax({
+            async:false,
+            crossDomain: true,
             url: urlRoot + 'contacts/?',
             datatype: 'JSON',
-            async: false,
             method: 'POST',
             data: JSON.stringify(contact),
             processData: false,
@@ -1548,9 +1551,9 @@ $(document).ready(function () {
         
         var newId;
         $.ajax({
+            async: false,
             url: urlRoot + 'contacts/'+id+'/?',
             datatype: 'JSON',
-            async: false,
             method: 'PUT',
             data: JSON.stringify(contact),
             processData: false,
@@ -2031,6 +2034,8 @@ $(document).ready(function () {
                 
                 
                 $.ajax({
+                    async: true,
+                    crossDomain: true,
                     url: url,
                     type: 'POST',
                     contentType: 'application/json',

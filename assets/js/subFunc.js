@@ -228,7 +228,6 @@
             },
             templateResult: function (data) {
                 var $result = $("<span></span>");
-
                 $result.text(data.text);
 
                 if (data.newOption) {
@@ -240,10 +239,53 @@
             });
             $(document).on('select2:select','.editselect', function (e) {
                 var data = e.params.data;
+                var entity = $(this).attr('entity');
+                var quickies = {
+                    "entity":entity,
+                    "newValue":data.text
+                };
+                console.log(quickies);
+                swal({
+                    title: "Are you sure?",
+                    text: "You want to add this Option!!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        
+                        $.ajax({
+                            async: true,
+                            crossDomain: true,
+                            url: urlRoot + "common/quickadd",
+                            type: 'POST',
+                            headers:{
+                                "X-CSRFToken": csrftoken
+                            },
+                            contentType:'application/json',
+                            datatype: "JSON",
+                            data:JSON.stringify(quickies),
+                            success: function (data) {
+                                console.log('option added');
+                            },
+                            error:function(error){
+                                console.log(error.responseText);
+                            }
+                        });
+                        
+                        swal("Poof! New "+entity+" has been added!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Request Denied");
+                    }
+                });
+
                 console.log(data);
             });
         }
-            editSelect();
+        editSelect();
 
             // $('.select2').select2({
             //     placeholder:{
