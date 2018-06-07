@@ -27,7 +27,7 @@
         <link href="assets/css/jquery-ui.css" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
         <link rel="stylesheet" href="Libraries/timepicker/jquery.timepicker.min.css">
-
+        
         <link href='fullcalendar-3.9.0/fullcalendar.min.css' rel='stylesheet' />
         <link href='fullcalendar-3.9.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
         
@@ -35,17 +35,9 @@
         <script src='fullcalendar-3.9.0/lib/moment.min.js'></script>
         <script src='fullcalendar-3.9.0/fullcalendar.min.js'></script>
         <div id="css"></div>
-        
+        <link class="css-theme-color-file" href="assets/css/light-cyan.css" rel="stylesheet">
     </head>
-    <!-- <script>
-
-        $(document).ready(function() {
-      
-          
-      
-      </script> -->
-      <style>
-
+    <style>
         body {
           margin: 40px 10px;
           padding: 0;
@@ -57,32 +49,22 @@
           max-width: 900px;
           margin: 0 auto;
         }
-      
       </style>
     <body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
-        
         <i class="btn-theme-switcher icon-cog hidden-xs"></i>
-        
         <!-- Page Loader -->
-
         <!-- START WRAPPER -->
         <div class="wrapper">
-
             <div id="divHeader"></div>
-
             <div id="divSide"></div>
-        
-
             <div class="main-content small_content">
-
                 <!-- START MAIN CONTAINER -->
                 <div class="main-container">
-
                     <!-- START PAGE HEADER -->
                     <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
                         <div class="page-header-content slideshow">
                             <div class="page-header-overlay">
-                                <h1 class="page-title">Employee Dashboard</h1>
+                                <h1 class="page-title">Dashboard</h1>
                                 <div class="page-breadcrumb">
                                     <nav class="c_breadcrumbs">
                                         <ul>
@@ -99,103 +81,181 @@
                         </div>
                     </section>
                     <!-- END PAGE HEADER -->
-
                     <!-- START PAGE CONTENT -->
                     <div class="page-content">
-                        
-                            <div class="panel">
-                                <div class="container">
-                                <div class="row m-t-20 p-b-20 m-l-20">
-                                    <!-- todo List -->
-                                    <div class="col-sm-4 card-box">
-                                        <fieldset>
-                                            <legend>To Do List</legend>
-                                        </fieldset>
+                        <div class="container">
+                             <!--****** Start Modal Responsive******-->
+                            <div class="modal" id="modal-responsive" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content animated fadeOut">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                                            <h4 class="modal-title"><strong>TO Do List</strong> (new item)</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="field-1" class="control-label">First Name</label>
+                                                        <input type="text" class="form-control" id="field-1" placeholder="First Name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="field-2" class="control-label">Last Name</label>
+                                                        <input type="text" class="form-control" id="field-2" placeholder="Last Name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="field-3" class="control-label">Address</label>
+                                                        <input type="text" class="form-control" id="field-3" placeholder="Address">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="field-4" class="control-label">City</label>
+                                                        <input type="text" class="form-control" id="field-4" placeholder="City">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="field-5" class="control-label">Country</label>
+                                                        <input type="text" class="form-control" id="field-5" placeholder="Country">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="field-6" class="control-label">Zip</label>
+                                                        <input type="text" class="form-control" id="field-6" placeholder="Zip">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer text-center">
+                                            <button type="button" class="btn btn-primary btn-raised "><i class="fa fa-check"></i> Save</button>
+                                        </div>
                                     </div>
-                                    <!-- todo List ends-->
-                                    <!-- Calendar -->
-                                    <div class="col-sm-8 card-box">
-                                        <fieldset>
-                                            <legend>Calendar</legend>
-                                            <div id='calendar'></div>
-                                        </fieldset>
-                                    </div>
-                                    <!-- Calendar -->
                                 </div>
-
-                                <div class="row m-t-20 p-b-20 m-l-20">
-                                    <!-- mynotes -->
-                                    <div class="col-sm-5 card-box">
-                                        <fieldset>
-                                            <legend>Notes</legend>
-                                        </fieldset>
-                                    </div>
-                                    <!-- mynotes -->
-                                    <div class="col-sm-6">
-                                        
+                            </div>
+            <!--****** End Modal Responsive******-->
+                            
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-6 ">
+                                    <div class="counter-widget variant-2" style="border-radius:0px">
+                                        <div class="counter-icon">
+                                            <i class="icon icon-binoculars"></i>
+                                        </div>
+                                        <div class="counter-content">
+                                            <div class="total"></div>
+                                            <div class="caption">
+                                                My Efficiency
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
                                 </div>
-                                <div class="row m-t-20 p-b-20 m-l-20">
-                                     <!-- task -->
-
-                                    <div class="col-sm-6 card-box">
-                                        <fieldset>
-                                            <legend>Tasks</legend>
-                                        </fieldset>
-                                        <div class="panel-group" id="taskaccordion">
-
+                            </div>
+                            <div class="row m-t-20 p-b-20">
+                                <!-- todo List -->
+                                <div class="col-sm-4">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="panel list-widget notes" style="border-radius: 0px">
+                                                <div class="panel-body" style="padding: 0px">
+                                                    <div class="list-header" style="background-color: #c4a122">
+                                                        <h3>To Do List</h3>    
+                                                    </div>
+                                                    <div class="list-content">
+                                                        <ul class="list-group" id="todoli"> 
+                                                        </ul>
+                                                    </div>
+                                                    <div class="list-footer" style="background-color: #c4a122">
+                                                        <a href="#">View All</a>
+                                                        <span class="icon icon-plus add-new" data-placement="left" data-toggle="tooltip" title="" data-original-title="Add New"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                   
-                                    <!-- task -->
+                                    <!-- todo list ends -->
+                                    <!-- notes -->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="panel list-widget notes" style="border-radius: 0px">
+                                                <div class="panel-body" style="padding: 0px">
+                                                    <div class="list-header" style="background-color: #c4a122">
+                                                        <h3>Notes</h3>
+                                                    </div>
+                                                    <div class="list-content" id="notesli">
+                                                        <form class="form-wizard m-10">
+                                                            <div class="row">
+                                                                <div class="col-sm-2">
+                                                                    <label class="input">Notes:</label>
+                                                                </div>
+                                                                <div class="col-sm-10">
+                                                                    <textarea id="notearea" class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </form>
+                                                    </div>
+                                                    <!-- <div class="list-footer" style="background-color: #c4a122">
+                                                        <div style="color: white">Options</div> 
+                                                        <span class="icon icon-pencil add-new" data-placement="left" data-toggle="tooltip" title="" data-original-title="Add New"></span>                                                   
+                                                    </div> -->
+                                                    <div class="buttonarea m-10" style="float:right">
+                                                        <button type="button" class="btn btn-success notesave">
+                                                            <i class="fa fa-save"></i>
+                                                            <span>Save</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- notes end -->
                                 </div>
-                                <div class="row m-t-20 p-b-20 m-l-20">
-                                    <!-- Employee -->
-                                    <div class="col-sm-6" id="task">
-                                    </div>
-                                    <!-- Employee -->
+                                <!-- top left part ends -->
+                                <!-- top right -->
+                                <!-- Calendar -->
+                                <div class="col-sm-7 card-box panel m-l-5" style="border-radius: 0px">
+                                    <fieldset>
+                                        <legend>Calendar</legend>
+                                        <div id='calendar'></div>
+                                    </fieldset>
                                 </div>
-
-
-                                <!-- <div class="panel-group" id="accordion">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" style="padding: 0px;">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
-                                                    Task 1
-                                                </a>
-                                            </h4>
+                                <!-- Calendar -->
+                                <!-- top right ends-->
+                            </div>
+                            <!-- top ends -->
+                            <div class="row">
+                                <!-- task -->
+                                <div class="col-sm-6 panel list-widget tasks p-0">
+                                    <div class="panel-body p-0" id="tasklist">
+                                        <div class="list-header" style="background-color: #c4a122">
+                                            <h3>Tasks</h3>
                                         </div>
-                                        <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                            <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
+                                        <div class="panel-group">
+                                            <div id="taskaccordion">
+
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" style="padding: 0px;">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
-                                                    Task2
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                            <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" style="padding: 0px;">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
-                                                    Task3            
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                            <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
+                                </div>
+                                    <div class="panel-body"></div>
+                                
+                                <!-- task -->
+                            </div>
+                            <div class="row m-t-20 p-b-20">
+                                <!-- Employee -->
+                                <div class="col-sm-6" id="task">
+                                </div>
+                                <!-- Employee -->
                             </div>
                         </div>
                     </div>
@@ -283,8 +343,6 @@
         <!-- <script src="assets/js/header.js" type="text/javascript"></script> -->
         <!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
         <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
-
-
     </html>
 
 
