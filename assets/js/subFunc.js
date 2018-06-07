@@ -350,7 +350,7 @@
         }
         
        window.getContactRow = function (){
-        contactArr=[]
+            var contactArr=[]
         $('#contact-row .new').each(function(index){
             countryCode = '+91';
             contact = new Object(); 

@@ -422,7 +422,7 @@ $(document).ready(function(){
             $('#taskProposal').append('<option value='+data[i].id+'>'+data[i].proposalNumber+'</option>');
         }
     });
-   var emp='';
+    var emp='';
     $.getJSON(urlRoot+'employees',function(data){
         for (var i = 0; i < data.length; i++) {
             $('#taskController').append('<option value='+data[i].id+'>'+data[i].name+'</option>');

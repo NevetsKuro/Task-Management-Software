@@ -29,7 +29,7 @@
         
         <script type="text/javascript" src="assets/js/jquery.min.js"></script>
         <link rel="stylesheet" href="Libraries/timepicker/jquery.timepicker.css">
-        
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
         
         <script type="text/javascript" src="assets/js/addCss.js"></script>
 		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
@@ -96,12 +96,12 @@
                                                         <ul class="nav nav-tabs nav-justified" role="tablist">
                                                             <li role="presentation" class="active">
                                                                 <a href="#tab1" data-toggle="tab">
-                                                                    <i class="icon-enter"></i> Account Details
+                                                                    <i class="icon-enter"></i> Meeting Template
                                                                 </a>
                                                             </li>
                                                             <li role="presentation">
                                                                 <a href="#tab2" data-toggle="tab">
-                                                                    <i class="icon-user"></i> Personal Details
+                                                                    <i class="icon-user"></i> Minutes of Meetings
                                                                 </a>
                                                             </li>
                                                         </ul>
@@ -120,8 +120,8 @@
                                                                         </div>
                                                                         <div class="col-sm-6">
                                                                             <label class="label">Name of Client / Contact:</label>
-                                                                            <label class="input">
-                                                                                    <input type="text" id="Name" placeholder="Enter Name.." list="namelist" required>
+                                                                            <label class="select">
+                                                                                <select id="meet_referedFor" class="select2"></select>
                                                                             </label>
                                                                         </div>
                     
@@ -129,7 +129,7 @@
                                                                             <label class="label">Purpose/Objective:</label>
                                                                             <label class="textarea">
                                                                             <i class="icon-append icon-book2"></i>
-                                                                            <textarea id="purpose" rows="3" class="autosize-animated" required></textarea>
+                                                                            <textarea id="meet_purpose" rows="3" class="autosize-animated" required></textarea>
                                                                             </label>
                                                                         </div>
                                                                         
@@ -138,7 +138,7 @@
                                                                         <div class="col-sm-6">
                                                                             <label class="label">Meeting Mode:</label>
                                                                             <label class="select">
-                                                                                <select id="meeting_mode" class="select2" required>
+                                                                                <select id="meet_mode" class="select2" required>
                                                                                     <option value="">--Select--</option>
                                                                                     <option value="location">Face To Face</option>
                                                                                     <option value="oncall">On Call</option>
@@ -147,16 +147,10 @@
                                                                         </div>
                                                                         
                                                                         <div class="col-sm-6">
-                                                                            <div id="loc-wrapper" class="hide">
+                                                                            <div id="loc-wrapper">
                                                                                 <label class="label">Enter Location: </label>
                                                                                 <label class="input">
-                                                                                    <input type="text" id="meeting_location" required/>
-                                                                                </label>
-                                                                            </div>
-                                                                            <div id="call-wrapper" class="hide">
-                                                                                <label class="label">Enter Phone number: </label>
-                                                                                <label class="input">
-                                                                                    <input type="number" id="meeting_phone" required/>
+                                                                                    <input type="text" id="meet_location" required/>
                                                                                 </label>
                                                                             </div>
                                                                         </div>
@@ -170,33 +164,23 @@
                                                                         <div class="col-sm-6">
                                                                             <label class="label">Start Time:</label>
                                                                             <label class="input">
-                                                                            <input type="text" id="sTime" class="timepicker" placeholder="1:00 PM">
+                                                                            <input type="text" id="meet_STime" class="timepicker" placeholder="1:00">
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-sm-6">
                                                                             <label class="label">End Time:</label>
                                                                             <label class="input">
-                                                                            <input type="text" id="eTime" class="timepicker" placeholder="1:00 PM">
+                                                                            <input type="text" id="meet_ETime" class="timepicker" placeholder="1:00">
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-sm-6" style="visibility: hidden">
+                                                                            <label class="label">Temp:</label>
+                                                                            <label class="input">
+                                                                            <input type="text">
                                                                             </label>
                                                                         </div>
                                                                         
-                                                                        <!-- <div class="m-t-15 col-sm-6">
-                                                                        <label id="lblSingSelect" class="select">
-                                                                            <select id="singSelect" class="form-control">
-                                                                                    <option value="AK">Alaska</option>
-                                                                                    <option value="HI">Hawaii</option>
-                                                                                    <option value="CA">California</option>
-                                                                                    <option value="NV">Nevada</option>
-                                                                                    <option value="OR">Oregon</option>
-                                                                                    <option value="WA">Washington</option>
-                                                                            </select>
-                                                                        </label>
-                                                                        </div> -->
-                    
-                                                                        <span id="message" class="col-sm-12 text-danger text-italic text-center"></span>
-                                                                        
                                                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                                                        
                     
                                                                         <div class="well row m-0">
                                                                             <label class="text-bold f-s-20 col-sm-10">Attendees</label>
@@ -206,27 +190,25 @@
                                                                             <table id="attendees" class="table table-small-font table-bordered table-striped m-b-10 ">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th>Organisation Side</th>
-                                                                                        <th>Client Side</th>
-                                                                                        <th>Third Party</th>
-                                                                                        
+                                                                                        <th>Type</th>
+                                                                                        <th>Attendees</th>
+                                                                                        <th>Remove</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody id="attendee_row">
                                                                                     <tr class="new">
                                                                                         <td>
                                                                                             <label class="select">
-                                                                                                <select class="attendee_organisation" class="select2"></select>
+                                                                                                <select class="attendee_type select2">
+                                                                                                    <option value="O">Organisation Side</option>
+                                                                                                    <option value="C">Client Side</option>
+                                                                                                    <option value="T">Third Party</option>
+                                                                                                </select>
                                                                                             </label>
                                                                                         </td>
                                                                                         <td>
                                                                                             <label class="select">
-                                                                                                <select class="attendee_client" class="select2"></select>
-                                                                                            </label>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <label class="select">
-                                                                                                <select class="attendees_thirdParty" class="select2"></select>
+                                                                                                <select class="attendees_list select2"></select>
                                                                                             </label>
                                                                                         </td>
                                                                                         <td>
@@ -251,8 +233,10 @@
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>Agenda Number</th>
+                                                                                        <th>Type</th>
                                                                                         <th>Owner</th>
                                                                                         <th>Duration</th>
+                                                                                        <th>Remove</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody id="agenda_row">
@@ -263,12 +247,20 @@
                                                                                             </label>
                                                                                         </td>
                                                                                         <td>
-                                                                                            <label class="input">
-                                                                                                <input class="agenda_owner" type="text">
+                                                                                            <label class="select">
+                                                                                                <select class="agenda_type select2">
+                                                                                                    <option value="E">Employee</option>
+                                                                                                    <option value="C">Contacts</option>
+                                                                                                </select>
                                                                                             </label>
                                                                                         </td>
                                                                                         <td>
-                                                                                            <label class="input custom_inline m-l-0">
+                                                                                            <label class="select">
+                                                                                                <select class="agenda_owner select2"></select>
+                                                                                            </label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <label class="input ">
                                                                                                 <input class="agenda_duration" type="text" placeholder="HH.MM">
                                                                                             </label>
                                                                                         </td>
@@ -283,68 +275,145 @@
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
-                                                                        <div class="row">
-                                                                            <span class="col-sm-2 col-sm-offset-9">
-                                                                                <input class="btn btn-default btn-warning buttonDefSize" type="submit" id="btnsubmit" value="Submit">
-                                                                            </span>
+                                                                        <div class="col-lg-12">
+                                                                            <label class="label">Notes:</label>
+                                                                            <label class="textarea">
+                                                                                <textarea id="meet_notes" class="textarea textarea-expandable" rows="3"></textarea>
+                                                                            </label>
                                                                         </div>
                                                                     </fieldset>
                                                                 </div>
                                                                 <div class="tab-pane fade" id="tab2">
 
+                                                                    <h2>Minutes&nbsp;
+                                                                    <input id="generate" type="button" class="btn btn-danger btn-raised" value="generate"></h2>
+                                                                    
+                                                                    <div class="well row m-0">
+                                                                        <label class="text-bold f-s-20 col-sm-10">Agenda</label>
+                                                                        <span id='addMAgenda' class=" col-sm-1"><i class="glyphicon glyphicon-plus m-l-20 text-danger" title="Add Minutes"></i></span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table id="Magenda" class="table table-small-font table-bordered table-striped m-b-10 ">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Agenda</th>
+                                                                                    <th>Note</th>
+                                                                                    <th>Remove</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="Magenda_row">
+                                                                                <tr class="new">
+                                                                                    <td>
+                                                                                        <label class="select">
+                                                                                            <select class="Magenda_list select2"></select>
+                                                                                        </label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <label class="textarea">
+                                                                                            <textarea class="Magenda_note textarea textarea-expandable" rows="2"></textarea>
+                                                                                        </label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div id="removeMAgendas" class="col-md-1">
+                                                                                            <label class="m-l-20 m-t-10">
+                                                                                                <span ><i class="glyphicon glyphicon-remove fa-lg text-danger"></i></span>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                    
+                                                                    <br>
+                                                                    <h2>MOM to be sent the following via email:</h2>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-offset-2 col-lg-3">
+                                                                            <label class="select">
+                                                                                <select id="OrganisationsSide" class="select2"></select>
+                                                                            </label>
+                                                                            <label class="select">
+                                                                                <select id="ContactsSide" class="select2"></select>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                                     
                                                             </div>
                                                         </form>
-                                                    </div>
-
-
-
-                                            
-                                            
-
+                                                </div>
 
                                         </form>
 
-
-
-
                                         <div>
 
-                                                <div class="">
-                                                    
+                                            <div class="">
+                                                
+                                                <!--****** Start Colored Modal Footer******-->
+                                                <div class="modal modal-warning bg-header" id="attendee_modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                <div class="modal-dialog">
+                                                <div class="modal-content animated fadeOut">
+                                                <div class="modal-header">
+                                                    <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                                                    <h4 class="modal-title"><strong>Attendees</strong></h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                        <div class="row">
+                                                            <label class="label">Organisation Side:</label>
+                                                            <label class="input">
+                                                                <input id="agen_number" type="text" class="">
+                                                            </label>
+                                                            <label class="label">Owner:</label>
+                                                            <label class="input">
+                                                                <input id="agen_owner" type="text" class="">
+                                                            </label>
+                                                            <label class="label">Duration:</label>
+                                                            <label class="input">
+                                                                <input id="agen_dur" type="text" class="">
+                                                            </label>
+                                                        </div>
+                                                    <div class="row">                     
+                                                            <div class="col-xs-4 col-sm-4 text-bold f-s-12">Organisation Side</div>
+                                                            <div class="col-xs-4 col-sm-4 text-bold f-s-12">Client Side</div>
+                                                            <div class="col-xs-3 col-sm-3 text-bold f-s-12">Third Party</div>
+                                                    </div>
+                                                    <hr/>
+                                                    <br/>
+                                                    <div class="row" id="attendee_rows">
+                                                        <!-- DATA FROM JSON -->
+                                                    </div>
+                                                </div>                                                            
+                                                </div>
+                                                </div>
+                                                </div>
+                                                <!--****** Start Colored Modal Footer******-->
+                                                
+                                            </div>
+                                            <div class="">
+                                                
                                                     <!--****** Start Colored Modal Footer******-->
-                                                    <div class="modal modal-warning bg-header" id="attendee_modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                    <div class="modal modal-warning bg-header" id="agenda_modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content animated fadeOut">
                                                     <div class="modal-header">
                                                         <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                                                        <h4 class="modal-title"><strong>Attendees</strong></h4>
+                                                        <h4 class="modal-title"><strong>Agenda</strong></h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                            <div class="row">
-                                                                <label class="label">Organisation Side:</label>
-                                                                <label class="input">
-                                                                    <input id="agen_number" type="text" class="">
-                                                                </label>
-                                                                <label class="label">Owner:</label>
-                                                                <label class="input">
-                                                                    <input id="agen_owner" type="text" class="">
-                                                                </label>
-                                                                <label class="label">Duration:</label>
-                                                                <label class="input">
-                                                                    <input id="agen_dur" type="text" class="">
-                                                                </label>
-                                                            </div>
-                                                        <div class="row">                     
-                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Organisation Side</div>
-                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Client Side</div>
-                                                                <div class="col-xs-3 col-sm-3 text-bold f-s-12">Third Party</div>
-                                                        </div>
-                                                        <hr/>
-                                                        <br/>
-                                                        <div class="row" id="attendee_rows">
-                                                            <!-- DATA FROM JSON -->
+                                                        <div class="row">
+                                                            <label class="label">Agenda Number:</label>
+                                                            <label class="input">
+                                                                <input id="agen_number" type="text" class="">
+                                                            </label>
+                                                            <label class="label">Owner:</label>
+                                                            <label class="input">
+                                                                <input id="agen_owner" type="text" class="">
+                                                            </label>
+                                                            <label class="label">Duration:</label>
+                                                            <label class="input">
+                                                                <input id="agen_dur" type="text" class="">
+                                                            </label>
                                                         </div>
                                                     </div>                                                            
                                                     </div>
@@ -352,47 +421,28 @@
                                                     </div>
                                                     <!--****** Start Colored Modal Footer******-->
                                                     
-                                                </div>
-                                                <div class="">
-                                                    
-                                                        <!--****** Start Colored Modal Footer******-->
-                                                        <div class="modal modal-warning bg-header" id="agenda_modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                                                        <div class="modal-dialog">
-                                                        <div class="modal-content animated fadeOut">
-                                                        <div class="modal-header">
-                                                            <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                                                            <h4 class="modal-title"><strong>Agenda</strong></h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <label class="label">Agenda Number:</label>
-                                                                <label class="input">
-                                                                    <input id="agen_number" type="text" class="">
-                                                                </label>
-                                                                <label class="label">Owner:</label>
-                                                                <label class="input">
-                                                                    <input id="agen_owner" type="text" class="">
-                                                                </label>
-                                                                <label class="label">Duration:</label>
-                                                                <label class="input">
-                                                                    <input id="agen_dur" type="text" class="">
-                                                                </label>
-                                                            </div>
-                                                        </div>                                                            
-                                                        </div>
-                                                        </div>
-                                                        </div>
-                                                        <!--****** Start Colored Modal Footer******-->
-                                                        
-                                                </div>
+                                            </div>
                                         </div>
-                                        
-                                        <hr/>
-                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     </div>
-                                    </div>
+                                </div>
                                 <!-- END PANEL -->             
                     
+                                <div class="panel">
+                                        <div class="panel-body">
+                                            <footer class="row m-t-20">
+                                                <div class="col-lg-2 pull-right">
+                                                    <input id="submit_Meeting" type="button" class="btn btn-success btn-raised buttonDefSize" value="Submit">
+                                                </div>
+                                                <div class="col-lg-2 pull-right">
+                                                    <input type="reset" class="btn btn-danger btn-raised border-rounded buttonDefSize" value="Reset">
+                                                </div>
+                                                <div class="note col-lg-12">
+                                                    <strong>Note:</strong> Fields marked with
+                                                    <span class="text-danger">*</span> are to be filled mandatorily.
+                                                </div>
+                                            </footer>
+                                        </div>
+                                    </div>
                             </div>
                             <!-- END COL-MD-12 -->
                     

@@ -53,23 +53,26 @@ $(document).ready(function(){
 
     if(pid){
         $.getJSON(urlRoot+'tasks/proposals/'+pid,function(proposal){
-            $('#ProposalToClient').val(proposal.toClient);
-            $('#ProposalToPerson').val(proposal.toPerson);
-            $('#ProposalFromEntity').val(proposal.fromEntity);
-            $('#FromEmployee').val(proposal.fromEmployee);
+            $('#ProposalToClient').val(proposal.to_client);
+            $('#ProposalToPerson').val(proposal.to_person);
+            $('#ProposalFromEntity').val(proposal.from_entity);
+            $('#FromEmployee').val(proposal.from_employee);
             var formatted5 = null,formatted6 = null;
-            if(proposal.proposalDate){
-                var datetime = proposal.proposalDate.split('T');
+            if(proposal.proposal_date){
+                var datetime = proposal.proposal_date.split('T');
                 formatted5 = $.datepicker.formatDate("dd/mm/yy", new Date(datetime[0]));
-                formatted6 = datetime[1].slice(0,-1);
+                formatted6 = datetime[1].slice(0,-4);
             }
             $('#ProposalDate').val(formatted5);
             $('#ProposalTime').val(formatted6);
-            $('#ProposalSubject').val(proposal.subject);
-            $('#ProposalBackground').val(proposal.background);
-            $('#ProposalScopeOfWork').val(proposal.scopeOfWork);
+            $('#ProposalSubject').val(proposal.subject)//.summernote('code',proposal.subject);
+            $('#ProposalBackground').summernote('code',proposal.background);
+            $('#ProposalScopeOfWork').summernote('code',proposal.scopeOfWork);
             $('.ProposalFee').val(proposal.fees);
             $('#ProposalStatus').val(proposal.taskProposalStatus);
+            $('#ProposalIntroLine').summernote('code',proposal.introductory_line);
+            $('#ProposalDeliverables').summernote('code',proposal.deliverables);
+            $('#ProposalMilestone').summernote('code',proposal.payment_milestone);
         });
     }
 
@@ -77,7 +80,6 @@ $(document).ready(function(){
         $('#FeeProcess').modal('show');
     });
     
-
     //Fee Structure
     $(document).on('click','.addRow',function(){
         $('.rowEntry').append(`
@@ -189,10 +191,10 @@ $(document).ready(function(){
     
     
     function checkValidation(){
-        var toClient = 1;// $('#ProposalToClient').val();
+        var toClient = $('#ProposalToClient').val();
         var toPerson = 1;//$('#ProposalToPerson').val();
-        var fromEntity = 1;//$('#ProposalFromEntity').val();
-        var fromEmployee = 1;//$('#FromEmployee').val();
+        var fromEntity = $('#ProposalFromEntity').val();
+        var fromEmployee = $('#FromEmployee').val();
         var date = $('#ProposalDate').val();
         var time = $('#ProposalTime').val();
         var subj = $('#ProposalSubject').val();
@@ -263,22 +265,28 @@ $(document).ready(function(){
             var fromEmployee = $('#FromEmployee').val();
             var date = $('#ProposalDate').val();
             var time = $('#ProposalTime').val();
-            var subj = $('#ProposalSubject').val();
-            var background = $('#ProposalBackground').val();
-            var scopeOfWork = $('#ProposalScopeOfWork').val();
+            var subj = $('#ProposalSubject').val()//.summernote('code').replace(/&quot;/g,'"').replace(/&nbsp;/g,' ');
+            var intro = $('#ProposalIntroLine').summernote('code').replace(/&quot;/g,'"').replace(/&nbsp;/g,' ').replace('',' ');
+            var background = $('#ProposalBackground').summernote('code').replace(/&quot;/g,'"').replace(/&nbsp;/g,' ').replace('',' ');
+            var deliverables = $('#ProposalDeliverables').summernote('code').replace(/&quot;/g,'"').replace(/&nbsp;/g,' ').replace('',' ');
+            var scopeOfWork = $('#ProposalScopeOfWork').summernote('code').replace(/&quot;/g,'"').replace(/&nbsp;/g,' ').replace('',' ');
             var fees = parseInt($('.ProposalFee').val()).toFixed(2);
             var status = $('#ProposalStatus').val();
-            var ProposalDate  = getFormateDateToServer(date) +'T'+ time.slice(0,-2)+':00Z';
+            var paymentMilestones = $('#ProposalMilestone').summernote('code').replace(/&quot;/g,'"').replace(/&nbsp;/g,' ').replace('',' ');
+            var ProposalDate  = getFormateDateToServer(date) +'T'+ time+':00Z';
 
             var ProposalData = new Object();
-            ProposalData.toClient = 1;//toClient;
-            ProposalData.toPerson = 1;//toPerson;
-            ProposalData.fromEntity = 1;//fromEntity;
-            ProposalData.fromEmployee = 1;//fromEmployee;
-            ProposalData.ProposalDate = ProposalDate;
+            ProposalData.to_client = toClient;
+            ProposalData.to_person = 1;//toPerson;
+            ProposalData.from_entity = fromEntity;
+            ProposalData.from_employee = fromEmployee;
+            ProposalData.proposal_date = ProposalDate;
             ProposalData.subject = subj;
+            ProposalData.introductory_line = intro;
             ProposalData.scopeOfWork = scopeOfWork;
             ProposalData.background = background;
+            ProposalData.deliverables = deliverables;
+            ProposalData.payment_milestone = paymentMilestones;
             ProposalData.fees = fees;
             ProposalData.taskProposalStatus = status;
 
@@ -303,7 +311,7 @@ $(document).ready(function(){
                         swal('Proposal Added');
                     },
                     error:function(error){
-                        swal(error.responseText);
+                        console.log(error.responseText);
                     }
                 });
             }else if(pid){
@@ -324,7 +332,7 @@ $(document).ready(function(){
                         swal('Proposal Updated');
                     },
                     error:function(){
-                        swal(' -- ');
+                        console.log(error.responseText);
                     }
                 });
             }
