@@ -31,7 +31,9 @@ $(document).ready(function(){
             if($('#meet_referedFor').is(':checked')){
                 $('.attendees_list').attr('disabled',true);
             }else{
-                getClientList(target);
+                //getClientList(target);
+                var id = $('#meet_referedFor').val();
+                getPOCList(target,id);
             }
         }else if(type == 'T'){
             getContactList(target);
@@ -48,18 +50,16 @@ $(document).ready(function(){
     //         getContactList(target);
     //     }
     // });
-
-    var empFor1 = $('.attendee_organisation');
-    getEmployeeList(empFor1);
-    getContactList($('.attendees_thirdParty'));
+    getClientList($('#meet_referedFor'));
     
     
-    
-    var employees =[],clients=[],contacts=[];
+    var employees =[],clients=[],contacts=[],pocs=[];
     
     function getEmployeeList(selector){
         $.getJSON(urlRoot+'employees/',function(data){
             employees = data;
+
+            selector.append('<option disabled selected value="">Select..</option>');
             for (var i = 0; i < employees.length; i++) {
                 selector.append('<option value='+employees[i].id+'>'+employees[i].name+'</option>');
             }
@@ -68,21 +68,51 @@ $(document).ready(function(){
     function getClientList(selector){
         $.getJSON(urlRoot+'clients/allclients',function(data){
             clients = data;
+
+            selector.append('<option disabled selected value="">Select..</option>');
             for (var i = 0; i < clients.length; i++) {
                 selector.append('<option value='+clients[i].id+'>'+clients[i].name+'</option>');
+            }
+        });
+    }
+    function getPOCList(selector,id){
+        $.getJSON(urlRoot+'contacts/?client='+id,function(data){
+            pocs = data;
+
+            selector.append('<option disabled selected value="">Select..</option>');
+            for (var i = 0; i < pocs.length; i++) {
+                selector.append('<option value='+pocs[i].id+'>'+pocs[i].name+'</option>');
             }
         });
     }
     function getContactList(selector){
         $.getJSON(urlRoot+'contacts/',function(data){
             contacts = data;
+
+            selector.append('<option disabled selected value="">Select..</option>');
             for (var i = 0; i < contacts.length; i++) {
                 selector.append('<option value='+contacts[i].id+'>'+contacts[i].name+'</option>');
             }
         });
     }
+    function addRowMinutes(){
+        $('#Magenda_row').append(`
+            <tr class="new">
+                <td>
+                    <label class="input">
+                        <input type="type" class="Magenda_list">
+                    </label>
+                </td>
+                <td>
+                    <label class="textarea">
+                        <textarea class="Magenda_note textarea" rows="2"></textarea>
+                    </label>
+                </td>
+            </tr>
+        `);
+    }
 
-    $(document).on('click','#generate',function(){
+    $(document).on('change','.attendees_list',function(){
         var valueArray1 = $('.attendees_list').map(function() {
             if($(this).parentsUntil('#attendee_row').find('.attendee_type').val()=='O'){
                 return this.value;
@@ -98,9 +128,7 @@ $(document).ready(function(){
                 return this.value;
             }
         }).get();
-        var valueArray4 = $('.agenda_number').map(function() {
-            return this.value;
-        }).get();
+        
         // var valueArray5 = $('.agenda_owner').map(function() {
         //     if($(this).parentsUntil('#agenda_row').find('.agenda_type').val()=='C'){
         //         return this.value;
@@ -114,7 +142,7 @@ $(document).ready(function(){
             empList.push(a);
         }
         for (let index = 0; index < valueArray2.length; index++) {
-            var a = clients.find(function(a){return a.id==valueArray2[index]});
+            var a = pocs.find(function(a){return a.id==valueArray2[index]});
             cliList.push(a);
         }
         for (let index = 0; index < valueArray3.length; index++) {
@@ -136,23 +164,53 @@ $(document).ready(function(){
         //     $('.Magenda_list').append('<option value='+new2[i].id+'>'+new2[i].name+'</option>');
         // }
 
-        var new1 =cliList.concat(conList);
-        var new3 =new1.concat(empList);
-
-        $('.Magenda_list').empty();
-        for(var i=0;i<valueArray4.length;i++){
-            $('.Magenda_list').append('<option value='+valueArray4[i]+'>'+valueArray4[i]+'</option>');
+        var new1;
+        if(cliList){
+            new1 = cliList.concat(conList);
+        }else{
+            new1 = conList;
         }
+        var new3 = new1.concat(empList);
+
+
+        $(document).on('click','#generate',function(){
+            var valueArray4 = $('.agenda_number').map(function() {
+                return this.value;
+            }).get();
+            if(valueArray4){
+                for(var i=0;i<valueArray4.length;i++){
+                    if(i>0){
+                        addRowMinutes();
+                        $('#Magenda_row .new .Magenda_list').val(valueArray4[i]);
+                    }else{
+                        $('#Magenda_row .new .Magenda_list').val(valueArray4[i]);
+                    }
+                }
+            }
+        });
         $('.agenda_owner').empty();
-        for(var i=0;i<new3.length;i++){
-            $('.agenda_owner').append('<option value='+new3[i].id+'>'+new3[i].name+'</option>');
-        }
-
+        $(document).on('change','.agenda_type',function(){
+            if($(this).val()=='E'){
+                $('.agenda_owner').empty();
+                $('.agenda_owner').append('<option disabled selected value="">Select..</option>');
+                for(var i=0;i<empList.length;i++){
+                    $('.agenda_owner').append('<option value='+empList[i].id+'>'+empList[i].name+'</option>');
+                }
+            }else if($(this).val()=='C'){
+                $('.agenda_owner').empty();
+                $('.agenda_owner').append('<option disabled selected value="">Select..</option>');
+                for(var i=0;i<new1.length;i++){
+                    $('.agenda_owner').append('<option value='+new1[i].id+'>'+new1[i].name+'</option>');
+                }
+            }
+        })
         $('#OrganisationsSide').empty();
+        $('#OrganisationsSide').append('<option disabled selected value="">Select..</option>');
         for(var i=0;i<empList.length;i++){
             $('#OrganisationsSide').append('<option value='+empList[i].id+'>'+empList[i].name+'</option>');
         }
         $('#ContactsSide').empty();
+        $('#ContactsSide').append('<option disabled selected value="">Select..</option>');
         for(var i=0;i<new1.length;i++){
             $('#ContactsSide').append('<option value='+new1[i].id+'>'+new1[i].name+'</option>');
         }
@@ -239,8 +297,8 @@ $(document).ready(function(){
         $('#Magenda_row').append(`
                 <tr class="new">
                     <td>
-                        <label class="select2">
-                            <select class="Magenda_list select2"></select>
+                        <label class="input">
+                            <input type="type" class="Magenda_list">
                         </label>
                     </td>
                     <td>
@@ -248,35 +306,37 @@ $(document).ready(function(){
                             <textarea class="Magenda_note textarea" rows="2"></textarea>
                         </label>
                     </td>
-                    <td>
-                        <div id="removeMAgendas" class="col-md-1">
-                            <label class="m-l-20 m-t-10">
-                                <span ><i class="glyphicon glyphicon-remove fa-lg text-danger"></i></span>
-                            </label>
-                        </div>
-                    </td>
                 </tr>
         `);
-        $('.Magenda_list').select2();
-        $('.Magenda_note').select2();
     });
 
-    $('#Magenda_row').on('click', '#removeMAgendas', function () {
-        $(this).parentsUntil('#Magenda_row').remove();
-    });
+    // $('#Magenda_row').on('click', '#removeMAgendas', function () {
+    //     $(this).parentsUntil('#Magenda_row').remove();
+    // });
 
-    var attend, agend;
-    var attendArr, agendArr;
-    
+    function getMinutes(){
+        var minutesm, minArr=[];
+        $('#Magenda_row .new').each(function(index){
+            minutesm = new Object();
+            minutesm['agenda'] = $(this).find('.Magenda_list').val();
+            minutesm['text'] = $(this).find('.Magenda_note').val();
+            minArr.push(minutesm);
+        });
+        return minArr;
+    }
     function getAttendee(){
-        $('#attendee-row .new').each(function(index){
-            attend = new Object(); 
-            attend['employees'] = $(this).find('.attendee_type').val();
-            attend['contacts'] = $(this).find('.attendees_list').val();
+        var attend, attendArr=[];
+        $('#attendee_row .new').each(function(index){
+            attend = new Object();
+            attend['attendee_type'] = $(this).find('.attendee_type').val();
+            attend['attendeeId'] = $(this).find('.attendees_list').val();
+            attend['send_MOM'] = false;
             attendArr.push(attend);
         });
+        return attendArr;
     }
     function getAgenda(){
+        var agend,agendaArr=[];
         $('#agenda_row .new').each(function(index){
             agend = new Object();
             agend['agenda'] = $(this).find('.agenda_number').val();
@@ -286,13 +346,16 @@ $(document).ready(function(){
                 agend['contact_owner'] = $(this).find('.agenda_owner').val();
             }
             agend['duration'] = $(this).find('.agenda_duration').val();
-            agendArr.push(agend);
+            agendaArr.push(agend);
         });
-        return agendArr
+        return agendaArr;
     }
+
+    
 
     $(document).on('click','#submitMeeting',function(){
         var referedFor = $('#meet_referedFor').val();
+        var subject = $('#meet_subject').val();
         var purpose = $('#meet_purpose').val();
         var mode = $('#meet_mode').val();
         var location = $('#meet_location').val();
@@ -302,19 +365,43 @@ $(document).ready(function(){
         var notes = $('#meet_notes').val();
 
         var MeetingData = new Object();
-        if(meet_For.is(':checked')==true){
+        if($('#taskType').is(':checked')==true){
             MeetingData.contact = referedFor;
         }else{
             MeetingData.client = referedFor;
         }
         //MeetingData.subject = ;   ???????
         MeetingData.location = location;
+        MeetingData.meeting_agenda  = getAgenda();
+        MeetingData.attendees = getAttendee();
         MeetingData.date = getFormateDateToServer(date);
         MeetingData.start_time = STime;
         MeetingData.end_time = ETime;
         MeetingData.purpose = purpose;
+        MeetingData.subject = subject;
         MeetingData.notes = notes;
         
+        var minArr = getMinutes();
+        for (let i = 0; i < minArr.length; i++) {
+            var agenda = MeetingData.meeting_agenda.find(function(a){ return a.agenda == minArr[i].agenda});
+            if(agenda){
+                agenda.note = minArr[i].text;
+            }
+        }
+        var MOM1 = $('#OrganisationsSide').val();
+        if(MOM1){
+            var meet_MOM = MeetingData.attendees.find(function(a){ return a.attendeeId==MOM1})
+            if(meet_MOM){
+                meet_MOM.send_MOM = true;
+            }
+        }
+        var MOM2 = $('#ContactsSide').val();
+        if(MOM2){
+            var meet_MOM = MeetingData.attendees.find(function(a){ return a.attendeeId==MOM2})
+            if(meet_MOM){
+                meet_MOM.send_MOM = true;
+            }
+        }
         var MeetingJSON = JSON.stringify(MeetingData);
         console.log(MeetingJSON);
 
@@ -335,8 +422,8 @@ $(document).ready(function(){
                 swal('Meeting Details Created');
             },
             error:function(error){
-                console.log(error.responseText());
+                console.log(error.responseText);
             }
-        })
+        });
     })
 })

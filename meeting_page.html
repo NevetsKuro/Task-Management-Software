@@ -124,7 +124,14 @@
                                                                                 <select id="meet_referedFor" class="select2"></select>
                                                                             </label>
                                                                         </div>
-                    
+                                                                        
+                                                                        <div class="col-sm-12">
+                                                                            <label class="label">Subject:</label>
+                                                                            <label class="input">
+                                                                                <input id="meet_subject" type="text">
+                                                                            </label>
+                                                                        </div>
+
                                                                         <div class="col-sm-12">
                                                                             <label class="label">Purpose/Objective:</label>
                                                                             <label class="textarea">
@@ -290,7 +297,7 @@
                                                                     
                                                                     <div class="well row m-0">
                                                                         <label class="text-bold f-s-20 col-sm-10">Agenda</label>
-                                                                        <span id='addMAgenda' class=" col-sm-1"><i class="glyphicon glyphicon-plus m-l-20 text-danger" title="Add Minutes"></i></span>
+                                                                        <!-- <span id='addMAgenda' class=" col-sm-1"><i class="glyphicon glyphicon-plus m-l-20 text-danger" title="Add Minutes"></i></span> -->
                                                                     </div>
                                                                     <div class="table-responsive">
                                                                         <table id="Magenda" class="table table-small-font table-bordered table-striped m-b-10 ">
@@ -298,27 +305,20 @@
                                                                                 <tr>
                                                                                     <th>Agenda</th>
                                                                                     <th>Note</th>
-                                                                                    <th>Remove</th>
+                                                                                    <!-- <th>Remove</th> -->
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody id="Magenda_row">
                                                                                 <tr class="new">
                                                                                     <td>
-                                                                                        <label class="select">
-                                                                                            <select class="Magenda_list select2"></select>
+                                                                                        <label class="input">
+                                                                                            <input type="text" class="Magenda_list">
                                                                                         </label>
                                                                                     </td>
                                                                                     <td>
                                                                                         <label class="textarea">
                                                                                             <textarea class="Magenda_note textarea textarea-expandable" rows="2"></textarea>
                                                                                         </label>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div id="removeMAgendas" class="col-md-1">
-                                                                                            <label class="m-l-20 m-t-10">
-                                                                                                <span ><i class="glyphicon glyphicon-remove fa-lg text-danger"></i></span>
-                                                                                            </label>
-                                                                                        </div>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -328,10 +328,12 @@
                                                                     <br>
                                                                     <h2>MOM to be sent the following via email:</h2>
                                                                     <div class="row">
-                                                                        <div class="col-lg-offset-2 col-lg-3">
+                                                                        <div class="col-lg-offset-2 col-lg-4">
+                                                                            <label class="label">Organisation Side:</label>
                                                                             <label class="select">
                                                                                 <select id="OrganisationsSide" class="select2"></select>
                                                                             </label>
+                                                                            <label class="label">Contacts Side:</label>
                                                                             <label class="select">
                                                                                 <select id="ContactsSide" class="select2"></select>
                                                                             </label>
@@ -431,7 +433,7 @@
                                         <div class="panel-body">
                                             <footer class="row m-t-20">
                                                 <div class="col-lg-2 pull-right">
-                                                    <input id="submit_Meeting" type="button" class="btn btn-success btn-raised buttonDefSize" value="Submit">
+                                                    <input id="submitMeeting" type="button" class="btn btn-success btn-raised buttonDefSize" value="Submit">
                                                 </div>
                                                 <div class="col-lg-2 pull-right">
                                                     <input type="reset" class="btn btn-danger btn-raised border-rounded buttonDefSize" value="Reset">
