@@ -17,7 +17,7 @@ $(document).ready(function(){
                 console.log(data.name?data.name:"NO NAME");
                 console.log(data.token?data.token:"No TOKEN");
                 localStorage.setItem('token',data.token);
-                $(location).attr('href','dashboard.html');
+                //$(location).attr('href','dashboard.html');
                 // if(src!=null && src!='')
                 //     $(location).attr('href',src);
                 // else
