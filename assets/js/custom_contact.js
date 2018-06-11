@@ -8,10 +8,10 @@ $(document).ready(function(){
     // var urlRoot = 'https://office-management-demo.herokuapp.com/';
     // var urlRoot = 'http://35.202.86.61/office-management/';
     
-    $('#file').on('change',function(){
+    $('#file2').on('change',function(){
         $('#addContact_vcard').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
     });
-    $('#file2').on('change',function(){
+    $('#file').on('change',function(){
         $('#addContact_image').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
     });
      
@@ -123,17 +123,15 @@ $(document).ready(function(){
             for (var i = 0; i < data.genders.length; i++) {
                 $('#addContact_gender').append('<option value='+data.genders[i].id+'>'+data.genders[i].gender+'</option>');
             }
-            
             for (var i = 0; i < data.categories.length; i++) {
                 $('.contactnumber_category').append('<option value='+data.categories[i].id+'>'+data.categories[i].category+'</option>');
                 $('.email_category').append('<option value='+data.categories[i].id+'>'+data.categories[i].category+'</option>');
                 $('.address_category').append('<option value='+data.categories[i].id+'>'+data.categories[i].category+'</option>');
             }
-    
             for (var i = 0; i < data.social_medias.length; i++) {
                 $('.socialmedia_category').append('<option value='+data.social_medias[i].id+'>'+data.social_medias[i].social_media+'</option>');
             }
-         
+            
             // for (var i = 0; i < data.managers.length; i++) {
             //     $('#managers').append('<option value=' + data.managers[i].id+'>'+data.managers[i].name+'</option>');
             // }
@@ -149,17 +147,17 @@ $(document).ready(function(){
             for (var i = 0; i < data.departments.length; i++) {
                 $('#addContact_department').append('<option value=' + data.departments[i].id+'>'+data.departments[i].department+'</option>');
             }
-            
             for (var i = 0; i < data.sources.length; i++) {
                 $('#addContact_source').append('<option value=' + data.sources[i].id+'>'+data.sources[i].source+'</option>');
             }
-            
             for (var i = 0; i < data.services.length; i++) {
                 $('#addContact_potential_service').append('<option value=' + data.services[i].id+'>'+data.services[i].service+'</option>');
             }
-    
             for (var i = 0; i < data.lead_statuses.length; i++) {
                 $('#addContact_lead_status').append('<option value=' + data.lead_statuses[i].id+'>'+data.lead_statuses[i].lead_status+'</option>');
+            }
+            for (var i = 0; i < data.states.length; i++) {
+                $('#addContact_state').append('<option value=' + data.states[i].state+'>'+data.states[i].state+'</option>');
             }
 
             console.log('Pre filled data added!!!');
@@ -233,8 +231,12 @@ $(document).ready(function(){
                 $('#addContact_city').val(addr.City);
                 $('#addContact_pincode').val(addr.Pincode);
                 $('#addContact_state').val(addr.State).trigger('change');
-                $('#addContact_image').val(data.person_image.substring(data.person_image.lastIndexOf('/')+1));
-                $('#addContact_vcard').val(data.card_image.substring(data.card_image.lastIndexOf('/')+1));
+                if(data.person_image){
+                    $('#addContact_image').val(data.person_image.substring(data.person_image.lastIndexOf('/')+1));
+                }
+                if(data.card_image){
+                    $('#addContact_vcard').val(data.card_image.substring(data.card_image.lastIndexOf('/')+1));
+                }
                 
                 if(data.contact_organisation){
                     currentOrganisationsId = data.contact_organisation.organisation.id;
@@ -834,6 +836,12 @@ var CF_cardimg='';
                                     Val = getOrg();
                                     break;
                                     console.log(dataType + "changed");
+                                case 'person_image':
+                                    Val = CF_userimg;
+                                    break;
+                                case 'card_image':
+                                    Val = CF_cardimg;
+                                    break;
                                 }
                                 contactData[dataType] = Val;
                             });

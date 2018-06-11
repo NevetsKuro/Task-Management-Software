@@ -11,7 +11,7 @@ $(document).ready(function () {
     var navbar = $("#sticky_row");
     
     // Get the offset position of the row
-    var sticky = 260;
+    var sticky = 200;
     
     // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
     function myFunction() {
@@ -51,15 +51,15 @@ $(document).ready(function () {
                                 <h4 class="m-t-0 m-b-5 header-title">
                                     <b class="name">${element.name}</b>
                                 </h4>
-                                <p class="text-muted text-bold">${element.designation}</p>
+                                <p class="text-muted text-bold">${element.designation!=null?element.designation:''}</p>
                                 <p class="text-dark">
-                                    <small>${( listOf == 'contact' ? element.organisation:" " )}</small>
+                                    <small>${element.organisation!=null?element.organisation:''}</small>
                                 </p>
                                 <p class="text-dark">
-                                    <small>${element.phone}</small>
+                                    <small>${element.phone!=null?element.phone:''}</small>
                                 </p>
                                 <p class="text-dark m-l-50">
-                                    <small>${(typeof element.email !== "" || typeof element.email !== 'null') ? element.email : 'Not available'}</small>
+                                    <small>${element.email!=null? element.email : ''}</small>
                                 </p>
                             </div>
                         </div>
@@ -89,8 +89,19 @@ $(document).ready(function () {
                 `
             });
             listContact+="</div>"
-        $('.cList').html(listContact);
+            $('.cList').html(listContact);
         }
+        var Totalpages = $(".col-sm-4").length;
+        var templateLI;
+        var blocks = Math.ceil(Totalpages/pageSize);
+        templateLI = `<li><a href="#">« PREV</a></li>`;
+        for (let i = 0; i < blocks; i++) {
+            templateLI +=`<li><a href="#">${i+1}</a>`;
+        }
+        templateLI +=`<li><a href="#">NEXT »</a></li>`;
+        $("#pagin").html(templateLI);
+        $("#pagin li:nth-child(2)").addClass('active');
+        showPage(1);
     }
 
     function clientListBody(currentList) {
@@ -148,13 +159,13 @@ $(document).ready(function () {
                                     <small>${legal_stats?legal_stats:'Legal Status'}</small>
                                 </p>
                                 <p class="text-dark">
-                                    <small>${element.phone?element.phone:''}</small>
+                                    <small>${element.phone!=null?element.phone:''}</small>
                                 </p>
                                 <p class="text-dark">
-                                    <small>${element.email?element.email:''}</small>
+                                    <small>${element.email!=null?element.email:''}</small>
                                 </p>
                                 <p class="text-dark">
-                                    <small>${legal_stats == 'Individuals'?element.designation:''}</small>
+                                    <small>${legal_stats == 'Individuals'?element.designation!=null?element.designation:'':''}</small>
                                 </p>
 
                             </div>
@@ -180,11 +191,21 @@ $(document).ready(function () {
                 </div>
                 `
             });
-        $('.cList').html(listClient);
+            $('.cList').html(listClient);
         }
         $('.personimg').attr('height',$('.personimg').attr('width'));
+        var Totalpages = $(".col-sm-4").length;
+        var templateLI;
+        var blocks = Math.ceil(Totalpages/pageSize);
+        templateLI = `<li><a href="#">« PREV</a></li>`;
+        for (let i = 0; i < blocks; i++) {
+            templateLI +=`<li><a href="#">${i+1}</a>`;
+        }
+        templateLI +=`<li><a href="#">NEXT »</a></li>`;
+        $("#pagin").html(templateLI);
+        $("#pagin li:nth-child(2)").addClass('active');
+        showPage(1);
     }
-
     if(listOf === 'contact'){
     $.ajax({
         url: urlRoot+'contacts/',
@@ -211,6 +232,28 @@ $(document).ready(function () {
         });
         $('.CTC').addClass('hide');
     }
+
+    var pageSize = 12;
+    
+    
+
+	showPage = function(page) {
+	    $(".col-sm-4").hide();
+	    $(".col-sm-4").each(function(n) {
+	        if (n >= pageSize * (page - 1) && n < pageSize * page)
+	            $(this).show();
+	    });
+	}
+    
+	$(document).on('click','#pagin li a',function(e) {
+        e.preventDefault();
+	    $("#pagin li").removeClass("active");
+	    $(this).parent().addClass("active");
+	    showPage(parseInt($(this).text()));
+    });
+    
+    $('#pagin li').css('display','inline-block');
+    $('#paginate').css('text-align','center');
 
     $(document).on('click', '.deleteContact', function () {
         var id = $(this).attr('id');

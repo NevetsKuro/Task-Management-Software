@@ -276,7 +276,7 @@
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <label class="select">
-                                                                    <select name="title" update-ctrl="title" id="addContact_title" class="select2" required>
+                                                                    <select entity="Title"  name="title" update-ctrl="title" id="addContact_title" class="select2 editselect" required>
                                                                         
                                                                     </select>
                                                                 </label>
@@ -326,7 +326,7 @@
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <label class="select">
-                                                                    <select name="gender" update-ctrl="gender" id="addContact_gender" class="select2 editselect" title="gender" required>
+                                                                    <select entity="Gender" name="gender" update-ctrl="gender" id="addContact_gender" class="select2 editselect" title="gender" required>
                                                                         
                                                                     </select>
                                                                 </label>
@@ -344,7 +344,7 @@
                                                                 </label>
                                                                 <div class="input input-file">
                                                                     <div class="button">
-                                                                        <input update-ctrl="vcard" name="file" id="file" type="file" accept="image/*" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
+                                                                        <input update-ctrl="person_image" name="file" id="file" type="file" accept="image/*" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
                                                                     <input id="addContact_image" type="text" readonly="">
                                                                 </div>
                                                             </div>
@@ -354,7 +354,7 @@
                                                                 </label>
                                                                 <div class="input input-file">
                                                                     <div class="button">
-                                                                        <input update-ctrl="cardImage" name="file2" id="file2" type="file" image/* onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
+                                                                        <input update-ctrl="card_image" name="file2" id="file2" type="file" image/* onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
                                                                     <input id="addContact_vcard" type="text" readonly="" >
                                                                 </div>
                                                             </div>
@@ -368,11 +368,8 @@
                                                                 <textarea update-ctrl="address" id="addContact_addresses" rows="4" placeholder="Address e.g. Laxmi Plaza, Laxmi Industrial Estate, New Link Road, Andheri West, Mumbai"></textarea>
                                                             </label>
                                                             <label class="input select col-sm-3">
-                                                                <select update-ctrl="address" id="addContact_state" type="text" class="select2">
-                                                                    <option disabled selected value="0">State</option>
-                                                                    <option value="Maharashtra">Maharashtra</option>
-                                                                    <option value="Delhi">Delhi</option>
-                                                                    <option value="Kerala">Kerala</option>
+                                                                <select entity="State" update-ctrl="address" id="addContact_state" type="text" class="select2 editselect">
+                                                                    
                                                                 </select>
                                                                 <input update-ctrl="address" id="addContact_city" type="text" placeholder="City" class="m-b-2 m-t-2">
                                                                 <input update-ctrl="address" id="addContact_pincode" type="number" placeholder="Pincode">

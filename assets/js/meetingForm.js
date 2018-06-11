@@ -1,4 +1,19 @@
 $(document).ready(function(){
+    
+    $('#loader').show()
+    var employees =[],clients=[],contacts=[],pocs=[];
+    $.getJSON(urlRoot+'employees/',function(data){
+        employees = data;
+    });
+    $.getJSON(urlRoot+'clients/allclients',function(data){
+        clients = data;
+    });
+    $.getJSON(urlRoot+'contacts/',function(data){
+        contacts = data;
+    });
+
+    var p=GetURLParams();
+    var mid=p['meet_id'];
 
     $('#taskType').bootstrapToggle({
         off: 'Client',
@@ -9,8 +24,86 @@ $(document).ready(function(){
         style: 'ios',
         size: 'large'
     });
+    if(mid){
+        $.ajax({
+            url:urlRoot+'meetings/'+mid,
+            type:'GET',
+            datatype:'JSON',
+            success:function(data){
+                if(data.contact){
+                    $('#taskType').bootstrapToggle('on');
+                    $('#meet_referedFor').val(data.contact);
+                }else if(data.client){
+                    $('#taskType').bootstrapToggle('off');
+                    $('#meet_referedFor').val(data.client);
+                }
+                $('#meet_subject').val(data.subject);
+                $('#meet_purpose').val(data.purpose);
+                $('#meet_mode').val();
+                $('#meet_location').val(data.location);
+                $('#meet_date').val(getFormateDateFromServer(data.date));
+                $('#meet_STime').val(data.start_time);
+                $('#meet_ETime').val(data.end_time);
+                $('#meet_notes').val(data.notes);
 
-    $(document).on('change','#taskType',function(){
+                var attendees = data.attendees;
+                var agenda = data.meeting_agenda;
+                for (let i = 0; i < attendees.length; i++) {
+                    if(i>0){
+                        addRowAttendees();
+                        $('#attendee_row .new:last .attendee_type').val(attendees[i].attendee_type);
+                        $('#attendee_row .new:last .attendee_type').trigger('change');
+                        $('#attendee_row .new:last .attendees_list').val(attendees[i].attendeeId);
+                        $('#attendee_row .new:last .attendees_list').trigger('change');
+                    }else{
+                        $('#attendee_row .new .attendee_type').val(attendees[i].attendee_type);
+                        $('#attendee_row .new .attendee_type').trigger('change');
+                        $('#attendee_row .new .attendees_list').val(attendees[i].attendeeId);
+                        $('#attendee_row .new .attendees_list').trigger('change');
+                    }
+                }
+                for (let i = 0; i < agenda.length; i++) {
+                    if(i>0){
+                        addRowAgenda();
+                        $('#agenda_row .new:last .agenda_number').val(agenda[i].agenda);
+                        $('#agenda_row .new:last .agenda_duration').val(agenda[i].duration);
+                        if(agenda[i].employee_owner){
+                            $('#agenda_row .new:last .agenda_type').val('E').trigger('change');
+                            $('#agenda_row .new:last .agenda_owner').val(agenda[i].employee_owner);
+                        }else if(agenda[i].contact_owner){
+                            $('#agenda_row .new:last .agenda_type').val('C').trigger('change');
+                            $('#agenda_row .new:last .agenda_owner').val(agenda[i].contact_owner);
+                        
+                        }
+                    }else{
+                        $('#agenda_row .new .agenda_number').val(agenda[i].agenda);
+                        $('#agenda_row .new .agenda_duration').val(agenda[i].duration);
+                        if(agenda[i].employee_owner){
+                            $('#agenda_row .new .agenda_type').val('E');
+                            $('#agenda_row .new .agenda_owner').val(agenda[i].employee_owner);
+                        }else if(agenda[i].contact_owner){
+                            $('#agenda_row .new .agenda_type').val('C');
+                            $('#agenda_row .new .agenda_owner').val(agenda[i].contact_owner);
+                        
+                        }
+                    }
+                }
+
+                $('#Magenda_row .new').remove();
+                for (let i = 0; i < agenda.length; i++) {
+                    addRowMinutes();
+                    $('#Magenda_row .new:last .Magenda_list').val(agenda[i].agenda);
+                    $('#Magenda_row .new:last .Magenda_note').val(agenda[i].note);
+                }
+
+            }
+        });
+        
+        $('#loader').hide()
+    }
+
+
+$(document).on('change','#taskType',function(){
         var meet_For = $(this);
         var referedFor = $('#meet_referedFor');
         referedFor.empty();
@@ -52,48 +145,55 @@ $(document).ready(function(){
     // });
     getClientList($('#meet_referedFor'));
     
-    
-    var employees =[],clients=[],contacts=[],pocs=[];
-    
     function getEmployeeList(selector){
-        $.getJSON(urlRoot+'employees/',function(data){
-            employees = data;
-
+        
+        $('#loader').show()
             selector.append('<option disabled selected value="">Select..</option>');
             for (var i = 0; i < employees.length; i++) {
                 selector.append('<option value='+employees[i].id+'>'+employees[i].name+'</option>');
             }
-        });
+        $('#loader').hide()
     }
+        
     function getClientList(selector){
-        $.getJSON(urlRoot+'clients/allclients',function(data){
-            clients = data;
-
-            selector.append('<option disabled selected value="">Select..</option>');
+        $('#loader').show()
+        selector.append('<option disabled selected value="">Select..</option>');
+        if(clients){
             for (var i = 0; i < clients.length; i++) {
                 selector.append('<option value='+clients[i].id+'>'+clients[i].name+'</option>');
             }
-        });
+        }
+        $('#loader').hide()
     }
     function getPOCList(selector,id){
-        $.getJSON(urlRoot+'contacts/?client='+id,function(data){
-            pocs = data;
-
+        if(id){
+            $.getJSON(urlRoot+'contacts/?client='+id,function(data){
+                pocs = data; 
+            });
             selector.append('<option disabled selected value="">Select..</option>');
             for (var i = 0; i < pocs.length; i++) {
                 selector.append('<option value='+pocs[i].id+'>'+pocs[i].name+'</option>');
             }
-        });
+        }
     }
-    function getContactList(selector){
-        $.getJSON(urlRoot+'contacts/',function(data){
-            contacts = data;
 
-            selector.append('<option disabled selected value="">Select..</option>');
-            for (var i = 0; i < contacts.length; i++) {
-                selector.append('<option value='+contacts[i].id+'>'+contacts[i].name+'</option>');
-            }
-        });
+    // function getContactList(selector){
+    //     $.getJSON(urlRoot+'contacts/',function(data){
+    //         contacts = data;
+
+    //         selector.append('<option disabled selected value="">Select..</option>');
+    //         for (var i = 0; i < contacts.length; i++) {
+    //             selector.append('<option value='+contacts[i].id+'>'+contacts[i].name+'</option>');
+    //         }
+    //     });
+    // }
+
+    
+    function getContactList(selector){
+        selector.append('<option disabled selected value="">Select..</option>');
+        for (var i = 0; i < contacts.length; i++) {
+            selector.append('<option value='+contacts[i].id+'>'+contacts[i].name+'</option>');
+        }
     }
     function addRowMinutes(){
         $('#Magenda_row').append(`
@@ -177,46 +277,47 @@ $(document).ready(function(){
             var valueArray4 = $('.agenda_number').map(function() {
                 return this.value;
             }).get();
+            $('#Magenda_row .new').remove();
             if(valueArray4){
                 for(var i=0;i<valueArray4.length;i++){
-                    if(i>0){
-                        addRowMinutes();
-                        $('#Magenda_row .new .Magenda_list').val(valueArray4[i]);
-                    }else{
-                        $('#Magenda_row .new .Magenda_list').val(valueArray4[i]);
-                    }
+                    addRowMinutes();
+                    $('#Magenda_row .new:last .Magenda_list').val(valueArray4[i]);
                 }
             }
         });
         $('.agenda_owner').empty();
         $(document).on('change','.agenda_type',function(){
             if($(this).val()=='E'){
-                $('.agenda_owner').empty();
-                $('.agenda_owner').append('<option disabled selected value="">Select..</option>');
+                $(this).parentsUntil('#agenda_row').find('.agenda_owner').empty();
+                $(this).parentsUntil('#agenda_row').find('.agenda_owner').append('<option disabled selected value="">Select..</option>');
                 for(var i=0;i<empList.length;i++){
-                    $('.agenda_owner').append('<option value='+empList[i].id+'>'+empList[i].name+'</option>');
+                    $(this).parentsUntil('#agenda_row').find('.agenda_owner').append('<option value='+empList[i].id+'>'+empList[i].name+'</option>');
                 }
             }else if($(this).val()=='C'){
-                $('.agenda_owner').empty();
-                $('.agenda_owner').append('<option disabled selected value="">Select..</option>');
+                $(this).parentsUntil('#agenda_row').find('.agenda_owner').empty();
+                $(this).parentsUntil('#agenda_row').find('.agenda_owner').append('<option disabled selected value="">Select..</option>');
                 for(var i=0;i<new1.length;i++){
-                    $('.agenda_owner').append('<option value='+new1[i].id+'>'+new1[i].name+'</option>');
+                    $(this).parentsUntil('#agenda_row').find('.agenda_owner').append('<option value='+new1[i].id+'>'+new1[i].name+'</option>');
                 }
             }
         })
         $('#OrganisationsSide').empty();
         $('#OrganisationsSide').append('<option disabled selected value="">Select..</option>');
+        if(empList.length && empList[0]){
         for(var i=0;i<empList.length;i++){
-            $('#OrganisationsSide').append('<option value='+empList[i].id+'>'+empList[i].name+'</option>');
+                $('#OrganisationsSide').append('<option value='+empList[i].id+'>'+empList[i].name+'</option>');
+            }
         }
         $('#ContactsSide').empty();
         $('#ContactsSide').append('<option disabled selected value="">Select..</option>');
-        for(var i=0;i<new1.length;i++){
-            $('#ContactsSide').append('<option value='+new1[i].id+'>'+new1[i].name+'</option>');
+        if(new1.length && new1[0]){
+            for(var i=0;i<new1.length;i++){
+                $('#ContactsSide').append('<option value='+new1[i].id+'>'+new1[i].name+'</option>');
+            }
         }
     });
 
-    $(document).on('click','#addAttendees',function(){
+    function addRowAttendees(){
         $('#attendee_row').append(`
             <tr class="new">
                 <td>
@@ -244,13 +345,15 @@ $(document).ready(function(){
         `);
         $('.attendee_type').select2();
         $('.attendees_list').select2();
-    });
+    }
+
+    $(document).on('click','#addAttendees',addRowAttendees);
 
     $('#attendee_row').on('click', '#removeAttendees', function () {
         $(this).parentsUntil('#attendee_row').remove();
     });
 
-    $(document).on('click','#addAgenda',function(){
+    function addRowAgenda(){
         $('#agenda_row').append(`
                 <tr class="new">
                     <td>
@@ -287,7 +390,9 @@ $(document).ready(function(){
         `);
         $('.agenda_type').select2();
         $('.agenda_owner').select2();
-    });
+    }
+
+    $(document).on('click','#addAgenda',addRowAgenda);
 
     $('#agenda_row').on('click', '#removeAgenda', function () {
         $(this).parentsUntil('#agenda_row').remove();
@@ -405,25 +510,48 @@ $(document).ready(function(){
         var MeetingJSON = JSON.stringify(MeetingData);
         console.log(MeetingJSON);
 
-        $.ajax({
-            async: true,
-            crossDomain: true,
-            url:urlRoot+'meetings/',
-            datatype:'JSON',
-            method:'POST',
-            headers: {
-                "X-CSRFToken": csrftoken,
-                "content-type": "application/json",
-                "cache-control": "no-cache"
-            },
-            processData: false,
-            data:MeetingJSON,
-            success:function(){
-                swal('Meeting Details Created');
-            },
-            error:function(error){
-                console.log(error.responseText);
-            }
-        });
+        if(mid){
+            $.ajax({
+                async: true,
+                crossDomain: true,
+                url:urlRoot+'meetings/'+mid+'/',
+                datatype:'JSON',
+                method:'PUT',
+                headers: {
+                    "X-CSRFToken": csrftoken,
+                    "content-type": "application/json",
+                    "cache-control": "no-cache"
+                },
+                processData: false,
+                data:MeetingJSON,
+                success:function(){
+                    swal('Meeting Details Updated');
+                },
+                error:function(error){
+                    console.log(error.responseText);
+                }
+            });
+        }else{
+            $.ajax({
+                async: true,
+                crossDomain: true,
+                url:urlRoot+'meetings/',
+                datatype:'JSON',
+                method:'POST',
+                headers: {
+                    "X-CSRFToken": csrftoken,
+                    "content-type": "application/json",
+                    "cache-control": "no-cache"
+                },
+                processData: false,
+                data:MeetingJSON,
+                success:function(){
+                    swal('Meeting Details Created');
+                },
+                error:function(error){
+                    console.log(error.responseText);
+                }
+            });
+        }
     })
 })
