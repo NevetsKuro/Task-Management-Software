@@ -36,6 +36,7 @@
         <script src='fullcalendar-3.9.0/fullcalendar.min.js'></script>
         <div id="css"></div>
         <link class="css-theme-color-file" href="assets/css/light-cyan.css" rel="stylesheet">
+        <link href="assets/css/custom.css" rel="stylesheet">
     </head>
     <style>
         body {
@@ -142,113 +143,197 @@
                                     </div>
                                 </div>
                             </div>
-            <!--****** End Modal Responsive******-->
-                            
                             <div class="row">
                                 <div class="col-lg-3 col-sm-6 ">
-                                    <div class="counter-widget variant-2" style="border-radius:0px">
+                                    <div class="counter-widget variant-1 dashColor1"  style="border-radius: 10px">
                                         <div class="counter-icon">
-                                            <i class="icon icon-binoculars"></i>
-                                        </div>
-                                        <div class="counter-content">
-                                            <div class="total"></div>
-                                            <div class="caption">
-                                                My Efficiency
+                                            <div class="front-content">
+                                                <i class="icon icon-binoculars"></i>
+                                                <span class="total" id="empcode">78, 921</span>
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                        <!-- <span class="sr-only">60% Complete (success)</span> -->
+                                                        <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div>
+                                                    </div>
+                                                </div>
+                                                <p style="color: white">Employee Code</p>
                                             </div>
                                         </div>
-                                        <div class="clearfix"></div>
+                                        <div class="counter-content whitecolor">
+                                            <h3>Employee Efficiency</h3>
+                                            <div class="progress progress-xs">
+                                                <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                    <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="total" id="empeff">78, 921</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 ">
+                                    <div class="counter-widget variant-1 color-2">
+                                        <div class="counter-icon">
+                                            <div class="front-content">
+                                                <i class="icon icon-users"></i>
+                                                <span class="total">831</span>
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                        <span class="sr-only">40% Complete (success)</span>
+                                                        <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div>
+                                                    </div>
+                                                </div>
+                                                <p style="color: white">Users registered</p>
+                                            </div>
+                                        </div>
+                                        <div class="counter-content whitecolor">
+                                            <h3>User Registration</h3>
+                                            <div>
+                                                <span class="line" style="height: 100px; display: none;">5,3,9,6,5,9,7,3,5,2,9,10,5</span><svg class="peity" height="16" width="200"><polygon fill="#c6d9fd" points="0 15.5 0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8 200 15.5"></polygon><polyline fill="none" points="0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8" stroke="#4d89f9" stroke-width="1" stroke-linecap="square"></polyline></svg>
+                                                <span class="text-success counter-status">4.7% <i class="fa fa-level-up"></i></span>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="counter-widget variant-1 color-3">
+                                        <div class="counter-icon">
+                                            <div class="front-content">
+                                                <i class="icon icon-clock"></i>
+                                                <span class="total" id="tatime">850</span>
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                        <span class="sr-only">60% Complete (success)</span>
+                                                        <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div>
+                                                    </div>
+                                                </div>
+                                                <p style="color: white">Total Time Spent</p>
+                                            </div>
+                                        </div>
+                                        <div class="counter-content whitecolor">
+                                            <h3>TIME STATS</h3>
+                                            <div>
+                                                <span class="line" style="height: 100px; display: none;">5,3,9,6,5,9,7,3,5,2,9,10,5</span><svg class="peity" height="16" width="200"><polygon fill="#c6d9fd" points="0 15.5 0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8 200 15.5"></polygon><polyline fill="none" points="0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8" stroke="#4d89f9" stroke-width="1" stroke-linecap="square"></polyline></svg>
+                                                <span class="text-danger counter-status">1.6% <i class="fa fa-level-down"></i></span>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 ">
+                                    <div class="counter-widget variant-1 color-4">
+                                        <div class="counter-icon">
+                                            <div class="front-content">
+                                                <i class="icon icon-thumbs-up"></i>
+                                                <span class="total" id="tass">50, 256</span>
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                        <span class="sr-only">60% Complete (success)</span>
+                                                        <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div>
+                                                    </div>
+                                                </div>
+                                                <p style="color: white">Total Tasks Assigned</p>
+                                            </div>
+                                        </div>
+                                        <div class="counter-content whitecolor">
+                                            <h3>Total Tasks Done</h3>
+                                            <div>
+                                                <span class="line" style="height: 100px; display: none;">5,3,9,6,5,9,7,3,5,2,9,10,5</span><svg class="peity" height="16" width="200"><polygon fill="#c6d9fd" points="0 15.5 0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8 200 15.5"></polygon><polyline fill="none" points="0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8" stroke="#4d89f9" stroke-width="1" stroke-linecap="square"></polyline></svg>
+                                                <span class="text-success counter-status" id="tstats" > <i class="fa fa-level-up"></i></span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row m-t-20 p-b-20">
+                            <div class="row">
                                 <!-- todo List -->
                                 <div class="col-sm-4">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="panel list-widget notes" style="border-radius: 0px">
+                                            <div class="panel list-widget notes">
+                                                <!--<div class="panel-heading" style="padding: 0px;">
+                                                    <h4 class="panel-title">
+                                                        <div class="m-l-30 p-t-10"></div>
+                                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="" aria-expanded="false" class="collapsed">
+                                                            <div class="list-header" style="background-color: #9baa16fc">
+                                                                <h3>To Do List</h3>    
+                                                            </div>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                                    <div class="list-content">
+                                                        <ul class="list-group" id="todoli"></ul>
+                                                    </div>
+                                                </div>-->
                                                 <div class="panel-body" style="padding: 0px">
-                                                    <div class="list-header" style="background-color: #c4a122">
+                                                    <div class="list-header" style="background-color: #b51f63">
                                                         <h3>To Do List</h3>    
                                                     </div>
-                                                    <div class="list-content">
-                                                        <ul class="list-group" id="todoli"> 
+                                                    <div class="list-content dashlist">
+                                                        <ul class="list-group" id="todoli">                                 
                                                         </ul>
                                                     </div>
-                                                    <div class="list-footer" style="background-color: #c4a122">
-                                                        <a href="#">View All</a>
-                                                        <span class="icon icon-plus add-new" data-placement="left" data-toggle="tooltip" title="" data-original-title="Add New"></span>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- todo list ends -->
-                                    <!-- notes -->
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="panel list-widget notes" style="border-radius: 0px">
-                                                <div class="panel-body" style="padding: 0px">
-                                                    <div class="list-header" style="background-color: #c4a122">
-                                                        <h3>Notes</h3>
+                                            <div class="panel list-widget notes p-0">
+                                                <div class="panel-body p-0">
+                                                    <div class="list-header p-10" style="background-color: peru">
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <h3 style="color: white">Notes</h3>
+                                                            </div>
+                                                            <div class="col-sm-2" style="float: right; vertical-align: middle">
+                                                                <button type="button" class="btn btn-success notesave dashbutton m-t-5" title="Save Changes">
+                                                                    <i class="fa fa-save"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="list-content" id="notesli">
-                                                        <form class="form-wizard m-10">
+                                                    <div class="list-content" id="notesli" style="background-color: khaki">
+                                                        <form class="form-wizard p-5">
                                                             <div class="row">
-                                                                <div class="col-sm-2">
-                                                                    <label class="input">Notes:</label>
-                                                                </div>
-                                                                <div class="col-sm-10">
-                                                                    <textarea id="notearea" class="form-control"></textarea>
+                                                                <div class="col-sm-12">
+                                                                    <textarea class="textarea textarea-expandable col-sm-12" style="background-color: rgba(0,0,0,0);border: none;resize: none" id="notearea" rows="2" placeholder="Add Your Notes Here...."></textarea>
                                                                 </div>
                                                             </div>
-                                                            
                                                         </form>
-                                                    </div>
-                                                    <!-- <div class="list-footer" style="background-color: #c4a122">
-                                                        <div style="color: white">Options</div> 
-                                                        <span class="icon icon-pencil add-new" data-placement="left" data-toggle="tooltip" title="" data-original-title="Add New"></span>                                                   
-                                                    </div> -->
-                                                    <div class="buttonarea m-10" style="float:right">
-                                                        <button type="button" class="btn btn-success notesave">
-                                                            <i class="fa fa-save"></i>
-                                                            <span>Save</span>
-                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- notes end -->
                                 </div>
-                                <!-- top left part ends -->
-                                <!-- top right -->
-                                <!-- Calendar -->
-                                <div class="col-sm-7 card-box panel m-l-5" style="border-radius: 0px">
-                                    <fieldset>
-                                        <legend>Calendar</legend>
-                                        <div id='calendar'></div>
-                                    </fieldset>
+                                <div class="col-sm-8 ">
+                                    <div class="panel list-widget notes p-0 dashCard">
+                                        <div class="panel-body p-0">
+                                            <div class="list-header p-30" style="background-color:#3a87ad">
+                                                <h3 style="color: white">Activity Calendar</h3>
+                                            </div>
+                                            <div class="list-content">
+                                                <div id="calendar" class="m-20"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- Calendar -->
-                                <!-- top right ends-->
                             </div>
                             <!-- top ends -->
                             <div class="row">
                                 <!-- task -->
-                                <div class="col-sm-6 panel list-widget tasks p-0">
-                                    <div class="panel-body p-0" id="tasklist">
-                                        <div class="list-header" style="background-color: #c4a122">
+                                <div class="col-sm-12 panel list-widget tasks p-0">
+                                    <div class="panel-body p-0" id="tasklist" style="border-radius: 10px">
+                                        <div class="list-header" style="background-color: #e9775b">
                                             <h3>Tasks</h3>
                                         </div>
                                         <div class="panel-group">
                                             <div id="taskaccordion">
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="panel-body"></div>
-                                
                                 <!-- task -->
                             </div>
                             <div class="row m-t-20 p-b-20">
@@ -323,10 +408,8 @@
         
         <script type="text/javascript">
             $(document).ready(function () {
-
                 //global functions
                 App.init();
-
             });
         </script>
         <script type="text/javascript" src="Libraries/timepicker/jquery.timepicker.min.js"></script>
@@ -337,7 +420,6 @@
         <script src="assets/js/dashboard.js" type="text/javascript"></script>
         <!--script src="assets/js/dashboard.js" type="text/javascript"></script-->
     </body>
-
         <script src="assets/js/echarts.js"></script>
         <script src="assets/js/jquery.peity.min.js"></script>
         <!-- <script src="assets/js/header.js" type="text/javascript"></script> -->

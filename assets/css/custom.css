@@ -1,24 +1,113 @@
-.centerAlign { line-height:40px;vertical-align:center; }
-.hover-grey:hover { background-color: grey; color: white; } 
-.yellow-line { border-bottom: 1px solid #dab236; }
-.nav-tabs > li.active { border-bottom: 3px solid #dab236; }
+.dashCard{
+	border-radius: 0px !important;
+}
+.dashColor1{
+	background-color: #26C6DA;
+}
+.no-border{
+	border: none !important;
+}
+.whitecolor{
+	background-color:#fff !important;
+}
+.centerAlign {
+	line-height: 40px;
+	vertical-align: center;
+}
+.dashbutton{
+	height:30px !important;
+	width:30px !important;
+	padding:0px !important;
+}
+#notearea{
+	outline: none;
+}
+.dashlist{
+	max-height: 486px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.dashlist::-webkit-scrollbar {
+    width: 5px;
+	height:5px;
+	border-radius: 5px;
+}
+.dashlist::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 1px 1px 1px rgba(0,0,0,0.5);
+}
+.dashlist::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 5px solid #000000;
+  border-radius: 5px;
+}
+.dashcheck{
+	width: 21px;
+	height: 19px;
+}
+
+.hover-grey:hover {
+	background-color: grey;
+	color: white;
+}
+
+.yellow-line {
+	border-bottom: 1px solid #dab236;
+}
+
+.nav-tabs>li.active {
+	border-bottom: 3px solid #dab236;
+}
+
 /* #contact-row > .well { border:0px;box-shadow:none; }
 #website-row > .well { border:0px;box-shadow:none; }
 #hoaddress-row > .well { border:0px;box-shadow:none;}
 #service > .well { border:0px;box-shadow:none; } */
-input.uppercase { text-transform: uppercase; }
-.buttonDefSize { width: 80%!important; }
-.ui-datepicker td a {text-align: center!important;}
-.ui-datepicker {width: auto!important; }
-.label-font {  font-weight: 700;color:grey;font-size:13px;color:#777; }
-.serc-btn { position: absolute;top: 7px;right: 10px;font-size: 22px;color: grey;cursor: pointer; }
-.well { margin-bottom: 0px!important; padding:10px;}
+
+input.uppercase {
+	text-transform: uppercase;
+}
+
+.buttonDefSize {
+	width: 80% !important;
+}
+
+.ui-datepicker td a {
+	text-align: center !important;
+}
+
+.ui-datepicker {
+	width: auto !important;
+}
+
+.label-font {
+	font-weight: 700;
+	color: grey;
+	font-size: 13px;
+	color: #777;
+}
+
+.serc-btn {
+	position: absolute;
+	top: 7px;
+	right: 10px;
+	font-size: 22px;
+	color: grey;
+	cursor: pointer;
+}
+
+.well {
+	margin-bottom: 0px !important;
+	padding: 10px;
+}
+
 /* .panel-bodyContact { transform: scale(0.95); }
 .panel-bodyClient { transform: scale(0.9); }
 .panel-bodyTask { transform: scale(0.9); } */
+
 /* #tab1 > div > div:nth-child(1) > div > label.input > div > div > span {
 	display: none;
 } */
+
 .se-pre-con {
 	position: fixed;
 	left: 0px;
@@ -26,8 +115,9 @@ input.uppercase { text-transform: uppercase; }
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
-	background: url('http://lancecoder.com/themes/calibre/assets/images/loader.gif') 50% 50% no-repeat rgb(249,249,249);
+	background: url('http://lancecoder.com/themes/calibre/assets/images/loader.gif') 50% 50% no-repeat rgb(249, 249, 249);
 }
+
 #loader {
 	position: absolute;
 	left: 50%;
@@ -43,54 +133,81 @@ input.uppercase { text-transform: uppercase; }
 	height: 120px;
 	-webkit-animation: spin 2s linear infinite;
 	animation: spin 2s linear infinite;
-  }
-  
-  @-webkit-keyframes spin {
-	0% { -webkit-transform: rotate(0deg); }
-	100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
-  }
-  
-  /* Add animation to "page content" */
-  .animate-bottom {
+}
+
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* Add animation to "page content" */
+
+.animate-bottom {
 	position: relative;
 	-webkit-animation-name: animatebottom;
 	-webkit-animation-duration: 1s;
 	animation-name: animatebottom;
 	animation-duration: 1s
-  }
-  
-  @-webkit-keyframes animatebottom {
-	from { bottom:-100px; opacity:0 } 
-	to { bottom:0px; opacity:1 }
-  }
-  
-  @keyframes animatebottom { 
-	from{ bottom:-100px; opacity:0 } 
-	to{ bottom:0; opacity:1 }
-  }
-span.select2-selection.select2-selection--multiple{
-	background-color: white!important;
 }
-.custom_inline{
-	display: inline-flex!important;
+
+@-webkit-keyframes animatebottom {
+	from {
+		bottom: -100px;
+		opacity: 0
+	}
+	to {
+		bottom: 0px;
+		opacity: 1
+	}
+}
+
+@keyframes animatebottom {
+	from {
+		bottom: -100px;
+		opacity: 0
+	}
+	to {
+		bottom: 0;
+		opacity: 1
+	}
+}
+
+span.select2-selection.select2-selection--multiple {
+	background-color: white !important;
+}
+
+.custom_inline {
+	display: inline-flex !important;
 	margin-left: 15px;
 }
+
 .mNega5 {
 	margin: -5px;
 }
-.lNega10{
+
+.lNega10 {
 	margin-left: -10px;
 }
-.toggle .toggle-group .toggle-handle{
-	background-color: white!important;
+
+.toggle .toggle-group .toggle-handle {
+	background-color: white !important;
 }
-body > div.ui-timepicker-wrapper{
-	width: 111px!important;
+
+body>div.ui-timepicker-wrapper {
+	width: 111px !important;
 }
 
 .orgbtn1Align {
@@ -98,6 +215,7 @@ body > div.ui-timepicker-wrapper{
 	right: 34px;
 	bottom: 5px;
 }
+
 .orgbtn2Align {
 	position: relative;
 	bottom: 5px;
@@ -105,40 +223,47 @@ body > div.ui-timepicker-wrapper{
 
 @media (min-width: 858px) {
 	html {
-			font-size: 12px;
+		font-size: 12px;
 	}
 }
+
 @media (min-width: 780px) {
 	html {
-			font-size: 11px;
+		font-size: 11px;
 	}
 }
+
 @media (min-width: 702px) {
 	html {
-			font-size: 10px;
+		font-size: 10px;
 	}
 }
+
 @media (min-width: 724px) {
 	html {
-			font-size: 9px;
+		font-size: 9px;
 	}
 }
+
 @media (max-width: 623px) {
 	html {
-			font-size: 8px;
+		font-size: 8px;
 	}
 	#divSide {
 		display: none;
 	}
 }
+
 .sky-form .checkbox i {
-    border-color: darkolivegreen!important;
+	border-color: darkolivegreen !important;
 }
-.right-12{
-	right:12px!important;
+
+.right-12 {
+	right: 12px !important;
 }
-.pos-des{
+
+.pos-des {
 	position: absolute;
-    top: 6px;
-    left: 9px;
+	top: 6px;
+	left: 9px;
 }
