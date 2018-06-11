@@ -7,7 +7,6 @@ $(document).ready(function(){
   
     // var urlRoot = 'https://office-management-demo.herokuapp.com/';
     // var urlRoot = 'http://35.202.86.61/office-management/';
-    
     $('#file2').on('change',function(){
         $('#addContact_vcard').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
     });
@@ -1021,5 +1020,4 @@ var CF_cardimg='';
             return false;
         }
     });
-
 });   

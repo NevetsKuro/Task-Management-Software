@@ -28,31 +28,16 @@
         <div id="css"></div>
         
         <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-        <!-- Page Loader -->
-        <script src="https://github.com/Modernizr/Modernizr/raw/master/modernizr.js" type="application/json"></script>
-        <script>
-            // Wait for window load
-            $(window).load(function() {
-                // Animate loader off screen
-                $("#loader").animate({
-                    top: -200
-                }, 1500);
-            });
-            </script>	
         <link rel="stylesheet" href="Libraries/timepicker/jquery.timepicker.css">
         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
         <link href="assets/vendors/ladda/dist/ladda-themeless.min.css">
-        <!-- <link rel="stylesheet" href="Libraries/jquery-loading-master/src/loading.css">
-        <link rel="stylesheet" href="Libraries/jquery-loading-master/dist/jquery.loading.css"> -->
         <script type="text/javascript" src="assets/js/addCss.js"></script>
-		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script> -->
-            
+		    
     </head>
     <body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
             
-        <!-- <div class="page-loader"></div> -->
-        <div id="loader"></div>
+        <div class="page-loader hide"></div>
+        <!-- <div id="loader"></div> -->
         <!-- START WRAPPER -->
         <div class="wrapper">
 
@@ -258,6 +243,7 @@
                                                                                         <td>
                                                                                             <label class="select">
                                                                                                 <select class="agenda_type select2">
+                                                                                                    <option selected disabled value="">Select..</option>
                                                                                                     <option value="E">Employee</option>
                                                                                                     <option value="C">Contacts</option>
                                                                                                 </select>
@@ -459,7 +445,7 @@
 
                     <!-- START PAGE FOOTER -->
                     <footer class="page-footer">
-                            <center><b class="f-s-20">Footer..</b></center>
+                        <center><b class="f-s-20">Footer..</b></center>
                     </footer>
                     <!-- END PAGE FOOTER -->
 
@@ -471,7 +457,7 @@
         </div>
 
         
-        <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
     <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
     <script src="assets/js/addheader.js" type="text/javascript"></script>
@@ -577,21 +563,14 @@
     /* START CUSTOM SCRIPTS
     /*================================-->
     <script src="assets/js/addCss.js"></script>
-    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
     <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
     <script type="text/javascript" src="Libraries/timepicker/jquery.timepicker.min.js"></script>
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.3/jquery.timepicker.min.js"></script> -->
-    <!-- <script type="text/javascript" src="Libraries/toggle/toggles.js"></script> -->
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="assets/js/subFunc.js" type="text/javascript"></script>
-    <script src="assets/js/header.js" type="text/javascript"></script>
-    <!-- <script src="assets/vendors/sweetalert/sweetalert.min.js" type="text/javascript"></script> -->
-    <script src="Libraries/jquery-loading-master/src/loading.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	<script src="assets/js/meetingForm.js" type="text/javascript"></script>
-
 </body>
 
 

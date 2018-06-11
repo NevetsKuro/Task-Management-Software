@@ -214,7 +214,7 @@ $(document).ready(function () {
                                 $('#HUF_date').val(commencement_date);
                                 $('#HUF_nameOfKarta').val(data.karta_name);
                                 $('#HUF_name').val(data.title);
-                                client_organisation(data.prospect);
+                                client_organisation(data.prospect.id);
                             }else if(legal == 3){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#prop_Title').val(data.title.id);
@@ -223,14 +223,14 @@ $(document).ready(function () {
                                 $('#Proprietor_mname').val(name.length==2?'':name[1]);
                                 $('#Proprietor_lname').val(name[name.length-1]);
                                 $('#Proprietor_dateOfComm').val(commencement_date);
-                                client_organisation(data.prospect);
+                                client_organisation(data.prospect.id);
                             
                             }else if(legal == 4){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#Partnership_date').val($.datepicker.formatDate("dd/mm/yy", new Date(data.partnership_deed_date)));
                                 $('#Partnership_dateOfComm').val(commencement_date);
                                 AddPartner(data.partners);
-                                client_organisation(data.prospect);
+                                client_organisation(data.prospect.id);
                             }else if(legal == 5){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 var other_Partners = "";
@@ -244,7 +244,7 @@ $(document).ready(function () {
                                 $('#LLP_LLPIN').val(data.llpin);
                                 $('#LLP_date').val(commencement_date);
                                 AddDPartner(data.designated_partners);
-                                client_organisation(data.prospect);
+                                client_organisation(data.prospect.id);
                             }else if(legal == 6){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#company_date').val(commencement_date);
@@ -253,7 +253,7 @@ $(document).ready(function () {
                                 $('#company_listedy').prop('checked',data.stock_exchange_listed).trigger('change');
                                 $('#company_stock').val(data.stock_exchange_name);
                                 AddDirector(data.directors);
-                                client_organisation(data.prospect);
+                                client_organisation(data.prospect.id);
                             }else if(legal == 7){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 var members = "";
@@ -266,7 +266,7 @@ $(document).ready(function () {
                                 $('#members').val(members);
                                 $('#AOP_date').val(commencement_date);
                                 $('#AOP_registration').val(data.registration_no);
-                                client_organisation(data.prospect);
+                                client_organisation(data.prospect.id);
                             }else if(legal == 8){
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#trust_doc').val(commencement_date);
@@ -278,7 +278,7 @@ $(document).ready(function () {
                                     }
                                 }
                                 $('#trusteeName').val(trustee);
-                                client_organisation(data.prospect);
+                                client_organisation(data.prospect.id);
                             }
                     }
                     console.log('legal='+ legal +'-- Org id='+contOrg);
@@ -2047,7 +2047,11 @@ $(document).ready(function () {
                         swal('Client added');
                     },
                     error: function (error) {
-                        swal('Not able to create client');
+                        if(error.responseJSON.detail){
+                            swal(error.responseJSON.detail);
+                        }else{
+                            swal('Not able to create client');
+                        }
                         console.log('Error in creating client:' + error.responseText);
                     }
                 });

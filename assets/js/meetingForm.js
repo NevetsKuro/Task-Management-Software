@@ -2,15 +2,44 @@ $(document).ready(function(){
     
     $('#loader').show()
     var employees =[],clients=[],contacts=[],pocs=[];
-    $.getJSON(urlRoot+'employees/',function(data){
-        employees = data;
-    });
-    $.getJSON(urlRoot+'clients/allclients',function(data){
-        clients = data;
-    });
-    $.getJSON(urlRoot+'contacts/',function(data){
-        contacts = data;
-    });
+
+    $.ajax({
+        async:false,
+        url:urlRoot+'employees/',
+        type:'GET',
+        datatype:'JSON',
+        success:function(data){
+           employees = data;
+        },
+        error:function(error){
+            console.log(error.responseText);
+        }
+    })
+    $.ajax({
+        async:false,
+        url:urlRoot+'clients/allclients',
+        type:'GET',
+        datatype:'JSON',
+        success:function(data){
+            clients = data;
+        },
+        error:function(error){
+            console.log(error.responseText);
+        }
+    })
+    $.ajax({
+        async:false,
+        url:urlRoot+'contacts/',
+        type:'GET',
+        datatype:'JSON',
+        success:function(data){
+            contacts = data;
+        },
+        error:function(error){
+            console.log(error.responseText);
+        }
+    })
+
 
     var p=GetURLParams();
     var mid=p['meet_id'];
@@ -24,6 +53,7 @@ $(document).ready(function(){
         style: 'ios',
         size: 'large'
     });
+
     if(mid){
         $.ajax({
             url:urlRoot+'meetings/'+mid,
@@ -56,10 +86,10 @@ $(document).ready(function(){
                         $('#attendee_row .new:last .attendees_list').val(attendees[i].attendeeId);
                         $('#attendee_row .new:last .attendees_list').trigger('change');
                     }else{
-                        $('#attendee_row .new .attendee_type').val(attendees[i].attendee_type);
-                        $('#attendee_row .new .attendee_type').trigger('change');
-                        $('#attendee_row .new .attendees_list').val(attendees[i].attendeeId);
-                        $('#attendee_row .new .attendees_list').trigger('change');
+                        $('#attendee_row .new:first .attendee_type').val(attendees[i].attendee_type);
+                        $('#attendee_row .new:first .attendee_type').trigger('change');
+                        $('#attendee_row .new:first .attendees_list').val(attendees[i].attendeeId);
+                        $('#attendee_row .new:first .attendees_list').trigger('change');
                     }
                 }
                 for (let i = 0; i < agenda.length; i++) {
@@ -79,12 +109,11 @@ $(document).ready(function(){
                         $('#agenda_row .new .agenda_number').val(agenda[i].agenda);
                         $('#agenda_row .new .agenda_duration').val(agenda[i].duration);
                         if(agenda[i].employee_owner){
-                            $('#agenda_row .new .agenda_type').val('E');
+                            $('#agenda_row .new .agenda_type').val('E').trigger('change');
                             $('#agenda_row .new .agenda_owner').val(agenda[i].employee_owner);
                         }else if(agenda[i].contact_owner){
-                            $('#agenda_row .new .agenda_type').val('C');
+                            $('#agenda_row .new .agenda_type').val('C').trigger('change');
                             $('#agenda_row .new .agenda_owner').val(agenda[i].contact_owner);
-                        
                         }
                     }
                 }
@@ -95,7 +124,11 @@ $(document).ready(function(){
                     $('#Magenda_row .new:last .Magenda_list').val(agenda[i].agenda);
                     $('#Magenda_row .new:last .Magenda_note').val(agenda[i].note);
                 }
-
+                var emailSend1 = attendees.find(function(a){return a.send_MOM==true&&a.attendee_type=='O'})
+                $('#OrganisationsSide').val(emailSend1.attendeeId)
+                var emailSend2 = attendees.find(function(a){return a.send_MOM==true&&a.attendee_type!='O'})
+                $('#ContactsSide').val(emailSend2.attendeeId)
+                
             }
         });
         
@@ -103,18 +136,21 @@ $(document).ready(function(){
     }
 
 
-$(document).on('change','#taskType',function(){
+    $(document).on('change','#taskType',function(){
         var meet_For = $(this);
         var referedFor = $('#meet_referedFor');
         referedFor.empty();
         if(meet_For.is(':checked')==true){
             getContactList(referedFor);
+            $('.attendee_type option:nth-child(3)').attr('disabled',true);
         }else{
             getClientList(referedFor);
         }
     });
 
     $(document).on('change','.attendee_type',function(){
+        
+        $('.page-loader').removeClass('hide');
         var type = $(this).val()
         var target = $(this).parentsUntil('#attendee_row').find('.attendees_list');
         target.empty();
@@ -122,7 +158,7 @@ $(document).on('change','#taskType',function(){
             getEmployeeList(target);
         }else if(type == 'C'){
             if($('#meet_referedFor').is(':checked')){
-                $('.attendees_list').attr('disabled',true);
+
             }else{
                 //getClientList(target);
                 var id = $('#meet_referedFor').val();
@@ -131,39 +167,25 @@ $(document).on('change','#taskType',function(){
         }else if(type == 'T'){
             getContactList(target);
         }
+        $('.page-loader').addClass('hide');
     });
     
-    // $(document).on('change','.agenda_type',function(){
-    //     var type = $(this).val()
-    //     var target = $(this).parentsUntil('#agenda_row').find('.agenda_owner');
-    //     target.empty();
-    //     if(type == 'E'){
-    //         getEmployeeList(target);
-    //     }else if(type == 'C'){
-    //         getContactList(target);
-    //     }
-    // });
     getClientList($('#meet_referedFor'));
     
     function getEmployeeList(selector){
-        
-        $('#loader').show()
             selector.append('<option disabled selected value="">Select..</option>');
             for (var i = 0; i < employees.length; i++) {
                 selector.append('<option value='+employees[i].id+'>'+employees[i].name+'</option>');
             }
-        $('#loader').hide()
     }
         
     function getClientList(selector){
-        $('#loader').show()
         selector.append('<option disabled selected value="">Select..</option>');
         if(clients){
             for (var i = 0; i < clients.length; i++) {
                 selector.append('<option value='+clients[i].id+'>'+clients[i].name+'</option>');
             }
         }
-        $('#loader').hide()
     }
     function getPOCList(selector,id){
         if(id){
@@ -194,6 +216,7 @@ $(document).on('change','#taskType',function(){
         for (var i = 0; i < contacts.length; i++) {
             selector.append('<option value='+contacts[i].id+'>'+contacts[i].name+'</option>');
         }
+        $('.page-loader').removeClass('hide');
     }
     function addRowMinutes(){
         $('#Magenda_row').append(`
@@ -271,7 +294,6 @@ $(document).on('change','#taskType',function(){
             new1 = conList;
         }
         var new3 = new1.concat(empList);
-
 
         $(document).on('click','#generate',function(){
             var valueArray4 = $('.agenda_number').map(function() {
@@ -375,7 +397,7 @@ $(document).on('change','#taskType',function(){
                         </label>
                     </td>
                     <td>
-                        <label class="input custom_inline m-l-0">
+                        <label class="input">
                             <input class="agenda_duration" type="text" placeholder="HH.MM">
                         </label>
                     </td>
