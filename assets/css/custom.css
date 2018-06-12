@@ -185,10 +185,6 @@ input.uppercase {
 	}
 }
 
-span.select2-selection.select2-selection--multiple {
-	background-color: white !important;
-}
-
 .custom_inline {
 	display: inline-flex !important;
 	margin-left: 15px;
@@ -202,7 +198,8 @@ span.select2-selection.select2-selection--multiple {
 	margin-left: -10px;
 }
 
-.toggle .toggle-group .toggle-handle {
+.toggle .toggle-group .toggle-handle,
+span.select2-selection.select2-selection--multiple{
 	background-color: white !important;
 }
 
@@ -266,4 +263,13 @@ body>div.ui-timepicker-wrapper {
 	position: absolute;
 	top: 6px;
 	left: 9px;
+}
+.header-con {
+	width: 40px;
+	font-size: 25px;
+    padding-top: 15px;
+    height: 60px;	
+}
+#btnsubmit{
+	color: white!important;
 }
