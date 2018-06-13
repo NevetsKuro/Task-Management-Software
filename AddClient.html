@@ -124,7 +124,7 @@
                                                 <label class="checkbox m-19">
                                                     <input id="persmissions" type="checkbox">
                                                     <i></i>
-                                                    <span class="label-font">Send ---:</span>
+                                                    <span class="label-font">Handle Group:</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -258,29 +258,29 @@
                                                         <div class="well f-s-25 p-l-20 text-bold">Hindu Undivided Family(HUF)</div>
                                                         <span class="m-10"></span>
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Name of HUF:</label>
                                                                 <label class="input">
                                                                     <i class="icon-append icon-user"></i>
                                                                     <input id="HUF_name" type="text">
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Date of Incorporation:</label>
                                                                 <label class="input">
                                                                     <i class="icon-append icon-calendar-31"></i>
                                                                     <input id="HUF_date" type="text" class="datepickr">
                                                                 </label>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Name of Karta:</label>
                                                                 <label class="input">
                                                                     <input id="HUF_nameOfKarta" type="text">
                                                                 </label>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Name of Business:
                                                                     <span class="text-danger">*</span>
                                                                 </label>
@@ -296,16 +296,6 @@
 
                                                         <div class="text-bold p-l-20 f-s-25 well">Proprietor</div>
                                                         <span class="m-10"></span>
-                                                        <div class="row">
-                                                            <div class="col-sm-12">
-                                                                <label class="label">Name of Business:
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
-                                                                <label class="input">
-                                                                    <input id="Proprietor_name" class="nameofBusiness" type="text" required>
-                                                                </label>
-                                                            </div>
-                                                        </div>
                                                         <div class="row">
                                                             <div class="col-sm-2">
                                                                 <label class="label">Title:</label>
@@ -335,11 +325,19 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Date of Commencement of Business :</label>
                                                                 <label class="input">
                                                                     <i class="icon-append icon-calendar-31 text-primary f-s-22"></i>
                                                                     <input id="Proprietor_dateOfComm" type="text" class="datepickr">
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Name of Business:
+                                                                    <span class="text-danger">*</span>
+                                                                </label>
+                                                                <label class="input">
+                                                                    <input id="Proprietor_name" class="nameofBusiness" type="text" required>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -351,7 +349,7 @@
                                                             <div class="text-bold p-l-20 well f-s-18">Partnership Firm</div>
                                                             <span class="m-10"></span>
                                                             <div class="row">
-                                                                <div class="col-sm-12">
+                                                                <div class="col-sm-4">
                                                                     <label class="label">Name of Business:
                                                                         <span class="text-danger">*</span>
                                                                     </label>
@@ -359,16 +357,14 @@
                                                                         <input id="Partnership_name" class="nameofBusiness" type="text" required>
                                                                     </label>
                                                                 </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
+                                                                <div class="col-sm-4">
                                                                     <label class="label">Date of Partnership Deed:</label>
                                                                     <label class="input">
                                                                         <i class="icon-append icon-calendar-31 text-primary f-s-22"></i>
                                                                         <input id="Partnership_date" type="text" class="datepickr">
                                                                     </label>
                                                                 </div>
-                                                                <div class="col-sm-6">
+                                                                <div class="col-sm-4">
                                                                     <label class="label">Date of Commencement of Business:</label>
                                                                     <label class="input">
                                                                         <i class="icon-append icon-calendar-31 text-primary f-s-22"></i>
@@ -427,7 +423,7 @@
                                                         <div class="text-bold p-l-20 f-s-25 well">Limited Liability Partnership(LLP)</div>
                                                         <span class="m-10"></span>
                                                         <div class="row">
-                                                            <div class="col-sm-12">
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Name of LLP:
                                                                     <span class="text-danger">*</span>
                                                                 </label>
@@ -435,8 +431,6 @@
                                                                     <input id="LLP_name" class="nameofBusiness" type="text">
                                                                 </label>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
                                                             <div class="col-sm-4">
                                                                 <label class="label">Date of Incorporation:</label>
                                                                 <label class="input">
@@ -507,7 +501,7 @@
                                                             <div class="well f-s-25 p-l--20 text-bold">Company</div>
                                                             <span class="m-10"></span>
                                                             <div class="row">
-                                                                <div class="col-sm-12">
+                                                                <div class="col-sm-4">
                                                                     <label class="label">Name of Company:
                                                                         <span class="text-danger">*</span>
                                                                     </label>
@@ -515,9 +509,7 @@
                                                                         <input id="company_name" class="nameofBusiness" type="text" required>
                                                                     </label>
                                                                 </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
+                                                                <div class="col-sm-4">
                                                                     <label class="label">Types of Company:
                                                                         <span class="text-danger">*</span>
                                                                     </label>
@@ -527,7 +519,7 @@
                                                                         </select>
                                                                     </label>
                                                                 </div>
-                                                                <div class="col-sm-6">
+                                                                <div class="col-sm-4">
                                                                     <label class="label">Date of Incorporation:</label>
                                                                     <label class="input">
                                                                         <i class="icon-append icon-calendar-31 text-primary f-s-22"></i>
@@ -550,7 +542,7 @@
                                                                         <span class="label-font">Listed</span>
                                                                     </label>
                                                                 </div> -->
-                                                                <div class="nofE col-sm-6 ">
+                                                                <div class="nofE col-sm-6 hide">
                                                                     <label class="label">Name(s) of Stock Exchange(if listed):</label>
                                                                     <label class="select">
                                                                         <select entity="StockExchange" id="company_stock" class="select2 editselect">
@@ -1033,7 +1025,7 @@
                                                                     <th>Valid From</th>
                                                                     <th>Valid Till</th>
                                                                     <th>Applicable Law</th>
-                                                                    <th>Remove</th>
+                                                                    <th>Edit/Remove</th>
                                                                 </tr>
                                                             </thead>
                                                             <tfoot>
@@ -1045,7 +1037,7 @@
                                                                     <th>Valid From</th>
                                                                     <th>Valid Till</th>
                                                                     <th>Applicable Law</th>
-                                                                    <th>Remove</th>
+                                                                    <th>Edit/Remove</th>
                                                                 </tr>
                                                             </tfoot>
                                                         </table>
@@ -1100,7 +1092,13 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-4">
+                                                                <label class="label">Document Type:</label>
+                                                                <label class="input">
+                                                                    <select entity="" id='stat_type' class="select2 editselect"></select>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-4">
                                                                 <label class="label">Document:
                                                                 </label>
                                                                 <div class="input input-file">
@@ -1307,7 +1305,7 @@
     <!-- <script src="assets/pages/jquery.ui-sliders.js"></script> -->
     <!-- <script src="http://www.ungeek.in/calibre/assets/js/subFunc.js" type="text/javascript"></script> -->
     <script src="assets/js/subFunc.js"></script>
-    <!-- <script src="assets/js/header.js" type="text/javascript"></script> -->
+    <script src="assets/js/header.js" type="text/javascript"></script>
     <script src="assets/js/custom_client.js" type="text/javascript"></script>
     <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
     <!-- ================================/

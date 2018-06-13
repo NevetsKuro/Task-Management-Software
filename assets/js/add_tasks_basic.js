@@ -720,7 +720,4 @@ $(document).ready(function(){
             }
         });
     });  
-    $(document).on('click','#addKnowledge',function(){
-
-    });
 });

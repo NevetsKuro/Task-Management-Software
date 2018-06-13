@@ -102,25 +102,15 @@ $(window).ready(function(){
             break;
         }
     }
-
+    
     $.ajax({
-        url: urlRoot + 'contacts/form-data',
-        type: 'GET',
-        dataType:'JSON', //to parse string into JSON object,
-        success: function(datag){ 
-            if(datag){
-                global=datag;
-            }
-        }
-    });
-
-    $.ajax({
-        url: urlRoot + 'clients/form-data',
+        url: urlRoot + 'common/form-data',
         type: 'GET',
         dataType:'JSON', //to parse string into JSON object,
         success: function(data){ 
             if(data){
                 global2=data;
+                global=data;
             }
         }
     });

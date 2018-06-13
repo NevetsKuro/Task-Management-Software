@@ -33,10 +33,77 @@ $(document).ready(function(){
         from: 5
         });
 
-    $('addContact_state').select2({
-        placeholder: 'State'
+    $(document).on('click',
+    '#divHeader > div > div.header-right.hide-app-name > nav > div > div.collapse.navbar-collapse.bs-example-js-navbar-collapse > ul > li.header-con',
+    function(){
+        var tour = new Tour({
+            backdrop:true,
+            backdropPadding:1,
+            reflex:true,
+          steps: [
+          {
+            element: "#accord > div",
+            title: "Search Contacts",
+            content: "For searching if the contact already exist or not!",
+            placement:'top',
+            onShow: function (tour) {
+                    $('#collapseChck').collapse('show');
+            },
+          },
+          {
+            element: "#tab1 > div:nth-child(1) > div.col-sm-2 > label.label",
+            title: "Compulsory",
+            content: "Fields with star needs to be filled mandatorily",
+            onShow: function(tour) {
+                jQuery('#horizontal-wizard a[href=#tab1]').tab('show');
+                jQuery('#tab2').removeClass('active');
+                jQuery('#tab3').removeClass('active');
+                jQuery('#tab1').addClass('active');
+            }
+          },
+          {
+            element: "#tab1 > div:nth-child(1) > div.col-sm-2",
+            title: "Quick Adding",
+            content: "Can add options to some dropdown fields by typing in it.",
+            onNext: function (tour) {
+                    jQuery('#horizontal-wizard a[href=#tab2]').tab('show');
+                    jQuery('#tab1').removeClass('active');
+                    jQuery('#tab2').addClass('active');
+            },
+            placement:'top'
+          },
+          {
+            element: "#tab2 > div:nth-child(1) > div.col-sm-7.contact-search",
+            title: "Search",
+            content: "Use it to search existing Organisation.",
+            placement:'top',
+            onPrev: function (tour) {
+                    jQuery('#tab2').removeClass('active');
+                    jQuery('#tab1').addClass('active');
+                    jQuery('#horizontal-wizard a[href=#tab1]').tab('show');
+            },
+          },
+          {
+              element: "#tab2 > div.row.well",
+            title: "Branches",
+            content: "One Branch needs to be filled mandatory.",
+            placement:'top'
+          },
+          {
+            element:'',
+            title:'Tour over!',
+            content:"Thank for viewing",
+            orphan:true
+            }
+        ]});
+        
+        // Initialize the tour
+        tour.init();
+        
+        // Start the tour
+        tour.start();
     })
-    
+
     $(document).on('change','#range_02',function(){
         // console.log($(this).val()); 
         var v = $(this).val(); 

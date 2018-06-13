@@ -39,6 +39,20 @@ $(document).ready(function () {
             swal('Please enter a valid Aadhar Number')
         }
     });
+    $(document).on("change", ".partnershare", function() {
+        var sum = 0;var limit = 100;
+        $(".partnershare").each(function(){
+            sum += +$(this).val();
+        });
+        if(sum>limit){ $(this).val('');$(this).focus(); swal('The Share cannot exceed 100!')} console.log(sum);
+    });
+    $(document).on('change','#company_types',function(){
+        if($(this).val()=='3'){
+            $('.nofE').removeClass('hide')
+        }else{
+            $('.nofE').addClass('hide')
+        }
+    })
     /////////////////////////////////// Prefilled Data  //////////////////////////////////////////////////
 
     $.ajax({
@@ -60,6 +74,10 @@ $(document).ready(function () {
         success: function (data) {
             globalClient = data;
             globalContact = data;
+            
+            for (var i = 0; i < data.document_types.length; i++) {
+                $('#stat_type').append('<option value=' + data.document_types[i].id + '>' + data.document_types[i].documenType + '</option>');
+            }
             for (var i = 0; i < data.business_natures.length; i++) {
                 $('#nature_business').append('<option value=' + data.business_natures[i].id + '>' + data.business_natures[i].business_nature + '</option>');
             }
@@ -189,10 +207,25 @@ $(document).ready(function () {
                                     ]).draw(false);
                             });
                         }
-
+                        var len = data.statdocs.length;
+                        var stats = data.statdocs;
+                        stat_documents = data.statdocs;
+                        for (let i = 0; i < len; i++) {
+                            stat_docs.row.add([
+                                '<td class=" select-checkbox"></td>',
+                                stats[i].name,
+                                stats[i].number,
+                                stats[i].issuing_authority,
+                                stats[i].valid_from,
+                                stats[i].valid_till,
+                                stats[i].applicable_law,
+                                '<div class="sD_edit text-success text-center"><i class="glyphicon glyphicon-pencil"></i></div><div class="sD_remove text-danger text-center"><i class="glyphicon glyphicon-remove"></i></div>'
+                            ]).draw(false);
+                        }
+                        
                         if(legal==1){
-                            $('#individual_aadhar').val(data.aadhar_no);
-                            $('#individual_typeWork').val(data.typeOfWork);
+                            $('#individual_aadhar').val(data.aadhar_no).trigger('change');;
+                            $('#individual_typeWork').val(data.typeOfWork).trigger('change');
                             $('#website').val(data.website);
                             // indContactId = data.prospect;
                             indContactId = data.prospect['id'];
@@ -1333,14 +1366,40 @@ $(document).ready(function () {
             [1, 'asc']
         ]
     });
-
+    var stat_documents=[];
+    var stats_Obj;
+    var doco='';
+    $(document).on('change','#file3', function(){
+        var mimeType=$(this)[0].files[0]['type'];
+            var ggg1=$(this)[0].files[0];
+            var reader = new FileReader();
+            //$('#doc1txt').val($('#doc1').val());
+            reader.readAsDataURL(ggg1);
+            reader.onload = function () {
+                console.log('FILE :'+reader.result);
+                doco=reader.result;
+            }
+    });
     $('#submit_addmore').on('click', function () {
         var name = $('#stat_name').val();
         var number = $('#stat_number').val();
         var issuingAuthority = $('#stat_issuingAuthority').val();
-        var validFrom = $('#stat_validFrom').val();
-        var validTo = $('#stat_validTo').val();
+        var validFrom = getFormateDateToServer($('#stat_validFrom').val());
+        var validTo = getFormateDateToServer($('#stat_validTo').val());
         var applicable = $('#stat_applicable').val();
+        var type = $('#stat_type').val();
+        var docs = doco
+
+        stats_Obj = new Object();
+        stats_Obj.name = name;
+        stats_Obj.number = number;
+        stats_Obj.issuing_authority = issuingAuthority;
+        stats_Obj.valid_from = validFrom;
+        stats_Obj.valid_till = validTo
+        stats_Obj.applicable_law = applicable;
+        stats_Obj.document_type = type;
+        stats_Obj.document = docs;
+        stat_documents.push(stats_Obj);
 
         stat_docs.row.add([
             '<td class=" select-checkbox"></td>',
@@ -1350,7 +1409,7 @@ $(document).ready(function () {
             validFrom,
             validTo,
             applicable,
-            '<div class="sD_remove text-danger text-center"><i class="glyphicon glyphicon-remove"></i></div>'
+            '<div class="sD_edit text-success text-center"><i class="glyphicon glyphicon-pencil"></i></div><div class="sD_remove text-danger text-center"><i class="glyphicon glyphicon-remove"></i></div>'
         ]).draw(false);
 
         $('#statDocs tbody').on('click', 'div.sD_remove', function () {
@@ -1372,8 +1431,23 @@ $(document).ready(function () {
                     }
                 });
         });
-
         swal("Row added", "Look in the above table!", "success");
+    });
+
+    $(document).on('click','#statDocs > tbody > tr.even > td:nth-child(8) > div.sD_edit',function(){
+        var row = stat_docs.row($(this).parents('tr')).data();
+        $('#stat_name').val(row[1]);
+        $('#stat_number').val(row[2]);
+        $('#stat_issuingAuthority').val(row[3]);
+        $('#stat_validFrom').val(row[4]);
+        $('#stat_validTo').val(row[5]);
+        $('#stat_applicable').val(row[6]);
+        
+        var pri_row = stat_documents.find(function(a){return a.name==row[1]})
+        if(pri_row){
+            $('#stat_type').val(pri_row.document_type);
+            $('#stat_document').val(pri_row.document);
+        }
     });
 
     //adding row for satutory document
@@ -1590,7 +1664,9 @@ $(document).ready(function () {
                 //Create a new client
                 clientData.pan_no = $('#PANNO').val();
                 clientData.services = [];
-                clientData.services.push(1); //Change later
+                clientData.services.push(1); 
+                clientData.statdocs = stat_documents; 
+                clientData.handle_group = $('#persmissions').is(':checked');
 
                 if (legalStatus == 1) {
                     var titleId = $('#addContact_title').val();
@@ -1824,16 +1900,16 @@ $(document).ready(function () {
                         console.log('Error in creating client:' + error.responseText);
                     }
                 });
-
             } else {
-
                 var legalStatus = $('#client_legalstatus').val();
 
                 //Create a new client
                 clientData.pan_no = $('#PANNO').val();
                 clientData.services = [];
                 clientData.services.push(1);
-                
+                clientData.statdocs = stat_documents;
+                clientData.handle_group = $('#persmissions').is(':checked')
+
                 if (legalStatus == 1) {//Individuals
 
                     
