@@ -18,10 +18,10 @@ $(document).ready(function(){
                 console.log(data.token?data.token:"No TOKEN");
                 localStorage.setItem('token',data.token);
                 //$(location).attr('href','dashboard.html');
-                // if(src!=null && src!='')
-                //     $(location).attr('href',src);
-                // else
-                //     $(location).attr('href','dashboard.html');    
+                if(src!=null && src!='')
+                    $(location).attr('href',src);
+                else
+                    $(location).attr('href','dashboard.html');    
             },
             error:function(error){
                 console.log(error.responseText);
