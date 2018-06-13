@@ -6,38 +6,38 @@ $(document).ready(function(){
 var token=localStorage.getItem('token');	
 if(token!=null){
 	$.ajax({
-			async: true,
-			crossDomain: true,
-			url:urlRoot+'users/',
-			type:'GET',
-			datatype:'JSON',
-			headers: {
-				"Authorization": "Bearer "+token,
-				"content-type": "application/json",
-				"cache-control": "no-cache",
-				"X-CSRFToken":csrftoken
-			},
-			success:function(data){
-				if(data){
-				// 	$('.name').html(data.name);
-				// 	console.log(data);
-				// 	console.log(data.name);
-				// 	$('#profile').attr('href','profile.html');
-				// 	$('.name').html(data.name);
-				// 	$('.position').html(data.designation);
-					console.log(data);
-				}
-				else{
-					console.log($(location).attr('href').substring($(location).attr('href').lastIndexOf('/')+1));
-					$(location).attr('href','login.html?src='+$(location).attr('href').substring($(location).attr('href').lastIndexOf('/')+1));
-				}	
-			},
-			error:function(error){
-				$(location).attr('href','login.html?src='+$(location).attr('href').substring($(location).attr('href').lastIndexOf('/')+1));
-				// console.log(error.responseText);
-				
+		async: true,
+		crossDomain: true,
+		url:urlRoot+'current_user',
+		type:'GET',
+		datatype:'JSON',
+		headers: {
+			"Authorization": "Bearer "+token,
+			"content-type": "application/json",
+			"cache-control": "no-cache",
+			"X-CSRFToken":csrftoken
+		},
+		success:function(data){
+			if(data){
+				$('.name').html(data.name);
+				console.log(data);
+				console.log(data.name);
+				$('#profile').attr('href','profile.html');
+				$('.name').html(data.name);
+				$('.position').html(data.designation);
+				console.log(data);
 			}
-		});
+			else{
+				console.log($(location).attr('href').substring($(location).attr('href').lastIndexOf('/')+1));
+				$(location).attr('href','login.html?src='+$(location).attr('href').substring($(location).attr('href').lastIndexOf('/')+1));
+			}	
+		},
+		error:function(error){
+			$(location).attr('href','login.html?src='+$(location).attr('href').substring($(location).attr('href').lastIndexOf('/')+1));
+			// console.log(error.responseText);
+			
+		}
+	});
 }
 //dashboard call ends--------------------------------
 
@@ -46,7 +46,7 @@ $(document).on('click','#logout',function(){
 	$.ajax({
 		async:true,
 		crossDomain:true,
-		url:urlRoot+'employees/logout',
+		url:urlRoot+'logout',
 		type:'GET',
 		headers: {
 			"content-type": "application/json",

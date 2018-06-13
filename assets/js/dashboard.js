@@ -471,7 +471,7 @@ $(document).ready(function(){
                 success:function(data){
                     $(data).each(function(i,val){
                         loadSubtask(data[i]);
-                        actualtimespent+=data[i].actualtime?data[i].actualtime:0;
+                        actualtimespent+=data[i].actual_time?data[i].actual_time:0;
                         $('#tatime').html(actualtimespent);
                         //$(subtid).append(subtaskstxt);
                       });
@@ -602,12 +602,14 @@ $(document).ready(function(){
         $(this).siblings('.timerss').removeClass('hide');
         var subid=$(this).attr('id').split('T')[0];
         var rmv='#'+subid+'clocker';
-        var watchid=$(rmv).find('.time').attr('id');
+        var watchid=$(rmv).find('.start').attr('id');
         console.log("Timerid: "+watchid);
         console.log('Removing '+rmv);
         if(stopwatch.get(watchid).running);
             stopwatch.get(watchid).pause();
-        var timespent= parseFloat(Math.round(stopwatch.get(watchid).getElapsed()/3600000 *100) / 100).toFixed(2)
+            var timespent= parseFloat(Math.round(stopwatch.get(watchid).getElapsed()/3600000 *100) / 100).toFixed(2);
+            stopwatch.get(watchid).stop();
+        
         if(timespent>0.00){
             $.ajax({
                 async: true,
@@ -621,7 +623,10 @@ $(document).ready(function(){
                     "X-CSRFToken":csrftoken
                 },
                 success:function(subtask){
-                    subtask.actualtime+=timespent;
+                    if(subtask.actual_time)
+                        subtask.actual_time+=timespent;
+                    else
+                        subtask.actual_time=timespent;
                     var updstask=JSON.stringify(subtask);
                     $.ajax({
                         async: true,
@@ -651,6 +656,60 @@ $(document).ready(function(){
         $(rmv).remove();
     });
     //clock call starts--------
+    $(document).on('click','.closeme',function(){
+        var subid=$(this).attr('id').split('__')[1];
+        var watchid=$(this).attr('id');
+        console.log("Timerid: "+watchid);
+        if(stopwatch.get(watchid).running);
+            stopwatch.get(watchid).pause();
+        var timespent= parseFloat(Math.round(stopwatch.get(watchid).getElapsed()/3600000 *100) / 100).toFixed(2);
+        stopwatch.get(watchid).stop();
+        
+        if(timespent>0.00){
+            $.ajax({
+                async: true,
+                crossDomain: true,
+                url:urlRoot+'subtasks/'+subid+'/',
+                type:'GET',
+                datatype:'JSON',
+                headers:{
+                    "content-type": "application/json",
+                    "cache-control": "no-cache",
+                    "X-CSRFToken":csrftoken
+                },
+                success:function(subtask){
+                    if(subtask.actual_time)
+                        subtask.actual_time+=timespent;
+                    else
+                        subtask.actual_time=timespent;
+                    var updstask=JSON.stringify(subtask);
+                    $.ajax({
+                        async: true,
+                        crossDomain: true,
+                        url:urlRoot+'subtasks/'+subid+'/',
+                        type:'PUT',
+                        datatype:'JSON',
+                        data:updstask,
+                        headers:{
+                            "content-type": "application/json",
+                            "cache-control": "no-cache",
+                            "X-CSRFToken":csrftoken
+                        },
+                        success:function(subtask){ 
+                            swal('Updated Subtask:'+subtask.title);
+                        },
+                        error:function(error){
+                            console.log(error.responseText);
+                        }
+                    });
+                },
+                error:function(error){
+                    console.log(error.responseText);
+                }
+            });
+        }
+        $(this).parent().parent().parent().parent().remove();
+    });
     $(document).on('click','.timerss',function(){
         var subid=$(this).attr('id').split('T')[0];
         $(this).addClass('hide');
@@ -671,29 +730,32 @@ $(document).ready(function(){
                     console.log('Greater than 10');
                     sbtitle=sbtitle.slice(0,9)+'...';
                 }
-                var clock= `<li class="p-0 m-t-6 watch ${subtask.title}T${subtask.id}" id="${subtask.id}clocker">
+                var clock= `<li class="p-0 m-t-6 watch ${subtask.title}__${subtask.id}" id="${subtask.id}clocker">
                                 <div class="stopwatch" title="${subtask.title}_#${subtask.id}">
                                     <div class="row">
-                                        <div class="col-sm-12" style="overflow:hidden">
+                                        <div class="col-sm-8 p-0" style="overflow:hidden">
                                             <label class="task">${sbtitle}</label>
+                                        </div>
+                                        <div class="col-sm-3 p-0">
+                                            <buton type="link" type="link" class="btn btn-link p-0 closeme" id="${subtask.title}__${subtask.id}">x</button>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-8 p-r-0">
-                                            <label class="time" id="${subtask.title}T${subtask.id}"></label>
+                                            <label class="time" id="${subtask.title}__${subtask.id}time"></label>
                                         </div>
                                         <div class="col-sm-1 p-r-0 p-l-0">
-                                            <button class="start" id="${subtask.title}T${subtask.id}"><span class="glyphicon glyphicon-play"></span></button>
+                                            <button class="start" id="${subtask.title}__${subtask.id}"><span class="glyphicon glyphicon-play"></span></button>
                                         </div>
                                         <div class="col-sm-1 p-l-5">
-                                        <button class="pause" id="${subtask.title}T${subtask.id}"><span class="glyphicon glyphicon-pause"></span></button>
+                                        <button class="pause" id="${subtask.title}__${subtask.id}"><span class="glyphicon glyphicon-pause"></span></button>
                                         </div>
                                     </div>
                                 </div>
                             </li>`
                 $('.watchrow').append(clock);
-                time.set(subtask.title+'T'+subtask.id,document.querySelector('#'+subtask.title+'T'+subtask.id));
-                stopwatch.set(subtask.title+'T'+subtask.id,new Stopwatch(0));    
+                time.set(subtask.title+'__'+subtask.id,document.querySelector('#'+subtask.title+'__'+subtask.id+'time'));
+                stopwatch.set(subtask.title+'__'+subtask.id,new Stopwatch(0));    
             },
             error:function(error){
                 console.log(error.responseText);
@@ -827,10 +889,12 @@ $(document).ready(function(){
         $(document).on('click','.pause',function(){
             var id=$(this).attr('id');
             stopwatch.get(id).pause();
+            
             console.log('TIME: '+stopwatch.get(id).getElapsed()/3600000);
             var timespent=parseFloat(Math.round(stopwatch.get(id).getElapsed()/3600000 *100) / 100).toFixed(2);
             console.log(timespent + 'Hours');
-            var stid=id.split("T")[1];
+            stopwatch.get(id).stop();
+            var stid=id.split("__")[1];
             if(timespent>0.00){
                 $.ajax({
                     async: true,
@@ -844,12 +908,15 @@ $(document).ready(function(){
                         "X-CSRFToken":csrftoken
                     },
                     success:function(subtask){
-                        subtask.actualtime+=timespent;
+                        if(subtask.actual_time)
+                            subtask.actual_time+=timespent;
+                        else
+                            subtask.actual_time=timespent;
                         var updstask=JSON.stringify(subtask);
                         $.ajax({
                             async: true,
                             crossDomain: true,
-                            url:urlRoot+'subtasks/'+stid+'/',
+                            url:urlRoot+'subtasks/'+stid+'/?',
                             type:'PUT',
                             datatype:'JSON',
                             data:updstask,
