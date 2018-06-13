@@ -427,7 +427,22 @@
                 return formatted;
             }
         }
-
+        window.validation = function(){
+            console.log('Ran Once!');
+            var exit = false
+            $('.required').each(function(){
+                if($(this).val()==''||$(this).val()==null){
+                    swal(`${$(this).attr('name')} needs to be filled`);
+                    exit = true;
+                    return false;
+                }   
+            });
+            if(exit){
+                return false
+            }else{
+                return true;
+            }
+        }
         function getCookie(name) {
             var cookieValue = null;
             if (document.cookie && document.cookie !== '') {

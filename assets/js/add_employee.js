@@ -135,6 +135,7 @@ $(document).ready(function () {
 
     ///////////////////////////////////////////  GET REQUEST   /////////////////
     if(update){
+        $('.toShown').removeClass('hide')
         $.getJSON(urlRoot+'employees/'+empId,function(data){
             
             $('#employee_fname').val(data.name);

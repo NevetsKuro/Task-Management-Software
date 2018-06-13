@@ -68,6 +68,7 @@ $(document).ready(function () {
 
     //form data from Organisation
     $.ajax({
+        async:false,
         url: urlRoot+'common/form-data',
         datatype: 'JSON',
         type: 'GET',
@@ -122,6 +123,39 @@ $(document).ready(function () {
             swal('Server is not working:' + data);
         }
     });
+
+    $.ajax({
+        async:false,
+        url: urlRoot+'employees/',
+        datatype: 'JSON',
+        type: 'GET',
+        success: function (data) {
+            employees = data;
+            for (var i = 0; i < employees.length; i++) {
+                $('.lead_managers').append('<option value=' + employees[i].id + '>' + employees[i].name + '</option>');
+            }
+        },
+        error:function(error){
+            console.log(error.responseText);
+        }
+    });
+    function getService(){
+        $('.servicesCat').each(function(){
+            $(this).empty();
+            for (var i = 0; i < globalClient.services.length; i++) {
+                $(this).append('<option value=' + globalClient.services[i].id + '>' + globalClient.services[i].service + '</option>');
+            }
+        });
+    }
+    
+    function getEmployee(){
+        $('.lead_managers').each(function(){
+            $(this).empty();
+            for (var i = 0; i < employees.length; i++) {
+                $(this).append('<option value=' + employees[i].id + '>' + employees[i].name + '</option>');
+            }
+        });
+    }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     var indContactId;
@@ -162,6 +196,7 @@ $(document).ready(function () {
                     datatype:'JSON',
                     success:function(data){
 
+                        AddServiceData(data);
                         var commencement_date = $.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date));
                         $('#client_legalstatus').val(legal).trigger('change');
                         $('#PANNO').val(data.pan_no);
@@ -1459,44 +1494,71 @@ $(document).ready(function () {
     });
 
     //adding Service in client
-    $('#addService').on('click', function () {
+    function addServiceRows(){
         $('#service').append(`
-            <div id="newservice" class="row well">
-                <div class="col-md-4">
-                    <label class="select" id=" ">
-                        <select class="select2 editselect">
-                            <option>#</option>
-                        </select>
-                    </label>
+                <div class="newservice row well">
+                    <div class="col-md-4">
+                        <label class="select" id=" ">
+                            <select class="select2 editselect servicesCat">
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="select">
+                            <select class="select2 lead_managers">
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="input">
+                            <input type="text" class="lead_role">
+                        </label>
+                    </div>
+                    <div id="removeService" class="col-md-1">
+                        <label class="m-l-20 m-t-10">
+                            <span ><i class="glyphicon glyphicon-remove fa-lg text-danger"></i></span>
+                        </label>
+                    </div>
                 </div>
-
-                <div class="col-md-4">
-                    <label class="select" id="">
-                        <select class="select2">
-                            <option>#</option>
-                        </select>
-                    </label>
-                </div>
-                <div class="col-md-3">
-                    <label class="input">
-                        <input type="text" name="Org_name" placeholder="">
-                    </label>
-                </div>
-                <div id="removeService" class="col-md-1">
-                    <label class="m-l-20 m-t-10">
-                        <span ><i class="glyphicon glyphicon-remove fa-lg text-danger"></i></span>
-                    </label>
-                </div>
-            </div>
-            `);
-        $('#service').children('div:last').addClass('zoomInUp animated').show('fast');
-        editSelect();
-    });
+                `);
+            $('#service').children('div:last').addClass('zoomInUp animated').show('fast');
+            editSelect();
+            $('.select2').select2()
+            getService();
+            getEmployee();
+    }
+    $(document).on('click','#addService',addServiceRows);
 
     $('#service').on('click', '#removeService', function () {
-        $(this).parent('#newservice').remove();
+        $(this).parent('.newservice').remove();
     });
 
+    function AddServiceData(data) {
+        for (let i = 0; i < data.managers.length; i++) {
+            if (i > 0) {
+                addServiceRows();
+                $('#service .newservice .servicesCat:last').val(data.managers[i].service).trigger('change');
+                $('#service .newservice .lead_managers:last').val(data.managers[i].manager).trigger('change');
+                $('#service .newservice .lead_role:last').val(data.managers[i].role);
+            } else {
+                $('#service .newservice .servicesCat').val(data.managers[i].service).trigger('change');
+                $('#service .newservice .lead_managers').val(data.managers[i].manager).trigger('change');
+                $('#service .newservice .lead_role').val(data.managers[i].role);
+            }
+        }
+    }
+    var leadArr = [];
+    function getLeadManagement(){
+        var leadObj;
+        $('#service .newservice').each(function(){
+            leadObj = new Object();
+            leadObj.service = $(this).find('.servicesCat').val();
+            leadObj.manager = $(this).find('.lead_managers').val();
+            leadObj.role = $(this).find('.lead_role').val();
+            leadArr.push(leadObj);
+        });
+        return leadArr;
+    }
 
     var dirs;
     getDirectorsRow=function(){
@@ -1666,6 +1728,7 @@ $(document).ready(function () {
                 clientData.services = [];
                 clientData.services.push(1); 
                 clientData.statdocs = stat_documents; 
+                clientData.managers = getLeadManagement();
                 clientData.handle_group = $('#persmissions').is(':checked');
 
                 if (legalStatus == 1) {
@@ -1908,6 +1971,7 @@ $(document).ready(function () {
                 clientData.services = [];
                 clientData.services.push(1);
                 clientData.statdocs = stat_documents;
+                clientData.managers = getLeadManagement();
                 clientData.handle_group = $('#persmissions').is(':checked')
 
                 if (legalStatus == 1) {//Individuals
@@ -2107,7 +2171,6 @@ $(document).ready(function () {
 
                 var clientJSON = JSON.stringify(clientData);
                 console.log(clientJSON);
-                
                 
                 $.ajax({
                     async: true,

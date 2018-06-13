@@ -93,8 +93,8 @@ $(document).ready(function(){
                 <label class="col-xs-2 col-sm-2 input">
                     <input class="empDurationM" type="text">
                 </label>
-                <label class="col-xs-2 col-sm-2 input">
-                    <input class="empCostM" type="text">
+                <label class="col-xs-2 col-sm-2 label">
+                    <span class="empCostM"></span>
                 </label>
                 <label class="col-xs-1 col-sm-1 m-t-10">
                     <i class="glyphicon glyphicon-remove text-danger removeRow"></i>
@@ -162,7 +162,7 @@ $(document).ready(function(){
             perEmp = ctcPerHour * empDuration;
             EmpCost += perEmp; //total employees cost * by its duration.
             console.log(EmpCost);
-            $(this).parentsUntil('.rowEntry').find('.empCostM').val(perEmp);
+            $(this).parentsUntil('.rowEntry').find('.empCostM').html(perEmp);
         });
         AdminCost = (EmpCost*25/100);
         TotalCost = AdminCost + EmpCost;
@@ -176,7 +176,7 @@ $(document).ready(function(){
         console.log(TotalCost+':'+marginCost);
     });
     $(document).on('focus','.feeSubmit',function(){ 
-        var tots = $('#totalFee').val()
+        var tots = $('#totalFee').val();
         if(tots != ''){
             $('.ProposalFee').val(tots);
             $('#FeeProcess').modal('hide');
@@ -188,7 +188,6 @@ $(document).ready(function(){
     $(document).on('click','.removeRow',function(){
         $(this).parentsUntil('.rowEntry').remove();
     });
-    
     
     function checkValidation(){
         var toClient = $('#ProposalToClient').val();

@@ -5,7 +5,7 @@
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-        <title>Add Employee Reimbursements</title>
+        <title>Add Employee</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -27,8 +27,7 @@
         <link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css" rel="stylesheet">
         <link rel="stylesheet" href="Libraries/timepicker/jquery.timepicker.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.3/jquery.timepicker.min.css">
-
+    
         <div id="css"></div>
 
 </head>
@@ -58,8 +57,7 @@
                                     <nav class="c_breadcrumbs">
                                         <ul>
                                             <li><a href="#">Home</a></li>
-                                            <li><a href="#">Employee</a></li>
-                                            <li class="active"><a href="#">Reimbursements</a></li>
+                                            <li class="active"><a href="#">Employee</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -81,91 +79,75 @@
                                 <div class="panel">
 
                                     <div class="panel-body">
-                                        
-
-                                            <form id="emp_reimb" class="sky-form">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <label class="label">Task:
-                                                            <span class="text-danger">*</span>
-                                                        </label>
-                                                        <label class="select">
-                                                            <select id="empR_task" class="select2 required" name="Task"></select>
-                                                        </label>
-                                                    </div>
+                                       
+                                        <form id="" class="sky-form">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <label class="label">Query:
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <label class="textarea">
+                                                        <textarea name='Query' id="query_Query" class="textarea textarea-expandable required"></textarea>
+                                                    </label>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <label class="label">Reimbursement-Type:
-                                                            <span class="text-danger">*</span>
-                                                        </label>
-                                                        <label class="select">
-                                                            <select id="empR_type" class="select2 required" name="Type">
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <label class="label">Particular:</label>
-                                                        <label class="input">
-                                                            <input id="empR_particular" type="text">
-                                                        </label>
-                                                    </div>
+                                                <div class="col-lg-6">
+                                                    <label class="label">Attachment:</label>
+                                                    <label class="input input-file"> 
+                                                        <div class="button">
+                                                            <input update-ctrl="" id="file4" type="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
+                                                        <input id="query_attachment" type="text" readonly="" >    
+                                                    </label>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <label class="label">Date:
-                                                            <span class="text-danger">*</span>
-                                                        </label>
-                                                        <label class="input">
-                                                            <input id="empR_date" type="text" class="datepickr required" name="Date">
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <label class="label">Remarks:
-                                                            <span class="text-danger">*</span>
-                                                        </label>
-                                                        <label class="input">
-                                                            <input id="empR_remarks" type="text" class="required" name="Remarks">
-                                                        </label>
-                                                    </div>
-                                                    <!-- <div class="col-lg-6">
-                                                        <label class="label">Status:</label>
-                                                        <label class="select">
-                                                            <select id="empR_status" class="select2">
-                                                                <option value="A">Approved</option>
-                                                                <option value="N">Not-Approved</option>
-                                                            </select>
-                                                        </label>
-                                                    </div> -->
+                                                <div class="col-lg-6">
+                                                    <label class="label">Link:</label>
+                                                    <label class="input">
+                                                        <input id="query_link" type="text" class="">
+                                                    </label>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="label">Amount:
-                                                            <span class="text-danger">*</span>
-                                                        </div>
-                                                        <div class="input">
-                                                            <input id="empR_amount" type="number" class="required" name="Amount">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 custom_inline">
-                                                        <label class="label m-t-30">is Billable? </label>
-                                                        <label class="checkbox f-s-20 m-t-25">
-                                                            <input id="empR_billable" type="checkbox" class="">
-                                                            <i class='rounded-x m-l-10'></i>
-                                                        </label>
-                                                    </div>
+                                                <div class="col-lg-6">
+                                                    <label class="label">Path:</label>
+                                                    <label class="input">
+                                                        <input type="text" id="query_path">
+                                                    </label>
                                                 </div>
-                                            </form>
+                                                <div class="col-lg-6">
+                                                    <label class="label">To specific Person:
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <label class="select">
+                                                        <select id="query_person" class="select2">
+                                                            <option disabled selected value="">Select..</option>
+                                                            <option value="C">Client</option>
+                                                            <option value="M">Manager</option>
+                                                            <option value="O">Others</option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="label query_label">--:</label>
+                                                    <label class="select">
+                                                        <select id="query_list" class="select2"></select>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="checkbox m-19">
+                                                        <input id="query_notify" type="checkbox">
+                                                        <i></i>
+                                                        <span class="label-font">Send Approval</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 
                                 </div>
                                 <!-- END PANEL -->             
                             
-                                <div class="panel hideOnView">
+                                <div class="panel">
                                     <div class="panel-body">
                                             <footer class="text-right m-t-20">
                                             <button type="reset" class="btn btn-danger btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Reset</button>
-                                            <button id="submit_Reimburse" type="button" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Submit</button>
+                                            <button id="submitQuery" type="submit" class="btn btn-success btn-raised border-rounded float-right m-r-50 m-b-20 p-l-30 p-r-30">Submit</button>
                                             <div class="note"><strong>Note:</strong> Fields marked with <span class="text-danger" >*</span> are to be filled mandatorily.</div>
                                         </footer>
                                     </div>
@@ -298,13 +280,14 @@
 <!--================================/
     /* START CUSTOM SCRIPTS
     /*================================-->
-    
-    <script type="text/javascript" src="Libraries/timepicker/jquery.timepicker.min.js"></script>
 <script src="assets/js/addCss.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
+<script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+<script type="text/javascript" src="Libraries/timepicker/jquery.timepicker.min.js"></script>
 
 <script src="assets/js/subFunc.js" type="text/javascript"></script>
-<script src="assets/js/emp_reimburse.js" type="text/javascript"></script>
+<script src="assets/js/add_raiseQuery.js" type="text/javascript"></script>
 <!--================================/
     /* END CUSTOM SCRIPTS
     /*================================-->

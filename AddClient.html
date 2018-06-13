@@ -208,7 +208,7 @@
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <label class="input">
-                                                                    <input id="individual_fname" class="inpFirstName" type="text" autofocus required>
+                                                                    <input id="individual_fname" class="inpFirstName" type="text" required>
                                                                 </label>
                                                             </div>
                                                             <div class="col-sm-3">
@@ -927,26 +927,26 @@
 
                                                     <fieldset id="service" class="">
 
-                                                        <div class="row well">
+                                                        <div class="newservice row well">
 
                                                             <div class="col-md-4">
-                                                                <label class="label">Service</label>
-                                                                <label class="select" id="service_1">
-                                                                    <selectt entity="Service" id="services" class="select2 editselect servicesCat">
+                                                                <label class="label">Service:</label>
+                                                                <label class="select">
+                                                                    <select entity="Service" class="select2 editselect servicesCat">
                                                                     </select>
                                                                 </label>
                                                             </div>
 
                                                             <div class="col-md-4">
-                                                                <label class="label">Managers</label>
-                                                                <label class="input">
-                                                                    <input type="text" id="RelationshipManagers">
+                                                                <label class="label">Managers:</label>
+                                                                <label class="select">
+                                                                    <select class="select2 lead_managers"></select>
                                                                 </label>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <label class="label">Role</label>
+                                                                <label class="label">Role:</label>
                                                                 <label class="input">
-                                                                    <input type="text" name="Org_name" placeholder="">
+                                                                    <input type="text" class="lead_role">
                                                                 </label>
                                                             </div>
                                                             <div class="col-md-1">
@@ -956,9 +956,9 @@
                                                         </div>
 
                                                     </fieldset>
-                                                    <div id="addService" class="row m-t-30">
+                                                    <div class="row m-t-30">
                                                         <div class="col-sm-2 m-20">
-                                                            <input type="button" class="btn btn-warning buttonDefSize btn-raised" value="Add">
+                                                            <input id="addService" type="button" class="btn btn-warning buttonDefSize btn-raised" value="Add">
                                                         </div>
                                                     </div>
 
@@ -1305,7 +1305,7 @@
     <!-- <script src="assets/pages/jquery.ui-sliders.js"></script> -->
     <!-- <script src="http://www.ungeek.in/calibre/assets/js/subFunc.js" type="text/javascript"></script> -->
     <script src="assets/js/subFunc.js"></script>
-    <script src="assets/js/header.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/header.js" type="text/javascript"></script> -->
     <script src="assets/js/custom_client.js" type="text/javascript"></script>
     <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
     <!-- ================================/

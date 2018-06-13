@@ -22,6 +22,10 @@ $(document).ready(function(){
 
     $(document).on('click','#submitEmpEOD',function(){
 
+
+    var valid = validation();
+
+    if(valid){
         var workdone = $('#eod_workDone').val();
         var subtask = $('#eod_subtask').val();
         var date = getFormateDateToServer($('#eod_date').val());
@@ -81,8 +85,9 @@ $(document).ready(function(){
                 }
             });
         }
+    }
 
-    })
+    });
 
 
 })

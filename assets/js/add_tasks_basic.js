@@ -185,9 +185,23 @@ $(document).ready(function(){
         var id = $('#taskProposal').val()
         $.getJSON(urlRoot+'tasks/proposals/'+id,function(data){
             $('#taskProposalFee').val(data.fees);
-            $('#taskProposalTile').val(data.subject);     
+            $('#taskProposalTile').val(data.subject);
         });
     })
+
+    
+    $(document).on('click','#taskBar',function(){
+        $.getJSON(urlRoot+'tasks/'+tid,function(data){
+            var empCost = data.employeeCost;
+            var adminCost = data.adminCost;
+            var outOfPocket = data.outOfPocket;
+            var profit = data.profit;
+            var tots = empCost + adminCost + outOfPocket;
+            var fees = $('#taskProposalFee').val();
+            var valueIs = fees - profit / tots * 100;
+            $('.pBar').css('width',valueIs);
+        });
+    });
 
     $(document).on('click','.st_transfer',function(){
         $('#AssigneeTransferModal').modal('show');
@@ -498,7 +512,7 @@ $(document).ready(function(){
     $(document).on('change','#taskService',templates);
 
     if(tid){
-        $(document).off('change','#taskService',templates);    
+        $(document).off('change','#taskService',templates);
         $.getJSON(urlRoot+'tasks/'+tid,function(data){
             if(data.isExternal == true){
                 $('#taskType').bootstrapToggle('on');  
