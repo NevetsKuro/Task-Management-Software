@@ -1,11 +1,17 @@
 $(document).ready(function(){
+    var stopwatch=new Map();
+    var time=new Map();
+    $("#that").html("HERE");
+    $("#this").html("Try2");
+    // stopwatch.set('abc',new Stopwatch(109550000));
+    // stopwatch.set('xyz',new Stopwatch(3600000));
 	var taskscomplete=0;
     var actualtimespent=0;
     var taskassigned=0;
     var eventarr= new Array();
     var empid=1;
     datetime();
-    console.log("TOKEN: "+localStorage.getItem('token'));
+    // console.log("TOKEN: ");
     // $.ajax({
     //     async: true,
     //     crossDomain:true,
@@ -13,18 +19,19 @@ $(document).ready(function(){
     //     type:'GET',
     //     datatype:'JSON',
     //     headers:{
-    //         
     //         "content-type": "application/json",
     //         "cache-control": "no-cache",
-    //         "X-CSRFToken":csrftoken
+    //         "X-CSRFToken":csrftoken,
+    //         "Authorization":"Bearer"+localStorage.getItem('token'),
     //     },
     //     success:function(data){
-    //         console.log(data);
+    //         console.log("Users: "+data);
+    //     },
+    //     error:function(error){
+    //         console.log(error.responseText);
     //     }
     // });
-    
-        //EMPLIST-----------------
-
+    //EMPLIST-----------------
         $.ajax({
             async: true,
             crossDomain: true,
@@ -44,24 +51,31 @@ $(document).ready(function(){
                 $(emplist).each(function(i,val){
                     var email=emplist[i].email?emplist[i].email:'Not in records';
                     var phone=emplist[i].phone?emplist[i].phone:'Not in records';
+                    var gen='';
+                    if(emplist[i].title==1){
+                        gen='man';
+                    }
+                    if(emplist[i].title==2){
+                        gen='woman';
+                    }
                     empdis+=`<div class="panel panel-default m-t-5 p-0">
                                 <div class="panel-body p-10">
-                                    <div class="row">
-                                        <div class=" col-sm-3">
-                                            <label class="input">Name: </label>
-                                            `+emplist[i].name+`
+                                    <div class="row" style="line-height:30px; vertical-align:middle">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-2 input p-l-8" style="font-size:30px;">
+                                                <i class="linear-icons li icon-`+gen+` p-0 m-0" aria-hidden="true" ></i> 
+                                            </label>
+                                            <div class="col-sm-10">
+                                            `+emplist[i].name+`(`+emplist[i].designation+`)
+                                            </div>
                                         </div>
                                         <div class="col-sm-3">
-                                            <label class="input">Designation: </label>
-                                            `+emplist[i].designation+`
+                                            <label class="input"><span class="glyphicon glyphicon-envelope"></span></label>
+                                             `+email+`
                                         </div>
-                                        <div class="col-sm-3">
-                                            <label class="input">Email: </label>
-                                            `+email+`
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <label class="input">Phone: </label>
-                                            `+phone+`
+                                        <div class="col-sm-2">
+                                            <label class="input"><span class="glyphicon glyphicon-earphone"></span></label>
+                                             `+phone+`
                                         </div>
                                     </div>
                                 </div>
@@ -101,17 +115,15 @@ $(document).ready(function(){
     //notes add edit----------
         $(document).on('click','.notesave',function(){
             var req="POST";
-            var urlf=urlRoot+'widgets/note/'+empid+'/';
-            var notesidd=$(this).attr('id').split('T')[0];
+            var urlf=urlRoot+'widgets/note/';
+            var notesidd=$(this).attr('id');
             var emp=1;
             var ntext=$('#notearea').val();
             var data=new Object();
             data.content=ntext;
             data.employee=emp;
             if(notesidd){
-                //edit request
-                //urlf=urlRoot+'widgets/note/'+empid;
-                //data.id=notesid;
+                urlf=urlf+empid+'/';
                 req="PUT";
             }
             note=JSON.stringify(data);
@@ -158,7 +170,7 @@ $(document).ready(function(){
                                     <!--button type="button" class="btn btn-info btn-flat edittodo dashbutton" id="`+todoitem.id+`Tedit" title="Edit ToDo Item">
                                         <span class="icon icon-pencil add-new"></span>
                                     </button-->
-                                    <button type="button" class="btn btn-danger btn-flat deltodo dashbutton" id="`+todoitem.id+`Tedit" title="Delete ToDo Item">
+                                    <button type="button" class="btn btn-danger btn-flat rippler deltodo dashbutton" id="`+todoitem.id+`Tedit" title="Delete ToDo Item">
                                         <i class="fa fa-close"></i>
                                     </button>
                                 </div>
@@ -182,7 +194,7 @@ $(document).ready(function(){
                                             <!--button type="button" class="btn btn-info btn-flat edittodo dashbutton" id="`+todoitem.id+`Tedit" title="Edit ToDo Item">
                                                 <span class="icon icon-pencil add-new"></span>
                                             </button-->
-                                            <button type="button" class="btn btn-danger btn-flat deltodo dashbutton" id="`+todoitem.id+`Tedit" title="Delete ToDo Item">
+                                            <button type="button" class="btn btn-danger btn-flat rippler deltodo dashbutton" id="`+todoitem.id+`Tedit" title="Delete ToDo Item">
                                                 <i class="fa fa-close"></i>
                                             </button>
                                         </div>
@@ -195,7 +207,7 @@ $(document).ready(function(){
     //--------------------------
     //todolist add--------------        
     $(document).on('click','.savetodo',function(){
-        var note,status;
+        var note,status,date,time,subtask;
         if((a=$('#todonote').val())!='')
             note=a;
         else{
@@ -215,19 +227,23 @@ $(document).ready(function(){
             return false;
         }
         if((a=$('.TodoTime').val())!='')
-            time=a;
+            time=a+':00Z';
         else{
             swal('Select Date');
             return false;
         }
+        if((a=$('.SubTask_list').val())!='')
+            subtask=a.split("T")[0];
+        else{
+            subtask=null;
+        }
         var todobj=new Object();
-        todobj.note=$('#todonote').val();
-        todobj.status=$('.subtaskstatus').val();
+        todobj.note=note;
+        todobj.status=status;
         todobj.date=getFormateDateToServer(date);
-        todobj.time=time+':00Z';
+        todobj.time=time;
         todobj.employee=empid;
-        // todobj.sub_task=$('.SubTask_list').val();
-        
+        todobj.sub_task=subtask; 
         var tododata=JSON.stringify(todobj);
         console.log('JSON '+tododata);
         $.ajax({
@@ -238,13 +254,15 @@ $(document).ready(function(){
             datatype:'JSON',
             data:tododata,
             headers:{
-                "content-type": "application/x-www-form-urlencoded",
+                "content-type": "application/json",
                 "cache-control": "no-cache",
             },
             success:function(todolist){
                 var tdlist='';
                 tdlist+=todoAdder(todolist);
                 $('#todoli').append(tdlist);
+                $('#form_id').trigger("reset");
+                $('#modal-responsive').modal('hide');
             },
             error:function(error){
                 console.log(error.responseText);
@@ -268,7 +286,7 @@ $(document).ready(function(){
                 var tdlist='';
                 if(todolist){
                     $(todolist).each(function(i,val){
-                        tdlist+=todoAdder(todolist[i]) 
+                        tdlist+=todoAdder(todolist[i]);
                     });
                     $('#todoli').html(tdlist);
                 }
@@ -327,15 +345,12 @@ $(document).ready(function(){
                     error:function(error){
                         console.log(error.responseText);
                     }
-                });
-    
-                
+                }); 
             },
             error:function(error){
                 console.log(error.responseText);
             }
-        });  
-                
+        });             
     });
     //todolist edit ends--------
     //todolist delete-----------
@@ -427,8 +442,8 @@ $(document).ready(function(){
                                             <div class="m-l-30 p-t-10">`+data[i].title+`</div>
                                             <a class="collapsed" style="" data-toggle="collapse" data-parent="#accordion" href="#`+data[i].id+`" aria-expanded="false" class="collapsed">
                                                 <div class="progress p-0 m-0" style="height:30px;">   
-                                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="20" aria-valuemax="20" style="width:`+complete+`%; height:50px;color:#A9A9A9;background-color:`+color+`"></div>
-                                                    <div class="m-5" style=font-size:20px;vertical-align: middle; line-height:10px;">`+complete+`% </div>
+                                                    <div class="progress-bar progress-bar-striped active" id="`+data[i].id+`tskprg" role="progressbar" aria-valuemin="20" aria-valuemax="20" style="width:`+complete+`%; height:50px;color:#A9A9A9;background-color:`+color+`"></div>
+                                                    <div class="m-5" style=font-size:20px;vertical-align: middle; line-height:10px;" id="`+data[i].id+`tprg">`+complete+`% </div>
                                                 </div>
                                             </a>
                                         </h4>
@@ -533,6 +548,9 @@ $(document).ready(function(){
                                         <button type="button" class="btn btn-warning btn-raised rippler timerss dashbutton" id="`+subtask.id+`Tsimer" title="Start Timer">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         </button>
+                                        <button type="button" class="btn btn-warning btn-raised rippler timersend dashbutton hide" id="`+subtask.id+`Tsimer" title="Remove Timer">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        </button>
                                         <a href="Tasks_Form.html?tid=`+subtask.task+`" type="button" class="btn btn-adn btn-raised rippler viewsbt dashbutton" id="`+subtask.id+`Tview" title="View Details" style="vertical-align:middle">
                                             <i class="font-awesome fa fa-eye m-t-6" aria-hidden="true"></i>
                                         </a>
@@ -577,10 +595,66 @@ $(document).ready(function(){
             }
         });
     });
+    //clock ends starts--------
+    //clocks start end---------
+    $(document).on('click','.timersend',function(){
+        $(this).addClass('hide');
+        $(this).siblings('.timerss').removeClass('hide');
+        var subid=$(this).attr('id').split('T')[0];
+        var rmv='#'+subid+'clocker';
+        var watchid=$(rmv).find('.time').attr('id');
+        console.log("Timerid: "+watchid);
+        console.log('Removing '+rmv);
+        if(stopwatch.get(watchid).running);
+            stopwatch.get(watchid).pause();
+        var timespent= parseFloat(Math.round(stopwatch.get(watchid).getElapsed()/3600000 *100) / 100).toFixed(2)
+        if(timespent>0.00){
+            $.ajax({
+                async: true,
+                crossDomain: true,
+                url:urlRoot+'subtasks/'+subid+'/',
+                type:'GET',
+                datatype:'JSON',
+                headers:{
+                    "content-type": "application/json",
+                    "cache-control": "no-cache",
+                    "X-CSRFToken":csrftoken
+                },
+                success:function(subtask){
+                    subtask.actualtime+=timespent;
+                    var updstask=JSON.stringify(subtask);
+                    $.ajax({
+                        async: true,
+                        crossDomain: true,
+                        url:urlRoot+'subtasks/'+subid+'/',
+                        type:'PUT',
+                        datatype:'JSON',
+                        data:updstask,
+                        headers:{
+                            "content-type": "application/json",
+                            "cache-control": "no-cache",
+                            "X-CSRFToken":csrftoken
+                        },
+                        success:function(subtask){ 
+                            swal('Updated Subtask:'+subtask.title);
+                        },
+                        error:function(error){
+                            console.log(error.responseText);
+                        }
+                    });
+                },
+                error:function(error){
+                    console.log(error.responseText);
+                }
+            });
+        }
+        $(rmv).remove();
+    });
     //clock call starts--------
-    
     $(document).on('click','.timerss',function(){
         var subid=$(this).attr('id').split('T')[0];
+        $(this).addClass('hide');
+        $(this).siblings('.timersend').removeClass('hide');
         $.ajax({
             crossDomain: true,
             url:urlRoot+'subtasks/'+subid,
@@ -592,7 +666,34 @@ $(document).ready(function(){
                 "X-CSRFToken":csrftoken
             },
             success:function(subtask){
-                
+                var sbtitle=subtask.title;
+                if(sbtitle.length>10){
+                    console.log('Greater than 10');
+                    sbtitle=sbtitle.slice(0,9)+'...';
+                }
+                var clock= `<li class="p-0 m-t-6 watch ${subtask.title}T${subtask.id}" id="${subtask.id}clocker">
+                                <div class="stopwatch" title="${subtask.title}_#${subtask.id}">
+                                    <div class="row">
+                                        <div class="col-sm-12" style="overflow:hidden">
+                                            <label class="task">${sbtitle}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-8 p-r-0">
+                                            <label class="time" id="${subtask.title}T${subtask.id}"></label>
+                                        </div>
+                                        <div class="col-sm-1 p-r-0 p-l-0">
+                                            <button class="start" id="${subtask.title}T${subtask.id}"><span class="glyphicon glyphicon-play"></span></button>
+                                        </div>
+                                        <div class="col-sm-1 p-l-5">
+                                        <button class="pause" id="${subtask.title}T${subtask.id}"><span class="glyphicon glyphicon-pause"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>`
+                $('.watchrow').append(clock);
+                time.set(subtask.title+'T'+subtask.id,document.querySelector('#'+subtask.title+'T'+subtask.id));
+                stopwatch.set(subtask.title+'T'+subtask.id,new Stopwatch(0));    
             },
             error:function(error){
                 console.log(error.responseText);
@@ -658,6 +759,35 @@ $(document).ready(function(){
                         $('#'+subtask.id+'Tprogtxt').addClass('hide');
                         $('#'+subtask.id+'Tsave').addClass('hide');
                         $('#'+subtask.id+'Tcomplete').removeClass('hide');
+
+                        $.ajax({
+                            async: true,
+                            crossDomain: true,
+                            url:urlRoot+'tasks/'+subtask.task+'/',
+                            type:'GET',
+                            datatype:'JSON',
+                            headers:{
+                                "content-type": "application/json",
+                                "cache-control": "no-cache",
+                                "X-CSRFToken":csrftoken
+                            },
+                            success:function(task){
+                                $('#'+task.id+'tskprg').css("width",task.completed+'%');
+                                if(task.completed>=100){
+                                    $('#'+task.id+'tskprg').css("background-color",'green');
+                                }
+                                if(task.completed<10){
+                                    $('#'+task.id+'tskprg').css("background-color",'red');
+                                }
+                                if(task.completed>=10 && subtask.completed<100){
+                                    $('#'+task.id+'tskprg').css("background-color",'#fcc016');
+                                }
+                                $('#'+task.id+'tprg').html(task.completed+'%');
+                            },
+                            error:function(error){
+                                console.log(error.responseText);
+                            }
+                        });
                     },
                     error:function(error){
                         console.log(error.responseText);
@@ -690,5 +820,62 @@ $(document).ready(function(){
         });
     });
     //delete subtask ends--------------
+        $(document).on('click','.start',function(){
+            var id=$(this).attr('id')
+            stopwatch.get(id).start();
+        });
+        $(document).on('click','.pause',function(){
+            var id=$(this).attr('id');
+            stopwatch.get(id).pause();
+            console.log('TIME: '+stopwatch.get(id).getElapsed()/3600000);
+            var timespent=parseFloat(Math.round(stopwatch.get(id).getElapsed()/3600000 *100) / 100).toFixed(2);
+            console.log(timespent + 'Hours');
+            var stid=id.split("T")[1];
+            if(timespent>0.00){
+                $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url:urlRoot+'subtasks/'+stid+'/',
+                    type:'GET',
+                    datatype:'JSON',
+                    headers:{
+                        "content-type": "application/json",
+                        "cache-control": "no-cache",
+                        "X-CSRFToken":csrftoken
+                    },
+                    success:function(subtask){
+                        subtask.actualtime+=timespent;
+                        var updstask=JSON.stringify(subtask);
+                        $.ajax({
+                            async: true,
+                            crossDomain: true,
+                            url:urlRoot+'subtasks/'+stid+'/',
+                            type:'PUT',
+                            datatype:'JSON',
+                            data:updstask,
+                            headers:{
+                                "content-type": "application/json",
+                                "cache-control": "no-cache",
+                                "X-CSRFToken":csrftoken
+                            },
+                            success:function(subtask){ 
+                                swal('Updated Subtask:'+subtask.title);
+                            },
+                            error:function(error){
+                                console.log(error.responseText);
+                            }
+                        });
+                    },
+                    error:function(error){
+                        console.log(error.responseText);
+                    }
+                });
+            }
+        });
+        setInterval(function() {
+            time.forEach(function(value,key){
+            value.innerHTML=stopwatch.get(key);
+            });
+        }, 1000);
 
 });

@@ -1,6 +1,5 @@
 
 $(document).ready(function(){
-
 var h='';
 
 
@@ -27,6 +26,33 @@ h+= '                        <span class="icon-bar"></span> <span class="icon-ba
 h+= '                    </button>' ;
 h+= '                </div>' ;
 h+= '                <div class="collapse navbar-collapse bs-example-js-navbar-collapse" style="height: auto; outline: 0px;">' ;
+h+=`<div class="nav navbar-nav nav-left mob-hide" style="width:90%">
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="watchrow">
+                    <!--li class="p-0 m-t-1 watch">
+                        <div class="stopwatch">
+                            <label class="task" id="this">Here</label>
+                            <label class="time" id="abc"></label>
+                            <button class="start" id="abc"><span class="glyphicon glyphicon-play"></span></button>
+                            <button class="pause" id="abc"><span class="glyphicon glyphicon-pause"></span></button>
+                        </div>
+                    </li>
+                    <li class="p-0 m-t-1 watch">
+                        <div class="stopwatch">
+                            <label class="task" id="that">Here</label>
+                            <label class="time" id="xyz"></label>
+                            <button class="start" id="xyz"><span class="glyphicon glyphicon-play"></span></button>
+                            <button class="pause" id="xyz"><span class="glyphicon glyphicon-pause"></span></button>
+                        </div>
+                    </li-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+`
+
 // h+= '                    <!-- End Navbar Left-->' ;
 // h+= '                    <ul class="nav navbar-nav nav-left mob-hide">' ;
 // h+= '                        <li class="dropdown"> <a href="http://lancecoder.com/themes/calibre/layouts/iconic/index.php#" data-toggle="dropdown">Dropdown</a>' ;
@@ -126,9 +152,9 @@ h+= '                                <li>' ;
 h+= '                                    <div role="tabpanel" class="">' ;
 h+= '                                        <!-- Nav tabs -->' ;
 h+= '                                        <ul class="nav nav-tabs nav-justified" role="tablist">' ;
-h+= '                                            <li role="presentation" class="active"><a href="http://lancecoder.com/themes/calibre/layouts/iconic/index.php#notif-tasks" role="tab" data-toggle="tab"><i class="fa icon-menu-square fa-fw"></i></a></li>' ;
-h+= '                                            <li role="presentation"><a href="http://lancecoder.com/themes/calibre/layouts/iconic/index.php#notif-messages" role="tab" data-toggle="tab"><i class="fa icon-envelope fa-fw"></i></a></li>' ;
-h+= '                                            <li role="presentation"><a href="http://lancecoder.com/themes/calibre/layouts/iconic/index.php#notif-app" role="tab" data-toggle="tab"><i class="fa icon-warning fa-fw"></i></a></li>' ;
+h+= '                                            <li role="presentation" class="active"><a href="http://lancecoder.com/themes/calibre/layouts/iconic/index.php#notif-tasks" role="tab" data-toggle="tab"><i class="font-awesome fa fa-tasks" aria-hidden="true"></i></a></li>' ;
+h+= '                                            <li role="presentation"><a href="http://lancecoder.com/themes/calibre/layouts/iconic/index.php#notif-approval" role="tab" data-toggle="tab"><i class="font-awesome fa fa-check" aria-hidden="true"></i></a></li>' ;
+h+= '                                            <li role="presentation"><a href="http://lancecoder.com/themes/calibre/layouts/iconic/index.php#notif-general" role="tab" data-toggle="tab"><i class="fa icon-warning fa-fw"></i></a></li>' ;
 h+= '                                        </ul>' ;
 h+= '                                        <!-- Tab panes -->' ;
 h+= '                                        <div class="tab-content">' ;
@@ -143,7 +169,7 @@ h+= '                                                            <li>' ;
 h+= '                                                                <div class="alert alert-dismissable alert-styled alert-flat alert-extended">' ;
 h+= '                                                                    <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>' ;
 h+= '                                                                    <strong><a href="http://lancecoder.com/themes/calibre/layouts/iconic/index.php#">Laravel Login Customization</a></strong> ' ;
-h+= '                                                                    <p>Consectetur adipiscing elit molestie lorem at</p>' ;
+h+= '                                                                    <p>TASKS SECTION</p>' ;
 h+= '                                                                    <div class="progress progress-xs">' ;
 h+= '                                                                        <div class="progress-bar bg-info ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" data-transitiongoal="74" aria-valuenow="0" style="width: 74%;" aria-valuemin="0" aria-valuemax="100"><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div></div>' ;
 h+= '                                                                    </div>' ;
@@ -186,7 +212,7 @@ h+= '                                                    </div><!--/notif-footer
 
 h+= '                                                </div><!--/notif-wrapper-->' ;
 h+= '                                            </div>' ;
-h+= '                                            <div role="tabpanel" class="tab-pane fade" id="notif-messages">' ;
+h+= '                                            <div role="tabpanel" class="tab-pane fade" id="notif-approval">' ;
 h+= '                                                <div class="notif-wrapper">' ;
 h+= '                                                    <div class="notif-header">' ;
 h+= '                                                        <h5>You have 25 unread messages</h5>' ;
@@ -203,7 +229,7 @@ h+= '                                                                    </div>'
 h+= '                                                                    <div class="message">' ;
 h+= '                                                                        <strong><a href="http://lancecoder.com/themes/calibre/layouts/iconic/index.php#">Juan Dela Cruz</a><span class="timeago">Just now</span></strong> ' ;
 
-h+= '                                                                        <p>Consectetur adipiscing elit molestie lorem at</p>' ;
+h+= '                                                                        <p>APPROVAL</p>' ;
 h+= '                                                                    </div>' ;
 
 h+= '                                                                </div>' ;
@@ -260,7 +286,7 @@ h+= '                                                    </div><!--/notif-footer
 
 h+= '                                                </div><!--/notif-wrapper-->' ;
 h+= '                                            </div>' ;
-h+= '                                            <div role="tabpanel" class="tab-pane fade" id="notif-app">' ;
+h+= '                                            <div role="tabpanel" class="tab-pane fade" id="notif-general">' ;
 h+= '                                                <div class="notif-wrapper">' ;
 h+= '                                                    <div class="notif-header">' ;
 h+= '                                                        <h5>You have 4 important system notice</h5>' ;
@@ -271,7 +297,7 @@ h+= '                                                            <li>' ;
 h+= '                                                                <div class="alert alert-danger alert-dismissable alert-styled alert-flat alert-extended">' ;
 h+= '                                                                    <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>' ;
 h+= '                                                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>' ;
-h+= '                                                                    <span class="message">Meet maximum data usage.</span>' ;
+h+= '                                                                    <span class="message">GENERAL SECTION</span>' ;
 h+= '                                                                </div>' ;
 h+= '                                                            </li>' ;
 h+= '                                                            <li>' ;
@@ -354,3 +380,30 @@ $('#divHeader').html(h);
 
 
 });
+
+// var socket = io.connect('https://notification-server1.herokuapp.com');
+//     socket.emit('authentication', { token : localStorage.getItem('token') });
+//     socket.on('notification',function(data){
+//         console.log(data);
+//     var text=    `<li>
+//                     <div class="alert alert-danger alert-dismissable alert-styled alert-flat alert-extended">
+//                         <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+//                         <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+//                         <span class="message">${data.notification.message}</span>
+//                     </div>
+//                 </li>`
+    
+//     if(data.notification.category=='T'){
+//         $('#notif-tasks').find('ul').append(text);
+//         console.log('appended to tasks');
+//     }
+//     if(data.notification.category=='A'){
+//         $('#notif-approval').find('ul').append(text);
+//         console.log('appended to approval');
+//     }
+//     if(data.notification.category=='G'){
+//         $('#notif-general').find('ul').append(text);
+//         console.log('appended to general');
+//     }
+        
+    // });
