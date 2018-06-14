@@ -401,6 +401,10 @@ $(document).ready(function(){
             //     $('.variant-2').addClass('color-3');
             // if(eff>=110)
             //     $('.variant-2').addClass('color-4');
+            var srev=emp.self_revenue?emp.self_revenue:0;
+            var trev=emp.team_revenue?emp.team_revenue:0;
+            $('#selfrev').html(srev);
+            $('#teamrev').html(trev);
             $('#empcode').html(emp.code);
             $('#empeff').html(eff);
         }
@@ -408,7 +412,7 @@ $(document).ready(function(){
     $.ajax({
         async: true,
         crossDomain: true,
-        url:urlRoot+'tasks/?assignee='+1,
+        url:urlRoot+'tasks/?assignee='+empid,
         type:'GET',
         datatype:'JSON',
         headers: {
@@ -470,9 +474,9 @@ $(document).ready(function(){
                 },
                 success:function(data){
                     $(data).each(function(i,val){
+                        
                         loadSubtask(data[i]);
-                        actualtimespent+=data[i].actual_time?data[i].actual_time:0;
-                        $('#tatime').html(actualtimespent);
+                        
                         //$(subtid).append(subtaskstxt);
                       });
                 },
@@ -497,6 +501,12 @@ $(document).ready(function(){
     }); 
     //sbt completion change form open call starts------
     function loadSubtask(subtask){
+        var actime=0;
+        actime=parseFloat(subtask.actual_time);
+        console.log(subtask.title+": "+actime);
+        if(actime)
+            actualtimespent+=actime;
+        $('#tatime').html(actualtimespent);
         var subcolor='';
         var bcolor='';
         var eff=subtask.efficiency;
@@ -607,7 +617,7 @@ $(document).ready(function(){
         console.log('Removing '+rmv);
         if(stopwatch.get(watchid).running);
             stopwatch.get(watchid).pause();
-            var timespent= parseFloat(Math.round(stopwatch.get(watchid).getElapsed()/3600000 *100) / 100).toFixed(2);
+            var timespent= parseFloat(Math.round(stopwatch.get(watchid).getElapsed()/3600000 *100) / 100);
             stopwatch.get(watchid).stop();
         
         if(timespent>0.00){
@@ -662,7 +672,7 @@ $(document).ready(function(){
         console.log("Timerid: "+watchid);
         if(stopwatch.get(watchid).running);
             stopwatch.get(watchid).pause();
-        var timespent= parseFloat(Math.round(stopwatch.get(watchid).getElapsed()/3600000 *100) / 100).toFixed(2);
+        var timespent= parseFloat(Math.round(stopwatch.get(watchid).getElapsed()/3600000 *100) / 100);
         stopwatch.get(watchid).stop();
         
         if(timespent>0.00){
@@ -891,7 +901,7 @@ $(document).ready(function(){
             stopwatch.get(id).pause();
             
             console.log('TIME: '+stopwatch.get(id).getElapsed()/3600000);
-            var timespent=parseFloat(Math.round(stopwatch.get(id).getElapsed()/3600000 *100) / 100).toFixed(2);
+            var timespent=parseFloat(Math.round(stopwatch.get(id).getElapsed()/3600000 *100) / 100);
             console.log(timespent + 'Hours');
             stopwatch.get(id).stop();
             var stid=id.split("__")[1];
