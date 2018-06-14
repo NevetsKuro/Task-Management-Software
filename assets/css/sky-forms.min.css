@@ -101,8 +101,9 @@
 }
 
 .sky-form .progress {
-    float: right;
-    margin-top: 10px;
+    /* float: right;
+    margin-top: 10px; */
+    /* margin: 3px; */
     line-height: 39px;
     color: #232323
 }

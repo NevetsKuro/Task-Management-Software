@@ -273,3 +273,7 @@ body>div.ui-timepicker-wrapper {
 #btnsubmit{
 	color: white!important;
 }
+.samHei{
+	height:30px!important;
+	border-radius:4px;
+}

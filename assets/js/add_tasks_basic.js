@@ -190,16 +190,24 @@ $(document).ready(function(){
     })
 
     
-    $(document).on('click','#taskBar',function(){
+    $(document).on('click','#taskBar',function(e){
+        e.preventDefault();
         $.getJSON(urlRoot+'tasks/'+tid,function(data){
             var empCost = data.employeeCost;
             var adminCost = data.adminCost;
             var outOfPocket = data.outOfPocket;
             var profit = data.profit;
             var tots = empCost + adminCost + outOfPocket;
-            var fees = $('#taskProposalFee').val();
-            var valueIs = fees - profit / tots * 100;
-            $('.pBar').css('width',valueIs);
+            // var fees = $('#taskProposalFee').val();
+            var valueIs = parseInt(profit / tots * 100);
+            $('.pBar').css('width',valueIs+'%');
+            if(valueIs<5){
+                $('#tab2 > div.row.m-10 > div.col-lg-12.m-t-20 > div > div.progress-bar').css('background-color','#fb2e2e');
+            }else if(valueIs<25&&valueIs>5){
+                $('#tab2 > div.row.m-10 > div.col-lg-12.m-t-10 > div > div.progress-bar').css('background-color','#ffb81a');
+            }else if(25<valueIs){
+                $('#tab2 > div.row.m-10 > div.col-lg-12.m-t-10 > div > div.progress-bar').css('background-color','#28b10f');
+            }
         });
     });
 
@@ -415,38 +423,77 @@ $(document).ready(function(){
         });
     }
     ///////////////////////////////////////////////// Prefilled Data /////////////////////////////////////////////
-    $.getJSON(urlRoot+'common/form-data',function(data){
-        for (var i = 0; i < data.services.length; i++) {
-            $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
-        }
-        for (var i = 0; i < data.task_status.length; i++) {
-            $('.SubTask_Status').append('<option value='+data.task_status[i].id+'>'+data.task_status[i].status+'</option>');
-            $('#taskStatus').append('<option value='+data.task_status[i].id+'>'+data.task_status[i].status+'</option>');
-        }
-    });
+    
+      $.ajax({
+          async:false,
+          url:urlRoot+'common/form-data',
+          type:'GET',
+          datatype:'JSON',
+          success:function(data){
+            for (var i = 0; i < data.services.length; i++) {
+                $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
+            }
+            for (var i = 0; i < data.task_status.length; i++) {
+                $('.SubTask_Status').append('<option value='+data.task_status[i].id+'>'+data.task_status[i].status+'</option>');
+                $('#taskStatus').append('<option value='+data.task_status[i].id+'>'+data.task_status[i].status+'</option>');
+            }
+          }
+      })
+      $.ajax({
+          async:false,
+          url:urlRoot+'clients/allclients/',
+          type:'GET',
+          datatype:'JSON',
+          success:function(data){
+            for (var i = 0; i < data.length; i++) {
+                $('#taskClients').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+            }
+          }
+      })
+      $.ajax({
+          async:false,
+          url:urlRoot+'tasks/proposals/',
+          type:'GET',
+          datatype:'JSON',
+          success:function(data){
+            for (var i = 0; i < data.length; i++) {
+                $('#taskProposal').append('<option value='+data[i].id+'>'+data[i].proposalNumber+'</option>');
+            }
+          }
+      })
+      
+        var emp='';
+      $.ajax({
+          async:false,
+          url:urlRoot+'employees/',
+          type:'GET',
+          datatype:'JSON',
+          success:function(data){
+            for (var i = 0; i < data.length; i++) {
+                $('#taskController').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+            }
+            for (var i = 0; i < data.length; i++) {
+                $('#taskApprover').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+            }
+            emp=data;
+            fillAssignee();
+          }
+      })
 
-    $.getJSON(urlRoot+'clients/allclients',function(data){
-        for (var i = 0; i < data.length; i++) {
-            $('#taskClients').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
-        }
-    });
+    // $.getJSON(urlRoot+'common/form-data',function(data){
+        
+    // });
 
-    $.getJSON(urlRoot+'tasks/proposals',function(data){
-        for (var i = 0; i < data.length; i++) {
-            $('#taskProposal').append('<option value='+data[i].id+'>'+data[i].proposalNumber+'</option>');
-        }
-    });
-    var emp='';
-    $.getJSON(urlRoot+'employees',function(data){
-        for (var i = 0; i < data.length; i++) {
-            $('#taskController').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
-        }
-        for (var i = 0; i < data.length; i++) {
-            $('#taskApprover').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
-        }
-        emp=data;
-        fillAssignee();
-    });
+    // $.getJSON(,function(data){
+        
+    // });
+
+    // $.getJSON(,function(data){
+        
+    // });
+    // $.getJSON(,function(data){
+        
+    // });
 
     function fillAssignee(){
         for (var i = 0; i < emp.length; i++) {
@@ -521,7 +568,7 @@ $(document).ready(function(){
                 $('#Add_R_D').removeClass('hide');
             }
             $('#taskTitle').val(data.title);
-            $('#taskClients').val(data.clients).trigger('change');
+            $('#taskClients').val(data.client).trigger('change');
             $('#taskService').val(data.service).trigger('change');
             var rangeSlider = $("#range_02").data('ionRangeSlider');
             rangeSlider.update({from:data.priority});
@@ -543,6 +590,10 @@ $(document).ready(function(){
             $('#taskController').val(data.controller).trigger('change');
             $('#taskApprover').val(data.approver).trigger('change');
             $('#taskClientsView').val(data.showToClient);
+            if(data.adminCost||data.employeeCost||data.outOfPocket){
+                var cost = data.adminCost + data.employeeCost + data.outOfPocket;
+                $('#taskCost').val(cost);
+            }
             fillSubTask(tid);
         });
     }

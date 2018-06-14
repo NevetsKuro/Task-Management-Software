@@ -226,14 +226,22 @@
                                 <!--****** Start Colored Modal Footer******-->
                                 </div>
 
-                               
-                                
-                             
-                                
                             <div class="panel">
 
                                 <div class="panel-body panel-bodyContact">
 
+                                    <div class="row sky-form m-b-15 m-l-10">
+                                            <div class="col-sm-4">
+                                                <label class="label">Originator:
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <label class="select">
+                                                    <select id="addContact_originator" class="select2" required>
+                                                        <option default value="">Select...</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                    </div>
                                     <!-- ADDITIOAL INFORMATION -->
                                     <div id="new-form" class="col-sm-12">
 
@@ -250,7 +258,7 @@
                                                     </a>
                                                 </li>
                                                 <li role="presentation">
-                                                    <a href="#tab3" data-toggle="tab">
+                                                    <a href="#tab3" data-toggle="tab" class="hide">
                                                         <i class="icon-document"></i> Lead Management
                                                     </a>
                                                 </li>
@@ -708,16 +716,6 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-6">
-                                                                <label class="label">Originator:
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
-                                                                <label class="select">
-                                                                    <select id="addContact_originator" class="select2" required>
-                                                                        <option default value="">Select...</option>
-                                                                    </select>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-sm-6">
                                                                 <label class="label">Assignee:
                                                                     <span class="text-danger">*</span>
                                                                 </label>
@@ -727,8 +725,6 @@
                                                                     </select>
                                                                 </label>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
                                                             <div class="col-sm-6">
                                                                 <label class="label col-sm-10">Potential Service:
                                                                     <span class="text-danger">*</span>
@@ -873,7 +869,7 @@
     <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
     <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
     <script src="assets/js/subFunc.js" type="text/javascript"></script>
-    <script src="assets/js/header.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/header.js" typ  e="text/javascript"></script> -->
     <script src="assets/js/custom_contact.js" type="text/javascript"></script>
 </body>
 
