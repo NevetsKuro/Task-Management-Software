@@ -196,7 +196,7 @@
                                                                         <div class="col-lg-4">
                                                                             <label class="label">Duration:</label>
                                                                             <label class="input">
-                                                                                <input id="taskDuration" type="text" class="" placeholder="HH.MM">
+                                                                                <input id="taskDuration" type="text" class="valid_duration" placeholder="HH.MM">
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-lg-4">
@@ -221,7 +221,7 @@
                                                                             <label class="input col-lg-12 lNega10">
                                                                                 <i class="icon-append  icon-calendar-31 text-primary f-s-15 right-12"></i>
                                                                                 <input id="taskSdate" type="text" class="datepickr" placeholder="Date">
-                                                                                <i class="icon-append  icon-clock3 text-primary f-s-15 right-12"></i>
+                                                                                <!-- <i class="icon-append  icon-clock3 text-primary f-s-15 right-12"></i> -->
                                                                                 <input id="taskStime" type="text" class="timepicker" placeholder="Time">
                                                                             </label>
                                                                         </div>
@@ -230,7 +230,7 @@
                                                                             <label class="input col-lg-12 lNega10">
                                                                                 <i class="icon-append  icon-calendar-31 text-primary f-s-15 right-12"></i>
                                                                                 <input id="taskEdate" type="text" class="datepickr" placeholder="Date">
-                                                                                <i class="icon-append  icon-clock3 text-primary f-s-15 right-12"></i>
+                                                                                <!-- <i class="icon-append  icon-clock3 text-primary f-s-15 right-12"></i> -->
                                                                                 <input id="taskEtime" type="text" class="timepicker" placeholder="Time">
                                                                             </label>
                                                                         </div>
@@ -253,7 +253,7 @@
                                                             <label class="text-bold f-s-20 col-sm-10">SubTasks</label>
                                                             <span id='addSubTask' class=" col-sm-1"><i class="glyphicon glyphicon-plus m-l-20 text-danger" title="Add New Sub_Tasks"></i></span>
                                                         </div>
-                                                        <div class="table-responsive">
+                                                        <div class="table-responsive m-b-50">
                                                                 <table id="subTaskTable" class="table table-small-font table-bordered table-striped m-b-0 ">
                                                                     <thead>
                                                                         <tr>
@@ -306,20 +306,16 @@
                                                                             </td>
                                                                             <td>
                                                                                 <label class="select">
-                                                                                    <select entity="TaskStatus" class="SubTask_Status select2 editselect">
-                                                                                        <option default value="">Select...</option>
-                                                                                        <option value="1">Created</option>
-                                                                                        <option value="2">Started</option>
-                                                                                        <option value="3">Completed</option>
-                                                                                    </select>
+                                                                                    <select entity="TaskStatus" class="SubTask_Status select2 editselect"></select>
                                                                                 </label>
                                                                             </td>
                                                                             <td class="btn-group">
                                                                                 <button class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil" id="editstask"></i></button>
                                                                                 <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle"> <span class="caret"></span></button>
                                                                                 <ul class="dropdown-menu pull-right">
-                                                                                <li class="custom_inline st_transfer"><a href="#"><span class="glyphicon glyphicon-transfer" title="Transfer"></span></a></li><br>
+                                                                                <li class="custom_inline st_transfer hide"><a href="#"><span class="glyphicon glyphicon-transfer" title="Transfer"></span></a></li><br>
                                                                                 <li class="custom_inline st_remove"><a href="#"><span class="glyphicon glyphicon-remove" title="remove"></span></a></li>
+                                                                                <li class="custom_inline st_xtra hide"><a href="#"><span class="glyphicon glyphicon-pencil" title="extra work"></span></a></li>
                                                                                 </ul>
                                                                             </td>
                                                                         </tr>
@@ -377,7 +373,7 @@
                                                             </div>
                                                             <div class="col-lg-12 m-t-20">
                                                                 <div class="progress m-b-10 samHei">
-                                                                    <div class="pBar progress-bar progress-bar-striped active ui-progressbar ui-widget ui-widget-content ui-corner-all samHei" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                                    <div class="pBar progress-bar progress-bar-striped active ui-progressbar ui-widget ui-widget-content ui-corner-all samHei" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 1%" style="background-color:aliceblue" >
                                                                     <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div></div>
                                                                 </div>
                                                             </div>
@@ -417,17 +413,10 @@
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <label class="select">
-                                                                    <select id="doctype" class="select2 editselect" multiple="" tabindex="-1" aria-hidden="true">
-                                                                        <option default selected value="Select..."></option>
+                                                                    <select id="doctype" class="select2 editselect">
                                                                     </select>
                                                                 </label>
                                                             </div>
-                                                            <!-- <div class="col-sm-6">
-                                                                <label class="label">Document Type:</label>
-                                                                <label class="input">
-                                                                    <input type="text" id="docttype">
-                                                                </label>
-                                                            </div> -->
                                                         </div>
                                                         <div class="row m-b-30 well">
                                                             <div class="col-sm-6">
@@ -472,12 +461,12 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-lg-4 hide">
-                                                        <label class="input">
-                                                            <input type="text" id="Subtask_namey">
-                                                        </label>
-                                                    </div>
+                                                    <label class="input">
+                                                        <input id="Subtask_namey" type="text">
+                                                    </label>
+                                                </div>
                                             </div>
-                                            <div class="row"> 
+                                            <div class="row">
                                                 <div class="col-lg-4 pull-right">
                                                     <input id="AssigneeTransfer" class="btn btn-success buttonDefSize" type="button" value="Select">
                                                 </div>
@@ -521,7 +510,54 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                            </div>
+                            <!-- Modal for Adding R&D Works -->
+                            <div class="modal modal-warning bg-header" id="Xtra_Modal" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated fadeOut">
+                                            <div class="modal-header">
+                                                <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                                <h4 class="modal-title">
+                                                    <strong>E_W Work:</strong>
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body sky-form">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <label class="label">Title:</label>
+                                                        <label class="input">
+                                                            <input id="xtra_title" type="text" class="" minlength="30">
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <label class="label">Duration:</label>
+                                                        <label class="input">
+                                                            <input id="xtra_dur" type="text" class="valid_duration">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <label class="label">Category:</label>
+                                                        <label class="select">
+                                                            <select id="xtra_cat" class="select2"></select>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <input id="xtra_subtask" type="hidden">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 pull-right">
+                                                        <input id="XtraWork" class="btn btn-success buttonDefSize" type="button" value="Add">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
                             
                             <!-- Panel for submit and reset button -->
                             <div class="panel">

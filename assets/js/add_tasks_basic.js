@@ -32,6 +32,14 @@ $(document).ready(function(){
         dropdownParent: $('#AssigneeTransferModal')
     })
     
+    $('.table-responsive').on('show.bs.dropdown', function () {
+        $('.table-responsive').css( "overflow", "inherit" );
+    });
+    
+    $('.table-responsive').on('hide.bs.dropdown', function () {
+        $('.table-responsive').css( "overflow", "auto" );
+    });
+
     $(document).on('change','#range_02',function(){
         // console.log($(this).val()); 
         var v = $(this).val(); 
@@ -126,6 +134,7 @@ $(document).ready(function(){
                     <ul class="dropdown-menu pull-right idStored">
                     <li class="custom_inline st_transfer"><a href="#"><span class="glyphicon glyphicon-transfer"></span></a></li><br>
                     <li class="custom_inline st_remove"><a href="#"><span class="glyphicon glyphicon-remove"></span></a></li>
+                    <li class="custom_inline st_xtra hide"><a href="#"><span class="glyphicon glyphicon-pencil" title="extra work"></span></a></li>
                     </ul>
                 </td>
             </tr>
@@ -135,9 +144,17 @@ $(document).ready(function(){
             allowClear: true
         });
         datetime();
-        $.getJSON(urlRoot+'employees',function(data){
-            for (var i = 0; i < data.length; i++) {
-                $('.SubTask_Assignee').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+        fillAssignee();
+        $.ajax({
+            async:false,
+            url:urlRoot+'common/form-data',
+            type:'GET',
+            datatype:'JSON',
+            success:function(data){
+                $('.SubTask_Status:last').append('<option default value="">Select...</option>');
+                for (var i = 0; i < data.task_status.length; i++) {
+                    $('.SubTask_Status').append('<option value='+data.task_status[i].id+'>'+data.task_status[i].status+'</option>');
+                }
             }
         });
     }
@@ -181,8 +198,45 @@ $(document).ready(function(){
         }
     });
     
+    $(document).on('click','.st_xtra',function(){
+        $('#Xtra_Modal').modal('show');
+        $('#xtra_cat').select2({
+            dropdownParent: $('#Xtra_Modal')
+        })
+    });
+
+    $(document).on('click','#XtraWork',function(){
+        var title = $('#xtra_title').val();
+        var duration = $('#xtra_dur').val();
+        var category = $('#xtra_cat').val();
+        var subtask = $('#xtra_subtask').val();
+
+
+        var xtraObj = new Object();
+        xtraObj.title = title;
+        xtraObj.duration = duration;
+        xtraObj.category = category;
+        xtraObj.subtask = subtask;
+
+        var xtraJSON = JSON.stringify(xtraObj);
+        console.log(xtraJSON); 
+
+        $.ajax({
+            async:true,
+            url:urlRoot + 'subtask/extrawork/',
+            type:'POST',
+            datatype:'JSON',
+            data:xtraJSON,
+            success:function(data){
+
+            },
+            error:function(){
+
+            }
+        })
+    });
     $(document).on('change','#taskProposal',function(){
-        var id = $('#taskProposal').val()
+        var id = $('#taskProposal').val();
         $.getJSON(urlRoot+'tasks/proposals/'+id,function(data){
             $('#taskProposalFee').val(data.fees);
             $('#taskProposalTile').val(data.subject);
@@ -430,12 +484,18 @@ $(document).ready(function(){
           type:'GET',
           datatype:'JSON',
           success:function(data){
+            for (var i = 0; i < data.extra_work_categories.length; i++) {
+                $('#xtra_cat').append('<option value='+data.extra_work_categories[i].id+'>'+data.extra_work_categories[i].category+'</option>');
+            }
             for (var i = 0; i < data.services.length; i++) {
                 $('#taskService').append('<option value='+data.services[i].id+'>'+data.services[i].service+'</option>');
             }
             for (var i = 0; i < data.task_status.length; i++) {
                 $('.SubTask_Status').append('<option value='+data.task_status[i].id+'>'+data.task_status[i].status+'</option>');
                 $('#taskStatus').append('<option value='+data.task_status[i].id+'>'+data.task_status[i].status+'</option>');
+            }
+            for (var i = 0; i < data.document_types.length; i++) {
+                $('#doctype').append('<option value='+data.document_types[i].id+'>'+data.document_types[i].documenType+'</option>');
             }
           }
       })
@@ -496,6 +556,8 @@ $(document).ready(function(){
     // });
 
     function fillAssignee(){
+        $('#SelectAssignee').empty();
+        $('.SubTask_Assignee').empty();
         for (var i = 0; i < emp.length; i++) {
             $('.SubTask_Assignee').append('<option value='+emp[i].id+'>'+emp[i].name+'</option>');
             $('#SelectAssignee').append('<option value='+emp[i].id+'>'+emp[i].name+'</option>');
@@ -559,10 +621,12 @@ $(document).ready(function(){
     $(document).on('change','#taskService',templates);
 
     if(tid){
+        $('#st_transfer').removeClass('hide');
+        $('#st_xtra').removeClass('hide');
         $(document).off('change','#taskService',templates);
         $.getJSON(urlRoot+'tasks/'+tid,function(data){
             if(data.isExternal == true){
-                $('#taskType').bootstrapToggle('on');  
+                $('#taskType').bootstrapToggle('on');
             }else if(data.isExternal == false){
                 $('#taskType').bootstrapToggle('off');
                 $('#Add_R_D').removeClass('hide');
