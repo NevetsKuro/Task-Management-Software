@@ -34,10 +34,13 @@
         <script src='fullcalendar-3.9.0/lib/jquery.min.js'></script>
         <!-- morris -->
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
         <script src="assets/js/morris.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
         <script src="assets/js/example.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
         <link rel="stylesheet" href="assets/css/morris.css">
         <!-- morris -->
@@ -65,6 +68,12 @@
                 margin-left: -80px;
                 margin-top: -20px;
                 }
+                .ui-draggable, .ui-droppable {
+	background-position: top;
+}
+.ui-state-disabled{
+    opacity: 100;
+}
             </style>
     </head>
     <body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
@@ -223,11 +232,23 @@
                                                 <span class="line" style="height: 100px; display: none;">5,3,9,6,5,9,7,3,5,2,9,10,5</span><svg class="peity" height="16" width="200"><polygon fill="#c6d9fd" points="0 15.5 0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8 200 15.5"></polygon><polyline fill="none" points="0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8" stroke="#4d89f9" stroke-width="1" stroke-linecap="square"></polyline></svg>
                                                 <span class="text-success counter-status" id="empeff">4.7% <i class="fa fa-level-up"></i></span>
                                             </div>  -->
-                                            <div class="progress progress-xs">
+                                            <div style="border-bottom: 1px solid silver">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div id="mainempslider" style="background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4" style="font-size: 10px;text-align: left">Poor</div>
+                                                <div class="col-sm-4" style="font-size: 10px">Average</div>
+                                                <div class="col-sm-4" style="font-size: 10px;text-align: right">Good</div>
+                                            </div>
+                                            <!-- <div class="progress progress-xs">
                                                 <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                                     <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;">
                                                     </div>
                                                 </div>
+                                            </div> -->
                                             </div>
                                             <div class="col-sm-9 p-r-0 p-l-0 m-r-0">
                                                 <h4>Productivity:</h4>
@@ -342,7 +363,7 @@
                                                 <div class="panel-body" style="padding: 0px">   
                                                     <div class="list-header p-10" style="background-color: #1fa3b5">
                                                         <div class="row">
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-10">
                                                                 <h3 style="color: white">Extra Work</h3>
                                                             </div>
                                                             <div class="col-sm-2" style="float: right; vertical-align: middle">
@@ -418,28 +439,25 @@
                                 </div>
                                 <!-- task -->
                             </div>
-                            <div class="row" id="employeelist">
-                                <!-- Employee -->
-                                <!-- <div class="col-sm-12 panel-group list-widget tasks p-0" id="empaccordion">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading dashCard" style="padding: 0px;background-color: #6c3b45;color: white">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="">
-                                                    Reportees
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true" style="">
-                                            <div class="panel-body p-0">
-                                                <div class="panel-group" id="replist">
-                                                    
+                            <div class="row" >
+                                <div class="panel list-widget notes">
+                                    <div class="panel-body" style="padding: 0px">   
+                                        <div class="list-header p-10" style="background-color: #549ca5">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <h3 style="color: white">Reportee List</h3>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="list-content ">
+                                            <div class="row m-5 p-5" id="employeelist">
+                                            
+                                            </div>
+                                        </div>
                                     </div>
-                                </div> -->
-                                <!-- Employee -->
+                                </div>
                             </div>
+                        </div>
                             <!-- <div class="row">
                                 <div class="col-sm-12"> -->
                                        
@@ -548,7 +566,7 @@
         <!--script src="assets/js/dashboard.js" type="text/javascript"></script-->
     </body>
         <script src="assets/js/echarts.js"></script>
-        <!-- <script src="assets/js/header.js" type="text/javascript"></script> -->
+        <script src="assets/js/header.js" type="text/javascript"></script>
         <!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
         <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
         

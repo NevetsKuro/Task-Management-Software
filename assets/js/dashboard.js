@@ -71,42 +71,110 @@ $(document).ready(function(){
             },
             success:function(emplist){
                 console.log(emplist);
-                var empdis='';
+                
                 var no='Not in records';
                 $(emplist).each(function(i,val){
+                    var empdis='';
                     var email=emplist[i].email?emplist[i].email:'Not in records';
                     var phone=emplist[i].phone?emplist[i].phone:'Not in records';
-                    var gen='';
-                    if(emplist[i].title==1){
-                        gen='man';
-                    }
-                    if(emplist[i].title==2){
-                        gen='woman';
-                    }
-                    empdis+=`<div class="panel panel-default m-t-5 p-0">
-                                <div class="panel-body p-10">
-                                    <div class="row" style="line-height:30px; vertical-align:middle">
-                                        <div class="col-sm-4">
-                                            <label class="col-sm-2 input p-l-8" style="font-size:30px;">
-                                                <i class="linear-icons li icon-`+gen+` p-0 m-0" aria-hidden="true" ></i> 
-                                            </label>
-                                            <div class="col-sm-10">
-                                            `+emplist[i].name+`(`+emplist[i].designation+`)
+                    empdis+=    `
+                                    <div class="col-md-3">
+                                        <div class="panel profile-widget variant-2">
+                                            <div class="panel-body" style="box-shadow: 0 1px 1px 1px rgba(16, 16, 16, 0.57);">
+                                                <div class="profile-header" style=" height: 135px">
+                                                    <div class="overlay"></div>
+                                                    <div class="profine-info">
+                                                        <div class="name text-center empname" style="font-size:20px">${emplist[i].name}</div>
+                                                        <div class="position text-center empdes" style="font-size:12px">${emplist[i].designation}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="profile-body p-b-0">
+                                                    <div class="profile-image-wrapper">
+                                                        <img src="assets/images/user.png" alt="avatar" style="border:none;background-color:#fff;padding-top:5px;border-radius:50px">
+                                                    </div>
+                                                    <div class="social-stats ">
+                                                        <ul class="list-group m-b-0">
+                                                            <li class="list-group-item p-b-10 p-t-10">
+                                                                <div class="row">
+                                                                    <label class="input col-sm-2">
+                                                                        <i class="font-awesome fa fa-envelope" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <div class="col-sm-10">${email}</div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <label class="input col-sm-2">
+                                                                        <i class="font-awesome fa fa-phone" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <div class="col-sm-10">${phone}</div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="list-group-item p-b-10 p-t-10">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">Efficiency:</div>
+                                                                    <div class="col-sm-8">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12">
+                                                                                <div id="${emplist[i].id}empslider" style="background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="input col-sm-4" style="font-size:10px">Poor</div>
+                                                                            <div class="input col-sm-4" style="font-size:10px">Average</div>
+                                                                            <div class="input col-sm-4" style="font-size:10px;text-align:right">Good</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <label class="input"><span class="glyphicon glyphicon-envelope"></span></label>
-                                             `+email+`
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label class="input"><span class="glyphicon glyphicon-earphone"></span></label>
-                                             `+phone+`
-                                        </div>
                                     </div>
-                                </div>
-                            </div>`;
+                                `
+                    // empdis+=`<div class="panel panel-default m-t-5 p-0">
+                    //             <div class="panel-body p-10">
+                    //                 <div class="row" style="line-height:30px; vertical-align:middle">
+                    //                     <div class="col-sm-4">
+                    //                         <label class="col-sm-2 input p-l-8" style="font-size:30px;">
+                    //                             <i class="linear-icons li icon-`+gen+` p-0 m-0" aria-hidden="true" ></i> 
+                    //                         </label>
+                    //                         <div class="col-sm-10">
+                    //                         `+emplist[i].name+`(`+emplist[i].designation+`)
+                    //                         </div>
+                    //                     </div>
+                    //                     <div class="col-sm-3">
+                    //                         <label class="input"><span class="glyphicon glyphicon-envelope"></span></label>
+                    //                          `+email+`
+                    //                     </div>
+                    //                     <div class="col-sm-2">
+                    //                         <label class="input"><span class="glyphicon glyphicon-earphone"></span></label>
+                    //                          `+phone+`
+                    //                     </div>
+                    //                 </div>
+                    //             </div>
+                    //         </div>`;
+                    $('#employeelist').append(empdis);
+                    $('#'+emplist[i].id+'empslider').slider({
+                        disabled: true,
+                        value: emplist[i].efficiency,
+                        max:110,
+                        min:90,
+                        step:0.2
+                    });
+                    $('#'+emplist[i].id+'empslider').find('.ui-slider-handle').css({
+                        'background': 'none',
+                        'border-left': '10px solid transparent',
+                        'border-right': '10px solid transparent',
+                        'border-top': '8px solid #000',
+                        'width': '0px',
+                        'height': '0px',
+                        'top':'-0.6em'
+                    });
+                    $('.ui-state-disabled').css('opacity','100');
                 });
-                $('#replist').html(empdis);
+                
+                    
             },
             error:function(error){
                 console.log(error.responseText);
@@ -435,6 +503,24 @@ $(document).ready(function(){
             $('#empcode').html(emp.code);
             $('#empeff').html('<h4>'+eff+'</h4>');
             $('#empprod').html('<h4>'+prod+'</h4>');
+            $('#mainempslider').slider({
+                max:110,
+                min:90,
+                step:0.2,
+                value:eff,
+                disabled:true
+            });
+            $('#mainempslider').find('.ui-state-disabled').css('opacity','100');
+            $('#mainempslider').find('.ui-slider-handle').css({
+                'background': 'none',
+                'border-left': '10px solid transparent',
+                'border-right': '10px solid transparent',
+                'border-top': '8px solid #000',
+                'width': '0px',
+                'height': '0px',
+                'top':'-0.6em',
+                
+            }); 
         }
     });
     $.ajax({
@@ -566,12 +652,26 @@ $(document).ready(function(){
                                     <h5>`+subtask.title+`</h5>
                                 </div>
                                 <div class="col-sm-6" id="`+subtask.id+`progress">
-                                    <div class="progress m-t-10" style="height:20px; -moz-box-shadow: 10px 3px 5px 6px #ccc;-webkit-box-shadow: 10px 3px 5px 6px #ccc;box-shadow: 10px 3px 5px 6px #ccc;">   
-                                        <div class="progress-bar progress-bar-striped active" id="`+subtask.id+`takewid" role="progressbar" aria-valuemin="20" aria-valuemax="20" style="width:`+subcomplete+`%; height:25px;color:#A9A9A9;background-color:`+subcolor+`">
-                                            <div class="subcomplete m-t-5" style=font-size:10px;vertical-align: middle;">
-                                                `+subcomplete+`% 
+                                    <div class="row m-b-0 p-b-0">
+                                        <div class="col-sm-12">
+                                            <div class="progress m-t-10" style="height:20px; -moz-box-shadow: 10px 3px 5px 6px #ccc;-webkit-box-shadow: 10px 3px 5px 6px #ccc;box-shadow: 10px 3px 5px 6px #ccc;">   
+                                                <div class="progress-bar progress-bar-striped active" id="`+subtask.id+`takewid" role="progressbar" aria-valuemin="20" aria-valuemax="20" style="width:`+subcomplete+`%; height:25px;color:#A9A9A9;background-color:`+subcolor+`">
+                                                    <div class="subcomplete m-t-5" style=font-size:10px;vertical-align: middle;">
+                                                        `+subcomplete+`% 
+                                                    </div>
+                                                </div>  
                                             </div>
-                                        </div>  
+                                        </div>
+                                    </div>
+                                    <div class="row m-t-0 p-t-0">
+                                        <div class="col-sm-4" style="font-size:10px;text-align:left">Poor</div>
+                                        <div class="col-sm-4" style="font-size:10px;text-align:center">Average</div>
+                                        <div class="col-sm-4" style="font-size:10px;text-align:right">Good</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div id="${subtask.id}subtaskslider" style="background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;"></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4" id="sbtbtnarea">
@@ -618,8 +718,25 @@ $(document).ready(function(){
                             </div>
         `;
         //var subtid='#'+data[i].task+' .panel-body';
+        console.log("Effic: "+parseInt(subtask.efficiency*100));
         $('#'+subtask.task).find('.panel-body').append(subtaskstxt);
         $('.SubTask_list').append('<option value="'+subtask.id+'">'+subtask.title+'</option>');
+        $('#'+subtask.id+'subtaskslider').slider({
+            disabled: true,
+            value: parseInt(subtask.efficiency*100),
+            max:110,
+            min:90,
+          });
+          $('#'+subtask.id+'subtaskslider').find('.ui-slider-handle').css({
+            'background': 'none',
+            'border-left': '15px solid transparent',
+            'border-right': '15px solid transparent',
+            'border-bottom': '10px solid #000',
+            'width': '0px',
+            'height': '0px',
+            'top':'0.65em'
+        });
+        $('#'+subtask.id+'subtaskslider').find('.ui-state-disabled').css('opacity','100');
         
     }
     //loadsubtask end---------------
@@ -946,10 +1063,10 @@ $(document).ready(function(){
         var xtra=`
                     <li class="list-group-item p-5 m-0" style="border-bottom:1px solid #ccc">
                         <div class="content row p-0">
-                            <div class="col-sm-4 m-l-5">
+                            <div class="col-sm-5">
                                 <label class="input m-t-5 m-l-5">${work.title}</label>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-5">
                                 <label class="input m-t-5 m-l-5">${work.duration} Hours</label>
                             </div>
                             <div class="col-sm-2" style="float:right">
@@ -1052,6 +1169,16 @@ $(document).ready(function(){
             console.log(error.responseText);
         }
     });
+    //
+    //
+    //
+    //
+    //
+    
+    
+    //
+    //
+    //
     //
     //delete subtask ends--------------
         $(document).on('click','.start',function(){
