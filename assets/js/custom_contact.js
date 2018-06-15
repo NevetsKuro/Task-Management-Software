@@ -13,9 +13,9 @@ $(document).ready(function(){
     $('#file').on('change',function(){
         $('#addContact_image').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
     });
-     
-    // UpdateCont = inputChanges(); 
     
+
+    // UpdateCont = inputChanges(); 
     // var $form = $('#addContact_form'),
     // origForm = $form.serialize();
     // inputChanges = function(){
@@ -279,6 +279,7 @@ $(document).ready(function(){
             datatype:'JSON',
             type:'GET',
             success:function(data){
+                $('#horizontal-wizard > ul > li:nth-child(3) > a').removeClass('hide');
                 $('#colored-warning-header').modal('hide');
                 $('#message').html('Please move ahead to update Your contact!');
                 currentContactData = data;
@@ -407,63 +408,66 @@ $(document).ready(function(){
         $('#accord').addClass('hide');
         UpdateCont = inputChanges();
         // origForm = inputChanges();
+        $('#horizontal-wizard > ul > li:nth-child(3) > a').removeClass('hide');
+    }else{
+        $('#horizontal-wizard > ul > li:nth-child(3) > a').addClass('hide');
     }
     
     //add exsting contact to below form in add contact
     $('#searchResult').on('click','.click', filterContactData);
     
     var addContactRow = `
-    <div class='new row well'>
-        <div class='col-xs-2 col-sm-2'>
-            <label class='checkbox m-l-22'>
-                <input type='radio' update-ctrl="phone_numbers" name="CNChecked" class='cn_is_primary'><i class='rounded-x m-l-10'></i>
-            </label>
-        </div>
-        <div class='col-xs-3 col-sm-3'>
-            <label class='select'>
-                <select entity="Category" update-ctrl="phone_numbers" class='contactnumber_category select2 editselect'>
-                    
-                </select>
-            </label>
-        </div>
-        <div class='col-xs-5 col-sm-5'>
-            <label class='input'>
-                <input update-ctrl="phone_numbers" type='number' class='addContact_contactNumbers' minlength='9' maxlength='15' placeholder='10 digit number'>
-            </label>
-        </div>
-        <div class='col-xs-2 col-sm-2'>
-            <div id='remove-contact' class='text-center text-danger'>
-                <span class='centerAlign'><i class='glyphicon glyphicon-remove fa-lg'></i></span>
+        <div class='new row well'>
+            <div class='col-xs-2 col-sm-2'>
+                <label class='checkbox m-l-22'>
+                    <input type='radio' update-ctrl="phone_numbers" name="CNChecked" class='cn_is_primary'><i class='rounded-x m-l-10'></i>
+                </label>
+            </div>
+            <div class='col-xs-3 col-sm-3'>
+                <label class='select'>
+                    <select entity="Category" update-ctrl="phone_numbers" class='contactnumber_category select2 editselect'>
+                        
+                    </select>
+                </label>
+            </div>
+            <div class='col-xs-5 col-sm-5'>
+                <label class='input'>
+                    <input update-ctrl="phone_numbers" type='number' class='addContact_contactNumbers' minlength='9' maxlength='15' placeholder='10 digit number'>
+                </label>
+            </div>
+            <div class='col-xs-2 col-sm-2'>
+                <div id='remove-contact' class='text-center text-danger'>
+                    <span class='centerAlign'><i class='glyphicon glyphicon-remove fa-lg'></i></span>
+                </div>
             </div>
         </div>
-    </div>
-    `
-    var addEmailRow = `
-    <div class='new row well'>
-        <div class='col-xs-2 col-sm-2'>
-            <label class='checkbox m-l-22'>
-                <input type='radio' update-ctrl="email_addresses" name="EAChecked" class='ea_is_primary'><i class='rounded-x m-l-10'></i>
-            </label>
-        </div>
-        <div class='col-xs-3 col-sm-3'>
-            <label class='select'>
-                <select entity="Category" update-ctrl="email_addresses" class='email_category select2 editselect'>
-                    
-                </select>
-            </label>
-        </div>
-        <div class='col-xs-5 col-sm-5'>
-            <label class='input'>
-                <input update-ctrl="email_addresses" type='email' class='addContact_emailIds email_valid' placeholder='e.g. abc@gmail.com/'>
-            </label>
-        </div>
-        <div class='col-xs-2 col-sm-2'>
-            <div id='remove-email' class='text-center text-danger'>
-                <span class='centerAlign'><i class='glyphicon glyphicon-remove fa-lg'></i></span>
+        `
+        var addEmailRow = `
+        <div class='new row well'>
+            <div class='col-xs-2 col-sm-2'>
+                <label class='checkbox m-l-22'>
+                    <input type='radio' update-ctrl="email_addresses" name="EAChecked" class='ea_is_primary'><i class='rounded-x m-l-10'></i>
+                </label>
+            </div>
+            <div class='col-xs-3 col-sm-3'>
+                <label class='select'>
+                    <select entity="Category" update-ctrl="email_addresses" class='email_category select2 editselect'>
+                        
+                    </select>
+                </label>
+            </div>
+            <div class='col-xs-5 col-sm-5'>
+                <label class='input'>
+                    <input update-ctrl="email_addresses" type='email' class='addContact_emailIds email_valid' placeholder='e.g. abc@gmail.com/'>
+                </label>
+            </div>
+            <div class='col-xs-2 col-sm-2'>
+                <div id='remove-email' class='text-center text-danger'>
+                    <span class='centerAlign'><i class='glyphicon glyphicon-remove fa-lg'></i></span>
+                </div>
             </div>
         </div>
-    </div>
-    `
+        `
 
     //adding contact entry tab in contact form
     function addEmailRows(){

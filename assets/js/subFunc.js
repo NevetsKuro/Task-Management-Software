@@ -460,7 +460,17 @@
         }
         window.csrftoken = getCookie('csrftoken');
 
-
+        $(document).on("change", ".valid_duration", function() {
+            var dur = $(this).val();
+            var arr = dur.split('.');
+            if(arr[1]>60){
+                var res = arr[1] % 60;
+               $(this).val(arr[0] +'.'+res);
+             }
+             if($(this).val().indexOf('.') == -1){
+                 $(this).val(dur +'.00');
+             }
+        });
 
 });
 

@@ -157,7 +157,7 @@ $(document).ready(function () {
         });
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    
     var indContactId;
     if(contact!=undefined||client!=undefined){
         if(contact){
@@ -169,7 +169,6 @@ $(document).ready(function () {
                     client_organisation(data.contact_organisation.organisation.id);
                 }
             });
-
         }else if(client){
             if(legal){
                 var legalText;
@@ -195,7 +194,6 @@ $(document).ready(function () {
                     type:'GET',
                     datatype:'JSON',
                     success:function(data){
-
                         AddServiceData(data);
                         var commencement_date = $.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date));
                         $('#client_legalstatus').val(legal).trigger('change');
@@ -245,7 +243,9 @@ $(document).ready(function () {
                         var len = data.statdocs.length;
                         var stats = data.statdocs;
                         stat_documents = data.statdocs;
+                        var statsObject;
                         for (let i = 0; i < len; i++) {
+                            statsObject = new Object();
                             stat_docs.row.add([
                                 '<td class=" select-checkbox"></td>',
                                 stats[i].name,
@@ -256,10 +256,31 @@ $(document).ready(function () {
                                 stats[i].applicable_law,
                                 '<div class="sD_edit text-success text-center"><i class="glyphicon glyphicon-pencil"></i></div><div class="sD_remove text-danger text-center"><i class="glyphicon glyphicon-remove"></i></div>'
                             ]).draw(false);
+                            // statsObject.name = stats[i].name;
+                            
+                            // $.ajax({
+                            //     async: true,
+                            //     url: stats[i].document,
+                            //     type: 'GET',
+                            //     cache:false,
+                            //     xhr:function(){// Seems like the only way to get access to the xhr object
+                            //         var xhr = new XMLHttpRequest();
+                            //         xhr.responseType= 'blob'
+                            //         return xhr;
+                            //     },
+                            //     success:function(data){
+                            //         var reader = new FileReader();
+                            //         //$('#doc1txt').val($('#doc1').val());
+                            //         reader.readAsDataURL(data);
+                            //         statsObject.document = reader.result;
+                            //         console.log(reader.result);
+                            //     }
+                            // });
+                            // stat_documents.push(statsObject);
                         }
                         
                         if(legal==1){
-                            $('#individual_aadhar').val(data.aadhar_no).trigger('change');;
+                            $('#individual_aadhar').val(data.aadhar_no).trigger('change');
                             $('#individual_typeWork').val(data.typeOfWork).trigger('change');
                             $('#website').val(data.website);
                             // indContactId = data.prospect;
@@ -1523,7 +1544,8 @@ $(document).ready(function () {
                 `);
             $('#service').children('div:last').addClass('zoomInUp animated').show('fast');
             editSelect();
-            $('.select2').select2()
+            $('.lead_managers').select2()
+            $('.servicesCat').select2()
             getService();
             getEmployee();
     }
