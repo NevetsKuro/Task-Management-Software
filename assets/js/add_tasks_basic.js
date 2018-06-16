@@ -203,6 +203,9 @@ $(document).ready(function(){
         $('#xtra_cat').select2({
             dropdownParent: $('#Xtra_Modal')
         })
+        var subtaskid = $(this).parents('tr').attr('id');
+        console.log(subtaskid);
+        $('#xtra_subtask').val(subtaskid);;
     });
 
     $(document).on('click','#XtraWork',function(){
@@ -223,15 +226,22 @@ $(document).ready(function(){
 
         $.ajax({
             async:true,
-            url:urlRoot + 'subtask/extrawork/',
+            crossDomain: true,
+            url:urlRoot + 'subtasks/extrawork/',
             type:'POST',
             datatype:'JSON',
+            headers: {
+                "content-type": "application/json",
+                "cache-control": "no-cache",
+                "X-CSRFToken": csrftoken
+              },
+            processData: false,
             data:xtraJSON,
-            success:function(data){
-
+            success:function(){
+                swal('Extra Work Added!');
             },
-            error:function(){
-
+            error:function(error){
+                console.log(error.responseText)
             }
         })
     });
@@ -650,7 +660,7 @@ $(document).ready(function(){
             var formatted3 = $.datepicker.formatDate("dd/mm/yy", new Date(data.statutoryDueDate));
             $('#taskStats').val(formatted3);
             $('#taskStatus').val(data.status).trigger('change');
-            // $('#taskOrgin').val(data.originator);
+            $('#taskOrgin').val(data.originator);
             $('#taskController').val(data.controller).trigger('change');
             $('#taskApprover').val(data.approver).trigger('change');
             $('#taskClientsView').val(data.showToClient);
@@ -674,7 +684,7 @@ $(document).ready(function(){
         var name = $('#subTaskTable > tbody > tr > td:nth-child(1) > label > input').val();
         var Sdate = $('#subTaskTable > tbody > tr > td:nth-child(3) > label > input:first').val();
         var Stime = $('#subTaskTable > tbody > tr > td:nth-child(3) > label > input:nth-child(2)').val();
-        var assignee = 1;//$('#subTaskTable > tbody > tr > td:nth-child(4) > label > input').val();
+        var assignee = $('#subTaskTable > tbody > tr > td:nth-child(4) > label > input').val();
         var duration = $('#subTaskTable > tbody > tr > td:nth-child(2) > label > input').val();
 
         if(!title){
@@ -724,13 +734,13 @@ $(document).ready(function(){
             var isExternal= $('#taskType').prop('checked');
             tasksData.title = $('#taskTitle').val();
             tasksData.isExternal = isExternal;
-            tasksData.client = "1";//$('#taskClients').val();
-            tasksData.originator = "1";//$('#taskOrgin').val();
-            tasksData.controller = "1";//$('#taskController').val();
-            tasksData.status = "1";//$('#taskStatus').val();
+            tasksData.client = $('#taskClients').val();
+            tasksData.originator =$('#taskOrgin').val();
+            tasksData.controller =$('#taskController').val();
+            tasksData.status = $('#taskStatus').val();
             tasksData.showToClient = $('#taskClientsView').prop('checked');
             tasksData.service = $('#taskService').val();
-            tasksData.approver = "1";//$('#taskApprover').val();
+            tasksData.approver = $('#taskApprover').val();
             tasksData.priority = $('#range_02').val();
             tasksData.startTime = getFormateDateToServer($('#taskSdate').val()) +'T'+ $('#taskStime').val()+':00Z';
             tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val()+':00Z';
