@@ -3,6 +3,16 @@ $(document).ready(function(){
     var src=params['src'];
     var urlRoot = 'http://35.202.86.61/office-management/';
     
+    $(document).on('click','.showPwd',function(){
+        var a = $('#password').attr('type');
+        if(a=="text"){
+            $('#password').attr('type','password')
+            $(this).addClass('icon-eye').removeClass('icon-eye-crossed');
+        }else{
+            $('#password').attr('type','text')
+            $(this).removeClass('icon-eye').addClass('icon-eye-crossed');
+        }
+    })
     
     $(document).on('click','#submitLogin',function(){
         var username = $('#username').val();

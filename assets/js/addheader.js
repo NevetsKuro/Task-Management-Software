@@ -141,7 +141,7 @@ h+=`<div class="nav navbar-nav nav-left mob-hide" style="width:90%">
 
 h+= '                    <!-- Start Navbar Right -->' ;
 h+= '                    <ul class="nav navbar-nav navbar-right">' ;
-h+= '                        <li class="header-con"><i class="font-awesome fa fa-header text-primary" aria-hidden="true"></i></li> ' ;
+h+= '                        <li class="header-con"><i class="font-awesome fa fa-question text-primary f-s-38" aria-hidden="true"></i></li> ' ;
 h+= '                        <li class="dropdown header-notifcations"> ' ;
 h+= '                            <a data-toggle="dropdown" class="dropdown-toggle" role="button" href="http://lancecoder.com/themes/calibre/layouts/iconic/index.php#">' ;
 h+= '                                <i class="fa fa-bell-o"></i>' ;

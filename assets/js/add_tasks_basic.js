@@ -129,8 +129,8 @@ $(document).ready(function(){
                     </label>
                 </td>
                 <td class="btn-group">
-                    <button class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
-                    <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle"> <span class="caret"></span></button>
+                    <button type="button" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
+                    <button type="button" data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle"> <span class="caret"></span></button>
                     <ul class="dropdown-menu pull-right idStored">
                     <li class="custom_inline st_transfer"><a href="#"><span class="glyphicon glyphicon-transfer"></span></a></li><br>
                     <li class="custom_inline st_remove"><a href="#"><span class="glyphicon glyphicon-remove"></span></a></li>
@@ -746,6 +746,10 @@ $(document).ready(function(){
             tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val()+':00Z';
             tasksData.duration = $('#taskDuration').val();
             tasksData.statutoryDueDate = getFormateDateToServer($('#taskStats').val()) + 'T04:13:13Z';
+            var proposal = $('#taskProposal').val()
+            if(proposal){
+                tasksData.taskProposal = proposal;
+            }
             // tasksData.document
             
             var taskJSON = JSON.stringify(tasksData);
@@ -816,6 +820,7 @@ $(document).ready(function(){
     });
     var doco='';
     $(document).on('change','#doc1', function(){
+        $('#doc1txt').val($(this)[0].files[0]['name']);
         var mimeType=$(this)[0].files[0]['type'];
             var ggg1=$(this)[0].files[0];
             var reader = new FileReader();

@@ -12,7 +12,8 @@ var token=localStorage.getItem('token');
 		headers: {
 			"content-type": "application/json",
 			"cache-control": "no-cache",
-			"X-CSRFToken":csrftoken
+			"X-CSRFToken":csrftoken,
+			"Authorization":"Bearer "+token
 		},
 		processdata:false,
 		data: "{\n    \"note\": \"stringchanged\",\n    \"status\": \"P\",\n    \"date\": \"2018-06-13\",\n    \"time\": \"02:30:00\",\n    \"employee\": 1,\n    \"sub_task\": null\n}",
@@ -32,7 +33,7 @@ var token=localStorage.getItem('token');
 			}	
 		},
 		error:function(error){
-			// $(location).attr('href','login.html?src='+$(location).attr('href').substring($(location).attr('href').lastIndexOf('/')+1));
+			$(location).attr('href','login.html?src='+$(location).attr('href').substring($(location).attr('href').lastIndexOf('/')+1));
 			console.log(error.responseText);
 			
 		}
