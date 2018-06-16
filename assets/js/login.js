@@ -15,9 +15,9 @@ $(document).ready(function(){
             data:{'username':username,'password':password},
             success:function(data){
                 console.log(data.name?data.name:"NO NAME");
-                console.log(data.token?data.token:"No TOKEN");
+                console.log(data.token?data.token:"NO TOKEN");
                 localStorage.setItem('token',data.token);
-                //$(location).attr('href','dashboard.html');
+                $(location).attr('href','dashboard.html');
                 if(src!=null && src!='')
                     $(location).attr('href',src);
                 else

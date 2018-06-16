@@ -32,6 +32,19 @@
         
         
         <script src='fullcalendar-3.9.0/lib/jquery.min.js'></script>
+        <!-- morris -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+        <script src="assets/js/morris.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
+        <script src="assets/js/example.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
+        <link rel="stylesheet" href="assets/css/morris.css">
+        <!-- morris -->
+
         <script src='fullcalendar-3.9.0/lib/moment.min.js'></script>
         <script src='fullcalendar-3.9.0/fullcalendar.min.js'></script>
         <div id="css"></div>
@@ -49,7 +62,19 @@
                 max-width: 900px;
                 margin: 0 auto;
             }
-        </style>
+            #graph {
+                width: 420px;
+                height: 150px;
+                margin-left: -80px;
+                margin-top: -20px;
+                }
+                .ui-draggable, .ui-droppable {
+	background-position: top;
+}
+.ui-state-disabled{
+    opacity: 100;
+}
+            </style>
     </head>
     <body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
         <i class="btn-theme-switcher icon-cog hidden-xs"></i>
@@ -107,7 +132,7 @@
                                                     </div>
                                                     <label class="select col-md-6">
                                                         <label class="input">Select Subtask:</label>
-                                                        <select entity="subtasklist" class="SubTask_list form-control">
+                                                        <select entity="subtasklistask" class="SubTask_list select2 form-control" id="subtasklistask">
                                                             <option default value="">Select...</option>
                                                         </select>
                                                     </label>
@@ -118,8 +143,8 @@
                                                         <textarea id="todonote" class="form-control textarea textarea-expandable" rows="3" placeholder="Note"></textarea>
                                                     </label>
                                                     <label class="select col-md-4">
-                                                        <label class="input">Select Subtask Status:</label>
-                                                        <select entity="subtaskstatus" class="subtaskstatus form-control">
+                                                        <label class="input">Select Status:</label>
+                                                        <select entity="subtaskstatus" class="subtaskstatus form-control m-t-5" id="subtaskstatus">
                                                             <option default value="">Select...</option>
                                                             <option value="P">Pending</option>
                                                             <option value="C">Completed</option>
@@ -134,6 +159,50 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Xtrawork -->
+                            <div class="modal" id="modalextra" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content animated fadeOut">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                                                <h4 class="modal-title"><strong>Extra Work</strong> (new item)</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="xtraform">    
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label class="input">Set Duration :</label>
+                                                                    <input type="text" class="form-control" placeholder="HH:MM" id="xtradur">
+                                                                <!-- </label> -->
+                                                            </div> 
+                                                        </div>
+                                                        <label class="col-md-3">
+                                                            <label class="input">Title:</label>
+                                                            <input type="text" id="titlex" class="form-control" placeholder="Extra Work...">
+                                                        </label>
+                                                        <label class="select col-md-3">
+                                                            <label class="input">Select Subtask:</label>
+                                                            <select entity="subtasklist" class="SubTask_list select2 form-control" id="subtasklistx">
+                                                                <option default value="">Select...</option>
+                                                            </select>
+                                                        </label>
+                                                        <label class="select col-md-3">
+                                                            <label class="input">Select Category:</label>
+                                                            <select entity="xcat" class="xtracategory form-control select2 editselect" id="xcat">
+                                                                <option default value="">Select...</option>
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer text-center">
+                                                <button type="button" class="btn btn-primary btn-raised savextra"><i class="fa fa-check"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- Xtrawork ends -->
                             <div class="row">
                                 <div class="col-lg-3 col-sm-6 ">
                                     <div class="counter-widget variant-1 dashColor1"  style="border-radius: 10px">
@@ -151,17 +220,42 @@
                                             </div>
                                         </div>
                                         <div class="counter-content whitecolor">
-                                            <h3>Employee Efficiency</h3>
-                                            <div>
+                                            <div class="row">
+                                                <div class="col-sm-9 p-r-0 p-l-0 m-r-0">
+                                                    <h4>Efficiency:</h4>
+                                                </div>
+                                                <div class="col-sm-1 p-l-0 m-l-0" id="empeff">
+
+                                                </div>
+                                            </div>
+                                            <!-- <div>
                                                 <span class="line" style="height: 100px; display: none;">5,3,9,6,5,9,7,3,5,2,9,10,5</span><svg class="peity" height="16" width="200"><polygon fill="#c6d9fd" points="0 15.5 0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8 200 15.5"></polygon><polyline fill="none" points="0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8" stroke="#4d89f9" stroke-width="1" stroke-linecap="square"></polyline></svg>
                                                 <span class="text-success counter-status" id="empeff">4.7% <i class="fa fa-level-up"></i></span>
-                                            </div> 
+                                            </div>  -->
+                                            <div style="border-bottom: 1px solid silver">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div id="mainempslider" style="background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4" style="font-size: 10px;text-align: left">Poor</div>
+                                                <div class="col-sm-4" style="font-size: 10px">Average</div>
+                                                <div class="col-sm-4" style="font-size: 10px;text-align: right">Good</div>
+                                            </div>
                                             <!-- <div class="progress progress-xs">
                                                 <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                                     <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;">
                                                     </div>
                                                 </div>
                                             </div> -->
+                                            </div>
+                                            <div class="col-sm-9 p-r-0 p-l-0 m-r-0">
+                                                <h4>Productivity:</h4>
+                                            </div>
+                                            <div class="col-sm-1 p-l-0 m-l-0" id="empprod">
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -229,10 +323,9 @@
                                             </div>
                                         </div>
                                         <div class="counter-content whitecolor">
-                                            <h3>Total Tasks Done</h3>
+                                            <!-- <h3 class="m-b-0">Total Tasks Done</h3> -->
                                             <div>
-                                                <span class="line" style="height: 100px; display: none;">5,3,9,6,5,9,7,3,5,2,9,10,5</span><svg class="peity" height="16" width="200"><polygon fill="#c6d9fd" points="0 15.5 0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8 200 15.5"></polygon><polyline fill="none" points="0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8" stroke="#4d89f9" stroke-width="1" stroke-linecap="square"></polyline></svg>
-                                                <span class="text-success counter-status" id="tstats" > <i class="fa fa-level-up"></i></span>
+                                                <div id="graph"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -251,7 +344,7 @@
                                                                 <h3 style="color: white">To Do List</h3>
                                                             </div>
                                                             <div class="col-sm-2" style="float: right; vertical-align: middle">
-                                                                <button type="button" class="btn btn-adn btn-raised rippler dashbutton m-t-5" title="Add new todo-item" data-toggle="modal" data-target="#modal-responsive">
+                                                                <button type="button" class="btn btn-foursquare btn-flat rippler dashbutton m-t-5" title="Add new todo-item" data-toggle="modal" data-target="#modal-responsive">
                                                                     <i class="fa fa-plus"></i>
                                                                 </button>
                                                             </div>
@@ -259,6 +352,29 @@
                                                     </div>
                                                     <div class="list-content dashlist">
                                                         <ul class="list-group" id="todoli"></ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="panel list-widget notes">
+                                                <div class="panel-body" style="padding: 0px">   
+                                                    <div class="list-header p-10" style="background-color: #1fa3b5">
+                                                        <div class="row">
+                                                            <div class="col-sm-10">
+                                                                <h3 style="color: white">Extra Work</h3>
+                                                            </div>
+                                                            <div class="col-sm-2" style="float: right; vertical-align: middle">
+                                                                <button type="button" class="btn btn-reddit btn-flat rippler dashbutton m-t-5" title="Add Extra Work" data-toggle="modal" data-target="#modalextra">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list-content dashlist">
+                                                        <ul class="list-group" id="extrawork"></ul>
                                                     </div>
                                                 </div>
                                             </div>
@@ -274,7 +390,7 @@
                                                                 <h3 style="color: white">Notes</h3>
                                                             </div>
                                                             <div class="col-sm-2" style="float: right; vertical-align: middle">
-                                                                <button type="button" class="btn btn-success notesave dashbutton m-t-5" title="Save Changes">
+                                                                <button type="button" class="btn btn-soundcloud btn-flat notesave dashbutton m-t-5" title="Save Changes">
                                                                     <i class="fa fa-save"></i>
                                                                 </button>
                                                             </div>
@@ -284,7 +400,7 @@
                                                         <form class="form-wizard p-5">
                                                             <div class="row">
                                                                 <div class="col-sm-12">
-                                                                    <textarea class="textarea textarea-expandable col-sm-12" style="background-color: rgba(0,0,0,0);border: none;resize: none" id="notearea" rows="2" placeholder="Add Your Notes Here...."></textarea>
+                                                                    <textarea class="textarea textarea-expandable col-sm-12" style="background-color: rgba(0,0,0,0);border: none;resize: none;height: 6em" id="notearea" rows="2" placeholder="Add Your Notes Here...."></textarea>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -323,31 +439,50 @@
                                 </div>
                                 <!-- task -->
                             </div>
-                            <div class="row" id="employeelist">
-                                <!-- Employee -->
-                                <div class="col-sm-12 panel-group list-widget tasks p-0" id="empaccordion">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading dashCard" style="padding: 0px;background-color: #6c3b45;color: white">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="">
-                                                    Reportees
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true" style="">
-                                            <div class="panel-body p-0">
-                                                <div class="panel-group" id="replist">
-                                                    
+                            <div class="row" >
+                                <div class="panel list-widget notes">
+                                    <div class="panel-body" style="padding: 0px">   
+                                        <div class="list-header p-10" style="background-color: #549ca5">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <h3 style="color: white">Reportee List</h3>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-content ">
+                                            <div class="row m-5 p-5" id="employeelist">
+                                            
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Employee -->
                             </div>
-                            <div class="row">
-                                
-                            </div>
+                        </div>
+                            <!-- <div class="row">
+                                <div class="col-sm-12"> -->
+                                       
+                                        <script>
+                                        Morris.Donut({
+                                            element: 'graph',
+                                            data: [
+                                            {value: 70, label: 'foo'},
+                                            {value: 15, label: 'bar'},
+                                            {value: 10, label: 'baz'},
+                                            {value: 5, label: 'A really really long label'}
+                                            ],
+                                            backgroundColor: '#fff',
+                                            labelColor: '#060',
+                                            colors: [
+                                            '#dab326',
+                                            '#26c6da',
+                                            '#16b985',
+                                            '#da2677'
+                                            ],
+                                            formatter: function (x) { return x + "%"}
+                                        });
+                                        </script>
+                                <!-- </div>
+                            </div> -->
                         <!-- </div> -->
                     </div>
                 </div>
@@ -431,11 +566,7 @@
         <!--script src="assets/js/dashboard.js" type="text/javascript"></script-->
     </body>
         <script src="assets/js/echarts.js"></script>
-        <script src="assets/js/jquery.peity.min.js"></script>
-        <!-- <script src="assets/js/header.js" type="text/javascript"></script> -->
+        <script src="assets/js/header.js" type="text/javascript"></script>
         <!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
         <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
-    </html>
-
-
-   
+        

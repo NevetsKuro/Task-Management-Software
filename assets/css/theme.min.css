@@ -23478,7 +23478,7 @@ a.thumbnail:hover img {
     -moz-transform: translate(0%, 115%);
     -ms-transform: translate(0%, 115%);
     -webkit-transform: translate(0%, 115%);
-    transform: translate(0%, 115%);
+    transform: translate(0%, 50%);
     z-index: 10
 }
 
@@ -23495,7 +23495,7 @@ a.thumbnail:hover img {
 .profile-widget.variant-2 .profile-image-wrapper {
     position: relative;
     width: 120px;
-    height: 120px;
+    height: 105px;
     -moz-transform: translate(0%, -50%);
     -ms-transform: translate(0%, -50%);
     -webkit-transform: translate(0%, -50%);
@@ -23505,8 +23505,8 @@ a.thumbnail:hover img {
 }
 
 .profile-widget.variant-2 .profile-image-wrapper>img {
-    width: 120px;
-    height: 120px;
+    width: 105px;
+    height: 105px;
     border: 5px solid #fff
 }
 

@@ -11,6 +11,31 @@ $(document).ready(function(){
     var eventarr= new Array();
     var empid=1;
     datetime();
+    //formdata
+    $.ajax({
+        async: true,
+        crossDomain:true,
+        url: urlRoot+'common/form-data',
+        type:'GET',
+        datatype:'JSON',
+        headers:{
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "X-CSRFToken":csrftoken,
+            "Authorization":"Bearer"+localStorage.getItem('token'),
+        },
+        success:function(data){
+            var xtraworkcategory=data.extra_work_categories;
+            $(xtraworkcategory).each(function(i,val){
+                $('.xtracategory').append(`<option value="${xtraworkcategory[i].id}">${xtraworkcategory[i].category}</option>`)
+            });
+        },
+        error:function(error){
+            console.log(error.responseText);
+            swal("Could not load Please Reload.")
+        }
+    })
+    //formdata
     // console.log("TOKEN: ");
     // $.ajax({
     //     async: true,
@@ -46,42 +71,110 @@ $(document).ready(function(){
             },
             success:function(emplist){
                 console.log(emplist);
-                var empdis='';
+                
                 var no='Not in records';
                 $(emplist).each(function(i,val){
+                    var empdis='';
                     var email=emplist[i].email?emplist[i].email:'Not in records';
                     var phone=emplist[i].phone?emplist[i].phone:'Not in records';
-                    var gen='';
-                    if(emplist[i].title==1){
-                        gen='man';
-                    }
-                    if(emplist[i].title==2){
-                        gen='woman';
-                    }
-                    empdis+=`<div class="panel panel-default m-t-5 p-0">
-                                <div class="panel-body p-10">
-                                    <div class="row" style="line-height:30px; vertical-align:middle">
-                                        <div class="col-sm-4">
-                                            <label class="col-sm-2 input p-l-8" style="font-size:30px;">
-                                                <i class="linear-icons li icon-`+gen+` p-0 m-0" aria-hidden="true" ></i> 
-                                            </label>
-                                            <div class="col-sm-10">
-                                            `+emplist[i].name+`(`+emplist[i].designation+`)
+                    empdis+=    `
+                                    <div class="col-md-3">
+                                        <div class="panel profile-widget variant-2">
+                                            <div class="panel-body" style="box-shadow: 0 1px 1px 1px rgba(16, 16, 16, 0.57);">
+                                                <div class="profile-header" style=" height: 135px">
+                                                    <div class="overlay"></div>
+                                                    <div class="profine-info">
+                                                        <div class="name text-center empname" style="font-size:20px">${emplist[i].name}</div>
+                                                        <div class="position text-center empdes" style="font-size:12px">${emplist[i].designation}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="profile-body p-b-0">
+                                                    <div class="profile-image-wrapper">
+                                                        <img src="assets/images/user.png" alt="avatar" style="border:none;background-color:#fff;padding-top:5px;border-radius:50px">
+                                                    </div>
+                                                    <div class="social-stats ">
+                                                        <ul class="list-group m-b-0">
+                                                            <li class="list-group-item p-b-10 p-t-10">
+                                                                <div class="row">
+                                                                    <label class="input col-sm-2">
+                                                                        <i class="font-awesome fa fa-envelope" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <div class="col-sm-10">${email}</div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <label class="input col-sm-2">
+                                                                        <i class="font-awesome fa fa-phone" aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <div class="col-sm-10">${phone}</div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="list-group-item p-b-10 p-t-10">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">Efficiency:</div>
+                                                                    <div class="col-sm-8">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12">
+                                                                                <div id="${emplist[i].id}empslider" style="background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="input col-sm-4" style="font-size:10px">Poor</div>
+                                                                            <div class="input col-sm-4" style="font-size:10px">Average</div>
+                                                                            <div class="input col-sm-4" style="font-size:10px;text-align:right">Good</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <label class="input"><span class="glyphicon glyphicon-envelope"></span></label>
-                                             `+email+`
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label class="input"><span class="glyphicon glyphicon-earphone"></span></label>
-                                             `+phone+`
-                                        </div>
                                     </div>
-                                </div>
-                            </div>`;
+                                `
+                    // empdis+=`<div class="panel panel-default m-t-5 p-0">
+                    //             <div class="panel-body p-10">
+                    //                 <div class="row" style="line-height:30px; vertical-align:middle">
+                    //                     <div class="col-sm-4">
+                    //                         <label class="col-sm-2 input p-l-8" style="font-size:30px;">
+                    //                             <i class="linear-icons li icon-`+gen+` p-0 m-0" aria-hidden="true" ></i> 
+                    //                         </label>
+                    //                         <div class="col-sm-10">
+                    //                         `+emplist[i].name+`(`+emplist[i].designation+`)
+                    //                         </div>
+                    //                     </div>
+                    //                     <div class="col-sm-3">
+                    //                         <label class="input"><span class="glyphicon glyphicon-envelope"></span></label>
+                    //                          `+email+`
+                    //                     </div>
+                    //                     <div class="col-sm-2">
+                    //                         <label class="input"><span class="glyphicon glyphicon-earphone"></span></label>
+                    //                          `+phone+`
+                    //                     </div>
+                    //                 </div>
+                    //             </div>
+                    //         </div>`;
+                    $('#employeelist').append(empdis);
+                    $('#'+emplist[i].id+'empslider').slider({
+                        disabled: true,
+                        value: emplist[i].efficiency,
+                        max:110,
+                        min:90,
+                        step:0.2
+                    });
+                    $('#'+emplist[i].id+'empslider').find('.ui-slider-handle').css({
+                        'background': 'none',
+                        'border-left': '10px solid transparent',
+                        'border-right': '10px solid transparent',
+                        'border-top': '8px solid #000',
+                        'width': '0px',
+                        'height': '0px',
+                        'top':'-0.6em'
+                    });
+                    $('.ui-state-disabled').css('opacity','100');
                 });
-                $('#replist').html(empdis);
+                
+                    
             },
             error:function(error){
                 console.log(error.responseText);
@@ -167,10 +260,10 @@ $(document).ready(function(){
                                     <div class="name">`+todoitem.note+`</div>
                                 </div>
                                 <div class="col-sm-2" style="float:right">
-                                    <!--button type="button" class="btn btn-info btn-flat edittodo dashbutton" id="`+todoitem.id+`Tedit" title="Edit ToDo Item">
+                                    <!--button type="button" class="btn btn-info btn-raised edittodo dashbutton" id="`+todoitem.id+`Tedit" title="Edit ToDo Item">
                                         <span class="icon icon-pencil add-new"></span>
                                     </button-->
-                                    <button type="button" class="btn btn-danger btn-flat rippler deltodo dashbutton" id="`+todoitem.id+`Tedit" title="Delete ToDo Item">
+                                    <button type="button" class="btn btn-pinterest btn-raised rippler deltodo dashbutton" id="`+todoitem.id+`Tedit" title="Delete ToDo Item">
                                         <i class="fa fa-close"></i>
                                     </button>
                                 </div>
@@ -194,7 +287,7 @@ $(document).ready(function(){
                                             <!--button type="button" class="btn btn-info btn-flat edittodo dashbutton" id="`+todoitem.id+`Tedit" title="Edit ToDo Item">
                                                 <span class="icon icon-pencil add-new"></span>
                                             </button-->
-                                            <button type="button" class="btn btn-danger btn-flat rippler deltodo dashbutton" id="`+todoitem.id+`Tedit" title="Delete ToDo Item">
+                                            <button type="button" class="btn btn-pinterest btn-raised rippler deltodo dashbutton" id="`+todoitem.id+`Tedit" title="Delete ToDo Item">
                                                 <i class="fa fa-close"></i>
                                             </button>
                                         </div>
@@ -232,8 +325,8 @@ $(document).ready(function(){
             swal('Select Date');
             return false;
         }
-        if((a=$('.SubTask_list').val())!='')
-            subtask=a.split("T")[0];
+        if((a=$('#subtasklistask').val())!='')
+            subtask=a;
         else{
             subtask=null;
         }
@@ -261,7 +354,7 @@ $(document).ready(function(){
                 var tdlist='';
                 tdlist+=todoAdder(todolist);
                 $('#todoli').append(tdlist);
-                $('#form_id').trigger("reset");
+                $('#todoform').trigger("reset");
                 $('#modal-responsive').modal('hide');
             },
             error:function(error){
@@ -355,7 +448,9 @@ $(document).ready(function(){
     //todolist edit ends--------
     //todolist delete-----------
         $(document).on('click','.deltodo',function(){
+            var btnid=$(this).attr('id');
             var id=$(this).attr('id').split("T")[0];
+            
             $.ajax({
                 async: true,
                 crossDomain: true,
@@ -368,8 +463,7 @@ $(document).ready(function(){
                     "X-CSRFToken":csrftoken
                 },
                 success:function(todolist){
-                    swal("To-Do Element Deleted");
-                    location.reload();
+                    $('#'+btnid).parent().parent().parent().remove();
                 },
                 error:function(error){
                     console.log(error.responseText);
@@ -393,7 +487,8 @@ $(document).ready(function(){
         },
         success:function(emp){
             //console.log('emp: '+emp);
-            var eff=emp.efficiency;
+            var eff=emp.efficiency?emp.efficiency:0;
+            var prod=emp.productivity?emp.productivity:0;
             // // eff=110;
             // if(eff>=90&&eff<110)
             // //     $('.variant-2').addClass('color-2');
@@ -406,7 +501,26 @@ $(document).ready(function(){
             $('#selfrev').html(srev);
             $('#teamrev').html(trev);
             $('#empcode').html(emp.code);
-            $('#empeff').html(eff);
+            $('#empeff').html('<h4>'+eff+'</h4>');
+            $('#empprod').html('<h4>'+prod+'</h4>');
+            $('#mainempslider').slider({
+                max:110,
+                min:90,
+                step:0.2,
+                value:eff,
+                disabled:true
+            });
+            $('#mainempslider').find('.ui-state-disabled').css('opacity','100');
+            $('#mainempslider').find('.ui-slider-handle').css({
+                'background': 'none',
+                'border-left': '10px solid transparent',
+                'border-right': '10px solid transparent',
+                'border-top': '8px solid #000',
+                'width': '0px',
+                'height': '0px',
+                'top':'-0.6em',
+                
+            }); 
         }
     });
     $.ajax({
@@ -538,72 +652,99 @@ $(document).ready(function(){
                                     <h5>`+subtask.title+`</h5>
                                 </div>
                                 <div class="col-sm-6" id="`+subtask.id+`progress">
-                                    <div class="progress m-t-10" style="height:20px; -moz-box-shadow: 10px 3px 5px 6px #ccc;-webkit-box-shadow: 10px 3px 5px 6px #ccc;box-shadow: 10px 3px 5px 6px #ccc;">   
-                                        <div class="progress-bar progress-bar-striped active" id="`+subtask.id+`takewid" role="progressbar" aria-valuemin="20" aria-valuemax="20" style="width:`+subcomplete+`%; height:25px;color:#A9A9A9;background-color:`+subcolor+`">
-                                            <div class="subcomplete m-t-5" style=font-size:10px;vertical-align: middle;">
-                                                `+subcomplete+`% 
+                                    <div class="row m-b-0 p-b-0">
+                                        <div class="col-sm-12">
+                                            <div class="progress m-t-10" style="height:20px; -moz-box-shadow: 10px 3px 5px 6px #ccc;-webkit-box-shadow: 10px 3px 5px 6px #ccc;box-shadow: 10px 3px 5px 6px #ccc;">   
+                                                <div class="progress-bar progress-bar-striped active" id="`+subtask.id+`takewid" role="progressbar" aria-valuemin="20" aria-valuemax="20" style="width:`+subcomplete+`%; height:25px;color:#A9A9A9;background-color:`+subcolor+`">
+                                                    <div class="subcomplete m-t-5" style=font-size:10px;vertical-align: middle;">
+                                                        `+subcomplete+`% 
+                                                    </div>
+                                                </div>  
                                             </div>
-                                        </div>  
+                                        </div>
+                                    </div>
+                                    <div class="row m-t-0 p-t-0">
+                                        <div class="col-sm-4" style="font-size:10px;text-align:left">Poor</div>
+                                        <div class="col-sm-4" style="font-size:10px;text-align:center">Average</div>
+                                        <div class="col-sm-4" style="font-size:10px;text-align:right">Good</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div id="${subtask.id}subtaskslider" style="background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;"></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4" id="sbtbtnarea">
-                                    <div class="m-t-5" style="">
-                                        <button type="button" class="btn btn-info btn-raised rippler changecomp dashbutton" id="`+subtask.id+`Tcomplete" title="Update Progress">
-                                            <i class="icon icon-percent" aria-hidden="true"></i>
-                                        </button>
-                                            <input type="number" style="height:35px;width:150px"  step=".01" id="`+subtask.id+`Tprogtxt" class=" hide" placeholder="% Completed" max="100" min="0">
-                                        <button type="button" class="btn btn-success btn-raised sbtsave rippler hide dashbutton" id="`+subtask.id+`Tsave" title="Save Changes">
-                                            <i class="fa fa-save"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-warning btn-raised rippler timerss dashbutton" id="`+subtask.id+`Tsimer" title="Start Timer">
-                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-warning btn-raised rippler timersend dashbutton hide" id="`+subtask.id+`Tsimer" title="Remove Timer">
-                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        </button>
-                                        <a href="Tasks_Form.html?tid=`+subtask.task+`" type="button" class="btn btn-adn btn-raised rippler viewsbt dashbutton" id="`+subtask.id+`Tview" title="View Details" style="vertical-align:middle">
-                                            <i class="font-awesome fa fa-eye m-t-6" aria-hidden="true"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-primary btn-raised rippler todobtn dashbutton" id="`+subtask.id+`TAdd" title="Add to todo-list" data-toggle="modal" data-target="#modal-responsive">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-raised rippler delsbt dashbutton" id="`+subtask.id+`Tdelete" title="Delete Subtask">
-                                            <i class="fa fa-close"></i>
-                                        </button>
+                                    <div class="m-t-5" style="">`
+                                    if(subcomplete>=100){
+                                        subtaskstxt+=`
+                                                        <button type="button" disabled="true" class="btn btn-vimeo btn-raised rippler changecomp dashbutton" id="`+subtask.id+`Tcomplete" title="Max Progress Reached">
+                                                            <i class="icon icon-percent" aria-hidden="true"></i>
+                                                        </button>
+                                                    `
+                                    }
+                                    else{
+                                        subtaskstxt+=`
+                                                        <button type="button" class="btn btn-vimeo btn-raised rippler changecomp dashbutton" id="`+subtask.id+`Tcomplete" title="Update Progress">
+                                                            <i class="icon icon-percent" aria-hidden="true"></i>
+                                                        </button>
+                                                    `
+                                    }    
+                            subtaskstxt+= `<input type="number" style="height:35px;width:150px" step=".01" value=${subcomplete} id="${subtask.id}Tprogtxt" class=" hide" placeholder="% Completed" max="100" min="0">
+                                            <button type="button" class="btn btn-success btn-flat sbtsave rippler hide dashbutton" id="`+subtask.id+`Tsave" title="Save Changes">
+                                                <i class="fa fa-save"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-openid btn-raised rippler timerss dashbutton" id="`+subtask.id+`Tsimer" title="Start Timer">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-openid btn-raised rippler timersend dashbutton hide" id="`+subtask.id+`Tsimer" title="Remove Timer">
+                                                <i class="linear-icons li icon-timer-crossed" aria-hidden="true"></i>
+                                            </button>
+                                            <a href="Tasks_Form.html?tid=`+subtask.task+`" type="button" class="btn btn-adn btn-raised rippler viewsbt dashbutton" id="`+subtask.id+`Tview" title="View Details" style="vertical-align:middle">
+                                                <i class="font-awesome fa fa-eye m-t-6" aria-hidden="true"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-linkedin btn-raised rippler todobtn dashbutton" id="`+subtask.id+`TAdd" title="Add to todo-list" data-toggle="modal" data-target="#modal-responsive">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-bitbucket btn-raised rippler xtrabtn dashbutton" id="`+subtask.id+`TAdd" title="Add Some Extra Work" data-toggle="modal" data-target="#modalextra">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-pinterest btn-raised rippler delsbt dashbutton" id="`+subtask.id+`Tdelete" title="Delete Subtask">
+                                                <i class="fa fa-close"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
         `;
         //var subtid='#'+data[i].task+' .panel-body';
+        console.log("Effic: "+parseInt(subtask.efficiency*100));
         $('#'+subtask.task).find('.panel-body').append(subtaskstxt);
-        $('.SubTask_list').append('<option value="'+subtask.id+'Tsubt">'+subtask.title+'</option>');
+        $('.SubTask_list').append('<option value="'+subtask.id+'">'+subtask.title+'</option>');
+        $('#'+subtask.id+'subtaskslider').slider({
+            disabled: true,
+            value: parseInt(subtask.efficiency*100),
+            max:110,
+            min:90,
+          });
+          $('#'+subtask.id+'subtaskslider').find('.ui-slider-handle').css({
+            'background': 'none',
+            'border-left': '15px solid transparent',
+            'border-right': '15px solid transparent',
+            'border-bottom': '10px solid #000',
+            'width': '0px',
+            'height': '0px',
+            'top':'0.65em'
+        });
+        $('#'+subtask.id+'subtaskslider').find('.ui-state-disabled').css('opacity','100');
         
     }
     //loadsubtask end---------------
 
     $(document).on('click','.todobtn',function(){
+        $('#todoform').trigger("reset");
         var subid=$(this).attr('id').split('T')[0];
-        var todobj=new Object();
         $('.SubTask_list').val(subid+'Tsubt').trigger('change');
-        $.ajax({
-            crossDomain: true,
-            url:urlRoot+'subtasks/'+subid+'/',
-            type:'GET',
-            datatype:'JSON',
-            headers: {
-                "content-type": "application/json",
-                "cache-control": "no-cache",
-                "X-CSRFToken":csrftoken
-            },
-            success:function(subtask){
-                console.log(subtask);
-                $('#todonote').val(subtask.title);
-            },
-            error:function(error){
-                console.log(error.responseText);
-            }
-        });
     });
     //clock ends starts--------
     //clocks start end---------
@@ -633,8 +774,8 @@ $(document).ready(function(){
                     "X-CSRFToken":csrftoken
                 },
                 success:function(subtask){
-                    if(subtask.actual_time)
-                        subtask.actual_time+=timespent;
+                    if(parseFloat(subtask.actual_time))
+                        subtask.actual_time=parseFloat(subtask.actual_time)+timespent;
                     else
                         subtask.actual_time=timespent;
                     var updstask=JSON.stringify(subtask);
@@ -688,8 +829,8 @@ $(document).ready(function(){
                     "X-CSRFToken":csrftoken
                 },
                 success:function(subtask){
-                    if(subtask.actual_time)
-                        subtask.actual_time+=timespent;
+                    if(parseFloat(subtask.actual_time))
+                        subtask.actual_time=parseFloat(subtask.actual_time)+timespent;
                     else
                         subtask.actual_time=timespent;
                     var updstask=JSON.stringify(subtask);
@@ -747,7 +888,9 @@ $(document).ready(function(){
                                             <label class="task">${sbtitle}</label>
                                         </div>
                                         <div class="col-sm-3 p-0">
-                                            <buton type="link" type="link" class="btn btn-link p-0 closeme" id="${subtask.title}__${subtask.id}">x</button>
+                                            <buton type="link" type="link" class="btn btn-link p-0 closeme" id="${subtask.title}__${subtask.id}" title="Remove Timer">
+                                                <i class="linear-icons li icon-cross-square" aria-hidden="true"></i>
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -755,10 +898,14 @@ $(document).ready(function(){
                                             <label class="time" id="${subtask.title}__${subtask.id}time"></label>
                                         </div>
                                         <div class="col-sm-1 p-r-0 p-l-0">
-                                            <button class="start" id="${subtask.title}__${subtask.id}"><span class="glyphicon glyphicon-play"></span></button>
+                                            <button class="start" id="${subtask.title}__${subtask.id}" title="Start Timer">
+                                                <span class="glyphicon glyphicon-play"></span>
+                                            </button>
                                         </div>
                                         <div class="col-sm-1 p-l-5">
-                                        <button class="pause" id="${subtask.title}__${subtask.id}"><span class="glyphicon glyphicon-pause"></span></button>
+                                            <button class="pause" id="${subtask.title}__${subtask.id}" title="Stop Timer">
+                                                <span class="glyphicon glyphicon-pause"></span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -784,6 +931,9 @@ $(document).ready(function(){
     //sbt completion change call starts--------------
     $(document).on('click','.sbtsave',function(){
         var subtaid=$(this).attr('id').split("T")[0];
+        $('#'+subtaid+'Tprogtxt').addClass('hide');
+        $('#'+subtaid+'Tsave').addClass('hide');
+        $('#'+subtaid+'Tcomplete').removeClass('hide');
         var newprg=$('#'+subtaid+'Tprogtxt').val();
         console.log(newprg);
         $.ajax({
@@ -820,9 +970,13 @@ $(document).ready(function(){
                         $('#'+subtask.id+'takewid').css("width",subtask.completed+'%');
                         if(subtask.completed>=100){
                             $('#'+subtask.id+'takewid').css("background-color",'green');
+                            $('#'+subtask.id+'Tcomplete').attr('disabled','true');
+                            $('#'+subtask.id+'Tcomplete').attr('title','Max Progress Reached');
+
                         }
                         if(subtask.completed<10){
                             $('#'+subtask.id+'takewid').css("background-color",'red');
+
                         }
                         if(subtask.completed>=10 && subtask.completed<100){
                             $('#'+subtask.id+'takewid').css("background-color",'#fcc016');
@@ -891,6 +1045,141 @@ $(document).ready(function(){
             }
         });
     });
+    $('#subtaskstatus').select2({
+        dropdownParent: $('#modal-responsive')
+    })
+    $('#subtasklistask').select2({
+        dropdownParent: $('#modal-responsive')
+    })
+    $('#xcat').select2({
+        dropdownParent: $('#modalextra')
+    })
+    $('#subtasklistx').select2({
+        dropdownParent: $('#modalextra')
+    })
+    
+    //xtrawork function
+    function loadXtra(work){
+        var xtra=`
+                    <li class="list-group-item p-5 m-0" style="border-bottom:1px solid #ccc">
+                        <div class="content row p-0">
+                            <div class="col-sm-5">
+                                <label class="input m-t-5 m-l-5">${work.title}</label>
+                            </div>
+                            <div class="col-sm-5">
+                                <label class="input m-t-5 m-l-5">${work.duration} Hours</label>
+                            </div>
+                            <div class="col-sm-2" style="float:right">
+                                <button type="button" class="btn btn-pinterest btn-raised rippler delxtra dashbutton" id="${work.id}Tdelw" title="Delete ToDo Item">
+                                    <i class="fa fa-close"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                `;
+                $('#extrawork').append(xtra);
+    };
+    //xtrawork function
+    //delxtra
+    $(document).on('click','.delxtra',function(){
+        var btnid=$(this).attr('id');
+        var id=btnid.split('T')[0];
+        $.ajax({
+            async: true,
+            crossDomain: true,
+            url:urlRoot+'subtasks/extrawork/'+id+'/',
+            type:'DELETE',
+            datatype:'JSON',
+            headers:{
+                "content-type": "application/json",
+                "cache-control": "no-cache",
+                "X-CSRFToken":csrftoken
+            },
+            success:function(){
+                $('#'+btnid).parent().parent().parent().remove();
+            },
+            error:function(error){
+                console.log(error.responseText);
+            }
+        });
+    });
+    //delxtra
+    //addxtra
+    $(document).on('click','.savextra',function(){
+        var xtra=new Object();
+        xtra.title=$('#titlex').val();
+        xtra.subtask=$('#subtasklistx').val();
+        xtra.duration=$('#xtradur').val();
+        xtra.category=$('#xcat').val();
+        var xtrawork=JSON.stringify(xtra);
+        console.log("Xtra: "+xtrawork);
+        $.ajax({
+            async: true,
+            crossDomain: true,
+            url:urlRoot+'subtasks/extrawork/',
+            type:'POST',
+            datatype:'JSON',
+            data:xtrawork,
+            headers:{
+                "content-type": "application/json",
+                "cache-control": "no-cache",
+                "X-CSRFToken":csrftoken
+            },
+            success:function(extrawork){
+                if(extrawork){
+                    loadXtra(extrawork);
+                    $('#xtraform').trigger("reset");
+                    $('#modalxtra').modal('hide');
+                }
+
+            },
+            error:function(error){
+                console.log(error.responseText);
+            }
+        });
+    });
+    //addxtra
+    //xtrabtnadd
+    $(document).on('click','.xtrabtn',function(){
+        $('#xtraform').trigger("reset");
+        var subid=$(this).attr('id').split('T')[0];
+        $('.SubTask_list').val(subid+'Tsubt').trigger('change');
+    });
+    //xtratbnadd
+    //xtrawork
+    $.ajax({
+        async: true,
+        crossDomain: true,
+        url:urlRoot+'subtasks/extrawork/',
+        type:'GET',
+        datatype:'JSON',
+        headers:{
+            "content-type": "application/json",
+            "cache-control": "no-cache",
+            "X-CSRFToken":csrftoken
+        },
+        success:function(xtra){
+            if(xtra){
+                $(xtra).each(function(i,val){
+                    loadXtra(xtra[i]);
+                });
+            }
+        },
+        error:function(error){
+            console.log(error.responseText);
+        }
+    });
+    //
+    //
+    //
+    //
+    //
+    
+    
+    //
+    //
+    //
+    //
     //delete subtask ends--------------
         $(document).on('click','.start',function(){
             var id=$(this).attr('id')
@@ -918,15 +1207,15 @@ $(document).ready(function(){
                         "X-CSRFToken":csrftoken
                     },
                     success:function(subtask){
-                        if(subtask.actual_time)
-                            subtask.actual_time+=timespent;
+                        if(parseFloat(subtask.actual_time))
+                            subtask.actual_time=parseFloat(subtask.actual_time)+timespent;
                         else
                             subtask.actual_time=timespent;
                         var updstask=JSON.stringify(subtask);
                         $.ajax({
                             async: true,
                             crossDomain: true,
-                            url:urlRoot+'subtasks/'+stid+'/?',
+                            url:urlRoot+'subtasks/'+stid+'/',
                             type:'PUT',
                             datatype:'JSON',
                             data:updstask,
@@ -954,5 +1243,4 @@ $(document).ready(function(){
             value.innerHTML=stopwatch.get(key);
             });
         }, 1000);
-
 });
