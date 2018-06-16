@@ -129,8 +129,8 @@ $(document).ready(function(){
                     </label>
                 </td>
                 <td class="btn-group">
-                    <button class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
-                    <button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle"> <span class="caret"></span></button>
+                    <button type="button" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
+                    <button type="button" data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle"> <span class="caret"></span></button>
                     <ul class="dropdown-menu pull-right idStored">
                     <li class="custom_inline st_transfer"><a href="#"><span class="glyphicon glyphicon-transfer"></span></a></li><br>
                     <li class="custom_inline st_remove"><a href="#"><span class="glyphicon glyphicon-remove"></span></a></li>
@@ -203,6 +203,9 @@ $(document).ready(function(){
         $('#xtra_cat').select2({
             dropdownParent: $('#Xtra_Modal')
         })
+        var subtaskid = $(this).parents('tr').attr('id');
+        console.log(subtaskid);
+        $('#xtra_subtask').val(subtaskid);;
     });
 
     $(document).on('click','#XtraWork',function(){
@@ -223,15 +226,22 @@ $(document).ready(function(){
 
         $.ajax({
             async:true,
-            url:urlRoot + 'subtask/extrawork/',
+            crossDomain: true,
+            url:urlRoot + 'subtasks/extrawork/',
             type:'POST',
             datatype:'JSON',
+            headers: {
+                "content-type": "application/json",
+                "cache-control": "no-cache",
+                "X-CSRFToken": csrftoken
+              },
+            processData: false,
             data:xtraJSON,
-            success:function(data){
-
+            success:function(){
+                swal('Extra Work Added!');
             },
-            error:function(){
-
+            error:function(error){
+                console.log(error.responseText)
             }
         })
     });
@@ -650,7 +660,7 @@ $(document).ready(function(){
             var formatted3 = $.datepicker.formatDate("dd/mm/yy", new Date(data.statutoryDueDate));
             $('#taskStats').val(formatted3);
             $('#taskStatus').val(data.status).trigger('change');
-            // $('#taskOrgin').val(data.originator);
+            $('#taskOrgin').val(data.originator);
             $('#taskController').val(data.controller).trigger('change');
             $('#taskApprover').val(data.approver).trigger('change');
             $('#taskClientsView').val(data.showToClient);
@@ -674,7 +684,7 @@ $(document).ready(function(){
         var name = $('#subTaskTable > tbody > tr > td:nth-child(1) > label > input').val();
         var Sdate = $('#subTaskTable > tbody > tr > td:nth-child(3) > label > input:first').val();
         var Stime = $('#subTaskTable > tbody > tr > td:nth-child(3) > label > input:nth-child(2)').val();
-        var assignee = 1;//$('#subTaskTable > tbody > tr > td:nth-child(4) > label > input').val();
+        var assignee = $('#subTaskTable > tbody > tr > td:nth-child(4) > label > input').val();
         var duration = $('#subTaskTable > tbody > tr > td:nth-child(2) > label > input').val();
 
         if(!title){
@@ -724,18 +734,22 @@ $(document).ready(function(){
             var isExternal= $('#taskType').prop('checked');
             tasksData.title = $('#taskTitle').val();
             tasksData.isExternal = isExternal;
-            tasksData.client = "1";//$('#taskClients').val();
-            tasksData.originator = "1";//$('#taskOrgin').val();
-            tasksData.controller = "1";//$('#taskController').val();
-            tasksData.status = "1";//$('#taskStatus').val();
+            tasksData.client = $('#taskClients').val();
+            tasksData.originator =$('#taskOrgin').val();
+            tasksData.controller =$('#taskController').val();
+            tasksData.status = $('#taskStatus').val();
             tasksData.showToClient = $('#taskClientsView').prop('checked');
             tasksData.service = $('#taskService').val();
-            tasksData.approver = "1";//$('#taskApprover').val();
+            tasksData.approver = $('#taskApprover').val();
             tasksData.priority = $('#range_02').val();
             tasksData.startTime = getFormateDateToServer($('#taskSdate').val()) +'T'+ $('#taskStime').val()+':00Z';
             tasksData.endTime = getFormateDateToServer($('#taskEdate').val()) +'T'+ $('#taskEtime').val()+':00Z';
             tasksData.duration = $('#taskDuration').val();
             tasksData.statutoryDueDate = getFormateDateToServer($('#taskStats').val()) + 'T04:13:13Z';
+            var proposal = $('#taskProposal').val()
+            if(proposal){
+                tasksData.taskProposal = proposal;
+            }
             // tasksData.document
             
             var taskJSON = JSON.stringify(tasksData);
@@ -806,6 +820,7 @@ $(document).ready(function(){
     });
     var doco='';
     $(document).on('change','#doc1', function(){
+        $('#doc1txt').val($(this)[0].files[0]['name']);
         var mimeType=$(this)[0].files[0]['type'];
             var ggg1=$(this)[0].files[0];
             var reader = new FileReader();
