@@ -253,9 +253,6 @@ $(document).ready(function(){
                                     <div class="name">`+todoitem.note+`</div>
                                 </div>
                                 <div class="col-sm-2" style="float:right">
-                                    <!--button type="button" class="btn btn-info btn-raised edittodo dashbutton" id="`+todoitem.id+`Tedit" title="Edit ToDo Item">
-                                        <span class="icon icon-pencil add-new"></span>
-                                    </button-->
                                     <button type="button" class="btn btn-pinterest btn-raised rippler deltodo dashbutton" id="`+todoitem.id+`Tedit" title="Delete ToDo Item">
                                         <i class="fa fa-close"></i>
                                     </button>

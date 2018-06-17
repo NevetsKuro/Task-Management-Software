@@ -19,11 +19,11 @@ var token=localStorage.getItem('token');
 		success:function(user){
 			if(user){
 				current_user=user.id;
-				$('.name').html(user.name);
+				// $('.name').html(user.name);
 				console.log(user);
 				console.log(user.name);
 				$('#profile').attr('href','profile.html');
-				$('.name').html(user.name);
+				$('.empname').html(user.name);
 				$('.position').html(user.designation);
 				console.log(user);
 			}
