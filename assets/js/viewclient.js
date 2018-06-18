@@ -1,106 +1,63 @@
 $(window).ready(function(){
     var global=[];
-    var dat = $("#poctable").DataTable({
-        columnDefs:[
-            {
-                "targets": [3],
-                "visible": true,
-            },
-            {
-                "targets": [4],
-                "visible": false,
-            },
-            {
-                "targets": [5],
-                "visible": false,
-            }
-        ]
-    });
     
     var p=GetURLParams();
-    var leg=p['legalstats'];
-    console.log(leg);
     var id=p['id'];
-    var legalstatus="",data="",datag="",data2="",datatb="";
-    if(leg){
-        switch(leg){
+    var legalstatus = p['legalstatus'];
+    var T_legalstatus;
+    if(legalstatus){
+        switch(legalstatus){
             case '1':
-            $("#gstdrop").addClass("hide");
             $("#individual").removeClass("hide");
-            $("#branc").addClass("hide");
-            $("#deso").addClass("hide");
-            // $('.pocdesig').addClass("hide");
-            // $('.pocpurpose').addClass("hide");
-            dat.column(3).visible(true);
-            dat.column(4).visible(false);
-            dat.column(5).visible(false);
-            legalstatus="individuals";
+            $(".company_common").addClass("hide");
+            $("#org_details").addClass("hide");
+            $(".individuals").removeClass("hide");
+            T_legalstatus="individuals";
             break;
 
             case '2':
             $("#huf").removeClass("hide");
-            // $('.pocreln').addClass("hide");
-            dat.column(3).visible(false);
-            dat.column(4).visible(true);
-            dat.column(5).visible(true);
-            legalstatus='hufs';
+            $(".huf").removeClass("hide");
+            T_legalstatus='hufs';
             break;
 
             case '3':
             $("#prop").removeClass("hide");
-            // $('.pocreln').addClass("hide");
-            dat.column(3).visible(false);
-            dat.column(4).visible(true);
-            dat.column(5).visible(true);
-            legalstatus='proprietors';
+            $(".prop").removeClass("hide");
+            T_legalstatus='proprietors';
             break;
+
             case '4':
             $("#partner").removeClass("hide");
-            // $('.pocreln').addClass("hide");
-            // $("#parttable").DataTable();
-            dat.column(3).visible(false);
-            dat.column(4).visible(true);
-            dat.column(5).visible(true);
-            legalstatus='partnership-firms';
+            $(".partner").removeClass("hide");
+            T_legalstatus='partnership-firms';
             break;
 
             case '5':
             $("#llp").removeClass("hide");
-            // $('.pocreln').addClass("hide");
-            // $('#llptable').DataTable();
-            dat.column(3).visible(false);
-            dat.column(4).visible(true);
-            dat.column(5).visible(true);
-            legalstatus='limited-companies';
+            $(".llp").removeClass("hide");
+            T_legalstatus='llps';
             break;
 
             case '6':
             $("#company").removeClass("hide");
-            // $('.pocreln').addClass("hide");
-            // $("#cmptable").DataTable();
-            dat.column(3).visible(false);
-            dat.column(4).visible(true);
-            dat.column(5).visible(true);
-            legalstatus='llps';
+            $(".company").removeClass("hide");
+            T_legalstatus='limited-companies';
             break;
             
             case '7': 
             $("#aop").removeClass("hide");
-            dat.column(3).visible(false);
-            dat.column(4).visible(true);
-            dat.column(5).visible(true);
-            legalstatus='aop-boi';
+            $(".aop").removeClass("hide");
+            T_legalstatus='aop-boi';
             break;
 
             case '8':
             $("#trust").removeClass("hide");
-            // $('.pocreln').addClass("hide");
-            dat.column(3).visible(false);
-            dat.column(4).visible(true);
-            dat.column(5).visible(true);
-            legalstatus='trusts';
+            $(".trust").removeClass("hide");
+            T_legalstatus='trusts';
             break;
         }
+        
     }
     
     $.ajax({
@@ -115,69 +72,57 @@ $(window).ready(function(){
         }
     });
 
+    
+
     $.ajax({
-        url:urlRoot + 'clients/'+legalstatus+'/'+id,
+        url:urlRoot + 'clients/'+T_legalstatus+'/'+id,
         type: 'GET',
         dataType: 'json',
         success: function(data){
-            data.pan_no?$('#pan').html(data.pan_no):$('#pan').html('');
-            data.aadhar_no?$('#indadhar').html(data.aadhar_no):$('#indadhar').html('');
-            data.commencement_date?$('.doc').html($.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date))):data.commencement_date('');
-            data.gstin?$('#gstin').html(data.gstin):$('#gstin').html('');
-            data.prospect.name?$('#name').html(data.prospect.name):$('#name').html('');
-            data.prospect.address?$('#address').html(data.prospect.address):$('#address').html('');
+
+            data.pan_no?$('#panno').html(data.pan_no):$('#panno').html('None');
+            data.commencement_date?$('#dateOfCom').html($.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date))):$('.doc').html('');
+            data.gstin?$('#gstin').html(data.gstin):$('#gstin').html('None');
+            data.prospect.name?$('#name').html(data.prospect.name):$('#name').html('None');
+            data.prospect.address?$('#address').html(data.prospect.address):$('#address').html('None');
             data.prospect.email?$("#mail").html('#mail'):$().html('');
-
-
-            cons=data.pocs;
-            if(legalstatus=='individuals'){
-                data.typeOfWork?$('#indtow').html(data.typeOfWork):$('#indtow').html('');
+            
+            if(T_legalstatus=='individuals'){
+                $('#ind_name').html(data.prospect.title+' '+data.prospect.name);
+                data.typeOfWork?$('#ind_tow').html(data.typeOfWork):$('#ind_tow').html('None');
                 var dob=data.dob;
                 if(dob!=null){
                     var splitDate = dob.split('-');
-                    $('.dob').html(splitDate[2] + '/' + splitDate[1] + '/' + splitDate[0]);
+                    $('#dob').html(splitDate[2] + '/' + splitDate[1] + '/' + splitDate[0]);
                 }
+                data.aadhar_no?$('#ind_aadhar').html(data.aadhar_no):$('#ind_aadhar').html('None');
             }
-            if(legalstatus=='hufs'){
-                data.karta_name?$('#nok').html(data.karta_name):$('#nok').html('');
-                data.commencement_date?$('.doc').html(data.commencement_date):$('.doc').html('');
+            if(T_legalstatus=='hufs'){
+                data.karta_name?$('#nok').html(data.karta_name):$('#nok').html(' ');
+                data.commencement_date?$('.doc').html(data.commencement_date):$('.doc').html('None');
             }
             
-            /*$.ajax({
-                url:urlRoot + 'contacts/' + caller,
-                type: 'GET',
-                dataType: 'json',
-                success: function(data2){                     
-                    var phones=data2.phone_numbers;
-                    var mails=data2.email_addresses;
-                    for(var i=0;i<phones.length;i++){
-                        if(phones[i].is_primary===true){
-                            $("#phone").html(phones[i].number);
-                        }
-                    }
-                    for(var j=0;j<mails.length;j++){
-                        if(mails[j].is_primary===true){
-                            $("#mail").html(mails[j].email);
-                        }
-                    }
-                    if(data2.contact_organisation){
-                        $('#group').html(data2.contact_organisation.organisation.group);
-                        $('#website').html(data2.contact_organisation.organisation.website);
-                        $('#website').attr("href",data2.contact_organisation.organisation.website);
-                        var org = data2.contact_organisation.organisation;
-                        var branchid = data2.contact_organisation.branch;
-                        var brans = org.branches.find(function(branch){return branch.id === branchid;});
-                        $('#branchname').html(brans.name);
-                        $('#baddress').html(brans.address);
-                        $('#bgst').html(brans.gstin);
-                    }
-                },
-                error:function(error){
-                    console.log(error.responseText);
+            if(T_legalstatus!='individuals'){
+                var org = data.prospect;
+                $('#NameBusiness').html(org.name)
+                org.industry_types.length?$('#industry_types').html(org.industry_types.join('')):$('#industry_types').html('None');
+                org.business_types.length?$('#business_types').html(org.business_types.join('')):$('#business_types').html('None');
+                org.business_natures.length?$('#business_natures').html(org.business_natures.join()):$('#business_natures').html('None');
+                $('#website').html(org.website);
+                var obj = org.branches.find(function(a){ return a.is_head_office == true});
+                if(obj){
+                    $('#bname').html(obj.name);
+                    $('#baddress').html(obj.address);
                 }
-            });*/
+                $('#gstin').html(data.gstin);
+                $('#tan').html(data.tan_no);
+            }
+            
+            if(T_legalstatus=='proprietors'){
+                $('#pro_ownerName').html(data.owner_name);
+            }
 
-            if(legalstatus=='partnership-firms'){
+            if(T_legalstatus=='partnership-firms'){//4
                 var pars='';
                 for (let i = 0; i < data.partners.length; i++) {
                     pars+='<tr>';
@@ -189,7 +134,7 @@ $(window).ready(function(){
                 $('#partn').html(pars);
                 $('.deedDoc').html($.datepicker.formatDate("dd/mm/yy", new Date(data.partnership_deed_date)));
             }
-            if(legalstatus=='limited-companies'){
+            if(T_legalstatus=='limited-companies'){//6
                 var dirs='';
                 for (let i = 0; i < data.directors.length; i++) {
                     dirs+='<tr>'
@@ -199,10 +144,14 @@ $(window).ready(function(){
                     dirs+='</tr>';
                 }
                 $('#directors').html(dirs);
+                $('#listed').html(data.stock_exchange_name);
+                $('#company_doi').html($.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date)));
+                $('#cin').html(data.cin);
+                $('#type_company').html(data.company_type);
             }
-            if(legalstatus=='llps'){
+            if(T_legalstatus=='llps'){//5
                 var dpars='';
-                for (let i = 0; i < data.designated_partners.length; i++) {
+                for (let i = 1; i < data.designated_partners.length+1; i++) {
                     dpars+='<tr>'
                     dpars+='<td>'+i +'</td>';
                     dpars+='<td>'+data.designated_partners[i].name +'</td>';
@@ -210,90 +159,157 @@ $(window).ready(function(){
                     dpars+='</tr>';
                 }
                 $('#desigp').html(dpars);
-                var parss='';
-                for (let i = 0; i < data.other_partners.length; i++) {
-                    parss += data.other_partners[i].name;
+                if(data.other_partners.length){
+                    $('#dPars').html($.map(data.other_partners,(a)=>a.name).join(','));
                 }
-                $('#dPars').html(parss);
+                $('#pars_doi').html($.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date)));
+                $('#llpin').html(data.llpin);
             }
-            if(legalstatus=='trusts'){
-                var trustee='';
-                for (let i = 0; i < data.trustee.length; i++) {
-                    trustee+=data.trustee[i].name;
+            if(T_legalstatus=='trusts'){//8
+                if(data.trustee.length){
+                    $('#tnot').html($.map(data.trustee,(a)=>a.name).join(','));
                 }
-                $('#tnot').html(trustee);
+            }
+            if(T_legalstatus=='aop-boi'){
+                $('#reg').html(data.registration_no);
+                if(data.members){
+                    $('#members').html($.map(data.members,(a)=>a.name).join(','));
+                }
             }
 
-            // var relation, purpose;
-            for(var i=0;i<data.pocs.length;i++){
-                // if(legalstatus === 'individuals'){
-                //     var relationid = data.pocs[i].relation;
-                //     relation = global2.relation.find(function(rel){
-                //         return rel.id == relationid;
-                //     }).relation;
-                // }else{
-                //     purpose = data.pocs[i].purpose;
-                // }
-                // var relation = '';
-                var purpose = data.pocs[i].purpose;
-                //if(data.pocs[i].is_primary==true){
+            var managers = data.managers;
+            if(managers){
+                var mans='';
+                for (let i = 0; i < managers.length; i++) {
+                    mans+=`<tr>
+                    <td>${i+1}</td>
+                    <td>${managers[i].service}</td>
+                    <td>${managers[i].manager}</td>
+                    <td>${managers[i].role}</td>
+                    </tr>`;
+                }
+                $('#M_body').html(mans);
+            }
+
+            var pocs = data.pocs;
+            if(pocs){
+                var poc='';
+                // var contacts = pocs.map((a)=>a.contact)
+
+                for (let i = 0; i < pocs.length; i++) {
                     
-                //}
-                //else if(data.pocs[i].is_primary==false){
                     $.ajax({
-                        url: urlRoot + 'contacts/display/'+data.pocs[i].contact,
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(datatb){
-                            var dname=datatb.name;
-                            var phon="",mal="";
-                            for(var j=0;j<datatb.phone_numbers.length;j++){
-                                if(datatb.phone_numbers[j].is_primary===true)
-                                    phon=datatb.phone_numbers[j].number;      
-                            }
-                            for(var k=0;k<datatb.email_addresses.length;k++){
-                                if(datatb.email_addresses[k].is_primary===true)
-                                   mal=datatb.email_addresses[k].email;      
-                            }
-                            
-                            if(legalstatus=="individuals"){
-                                var designation='';
-                                var relationid = data.pocs[i].relation;
-                                var relation = global2.relation.find(function(rel){
-                                    return rel.id == relationid;
-                                }).relation;
-                                
-                                dat.row.add([
-                                    datatb.name?datatb.name:'',
-                                    phon?phon:'',
-                                    mal?mal:'',
-                                    relation?relation:'',
-                                    designation?designation:'',
-                                    purpose?purpose:''
-                                ]).draw(false);
-                            }
-                            else{
-                                if(datatb.contact_organisation){
-                                    var design = global.designations.find(function(des){
-                                        return des.id===datatb.contact_organisation.designation
-                                        }).designation;
-                                }
-                                dat.row.add([
-                                    datatb.name?datatb.name:'',
-                                    phon?phon:'',
-                                    mal?mal:'',
-                                    relation?relation:'',
-                                    design?design:'',
-                                    purpose?purpose:''
-                                ]).draw(false);
-                            }
+                        async:false,
+                        url:urlRoot+'contacts/'+pocs[i].contact+'/',
+                        type:'GET',
+                        dataType:'JSON',
+                        success:function(poca){
+                            poc+=`<tr>
+                            <td>${i+1}</td>
+                            <td>${poca.name}</td>
+                            <td>${poca.phone}</td>
+                            <td>${poca.email}</td>
+                            <td>${poca.designation}</td>
+                            <td>${pocs[i].relation}</td>
+                            <td>${pocs[i].purpose}</td>
+                            </tr>`;
                         },
                         error:function(error){
                             console.log(error.responseText);
                         }
                     });
-               // }
+                }
+                $('#P_C_body').html(poc);
             }
+
+            var statdocs = data.statdocs;
+            if(statdocs){
+                var stats='';
+                for (let i = 0; i < statdocs.length; i++) {
+                    stats+=`<tr>
+                    <td>${i+1}</td>
+                    <td>${statdocs[i].name}</td>
+                    <td>${statdocs[i].number}</td>
+                    <td>${statdocs[i].issuing_authority}</td>
+                    <td>${statdocs[i].valid_from}</td>
+                    <td>${statdocs[i].valid_till}</td>
+                    <td>${statdocs[i].applicable_law}</td>
+                    <td>${statdocs[i].document_type}</td>
+                    </tr>`;
+                }
+                $('#Stats_body').html(stats);
+            }
+
+            // var relation, purpose;
+            // for(var i=0;i<data.pocs.length;i++){
+            //     // if(legalstatus === 'individuals'){
+            //     //     var relationid = data.pocs[i].relation;
+            //     //     relation = global2.relation.find(function(rel){
+            //     //         return rel.id == relationid;
+            //     //     }).relation;
+            //     // }else{
+            //     //     purpose = data.pocs[i].purpose;
+            //     // }
+            //     // var relation = '';
+            //     var purpose = data.pocs[i].purpose;
+            //     //if(data.pocs[i].is_primary==true){
+                    
+            //     //}
+            //     //else if(data.pocs[i].is_primary==false){
+            //         // $.ajax({
+            //         //     url: urlRoot + 'contacts/display/'+data.pocs[i].contact,
+            //         //     type: 'GET',
+            //         //     dataType: 'JSON',
+            //         //     success: function(datatb){
+            //         //         var dname=datatb.name;
+            //         //         var phon="",mal="";
+            //         //         for(var j=0;j<datatb.phone_numbers.length;j++){
+            //         //             if(datatb.phone_numbers[j].is_primary===true)
+            //         //                 phon=datatb.phone_numbers[j].number;      
+            //         //         }
+            //         //         for(var k=0;k<datatb.email_addresses.length;k++){
+            //         //             if(datatb.email_addresses[k].is_primary===true)
+            //         //                mal=datatb.email_addresses[k].email;      
+            //         //         }
+                            
+            //         //         if(legalstatus=="individuals"){
+            //         //             var designation='';
+            //         //             var relationid = data.pocs[i].relation;
+            //         //             var relation = global2.relation.find(function(rel){
+            //         //                 return rel.id == relationid;
+            //         //             }).relation;
+                                
+            //         //             dat.row.add([
+            //         //                 datatb.name?datatb.name:'',
+            //         //                 phon?phon:'',
+            //         //                 mal?mal:'',
+            //         //                 relation?relation:'',
+            //         //                 designation?designation:'',
+            //         //                 purpose?purpose:''
+            //         //             ]).draw(false);
+            //         //         }
+            //         //         else{
+            //         //             if(datatb.contact_organisation){
+            //         //                 var design = global.designations.find(function(des){
+            //         //                     return des.id===datatb.contact_organisation.designation
+            //         //                     }).designation;
+            //         //             }
+            //         //             dat.row.add([
+            //         //                 datatb.name?datatb.name:'',
+            //         //                 phon?phon:'',
+            //         //                 mal?mal:'',
+            //         //                 relation?relation:'',
+            //         //                 design?design:'',
+            //         //                 purpose?purpose:''
+            //         //             ]).draw(false);
+            //         //         }
+            //         //     },
+            //         //     error:function(error){
+            //         //         console.log(error.responseText);
+            //         //     }
+            //         // });
+            //    // }
+            // }
         }
     });
 });

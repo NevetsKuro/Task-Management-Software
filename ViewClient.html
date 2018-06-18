@@ -90,30 +90,28 @@
 
                             <!-- START PANEL -->
                             <div class="panel">
-
-
                                 <div class="panel-body">
-                                    <div class="well f-s-25 m-b-20 text-bold">
-                                        <div class="row">
-                                            <center>
-                                                <div class="col-sm-12" >
-                                                    <label class="input" id="name">
-                                                        Name
-                                                    </label>
-                                                </div>
-                                            </center>
+                                        <div class="well f-s-25 m-b-20 text-bold">
+                                            <div class="row">
+                                                <center>
+                                                    <div class="col-sm-12" >
+                                                        <label class="input" id="name">
+                                                            Name
+                                                        </label>
+                                                    </div>
+                                                </center>
+                                            </div>
+                                            <div class="row">
+                                                <center>
+                                                    <div class="col-sm-12" >
+                                                        <label class="input" id="group">
+                                                                Group
+                                                        </label>
+                                                    </div>
+                                                </center>
+                                            </div>
                                         </div>
-                                        <div class="row">
-                                            <center>
-                                                <div class="col-sm-12" >
-                                                    <label class="input" id="group">
-                                                            Group
-                                                    </label>
-                                                </div>
-                                            </center>
-                                        </div>
-                                    </div>
-                                    <hr>
+                                        <hr>
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="row">
@@ -128,520 +126,370 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <hr>
-                                    <div>
-                                        <div class="row">
-                                            <div class="col-sm-1">
-                                                <label class="input">
-                                                    Phone:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-3" id="phone">
-                                                Phone
-                                            </div>
-                                            <div class="col-sm-1">
-                                                <label class="input">
-                                                    Email:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-3" id="mail">
-                                                Email Address
-                                            </div>
-                                            <div class="col-sm-1">
-                                                <label class="input">
-                                                    Website:
-                                                </label>
-                                            </div>
-                                            <a class="col-sm-3" id="website" href="#">
-                                                Website
-                                            </a>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1">
-                                                <label class="input">
-                                                    PAN:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-3" id="pan">
-                                                    Permanent Access Number
-                                            </div>
-                                            <div id="gstdrop">
-                                                <div class="col-sm-1">
-                                                    <label class="input">
-                                                        GSTIN:
-                                                    </label>
-                                                </div>
-                                                <div class="col-sm-3" id="gstin">
-                                                        GSTIN
-                                                </div>
-                                            </div>    
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1">
-                                                <label class="input">
-                                                    Address:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-3" id="address">
-                                                    Address
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <!-- AOP-BOI -->
-                                    <div class="row hide" id="aop">
-                                       <div class="col-sm-1">
-                                            <label class="input">
-                                                Reg No:
-                                            </label>
-                                       </div>
-                                        <div class="col-sm-3" id="reg">
-                                            Registeration Number
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label class="input">
-                                                Members Name:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-6" id="members">
-                                            Members
-                                        </div>
-                                    </div>
+                                        <hr>
+                                    <div id="horizontal-wizard">
+                                        <ul class="nav nav-tabs nav-justified" role="tablist">
+                                            <li role="presentation" class="active">
+                                                <a href="#tab1" data-toggle="tab">
+                                                    <i class="icon-enter"></i> Basic Details
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#tab2" data-toggle="tab">
+                                                    <i class="icon-user"></i> Contact Persons
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#tab3" data-toggle="tab">
+                                                    <i class="icon-credit-card"></i> Lead Management
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#tab4" data-toggle="tab">
+                                                    <i class="icon-check"></i> Statutory Data & Document
+                                                </a>
+                                            </li>
+                                        </ul>
+                          
+                                        <form id="frmHorizontalWizard" class="validator sky-form" novalidate="novalidate">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active fade in" id="tab1">
+                                                    <!-- INDIVIDUALS -->
+                                                    <div class="row hide" id="individual">
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            :Full Name
+                                                        </div>
+                                                        <div class="col-sm-3 label f-s-15" id="ind_name" dir="ltr">
+                                                                Name
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            :Date Of Birth
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15" id="dob" dir="ltr">
+                                                                Date Of Birth
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            :Type Of Work
+                                                        </div>
+                                                        <div class="col-sm-3 label f-s-15" id="ind_tow" dir="ltr">
+                                                            type of work
+                                                        </div>
+                                                    </div>
+                                                    <!-- INDIVIDUALS -->
 
-                                    <!-- Company -->
-                                    <div class="row hide" id="company">
-                                        <div class="col-sm-12">
-                                            <div class="row">
-                                                <div class="col-sm-1">
-                                                    <label class="input">
-                                                        CIN:
-                                                    </label>
+                                                    <!-- HUFS -->
+                                                    <div class="row hide" id="huf">
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            <!-- <label class="label">Date Of Birth:</label> -->
+                                                            :Name Of Karta
+                                                        </div>
+                                                        <div class="col-sm-3 label f-s-15" id="nok" dir="ltr">
+                                                                Name Of Karta
+                                                        </div>
+                                                    </div>
+                                                    <!-- HUFS -->
+
+                                                    <!-- AOP-BOI -->
+                                                    <div class="row hide" id="aop">
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            <!-- <label class="label">Date Of Birth:</label> -->
+                                                            :Reg No
+                                                        </div>
+                                                        <div class="col-sm-3 label f-s-15" id="reg" dir="ltr">
+                                                                Registeration Number
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            <!-- <label class="label">Other Ph. Numbers:</label> -->
+                                                            :Members Name
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15" id="members" dir="ltr">
+                                                                Members
+                                                        </div>
+                                                    </div>
+                                                    <!-- AOP-BOI -->
+
+                                                    <!-- COMPANY -->
+                                                    <div class="row hide" id="company">
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                <!-- <label class="label">Date Of Birth:</label> -->
+                                                                :Date Of Incorporation
+                                                            </div>
+                                                            <div class="col-sm-3 label f-s-15" id="company_doi" dir="ltr">
+                                                                    Date Of Incorporation
+                                                            </div>
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                <!-- <label class="label">Other Ph. Numbers:</label> -->
+                                                                :Name of Stock Exchange listed on
+                                                            </div>
+                                                            <div class="col-sm-4 label f-s-15" id="listed" dir="ltr">
+                                                                    Name of Stock Exchange listed on
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <table class="table table-responsive" id="cmptable">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Sr.No</th>
+                                                                                <th>Name of Director</th>
+                                                                                <th>DIN</th>
+                                                                                <th>Shareholding</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="directors">
+                
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                    <!-- COMPANY -->
+
+                                                    <!-- LLPS -->
+                                                    <div class="row hide" id="llp">
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                <!-- <label class="label">Date Of Birth:</label> -->
+                                                                :Date Of Incorporation
+                                                            </div>
+                                                            <div class="col-sm-3 label f-s-15" id="pars_doi" dir="ltr">
+                                                                    Date Of Incorporation
+                                                            </div>
+                                                            <div class="col-sm-2 f-s-15" dir="rtl">
+                                                                <!-- <label class="label">Date Of Birth:</label> -->
+                                                                :Other Designated Partners
+                                                            </div>
+                                                            <div class="col-sm-3 label f-s-15" id="dPars" dir="ltr">
+                                                                    Other designated partners
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <table class="table table-responsive" id="llptable">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Sr.No</th>
+                                                                            <th>Name of Designated Partner</th>
+                                                                            <th>DIN</th>
+                                                                            <th>Profit Share</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="desigp">
+                
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                    </div>
+                                                    <!-- LLPS -->
+
+                                                    <!-- PARTNERSHIP -->
+                                                    <div class="row hide" id="partner">
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            <!-- <label class="label">Date Of Birth:</label> -->
+                                                            :Date of Patnership Deed
+                                                        </div>
+                                                        <div class="col-sm-3 label f-s-15" id="deedDoc" dir="ltr">
+                                                                Date of Patnership Deed
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <table class="table table-responsive" id="parttable">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Sr.No</th>
+                                                                        <th>Name of Partners</th>
+                                                                        <th>Corresponding Share</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="partn">
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- PARTNERSHIP -->
+
+                                                    <!-- PROPRIETORS -->
+                                                    <div class="row hide" id="prop">
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            <!-- <label class="label">Date Of Birth:</label> -->
+                                                            : Owner's Name
+                                                        </div>
+                                                        <div class="col-sm-3 label f-s-15" id="pro_ownerName" dir="ltr">
+                                                                Owner's Name
+                                                        </div>
+                                                    </div>
+                                                    <!-- PROPRIETORS -->
+
+                                                    <!-- TRUSTS -->
+                                                    <div class="row hide" id="trust">
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            <!-- <label class="label">Date Of Birth:</label> -->
+                                                            :Name Of Trustee
+                                                        </div>
+                                                        <div class="col-sm-3 label f-s-15" id="tnot" dir="ltr">
+                                                                Name Of Trustee
+                                                        </div>
+                                                    </div>
+                                                    <!-- TRUSTS -->
+
+                                                    <div class="row company_common">
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            <!-- <label class="label">Date Of Birth:</label> -->
+                                                            :Date of Commencement
+                                                        </div>
+                                                        <div class="col-sm-3 label f-s-15" id="dateOfCom" dir="ltr">
+                                                            Date of Commencement
+                                                        </div>
+                                                    </div> 
+    
+                                                    <!-- ORGANISATION -->
+                                                    <div class="row" id="org_details">
+                                                        <hr>
+                                                        <div class="col-sm-12">
+                                                            <h2>Organisational Details:</h2>
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            :Name Of Business
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15" id="NameBusiness" dir="ltr">
+                                                                Name of business
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            :Type Of Industry
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15" id="industry_types" dir="ltr">
+                                                                Type Of Industry
+                                                        </div>
+                                                        <br>
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            :Nature Of Business
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15" id="business_natures" dir="ltr">
+                                                                Nature Of Business
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            :Type Of Business
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15" id="business_types" dir="ltr">
+                                                                Type Of Business
+                                                        </div>
+                                                        <br>
+                                                        <div class="col-sm-2 f-s-15 company_common" dir="rtl">
+                                                                :Branch Name
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15 company_common" id="bname" dir="ltr">
+                                                                name
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15 company_common" dir="rtl">
+                                                            :Address
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15 company_common" id="baddress" dir="ltr">
+                                                                address
+                                                        </div>
+                                                        <br>
+                                                        <div class="col-sm-2 f-s-15 company_common" dir="rtl">
+                                                            :Website
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15 company_common" id="website" dir="ltr">
+                                                            website
+                                                        </div>
+                                                    </div>
+                                                    <!-- ORGANISATION -->
                                                 </div>
-                                                <div class="col-sm-3" id="cin">
-                                                    Company Identification Number
-                                                </div>
-                                                <div class="col-sm-1">
-                                                    <label class="input">
-                                                        TAN:
-                                                    </label>
-                                                </div>
-                                                <div class="col-sm-3" id="tan">
-                                                    TAN
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <label class="input">
-                                                        Date Of Incorporation:
-                                                    </label>
-                                                </div>
-                                                <div class="col-sm-2 doc">
-                                                    Date Of Incorporation
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <label class="input">
-                                                        Name of Stock Exchange listed on:
-                                                    </label>
-                                                </div>
-                                                <div class="col-sm-7">
-                                                    Name of Stock Exchange listed on
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <table class="table table-responsive" id="cmptable">
+
+                                                <div class="tab-pane fade" id="tab2">
+                                                    <table class="table table-responsive">
                                                         <thead>
-                                                            <tr>
-                                                                <th>Sr.No</th>
-                                                                <th>Name of Director</th>
-                                                                <th>DIN</th>
-                                                                <th>Shareholding</th>
-                                                            </tr>
+                                                            <th>Sr. No</th>
+                                                            <th>Name</th>
+                                                            <th>Phone</th>
+                                                            <th>Email</th>
+                                                            <th>Relation</th>
+                                                            <th>Designation</th>
+                                                            <th>Purpose</th>
                                                         </thead>
-                                                        <tbody id="directors">
+                                                        <tbody id="P_C_body">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab3">
+                                                        <table class="table table-responsive">
+                                                                <thead>
+                                                                    <th>Sr. No</th>
+                                                                    <th>Service</th>
+                                                                    <th>Manager</th>
+                                                                    <th>Role</th>
+                                                                </thead>
+                                                                <tbody id="M_body">
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab4">
+                                                    
+                                                    <div class="stats">
+                                                        <div class="col-sm-2 f-s-15 hide individuals" dir="rtl">
+                                                            :Aadhar Number
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15 hide individuals" id="ind_aadhar" dir="ltr">
+                                                                aadhar
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15 hide company" dir="rtl">
+                                                            <!-- <label class="label">Date Of Birth:</label> -->
+                                                            :CIN
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15 hide company" id="cin" dir="ltr">
+                                                                CIN
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15 company_common" dir="rtl">
+                                                            <!-- <label class="label">Date Of Birth:</label> -->
+                                                            :GST-IN
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15 company_common" id="gstin" dir="ltr">
+                                                                GST-IN
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15 company_common" dir="rtl">
+                                                            <!-- <label class="label">Date Of Birth:</label> -->
+                                                            :TAN
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15 company_common" id="tan" dir="ltr">
+                                                                TAN
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15 hide llp" dir="rtl">
+                                                            <!-- <label class="label">Date Of Birth:</label> -->
+                                                            :LLPIN
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15 hide llp" id="llpin" dir="ltr">
+                                                                LLPIN
+                                                        </div>
+                                                        <div class="col-sm-2 f-s-15" dir="rtl">
+                                                            :PAN NO
+                                                        </div>
+                                                        <div class="col-sm-4 label f-s-15" id="panno" dir="ltr">
+                                                                PAN NO
+                                                        </div>
+                                                    </div>
+                                                    <table class="table table-responsive">
+                                                        <thead>
+                                                            <th>Sr. No</th>
+                                                            <th>Name</th>
+                                                            <th>Number</th>
+                                                            <th>Issuing Authority</th>
+                                                            <th>Valid From</th>
+                                                            <th>Valid To</th>
+                                                            <th>Aplicable Law</th>
+                                                            <th>Document Type</th>
+                                                        </thead>
+                                                        <tbody id="Stats_body">
 
                                                         </tbody>
                                                     </table>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
-                                    <!-- HUF -->
-                                    <div class="row hide" id="huf">
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                Name Of Karta:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3" id="nok">
-                                                Name Of Karta
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                Type Of Industry:
-                                            </label>   
-                                        </div>
-                                        <div class="col-sm-3" id="toi">
-                                                Type Of Industry
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label class="input">
-                                                Nature Of Business:
-                                            </label>   
-                                        </div>
-                                        <div class="col-sm-2" id="nob">
-                                                Nature Of Business
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label class="input">
-                                                Date Of Commencement:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-1 doc">
-                                                Date
-                                        </div>
-                                    </div>
-                                    <!-- LLPS -->
-                                    <div class="row hide" id="llp">
-                                        <div class="col-sm-12">
-                                            <div class="col-sm-1">
-                                                <label class="input">
-                                                    LLPIN:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                    LLPIN
-                                            </div>
-                                            <div class="col-sm-1">
-                                                <label class="input">
-                                                    TAN:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                TAN
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label class="input">
-                                                    Date Of Incorporation:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-2 doc">
-                                                    Date Of Incorporation
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <label class="input">
-                                                    Other Designated Partners:
-                                                </label>
-                                            </div>
-                                            <div id="dPars" class="col-sm-3">
-                                                    Other designated partners
-                                            </div>
-                                            <div class="row">
-                                                <table class="table table-responsive" id="llptable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Sr.No</th>
-                                                            <th>Name of Designated Partner</th>
-                                                            <th>DIN</th>
-                                                            <th>Profit Share</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="desigp">
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- PARTNERSHIP FIRM -->
-                                    <div class="row hide" id="partner">
-                                        <div class="col-sm-3">
-                                            <label class="input">
-                                                Date Of Commencement:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 doc">
-                                                Date
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <label class="input">
-                                                Date of Patnership Deed:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 deedDoc">
-                                            Date 
-                                        </div>
-                                        <span class="m-10"></span>
-                                        <div class="col-sm-12">
-                                            <table class="table table-responsive" id="parttable">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sr.No</th>
-                                                        <th>Name of Partners</th>
-                                                        <th>Corresponding Share</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="partn">
-                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <!-- TRUSTS -->
-                                    <div class="row hide" id="trust">
-                                        <div class="col-sm-2">
-                                            <label class="input">
-                                                Name Of Trustee:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3" id="tnot">
-                                            Name Of Trustee(s)
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <label class="input">
-                                                Date Of Commencement:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 doc">
-                                            Date Of Commencement
-                                        </div>
-                                    </div>
-                                    <div class="row hide" id="individual">
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                DOB:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 dob">
-                                            Date Of Birth
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label class="input">
-                                                Type Of Work:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2" id="indtow">
-                                            Type Of Work
-                                        </div> 
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                Addhar:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3" id="indadhar">
-                                            ADDHAR NUMBER
-                                        </div>
-                                    </div>
-                                    <div class="hide" id="prop">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <label class="input">
-                                                    Owner's Name:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-2" id="propown">
-                                                Owner Name
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label class="input">
-                                                    Nature Of Business:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-2" id="propnob">
-                                                Nature Of Business
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <label class="input" >
-                                                    Date Of Commencement:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-2 doc">
-                                                Date
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label class="input" >
-                                                    Type Of Industry:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-2" id="proptof">
-                                                Type Of Industry
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <label class="input" >
-                                                    Type Of Business:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-2" id="proptob">
-                                                    Type Of Business
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <label class="input" >
-                                                    TAN:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-2" id="proptan">
-                                                TAN NUMBER
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="">
-
-                                            <!--****** Start Colored Modal Footer******-->
-                                            <div class="modal modal-warning bg-header" id="colored-warning-header" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content animated fadeOut">
-                                                        <div class="modal-header">
-                                                            <button id="close_search" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                <i class="fa fa-times"></i>
-                                                            </button>
-                                                            <h4 class="modal-title">
-                                                                <strong>Contacts</strong>
-                                                            </h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Name</div>
-                                                                <div class="col-xs-4 col-sm-4 text-bold f-s-12">Company</div>
-                                                                <div class="col-xs-3 col-sm-3 text-bold f-s-12">Contact</div>
-                                                                <div class="col-xs-1 col-sm-1 text-bold f-s-12"></div>
-                                                            </div>
-                                                            <hr/>
-                                                            <br/>
-                                                            <div class="row" id="searchResult">
-                                                                <!-- DATA FROM JSON -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--****** Start Colored Modal Footer******-->
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                 </div>
                             </div>
                             <!-- END PANEL -->
 
-                        <div class="contactFormBody panel">
-                            <div class="panel-body">
-                                <div id="branc">
-                                    <div class="row">
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                <u>Branch:</u>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3" id="branchname">
-                                            <u>Branch</u>
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                GSTIN:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3" id="bgst">
-                                            GSTIN
-                                        </div>  
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                Address:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3" id="baddress">
-                                            ADDRESS
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div> 
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <label class="input">
-                                                <u>Person To Be Contacted</u>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <table id="poctable" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Relation</th>
-                                                <th>Designation</th>
-                                                <th>Purpose</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="pocbody"></tbody>
-                                        <!-- <tfoot>
-                                            <tr>
-                                                <th class="pocname">Name</th>
-                                                <th class="pocphone">Phone</th>
-                                                <th class="pocmail">Email</th>
-                                                <th class="pocreln">Relation</th>
-                                                <th class="pocdesig">Designation</th>
-                                                <th class="pocpurpose">Purpose</th>
-                                            </tr>
-                                        </tfoot> -->
-                                    </table>
-                                    <!--div class="row">
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                Name:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3" id="pocname">
-                                            Name
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                Phone:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3" id="pocphone">
-                                            Phone Number
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                Email Id:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3" id="pocmail">
-                                            Email Address
-                                        </div>
-                                    </div-->
-                                    <!--div class="row">
-                                        <div id="deso">
-                                            <div class="col-sm-1">
-                                                <label class="input">
-                                                    Desig. :
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-3" id="pocdesig">
-                                                Designation
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-sm-1">
-                                            <label class="input">
-                                                Relation:
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3" id="pocreln">
-                                            Relation
-                                        </div>
-                                    </div-->
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <!-- END COL-MD-12 -->
                 </div>
@@ -665,9 +513,6 @@
     </div>
 </div>
 
-
-
-
 <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
 
 <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
@@ -679,36 +524,36 @@
         $.widget.bridge('uibutton', $.ui.button);
         $.widget.bridge('uitooltip', $.ui.tooltip);
 
-    </script>
-    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/js/velocity.min.js" type="text/javascript"></script>
-    <script src="assets/js/velocity.ui.min.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.nanoscroller.min.js" type="text/javascript"></script>
-    <script src="assets/js/nicescroll.min.js" type="text/javascript"></script>
-    <script src="assets/js/animsition.min.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.cookie.min.js"></script>
-    <script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script>
-    <script src="assets/js/device.min.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/scrollTo.min.js"></script>
-    <script src="assets/js/rippler.min.js" type="text/javascript"></script>
-    <!-- SKY FORM JS PLUGINS-->
-    <script src="assets/js/jquery.form.min.js"></script>
-    <script src="assets/js/jquery.validate.min.js"></script>
-    <script src="assets/js/jquery.maskedinput.min.js"></script>
-    <script src="assets/js/jquery.modal.js"></script>
-    <script src="assets/js/theme.min.js" type="text/javascript"></script>
-    <script src="assets/js/select2.full.min.js" type="text/javascript"></script>
-    <script src="assets/js/select2.js" type="text/javascript"></script>
-    <!--[if lt IE 10]>
-                <script src="../../assets/vendors/skyforms/jquery.placeholder.min.js"></script>
-        <![endif]-->
-    <!--[if lt IE 9]>
-                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-                <script src="../../assets/vendors/skyforms/sky-forms-ie8.js"></script>
-        <![endif]-->
+</script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/js/velocity.min.js" type="text/javascript"></script>
+<script src="assets/js/velocity.ui.min.js" type="text/javascript"></script>
+<script src="assets/js/jquery.nanoscroller.min.js" type="text/javascript"></script>
+<script src="assets/js/nicescroll.min.js" type="text/javascript"></script>
+<script src="assets/js/animsition.min.js" type="text/javascript"></script>
+<script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script>
+<script src="assets/js/jquery.cookie.min.js"></script>
+<script src="assets/js/jquery.navgoco.min.js" type="text/javascript"></script>
+<script src="assets/js/device.min.js"></script>
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<script src="assets/js/owl.carousel.min.js"></script>
+<script src="assets/js/scrollTo.min.js"></script>
+<script src="assets/js/rippler.min.js" type="text/javascript"></script>
+<!-- SKY FORM JS PLUGINS-->
+<script src="assets/js/jquery.form.min.js"></script>
+<script src="assets/js/jquery.validate.min.js"></script>
+<script src="assets/js/jquery.maskedinput.min.js"></script>
+<script src="assets/js/jquery.modal.js"></script>
+<script src="assets/js/theme.min.js" type="text/javascript"></script>
+<script src="assets/js/select2.full.min.js" type="text/javascript"></script>
+<script src="assets/js/select2.js" type="text/javascript"></script>
+<!--[if lt IE 10]>
+            <script src="../../assets/vendors/skyforms/jquery.placeholder.min.js"></script>
+    <![endif]-->
+<!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="../../assets/vendors/skyforms/sky-forms-ie8.js"></script>
+    <![endif]-->
     <!-- END SKY FORM JS PLUGINS-->
     <!--================================/
         /* START GLOBAL JS PLUGINS
@@ -754,24 +599,6 @@
     <script src="assets/js/widget-weather.js" type="text/javascript"></script>
     <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
     <script src="assets/js/widget-list.js" type="text/javascript"></script>
-
-    <!--================================/
-        /* END SCRIPT THIS PAGE ONLY
-        /*================================-->
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-    
-                //global functions
-                App.init();
-                // $('#divSide').load('addSiderbar.html');
-            });
-        </script>
-    <!--================================/
-        /* START CUSTOM SCRIPTS
-        /*================================-->
-
-
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="assets/plugins/ion-rangeslider/ion.rangeSlider.min.js"></script>
     <script src="assets/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
@@ -790,7 +617,6 @@
         });
     </script>
     <!-- <script src="assets/js/custom_contact.js" type="text/javascript"></script> -->
-    
     <script src="assets/js/subFunc.js" type="text/javascript"></script>
     <!-- <script src="assets/js/header.js" type="text/javascript"></script> -->
     <script src="assets/js/viewclient.js" type="text/javascript"></script>
