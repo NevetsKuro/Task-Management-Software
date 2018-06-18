@@ -350,7 +350,7 @@ h+= '                                    <div class="profile-wrapper">' ;
 h+= '                                        <img src="assets/images/avatar1.jpg" class="profile-image img-circle" alt="Profile Image">' ;
 
 h+= '                                        <div class="account-info">' ;
-h+= '                                            <h3 class="name">Juan Dela Cruz</h3>' ;
+h+= '                                            <h3 class="empname">Juan Dela Cruz</h3>' ;
 h+= '                                            <h6 class="position">Web Developer</h6>' ;
 h+= '                                        </div>' ;
 h+= '                                        <hr>' ;

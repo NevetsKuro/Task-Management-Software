@@ -1,9 +1,8 @@
 //session checker---------------------------------------------
 $(document).ready(function(){
-	var urlRoot = 'http://35.202.86.61/office-management/';
-//dashboard call----------------------------------	
+//dashboard call----------------------------------
+window.current_user='';	
 var token=localStorage.getItem('token');	
-
 	$.ajax({
 		async: true,
 		crossDomain: true,
@@ -19,11 +18,12 @@ var token=localStorage.getItem('token');
 		data: "{\n    \"note\": \"stringchanged\",\n    \"status\": \"P\",\n    \"date\": \"2018-06-13\",\n    \"time\": \"02:30:00\",\n    \"employee\": 1,\n    \"sub_task\": null\n}",
 		success:function(user){
 			if(user){
-				$('.name').html(user.name);
+				current_user=user.id;
+				// $('.name').html(user.name);
 				console.log(user);
 				console.log(user.name);
 				$('#profile').attr('href','profile.html');
-				$('.name').html(user.name);
+				$('.empname').html(user.name);
 				$('.position').html(user.designation);
 				console.log(user);
 			}
