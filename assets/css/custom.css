@@ -15,9 +15,14 @@
 	vertical-align: center;
 }
 .dashbutton{
-	height:30px !important;
-	width:30px !important;
+	height:25px !important;
+	width:25px !important;
 	padding:0px !important;
+	font-size: 12px !important;
+}
+.dashbutton i{
+	height: 12px;
+	width: 12px;
 }
 #notearea{
 	outline: none;

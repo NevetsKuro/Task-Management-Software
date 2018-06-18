@@ -88,58 +88,60 @@ $(document).ready(function(){
                         var email=emplist[i].email?emplist[i].email:'Not in records';
                         var phone=emplist[i].phone?emplist[i].phone:'Not in records';
                         empdis+=    `
-                                        <li class="m-r-10 m-t-5 m-b-5" style="width=230px;height:320px;float:left;">
-                                            <div class="panel profile-widget variant-2">
-                                                <div class="panel-body" style="box-shadow: 0 1px 1px 1px rgba(16, 16, 16, 0.57);">
-                                                    <div class="profile-header" style=" height: 135px">
-                                                        <div class="overlay"></div>
-                                                        <div class="profine-info">
-                                                            <div class="name text-center empname" style="font-size:20px">${emplist[i].name}</div>
-                                                            <div class="position text-center empdes" style="font-size:12px">${emplist[i].designation}</div>
+                                        <li class="m-r-10 m-t-5 m-b-5" style="width=150px;height:275px;float:left;">
+                                            <a href="dashboard.html?emp=${emplist[i].id}" title="View Dashboard" style="text-decoration:none;color:#585b5c">
+                                                <div class="panel profile-widget variant-2">
+                                                    <div class="panel-body" style="box-shadow: 0 1px 1px 1px rgba(16, 16, 16, 0.57);">
+                                                        <div class="profile-header" style=" height: 100px">
+                                                            <div class="overlay"></div>
+                                                            <div class="profine-info">
+                                                                <div class="name text-center repname" style="font-size:17px">${toTitleCase(emplist[i].name)}</div>
+                                                                <div class="position text-center empdes" style="font-size:10px">${emplist[i].designation}</div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="profile-body p-b-0">
-                                                        <div class="profile-image-wrapper">
-                                                            <img src="assets/images/user.png" alt="avatar" style="border:none;background-color:#fff;padding-top:5px;border-radius:50px;width:100px;height:100px">
-                                                        </div>
-                                                        <div class="social-stats ">
-                                                            <ul class="list-group m-b-0">
-                                                                <li class="list-group-item p-b-10 p-t-10">
-                                                                    <div class="row">
-                                                                        <label class="input col-sm-2">
-                                                                            <i class="font-awesome fa fa-envelope" aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <div class="col-sm-10">${email}</div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label class="input col-sm-2">
-                                                                            <i class="font-awesome fa fa-phone" aria-hidden="true"></i>
-                                                                        </label>
-                                                                        <div class="col-sm-10">${phone}</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item p-b-10 p-t-10">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-4" style="font-size:12px">Efficiency:</div>
-                                                                        <div class="col-sm-8">
-                                                                            <div class="row">
-                                                                                <div class="col-sm-12">
-                                                                                    <div id="${emplist[i].id}empslider" style="background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;"></div>
+                                                        <div class="profile-body p-b-0">
+                                                            <div class="profile-image-wrapper" style="height:80px;width:80px">
+                                                                <img src="assets/images/user.png" alt="avatar" style="border:none;background-color:#fff;padding-top:5px;border-radius:50px;width:80px;height:80px">
+                                                            </div>
+                                                            <div class="social-stats ">
+                                                                <ul class="list-group m-b-0">
+                                                                    <li class="list-group-item p-b-10 p-t-10 p-l-5 p-r-5">
+                                                                        <div class="row">
+                                                                            <label class="input col-sm-2">
+                                                                                <i class="font-awesome fa fa-envelope" aria-hidden="true"></i>
+                                                                            </label>
+                                                                            <div class="col-sm-10" style="font-size:13px">${email}</div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <label class="input col-sm-2">
+                                                                                <i class="font-awesome fa fa-phone" aria-hidden="true"></i>
+                                                                            </label>
+                                                                            <div class="col-sm-10" style="font-size:13px">${phone}</div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-group-item p-b-10 p-t-10 p-l-5 p-r-5">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-4 p-r-0" style="font-size:12px">Efficiency:</div>
+                                                                            <div class="col-sm-8">
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-12">
+                                                                                        <div id="${emplist[i].id}empslider" style="background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row ">
+                                                                                    <div class="input col-sm-4" style="font-size:10px">Poor</div>
+                                                                                    <div class="input col-sm-4" style="font-size:10px">Average</div>
+                                                                                    <div class="input col-sm-4" style="font-size:10px;text-align:right">Good</div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row">
-                                                                                <div class="input col-sm-4" style="font-size:10px">Poor</div>
-                                                                                <div class="input col-sm-4" style="font-size:10px">Average</div>
-                                                                                <div class="input col-sm-4" style="font-size:10px;text-align:right">Good</div>
-                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </li>
                                     `
                         $('#employeelist').append(empdis);
@@ -617,21 +619,27 @@ $(document).ready(function(){
                         color='green';
                     }
                     tasktxt+=   `
-                                <div class="panel panel-default m-t-5" style="border-radius:0px">
+                                <div class="panel panel-default m-0 p-0" style="border-radius:0px">
                                     <div class="panel-heading" style="padding: 0px;">
                                         <h4 class="panel-title">
-                                            <div class="m-l-30 p-t-10">`+tasks[i].title+`</div>
-                                            <a class="collapsed" style="" data-toggle="collapse" data-parent="#accordion" href="#`+tasks[i].id+`" aria-expanded="false" class="collapsed">
-                                                <div class="progress p-0 m-0" style="height:30px;">   
-                                                    <div class="progress-bar progress-bar-striped active" id="`+tasks[i].id+`tskprg" role="progressbar" aria-valuemin="20" aria-valuemax="20" style="width:`+complete+`%; height:50px;color:#A9A9A9;background-color:`+color+`"></div>
-                                                    <div class="m-5" style=font-size:20px;vertical-align: middle; line-height:10px;" id="`+tasks[i].id+`tprg">`+complete+`% </div>
+                                            <a class="p-15 collapsed" style="" data-toggle="collapse" data-parent="#accordion" href="#`+tasks[i].id+`" aria-expanded="false" class="collapsed">
+                                                <div class="row m-t-0 m-b-0">
+                                                    <div class="col-sm-2 m-t-5">
+                                                        <div class="m-l-10">`+tasks[i].title+`</div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div class="progress p-0 m-0" style="height:25px;">   
+                                                            <div class="progress-bar progress-bar-striped active" id="`+tasks[i].id+`tskprg" role="progressbar" aria-valuemin="20" aria-valuemax="20" style="width:`+complete+`%; height:50px;color:#A9A9A9;background-color:`+color+`"></div>
+                                                            <div class="m-5" style=font-size:15px;vertical-align: middle; line-height:15px;" id="`+tasks[i].id+`tprg">`+complete+`% </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </a>
                                         </h4>
                                     </div>
                                     <div id="`+tasks[i].id+`" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                        <h4 class="panel-title p-t-5 p-l-20 p-r-10"> Subtasks: </h4>   
-                                        <div class="panel-body"></div>
+                                        <!--h4 class="panel-title p-t-5 p-l-20 p-r-10"> Subtasks: </h4-->   
+                                        <div class="panel-body p-t-5 p-b-5"></div>
                                     </div>
                                 </div>` 
                 }
@@ -712,37 +720,36 @@ $(document).ready(function(){
                 }
             }
         }
-        var subtaskstxt=`<div class="subtask m-t-5" style="border-radius:0px;border-bottom:1px solid #ccc" id="`+subtask.id+`subt">
+        var subtaskstxt=`<div class="subtask m-t-0" style="border-radius:0px;border-bottom:1px solid #ccc" id="`+subtask.id+`subt">
                             <div class="row">
-                                <div class="col-sm-2">
+                                <div class="col-sm-2 m-l-5 ">
                                     <h5>`+subtask.title+`</h5>
                                 </div>
                                 <div class="col-sm-6" id="`+subtask.id+`progress">
-                                <div class="row m-t-0 p-t-0">
-                                        <label class="input col-sm-2" style="font-size:12px;text-align:left">Efficiency:</label>
-                                        <div class="col-sm-2 m-t-5" style="font-size:10px;text-align:right">Poor</div>
-                                        <div class="col-sm-4 m-t-5" style="font-size:10px;text-align:center">Average</div>
-                                        <div class="col-sm-4 m-t-5" style="font-size:10px;text-align:left">Good</div>
+                                    <div class="row m-t-0 p-t-0">
+                                        <label class="input col-sm-2 m-b-0" style="font-size:12px;text-align:left">Efficiency:</label>
+                                        <div class="col-sm-2 m-t-0" style="font-size:10px;text-align:right">Poor</div>
+                                        <div class="col-sm-4 m-t-0" style="font-size:10px;text-align:center">Average</div>
+                                        <div class="col-sm-4 m-t-0" style="font-size:10px;text-align:left">Good</div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row m-t-0" style="height=15px">
                                         <div class="col-sm-12">
-                                            <div id="${subtask.id}subtaskslider" style="background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;"></div>
+                                            <div id="${subtask.id}subtaskslider" style="height:10px;background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;"></div>
                                         </div>
-                                    </div>    
-                                <div class="row m-b-0 p-b-0">
-                                        <div class="col-sm-12">
-                                            <div class="progress m-t-10" style="height:20px; -moz-box-shadow: 10px 3px 5px 6px #ccc;-webkit-box-shadow: 10px 3px 5px 6px #ccc;box-shadow: 10px 3px 5px 6px #ccc;">   
+                                    </div>
+                                    <div class="row m-t-0 m-b-0 p-b-0">
+                                        <div class="col-sm-12" style="height:25px">
+                                            <div class="progress m-t-5" style="height:15px;">   
                                                 <div class="progress-bar progress-bar-striped active" id="`+subtask.id+`takewid" role="progressbar" aria-valuemin="20" aria-valuemax="20" style="width:`+subcomplete+`%; height:25px;color:#A9A9A9;background-color:`+subcolor+`">
-                                                    <div class="subcomplete m-t-5" style=font-size:10px;vertical-align: middle;">
+                                                    <div class="subcomplete m-t-5" style=font-size:8px;line-height:8px;vertical-align: middle;">
                                                         `+subcomplete+`% 
                                                     </div>
                                                 </div>  
                                             </div>
                                         </div>
                                     </div>
-                                    
                                 </div>
-                                <div class="col-sm-4" id="sbtbtnarea">
+                                <div class="col-sm-3 m-r-0" id="sbtbtnarea">
                                     <div class="m-t-5" style="">`
                                     if(subcomplete>=100){
                                         subtaskstxt+=`
@@ -758,7 +765,7 @@ $(document).ready(function(){
                                                         </button>
                                                     `
                                     }    
-                            subtaskstxt+= `<input type="number" style="height:35px;width:150px" step=".01" value=${subcomplete} id="${subtask.id}Tprogtxt" class=" hide" placeholder="% Completed" max="100" min="0">
+                            subtaskstxt+= `<input type="number" style="height:35px;width:100px" step=".01" value=${subcomplete} id="${subtask.id}Tprogtxt" class=" hide" placeholder="% Completed" max="100" min="0">
                                             <button type="button" class="btn btn-success btn-flat sbtsave rippler hide dashbutton" id="`+subtask.id+`Tsave" title="Save Changes">
                                                 <i class="fa fa-save"></i>
                                             </button>
@@ -769,7 +776,7 @@ $(document).ready(function(){
                                                 <i class="linear-icons li icon-timer-crossed" aria-hidden="true"></i>
                                             </button>
                                             <a href="Tasks_Form.html?tid=`+subtask.task+`" type="button" class="btn btn-adn btn-raised rippler viewsbt dashbutton" id="`+subtask.id+`Tview" title="View Details" style="vertical-align:middle">
-                                                <i class="font-awesome fa fa-eye m-t-6" aria-hidden="true"></i>
+                                                <i class="font-awesome fa fa-eye m-t-5" aria-hidden="true"></i>
                                             </a>
                                             <button type="button" class="btn btn-linkedin btn-raised rippler todobtn dashbutton" id="`+subtask.id+`TAdd" title="Add to todo-list" data-toggle="modal" data-target="#modal-responsive">
                                                 <i class="fa fa-plus"></i>
@@ -799,10 +806,10 @@ $(document).ready(function(){
             'background': 'none',
             'border-left': '10px solid transparent',
             'border-right': '10px solid transparent',
-            'border-bottom': '10px solid #000',
+            'border-bottom': '5px solid #000',
             'width': '0px',
             'height': '0px',
-            'top':'0.70em',
+            'top':'0.55em',
             'border-top':'none'
         });
         $('#'+subtask.id+'subtaskslider').find('.ui-state-disabled').css('opacity','100');
@@ -1133,9 +1140,10 @@ $(document).ready(function(){
         var xtra=`
                     <li class="list-group-item p-5 m-0" style="border-bottom:1px solid #ccc">
                         <div class="content row p-0">
-                            <div class="col-sm-5">
-                                <label class="input m-t-5 m-l-5">${work.title}</label>
-                            </div>
+                            <ul class="col-sm-5 custom-inline" style="list-style-type:none">
+                                <li style="float:left"><label class="input m-t-5 m-l-5">${work.title}</label></li>
+                                <li style="float:left;font-size:11px; line-height:30px;vertical-align:bottom;margin-left:1px">-${work.subtask}</li>
+                            </ul>
                             <div class="col-sm-5">
                                 <label class="input m-t-5 m-l-5">${work.duration} Hours</label>
                             </div>
