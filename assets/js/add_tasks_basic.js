@@ -248,8 +248,8 @@ $(document).ready(function(){
     $(document).on('change','#taskProposal',function(){
         var id = $('#taskProposal').val();
         $.getJSON(urlRoot+'tasks/proposals/'+id,function(data){
-            $('#taskProposalFee').val(data.fees);
-            $('#taskProposalTile').val(data.subject);
+            $('#taskProposalFee').html(data.fees);
+            $('#taskProposalTile').html(data.subject);
         });
     })
 
@@ -266,11 +266,11 @@ $(document).ready(function(){
             var valueIs = parseInt(profit / tots * 100);
             $('.pBar').css('width',valueIs+'%');
             if(valueIs<5){
-                $('#tab2 > div.row.m-10 > div.col-lg-12.m-t-20 > div > div.progress-bar').css('background-color','#fb2e2e');
+                $('#tab2 > div.row.m-10 > div.col-lg-12.m-t-20 > div > div').css('background-color','#fb2e2e');
             }else if(valueIs<25&&valueIs>5){
-                $('#tab2 > div.row.m-10 > div.col-lg-12.m-t-10 > div > div.progress-bar').css('background-color','#ffb81a');
-            }else if(25<valueIs){
-                $('#tab2 > div.row.m-10 > div.col-lg-12.m-t-10 > div > div.progress-bar').css('background-color','#28b10f');
+                $('#tab2 > div.row.m-10 > div.col-lg-12.m-t-20 > div > div').css('background-color','#ffb81a');
+            }else if(valueIs>25){
+                $('#tab2 > div.row.m-10 > div.col-lg-12.m-t-20 > div > div').css('background-color','#28b10f');
             }
         });
     });
@@ -633,6 +633,8 @@ $(document).ready(function(){
     if(tid){
         $('#st_transfer').removeClass('hide');
         $('#st_xtra').removeClass('hide');
+        $('#tab2 > div.row.m-10').removeClass('hide');
+
         $(document).off('change','#taskService',templates);
         $.getJSON(urlRoot+'tasks/'+tid,function(data){
             if(data.isExternal == true){
@@ -664,9 +666,11 @@ $(document).ready(function(){
             $('#taskController').val(data.controller).trigger('change');
             $('#taskApprover').val(data.approver).trigger('change');
             $('#taskClientsView').val(data.showToClient);
+            $('#taskProposal').val(data.taskProposal).trigger('change');
+            $('#taskClientsView').attr('checked',data.showToClient);
             if(data.adminCost||data.employeeCost||data.outOfPocket){
                 var cost = data.adminCost + data.employeeCost + data.outOfPocket;
-                $('#taskCost').val(cost);
+                $('#taskCost').html(cost.toFixed(2));
             }
             fillSubTask(tid);
         });
@@ -684,7 +688,7 @@ $(document).ready(function(){
         var name = $('#subTaskTable > tbody > tr > td:nth-child(1) > label > input').val();
         var Sdate = $('#subTaskTable > tbody > tr > td:nth-child(3) > label > input:first').val();
         var Stime = $('#subTaskTable > tbody > tr > td:nth-child(3) > label > input:nth-child(2)').val();
-        var assignee = $('#subTaskTable > tbody > tr > td:nth-child(4) > label > input').val();
+        var assignee = $('#subTaskTable > tbody > tr > td:nth-child(4) > label > .SubTask_Assignee').val()
         var duration = $('#subTaskTable > tbody > tr > td:nth-child(2) > label > input').val();
 
         if(!title){
@@ -735,7 +739,7 @@ $(document).ready(function(){
             tasksData.title = $('#taskTitle').val();
             tasksData.isExternal = isExternal;
             tasksData.client = $('#taskClients').val();
-            tasksData.originator =$('#taskOrgin').val();
+            tasksData.originator = 1//$('#taskOrgin').val();
             tasksData.controller =$('#taskController').val();
             tasksData.status = $('#taskStatus').val();
             tasksData.showToClient = $('#taskClientsView').prop('checked');

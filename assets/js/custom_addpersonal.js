@@ -1,8 +1,8 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
     console.log('addpersonal js file running...');
 
-    $('#add_sibling').on('click',function(){
+    $('#add_sibling').on('click', function () {
         $('.siblings').append(`
         
             <div class="more_sibling">
@@ -26,7 +26,7 @@ $(document).ready(function(){
         `);
     });
 
-    $('.siblings').on('click','#remove_sibling',function(){
+    $('.siblings').on('click', '#remove_sibling', function () {
         $(this).parent('.more_sibling').remove();
     });
 
@@ -36,7 +36,7 @@ $(document).ready(function(){
 
     var counter = 1;
 
-    $('#add_personal').on('click',function(){
+    $('#add_personal').on('click', function () {
         var pers_degree = $('#pers_degree').val();
         var institute = $('#institute').val();
         var noattempts = $('#noattempts').val();
@@ -44,49 +44,49 @@ $(document).ready(function(){
         var pers_tYear = $('#pers_tYear').val();
         var pers_perc = $('#pers_perc').val();
         var grade = $('#grade').val();
-        
+
         Pers_table.row.add([
-                counter,
-                pers_degree,
-                institute,
-                noattempts,
-                pers_fYear,
-                pers_tYear,
-                pers_perc,
-                grade,
-                '<div class="per_remove text-danger text-center"><i class="glyphicon glyphicon-remove"></i></div>'
+            counter,
+            pers_degree,
+            institute,
+            noattempts,
+            pers_fYear,
+            pers_tYear,
+            pers_perc,
+            grade,
+            '<div class="per_remove text-danger text-center"><i class="glyphicon glyphicon-remove"></i></div>'
         ]).draw(false);
-        
-        $('#personal_datatable tbody').on('click','div.per_remove',function(){
+
+        $('#personal_datatable tbody').on('click', 'div.per_remove', function () {
             var conf = swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this imaginary file!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    Pers_table.row($(this).parents('tr')).remove().draw();
-                    swal("Poof! Your imaginary file has been deleted!", {
-                    icon: "success",
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        Pers_table.row($(this).parents('tr')).remove().draw();
+                        swal("Poof! Your imaginary file has been deleted!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("The selected row is deleted!");
+                    }
                 });
-                } else {
-                swal("The selected row is deleted!");
-                }
-            });
             //var conf = confirm("Are you sure");
         });
 
         counter++;
-        swal("Row added","Look in the above table!","success");
+        swal("Row added", "Look in the above table!", "success");
     });
 
-    $('#add_certificate').on('click',function(){
-        $('#education_form').removeClass('hide');   
+    $('#add_certificate').on('click', function () {
+        $('#education_form').removeClass('hide');
     });
 
-    $('#close_add_certificate').on('click',function(){
+    $('#close_add_certificate').on('click', function () {
         $('#education_form').addClass('hide');
     });
 
@@ -95,16 +95,16 @@ $(document).ready(function(){
         responsive: true
     });
 
-    var i=0;
+    var i = 0;
 
-    $('#add_to_experience').on('click',function(){
-        var exp_company = $('#exp_company').val(); 
+    $('#add_to_experience').on('click', function () {
+        var exp_company = $('#exp_company').val();
         var exp_fYear = $('#exp_fYear').val();
         var exp_tYear = $('#exp_tYear').val();
         var exp_rol = $('#exp_rol').val();
 
         exp_table.row.add([
-            i+1,
+            i + 1,
             exp_company,
             exp_fYear,
             exp_tYear,
@@ -112,39 +112,39 @@ $(document).ready(function(){
             '<div class="exp_remove text-danger text-center"><i class="glyphicon glyphicon-remove"></i></div>'
         ]).draw(false);
 
-        $('#experience_datatable tbody').on('click','div.exp_remove',function(){
+        $('#experience_datatable tbody').on('click', 'div.exp_remove', function () {
             var conf2 = swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this row!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    exp_table.row($(this).parents('tr')).remove().draw();
-                    swal("Poof! The row has been deleted!", {
-                    icon: "success",
-                });   
-                } else {
-                swal("Not deleted! ");
-                }
-            });
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this row!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        exp_table.row($(this).parents('tr')).remove().draw();
+                        swal("Poof! The row has been deleted!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Not deleted! ");
+                    }
+                });
             //var conf = confirm('Are you sure?');
-            
+
         });
-        swal("Row added","Look in the above table!","success");
+        swal("Row added", "Look in the above table!", "success");
     });
 
-    $('#add_experience').on('click',function(){
-        $('#experience_form').removeClass('hide');   
+    $('#add_experience').on('click', function () {
+        $('#experience_form').removeClass('hide');
     });
 
-    $('#close_add_experience').on('click',function(){
+    $('#close_add_experience').on('click', function () {
         $('#experience_form').addClass('hide');
     });
 
-    $('#addDocument').on('click',function(){
+    $('#addDocument').on('click', function () {
         $('.browseDocument').append(`
         <div class="row new well">
             <div class="col-sm-4">
@@ -174,7 +174,7 @@ $(document).ready(function(){
         $('.browseDocument .new:last').addClass('zoomInUp animated').show('fast');
     });
 
-    $('.browseDocument').on('click','.removeDocument',function(){
+    $('.browseDocument').on('click', '.removeDocument', function () {
         $(this).parents('.new').remove();
     });
 

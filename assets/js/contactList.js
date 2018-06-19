@@ -5,21 +5,23 @@ $(document).ready(function () {
 
     var listOf = urlParams['listOf'];
 
-    window.onscroll = function() {myFunction()};
+    window.onscroll = function () {
+        myFunction()
+    };
 
     // Get the row
     var navbar = $("#sticky_row");
-    
+
     // Get the offset position of the row
     var sticky = 200;
-    
+
     // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
     function myFunction() {
-      if (window.pageYOffset >= sticky) {
-        navbar.addClass("sticky");
-      } else if(window.pageYOffset <= sticky)  {
-        navbar.removeClass("sticky");
-      }
+        if (window.pageYOffset >= sticky) {
+            navbar.addClass("sticky");
+        } else if (window.pageYOffset <= sticky) {
+            navbar.removeClass("sticky");
+        }
     }
 
     function contactListBody(currentList) {
@@ -28,13 +30,13 @@ $(document).ready(function () {
         var contactLink = "AddContact.html?contact=";
         var clientLink = "AddClient.html?client=";
         var contactViewLink = "ViewContact.html"
-        
-        if(currentList){
+
+        if (currentList) {
             currentList.forEach(element => {
-                var img='';
-                if(element.person_image!=null){
-                    img=element.person_image;
-                    img=urlRoot+img.substr(img.indexOf("media"));
+                var img = '';
+                if (element.person_image != null) {
+                    img = element.person_image;
+                    img = urlRoot + img.substr(img.indexOf("media"));
                     // console.log(img);
                 }
                 //var
@@ -88,17 +90,17 @@ $(document).ready(function () {
                 </div>
                 `
             });
-            listContact+="</div>"
+            listContact += "</div>"
             $('.cList').html(listContact);
         }
         var Totalpages = $(".col-sm-4").length;
         var templateLI;
-        var blocks = Math.ceil(Totalpages/pageSize);
+        var blocks = Math.ceil(Totalpages / pageSize);
         templateLI = `<li><a href="#">« PREV</a></li>`;
         for (let i = 0; i < blocks; i++) {
-            templateLI +=`<li><a href="#">${i+1}</a>`;
+            templateLI += `<li><a href="#">${i+1}</a>`;
         }
-        templateLI +=`<li><a href="#">NEXT »</a></li>`;
+        templateLI += `<li><a href="#">NEXT »</a></li>`;
         $("#pagin").html(templateLI);
         $("#pagin li:nth-child(2)").addClass('active');
         showPage(1);
@@ -108,10 +110,10 @@ $(document).ready(function () {
         var listClient = "";
         var clientLink = "AddClient.html?client=";
         var clientViewLink = "ViewClient.html"
-        var legal_stats,legal_No;
-        if(currentList){
+        var legal_stats, legal_No;
+        if (currentList.length) {
             currentList.forEach(element => {
-                switch(element.legalstatus){
+                switch (element.legalstatus) {
                     case 'I':
                         legal_stats = 'Individuals';
                         legal_No = 1;
@@ -193,67 +195,67 @@ $(document).ready(function () {
             });
             $('.cList').html(listClient);
         }
-        $('.personimg').attr('height',$('.personimg').attr('width'));
+        $('.personimg').attr('height', $('.personimg').attr('width'));
         var Totalpages = $(".col-sm-4").length;
         var templateLI;
-        var blocks = Math.ceil(Totalpages/pageSize);
+        var blocks = Math.ceil(Totalpages / pageSize);
         templateLI = `<li><a href="#">« PREV</a></li>`;
         for (let i = 0; i < blocks; i++) {
-            templateLI +=`<li><a href="#">${i+1}</a>`;
+            templateLI += `<li><a href="#">${i+1}</a>`;
         }
-        templateLI +=`<li><a href="#">NEXT »</a></li>`;
+        templateLI += `<li><a href="#">NEXT »</a></li>`;
         $("#pagin").html(templateLI);
         $("#pagin li:nth-child(2)").addClass('active');
         showPage(1);
     }
-    if(listOf === 'contact'){
-    $.ajax({
-        url: urlRoot+'contacts/',
-        datatype: "JSON",
-        type: 'GET',
-        success: function (contactListData) {
-
-            contactListBody(contactListData);
-            currentList = contactListData;
-
-        }
-    });
-    }else if(listOf === 'client'){
+    if (listOf === 'contact') {
         $.ajax({
-            url:urlRoot+'clients/allclients', 
+            url: urlRoot + 'contacts/',
+            datatype: "JSON",
+            type: 'GET',
+            success: function (contactListData) {
+
+                contactListBody(contactListData);
+                currentList = contactListData;
+
+            }
+        });
+    } else if (listOf === 'client') {
+        $.ajax({
+            url: urlRoot + 'clients/allclients',
             datatype: "JSON",
             type: 'GET',
             success: function (clientListData) {
-    
+
                 clientListBody(clientListData);
                 currentList = clientListData;
-    
+
             }
         });
         $('.CTC').addClass('hide');
     }
 
     var pageSize = 12;
-    
-    
 
-	showPage = function(page) {
-	    $(".col-sm-4").hide();
-	    $(".col-sm-4").each(function(n) {
-	        if (n >= pageSize * (page - 1) && n < pageSize * page)
-	            $(this).show();
-	    });
-	}
-    
-	$(document).on('click','#pagin li a',function(e) {
+
+
+    showPage = function (page) {
+        $(".col-sm-4").hide();
+        $(".col-sm-4").each(function (n) {
+            if (n >= pageSize * (page - 1) && n < pageSize * page)
+                $(this).show();
+        });
+    }
+
+    $(document).on('click', '#pagin li a', function (e) {
         e.preventDefault();
-	    $("#pagin li").removeClass("active");
-	    $(this).parent().addClass("active");
-	    showPage(parseInt($(this).text()));
+        $("#pagin li").removeClass("active");
+        $(this).parent().addClass("active");
+        showPage(parseInt($(this).text()));
     });
-    
-    $('#pagin li').css('display','inline-block');
-    $('#paginate').css('text-align','center');
+
+    $('#pagin li').css('display', 'inline-block');
+    $('#paginate').css('text-align', 'center');
 
     $(document).on('click', '.deleteContact', function () {
         var id = $(this).attr('id');
@@ -266,17 +268,17 @@ $(document).ready(function () {
             })
             .then((willDelete) => {
                 if (willDelete) {
-                   
+
                     swal("Poof! Your contact has been deleted!", {
                         icon: "success",
                     });
                     $.ajax({
-                        url: urlRoot + 'contacts/' +id+'/',
+                        url: urlRoot + 'contacts/' + id + '/',
                         type: 'DELETE',
-                        async:false,
+                        async: false,
                         datatype: "JSON",
                         success: function () {
-                           swal('Contact Id' + id + ' has been deleted!!');
+                            swal('Contact Id' + id + ' has been deleted!!');
                         }
                     });
                     $('.cList').empty();
@@ -294,48 +296,51 @@ $(document).ready(function () {
             });
     });
 
-    $(document).on('click','.deleteSelected',function(){
-        var ids =[];
-        $('.color-4').each(function(){ ids.push($(this).find('.deleteContact').attr('id'));});
+    $(document).on('click', '.deleteSelected', function () {
+        var ids = [];
+        $('.color-4').each(function () {
+            ids.push($(this).find('.deleteContact').attr('id'));
+        });
         swal({
-            title: "Are you sure?",
-            text: "You want to delete this Contact!!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                
-                swal("Poof! Your contact has been deleted!", {
-                    icon: "success",
-                });
-                for (let i = 0; i < ids.length; i++) {
-                    $.ajax({
-                        url: urlRoot + 'contacts/' +ids[i]+'/',
-                        type: 'DELETE',
-                        async:false,
-                        datatype: "JSON",
-                        success: function () {
-                            swal('Contact Id has been deleted!!');
-                        },error:function(error){
-                            swal(error.responseText);
-                        }
+                title: "Are you sure?",
+                text: "You want to delete this Contact!!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
 
+                    swal("Poof! Your contact has been deleted!", {
+                        icon: "success",
+                    });
+                    for (let i = 0; i < ids.length; i++) {
+                        $.ajax({
+                            url: urlRoot + 'contacts/' + ids[i] + '/',
+                            type: 'DELETE',
+                            async: false,
+                            datatype: "JSON",
+                            success: function () {
+                                swal('Contact Id has been deleted!!');
+                            },
+                            error: function (error) {
+                                swal(error.responseText);
+                            }
+
+                        });
+                    }
+                    $('.cList').empty();
+                    $.ajax({
+                        url: urlRoot + 'contacts/',
+                        datatype: 'JSON',
+                        type: 'GET',
+                        success: function (contactListData) {
+                            contactListBody(contactListData);
+                            currentList = contactListData
+                        }
                     });
                 }
-                $('.cList').empty();
-                $.ajax({
-                    url: urlRoot + 'contacts/',
-                    datatype: 'JSON',
-                    type: 'GET',
-                    success: function (contactListData) {
-                        contactListBody(contactListData);
-                        currentList = contactListData
-                    }
-                });
-            }
-        });
+            });
     });
 
     $(document).on('click', '.selectable', function () {
@@ -345,8 +350,8 @@ $(document).ready(function () {
         } else {
             $(this).removeClass('btn-info');
             $(this).addClass('bg-grey');
-            if($('.selectable').hasClass('btn-info') == false){
-                $('.actionBut').attr('disabled',true);
+            if ($('.selectable').hasClass('btn-info') == false) {
+                $('.actionBut').attr('disabled', true);
             }
         }
 
@@ -368,13 +373,9 @@ $(document).ready(function () {
         }
 
 
-        // Manage de-select
-       // ($(this).children('.glyphicon').hasClass('glyphicon-ok-circle'))
-            
-
     });
 
-    $(document).on('click',".selectAll", function () {
+    $(document).on('click', ".selectAll", function () {
         if ($(this).is(':checked')) {
             $('.actionBut').attr('disabled', false);
             $(".selectable").children('.glyphicon').removeClass('glyphicon-ok-circle');
@@ -402,54 +403,57 @@ $(document).ready(function () {
         if (a.name.split(' ')[0] > b.name.split(' ')[0])
             return 1;
     }
+
     function compareLName(a, b) {
-        if (a.name.split(' ')[a.name.split(' ').length-1] <= b.name.split(' ')[b.name.split(' ').length-1])
+        if (a.name.split(' ')[a.name.split(' ').length - 1] <= b.name.split(' ')[b.name.split(' ').length - 1])
             return -1;
-        if (a.name.split(' ')[a.name.split(' ').length-1] > b.name.split(' ')[b.name.split(' ').length-1])
+        if (a.name.split(' ')[a.name.split(' ').length - 1] > b.name.split(' ')[b.name.split(' ').length - 1])
             return 1;
     }
+
     function compareOrganisation(a, b) {
-        if (a.organisation==null)
+        if (a.organisation == null)
             return 1;
         if (a.organisation <= b.organisation)
             return -1;
         if (a.organisation > b.organisation)
             return 1;
     }
+
     function compareDesignation(a, b) {
         if (a.designation <= b.designation)
             return -1;
         if (a.designation > b.designation)
             return 1;
     }
-    
 
-    $(document).on('click',".sortByFName", function () {
+
+    $(document).on('click', ".sortByFName", function () {
         var sortByFName = currentList.sort(compareFName);
-        (listOf == 'contact'?contactListBody(sortByFName):clientListBody(sortByFName));
+        (listOf == 'contact' ? contactListBody(sortByFName) : clientListBody(sortByFName));
     });
-    $(document).on('click',".sortByLName", function () {
+    $(document).on('click', ".sortByLName", function () {
         var sortByLName = currentList.sort(compareLName);
-        (listOf == 'contact'?contactListBody(sortByLName):clientListBody(sortByLName));
+        (listOf == 'contact' ? contactListBody(sortByLName) : clientListBody(sortByLName));
     });
-    $(document).on('click',".sortByOrganisation", function () {
+    $(document).on('click', ".sortByOrganisation", function () {
         var sortByOrganisation = currentList.sort(compareOrganisation);
         // for (let key in sortByOrganisation) {
         //     if(sortByOrganisation[key].organisation == null){var f = sortByOrganisation[key]; sortByOrganisation.splice(sortByOrganisation.indexOf(sortByOrganisation[key]),1);sortByOrganisation.push(f) };
         // }
         //   console.log(sortByOrganisation);          
-        (listOf == 'contact'?contactListBody(sortByOrganisation):clientListBody(sortByOrganisation));
+        (listOf == 'contact' ? contactListBody(sortByOrganisation) : clientListBody(sortByOrganisation));
     });
-    $(document).on('click',".sortByDesignation", function () {
+    $(document).on('click', ".sortByDesignation", function () {
         var sortByDesignation = currentList.sort(compareDesignation);
-        (listOf == 'contact'?contactListBody(sortByDesignation):clientListBody(sortByDesignation));
+        (listOf == 'contact' ? contactListBody(sortByDesignation) : clientListBody(sortByDesignation));
     });
     // $(document).on('click',".sortByOrganisation", function () {
     //     var sortByDesignation = currentList.sort(compareDesignation);
     //     contactListBody(sortByDesignation);
     // });
 
-    $(document).on('click','.searchContact', function (e) {
+    $(document).on('click', '.searchContact', function (e) {
         e.preventDefault();
         var searchData = $('.searchContactText').val();
         $('.cList').empty();
@@ -464,18 +468,12 @@ $(document).ready(function () {
                 swal('server not conected!!!' + err);
             },
             complete: function (data) {
-                if($('.cList').children().length == 0){
+                if ($('.cList').children().length == 0) {
                     swal('No data found!');
-                } 
+                }
             }
         });
 
     });
-
-    // $('#easyPaginate').easyPaginate({
-    //     paginateElement: 'div',
-    //     elementsPerPage: 8,
-    //     effect: 'fade'
-    // });
 
 });
