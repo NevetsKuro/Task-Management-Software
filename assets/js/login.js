@@ -27,11 +27,11 @@ $(document).ready(function(){
                 console.log(data.name?data.name:"NO NAME");
                 console.log(data.token?data.token:"NO TOKEN");
                 localStorage.setItem('token',data.token);
-                $(location).attr('href','dashboard.html');
+                // $(location).attr('href','dashboard.html');
                 if(src!=null && src!='')
                     $(location).attr('href',src);
                 else
-                    $(location).attr('href','dashboard.html');    
+                    $(location).attr('href','dashboard.html?emp='+data.id);    
             },
             error:function(error){
                 console.log(error.responseText);
