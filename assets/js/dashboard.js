@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var urlparam=GetURLParams();
     var stopwatch=new Map();
-    var time=new Map();
+    var timer=new Map();
     $("#that").html("HERE");
     $("#this").html("Try2");
 	var taskscomplete=0;
@@ -19,7 +19,7 @@ $(document).ready(function(){
     datetime();
     //formdata
     $.ajax({
-        async: false,
+        async: true,
         crossDomain:true,
         url: urlRoot+'common/form-data',
         type:'GET',
@@ -80,7 +80,7 @@ $(document).ready(function(){
                 "X-CSRFToken":csrftoken
             },
             success:function(emplist){
-                console.log(emplist);
+                // console.log(emplist);
                 var no='Not in records';
                 if(emplist.length>0){
                     $(emplist).each(function(i,val){
@@ -487,29 +487,45 @@ $(document).ready(function(){
             $('#teamrev').html(trev);
             $('#empcode').html(emp.code);
             console.log("TOTALTIME: "+emp.total_time);
+            var hour=0,min=0;
             if(emp.total_time){
-                var hour=parseInt(emp.total_time.toString().split('.')[0]);
+                time=emp.total_time.toString().split('.');
+                console.log(time);
+                hour=parseInt(time[0]);
                 console.log('HOURS: '+hour);
-                var min=parseInt(emp.total_time.toString().split('.')[1]);
-                console.log('MINUTES: '+min);
-                if(min=>60){
-                    hour+=parseInt(min/60);
-                    min+=parseInt(hour%min);
+                if(time.length>1){
+                    min=parseInt(time[1]);
+                    console.log('MINUTES: '+min);
+                    if(min>=60){
+                        hour+=parseInt(min/60);
+                        min+=parseInt(hour%min);
+                    }
+                    if(min.toString().length<=2){
+                        min='0'+min.toString();
+                    }
                 }
+                if(hour.toString().length<=2){
+                    hour='0'+hour.toString();
+                }
+                min='00';
+            }
                 console.log('HOURS now: '+hour);
                 console.log('MINUTES now: '+min);
                 var timmm=`
                             <div class="row">
-                                ${hour} : ${min}
+                                <div class="col-sm-2 col-sm-offset-3 p-l-0 p-r-0" style="text-align:center">${hour}</div>
+                                <div class="col-sm-1 p-l-0 p-r-0" style="text-align:center"> : </div>
+                                <div class="col-sm-2 p-l-0 p-r-0" style="text-align:center">${min}</div>
                             </div>
                             <div class="row m-t-5 m-b-0" style="font-size:8px">
-                                HOURS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MINUTES
+                                <div class="col-sm-2 col-sm-offset-3 p-l-0 p-r-0" style="text-align:center">HOURS</div>
+                                <div class="col-sm-1 p-l-0 p-r-0" style="text-align:center">  </div>
+                                <div class="col-sm-2 p-l-0 p-r-0" style="text-align:center">MINUTES</div>    
+                            
                             </div>
                         `;
                 $('#tatime').html(timmm);
-            }
-            else
-                $('#tatime').html(0);
+            
             $('#empeff').html(eff);
             $('#empprod').html(prod);
             $('#mainempslider').slider({
@@ -772,7 +788,7 @@ $(document).ready(function(){
                                             <button type="button" class="btn btn-openid btn-raised rippler timerss dashbutton" id="`+subtask.id+`Tsimer" title="Start Timer">
                                                 <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             </button>
-                                            <button type="button" class="btn btn-openid btn-raised rippler timersend dashbutton hide" id="`+subtask.id+`Tsimer" title="Remove Timer">
+                                            <button type="button" class="btn btn-openid btn-raised rippler timersend dashbutton hide" id="`+subtask.id+`Tsimernd" title="Remove Timer">
                                                 <i class="linear-icons li icon-timer-crossed" aria-hidden="true"></i>
                                             </button>
                                             <a href="Tasks_Form.html?tid=`+subtask.task+`" type="button" class="btn btn-adn btn-raised rippler viewsbt dashbutton" id="`+subtask.id+`Tview" title="View Details" style="vertical-align:middle">
@@ -793,7 +809,7 @@ $(document).ready(function(){
                             </div>
         `;
         //var subtid='#'+data[i].task+' .panel-body';
-        console.log("Effic: "+parseInt(subtask.efficiency*100));
+        // console.log("Effic: "+parseInt(subtask.efficiency*100));
         $('#'+subtask.task).find('.panel-body').append(subtaskstxt);
         $('.SubTask_list').append('<option value="'+subtask.id+'">'+subtask.title+'</option>');
         $('#'+subtask.id+'subtaskslider').slider({
@@ -886,6 +902,8 @@ $(document).ready(function(){
     //clock call starts--------
     $(document).on('click','.closeme',function(){
         var subid=$(this).attr('id').split('__')[1];
+        $('#'+subid+'Tsimernd').addClass('hide');
+        $('#'+subid+'Tsimernd').siblings('.timerss').removeClass('hide');
         var watchid=$(this).attr('id');
         console.log("Timerid: "+watchid);
         if(stopwatch.get(watchid).running);
@@ -988,7 +1006,7 @@ $(document).ready(function(){
                                 </div>
                             </li>`
                 $('.watchrow').append(clock);
-                time.set(subtask.title+'__'+subtask.id,document.querySelector('#'+subtask.title+'__'+subtask.id+'time'));
+                timer.set(subtask.title+'__'+subtask.id,document.querySelector('#'+subtask.title+'__'+subtask.id+'time'));
                 stopwatch.set(subtask.title+'__'+subtask.id,new Stopwatch(0));    
             },
             error:function(error){
@@ -1316,8 +1334,9 @@ $(document).ready(function(){
             }
         });
         setInterval(function() {
-            time.forEach(function(value,key){
+            timer.forEach(function(value,key){
             value.innerHTML=stopwatch.get(key);
             });
         }, 1000);
+        
 });
