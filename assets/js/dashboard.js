@@ -514,14 +514,13 @@ $(document).ready(function(){
                 var timmm=`
                             <div class="row">
                                 <div class="col-sm-2 col-sm-offset-3 p-l-0 p-r-0" style="text-align:center">${hour}</div>
-                                <div class="col-sm-1 p-l-0 p-r-0" style="text-align:center"> : </div>
+                                <div class="col-sm-2 p-l-0 p-r-0" style="text-align:center"> : </div>
                                 <div class="col-sm-2 p-l-0 p-r-0" style="text-align:center">${min}</div>
                             </div>
                             <div class="row m-t-5 m-b-0" style="font-size:8px">
                                 <div class="col-sm-2 col-sm-offset-3 p-l-0 p-r-0" style="text-align:center">HOURS</div>
-                                <div class="col-sm-1 p-l-0 p-r-0" style="text-align:center">  </div>
+                                <div class="col-sm-2 p-l-0 p-r-0" style="text-align:center">  </div>
                                 <div class="col-sm-2 p-l-0 p-r-0" style="text-align:center">MINUTES</div>    
-                            
                             </div>
                         `;
                 $('#tatime').html(timmm);
@@ -910,7 +909,6 @@ $(document).ready(function(){
             stopwatch.get(watchid).pause();
         var timespent= parseFloat(Math.round(stopwatch.get(watchid).getElapsed()/3600000 *100) / 100);
         stopwatch.get(watchid).stop();
-        
         if(timespent>0.00){
             $.ajax({
                 async: true,
