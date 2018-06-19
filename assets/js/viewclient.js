@@ -18,6 +18,7 @@ $(window).ready(function(){
             case '2':
             $("#huf").removeClass("hide");
             $(".huf").removeClass("hide");
+            
             T_legalstatus='hufs';
             break;
 
@@ -57,7 +58,6 @@ $(window).ready(function(){
             T_legalstatus='trusts';
             break;
         }
-        
     }
     
     $.ajax({
@@ -72,20 +72,18 @@ $(window).ready(function(){
         }
     });
 
-    
-
     $.ajax({
         url:urlRoot + 'clients/'+T_legalstatus+'/'+id,
         type: 'GET',
         dataType: 'json',
         success: function(data){
 
-            data.pan_no?$('#panno').html(data.pan_no):$('#panno').html('None');
             data.commencement_date?$('#dateOfCom').html($.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date))):$('.doc').html('');
             data.gstin?$('#gstin').html(data.gstin):$('#gstin').html('None');
+            data.pan_no?$('#panno').html(data.pan_no):$('#panno').html('None');
             data.prospect.name?$('#name').html(data.prospect.name):$('#name').html('None');
             data.prospect.address?$('#address').html(data.prospect.address):$('#address').html('None');
-            data.prospect.email?$("#mail").html('#mail'):$().html('');
+            data.prospect.email?$("#mail").html('#mail'):$("#mail").html('');
             
             if(T_legalstatus=='individuals'){
                 $('#ind_name').html(data.prospect.title+' '+data.prospect.name);
@@ -178,7 +176,7 @@ $(window).ready(function(){
             }
 
             var managers = data.managers;
-            if(managers){
+            if(managers.length){
                 var mans='';
                 for (let i = 0; i < managers.length; i++) {
                     mans+=`<tr>
@@ -189,10 +187,12 @@ $(window).ready(function(){
                     </tr>`;
                 }
                 $('#M_body').html(mans);
+            }else{
+                $('#M_body').html('<center><b>No Records Found</b></center>');
             }
 
             var pocs = data.pocs;
-            if(pocs){
+            if(pocs.length){
                 var poc='';
                 // var contacts = pocs.map((a)=>a.contact)
 
@@ -204,14 +204,23 @@ $(window).ready(function(){
                         type:'GET',
                         dataType:'JSON',
                         success:function(poca){
+                            var a;
+                            if(poca.phone_numbers.length){
+                                a = poca.phone_numbers.find((a)=> a.is_primary==true).number;
+                            }
+                            var b;
+                            if(poca.email_addresses.length){
+                                b = poca.email_addresses.find((a)=>a.is_primary==true).email;
+                            }
+                            
                             poc+=`<tr>
                             <td>${i+1}</td>
                             <td>${poca.name}</td>
-                            <td>${poca.phone}</td>
-                            <td>${poca.email}</td>
-                            <td>${poca.designation}</td>
-                            <td>${pocs[i].relation}</td>
-                            <td>${pocs[i].purpose}</td>
+                            <td>${a?a:'Not mentioned'}</td>
+                            <td>${b?b:'Not mentioned'}</td>
+                            <td>${poca.contact_orga1nisation?poca.contact_orga1nisation.designation:'Not mentioned'}</td>
+                            <td>${pocs[i].relation?pocs[i].relation:'Not mentioned'}</td>
+                            <td>${pocs[i].purpose?pocs[i].purpose:'Not mentioned'}</td>
                             </tr>`;
                         },
                         error:function(error){
@@ -222,8 +231,18 @@ $(window).ready(function(){
                 $('#P_C_body').html(poc);
             }
 
+            if(legalstatus=="1"){
+                $('#tab2 > table > thead > tr > th:nth-child(6)').hide();
+                $('#tab2 > table > tbody > tr > td:nth-child(6)').hide();
+                $('#tab2 > table > thead > tr > th:nth-child(7)').hide();
+                $('#tab2 > table > tbody > tr > td:nth-child(7)').hide();
+            }else if(legalstatus!="1"){
+                $('#tab2 > table > thead > tr > th:nth-child(5)').hide();
+                $('#tab2 > table > tbody > tr > td:nth-child(5)').hide();
+            }
+
             var statdocs = data.statdocs;
-            if(statdocs){
+            if(statdocs.length){
                 var stats='';
                 for (let i = 0; i < statdocs.length; i++) {
                     stats+=`<tr>
@@ -238,78 +257,9 @@ $(window).ready(function(){
                     </tr>`;
                 }
                 $('#Stats_body').html(stats);
+            }else{
+                $('#Stats_body').html('<center><b>No Records Found</b></center>');
             }
-
-            // var relation, purpose;
-            // for(var i=0;i<data.pocs.length;i++){
-            //     // if(legalstatus === 'individuals'){
-            //     //     var relationid = data.pocs[i].relation;
-            //     //     relation = global2.relation.find(function(rel){
-            //     //         return rel.id == relationid;
-            //     //     }).relation;
-            //     // }else{
-            //     //     purpose = data.pocs[i].purpose;
-            //     // }
-            //     // var relation = '';
-            //     var purpose = data.pocs[i].purpose;
-            //     //if(data.pocs[i].is_primary==true){
-                    
-            //     //}
-            //     //else if(data.pocs[i].is_primary==false){
-            //         // $.ajax({
-            //         //     url: urlRoot + 'contacts/display/'+data.pocs[i].contact,
-            //         //     type: 'GET',
-            //         //     dataType: 'JSON',
-            //         //     success: function(datatb){
-            //         //         var dname=datatb.name;
-            //         //         var phon="",mal="";
-            //         //         for(var j=0;j<datatb.phone_numbers.length;j++){
-            //         //             if(datatb.phone_numbers[j].is_primary===true)
-            //         //                 phon=datatb.phone_numbers[j].number;      
-            //         //         }
-            //         //         for(var k=0;k<datatb.email_addresses.length;k++){
-            //         //             if(datatb.email_addresses[k].is_primary===true)
-            //         //                mal=datatb.email_addresses[k].email;      
-            //         //         }
-                            
-            //         //         if(legalstatus=="individuals"){
-            //         //             var designation='';
-            //         //             var relationid = data.pocs[i].relation;
-            //         //             var relation = global2.relation.find(function(rel){
-            //         //                 return rel.id == relationid;
-            //         //             }).relation;
-                                
-            //         //             dat.row.add([
-            //         //                 datatb.name?datatb.name:'',
-            //         //                 phon?phon:'',
-            //         //                 mal?mal:'',
-            //         //                 relation?relation:'',
-            //         //                 designation?designation:'',
-            //         //                 purpose?purpose:''
-            //         //             ]).draw(false);
-            //         //         }
-            //         //         else{
-            //         //             if(datatb.contact_organisation){
-            //         //                 var design = global.designations.find(function(des){
-            //         //                     return des.id===datatb.contact_organisation.designation
-            //         //                     }).designation;
-            //         //             }
-            //         //             dat.row.add([
-            //         //                 datatb.name?datatb.name:'',
-            //         //                 phon?phon:'',
-            //         //                 mal?mal:'',
-            //         //                 relation?relation:'',
-            //         //                 design?design:'',
-            //         //                 purpose?purpose:''
-            //         //             ]).draw(false);
-            //         //         }
-            //         //     },
-            //         //     error:function(error){
-            //         //         console.log(error.responseText);
-            //         //     }
-            //         // });
-            //    // }
-            // }
         }
     });
 });

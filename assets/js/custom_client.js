@@ -10,53 +10,59 @@ $(document).ready(function () {
     var globalContact = [];
     var globalClient = [];
     var contact = urlParams['contact']; //type number
-    var client = urlParams['client'];   //type number
-    var legal = urlParams['legal'];     //type number
+    var client = urlParams['client']; //type number
+    var legal = urlParams['legal']; //type number
     var contOrg;
     // var urlRoot = 'http://office-management-demo.herokuapp.com/';
     var urlRoot = 'http://35.202.86.61/office-management/';
 
-    
-    $('#file3').on('change',function(){
-        $('#stat_document').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
+
+    $('#file3').on('change', function () {
+        $('#stat_document').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92), 4) + 1));
     });
-    
-    $('.nameofBusiness').attr('disabled',true);
-    if(client && legal){
-        $('#client_group').attr('disabled',true);
+
+    $('.nameofBusiness').attr('disabled', true);
+    if (client && legal) {
+        $('#client_group').attr('disabled', true);
     }
-    
-    $('[data-type="adhaar-number"]').keyup(function() {
+
+    $('[data-type="adhaar-number"]').keyup(function () {
         var value = $(this).val();
         value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
         $(this).val(value);
     });
-    
-    $('[data-type="adhaar-number"]').on("change, blur", function() {
+
+    $('[data-type="adhaar-number"]').on("change, blur", function () {
         var value = $(this).val();
         var maxLength = $(this).attr("maxLength");
         if (value.length != maxLength) {
             swal('Please enter a valid Aadhar Number')
         }
     });
-    $(document).on("change", ".partnershare", function() {
-        var sum = 0;var limit = 100;
-        $(".partnershare").each(function(){
+    $(document).on("change", ".partnershare", function () {
+        var sum = 0;
+        var limit = 100;
+        $(".partnershare").each(function () {
             sum += +$(this).val();
         });
-        if(sum>limit){ $(this).val('');$(this).focus(); swal('The Share cannot exceed 100!')} console.log(sum);
+        if (sum > limit) {
+            $(this).val('');
+            $(this).focus();
+            swal('The Share cannot exceed 100!')
+        }
+        console.log(sum);
     });
-    $(document).on('change','#company_types',function(){
-        if($(this).val()=='3'){
+    $(document).on('change', '#company_types', function () {
+        if ($(this).val() == '3') {
             $('.nofE').removeClass('hide')
-        }else{
+        } else {
             $('.nofE').addClass('hide')
         }
     })
     /////////////////////////////////// Prefilled Data  //////////////////////////////////////////////////
 
     $.ajax({
-        url: urlRoot+'organisations/groups',
+        url: urlRoot + 'organisations/groups',
         datatype: 'JSON',
         type: 'GET',
         success: function (groups) {
@@ -68,14 +74,14 @@ $(document).ready(function () {
 
     //form data from Organisation
     $.ajax({
-        async:false,
-        url: urlRoot+'common/form-data',
+        async: false,
+        url: urlRoot + 'common/form-data',
         datatype: 'JSON',
         type: 'GET',
         success: function (data) {
             globalClient = data;
             globalContact = data;
-            
+
             for (var i = 0; i < data.document_types.length; i++) {
                 $('#stat_type').append('<option value=' + data.document_types[i].id + '>' + data.document_types[i].documenType + '</option>');
             }
@@ -90,7 +96,7 @@ $(document).ready(function () {
             for (var i = 0; i < data.business_types.length; i++) {
                 $('#businessType').append('<option value=' + data.business_types[i].id + '>' + data.business_types[i].business_type + '</option>');
             }
-            
+
             for (var i = 0; i < data.company_type.length; i++) {
                 $('#company_types').append('<option value=' + data.company_type[i].id + '>' + data.company_type[i].company_type + '</option>');
             }
@@ -98,11 +104,11 @@ $(document).ready(function () {
             for (var i = 0; i < data.stock_exchange.length; i++) {
                 $('#company_stock').append('<option value=' + data.stock_exchange[i].id + '>' + data.stock_exchange[i].stock_exchange + '</option>');
             }
-            
+
             for (var i = 0; i < data.titles.length; i++) {
                 $('.selTitle').append('<option value=' + data.titles[i].id + '>' + data.titles[i].title + '</option>');
             }
-            
+
             for (var i = 0; i < data.categories.length; i++) {
                 $('.contactnumber_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
                 $('.email_category').append('<option value=' + data.categories[i].id + '>' + data.categories[i].category + '</option>');
@@ -113,10 +119,10 @@ $(document).ready(function () {
                 $('.servicesCat').append('<option value=' + data.services[i].id + '>' + data.services[i].service + '</option>');
             }
 
-            for(var i = 0; i < data.genders.length; i++){
+            for (var i = 0; i < data.genders.length; i++) {
                 $('#clientsContact_Gender').append('<option value=' + data.genders[i].id + '>' + data.genders[i].gender + '</option>');
             }
-            
+
             console.log('Pre filled data added!!!');
         },
         error: function (data) {
@@ -125,8 +131,8 @@ $(document).ready(function () {
     });
 
     $.ajax({
-        async:false,
-        url: urlRoot+'employees/',
+        async: false,
+        url: urlRoot + 'employees/',
         datatype: 'JSON',
         type: 'GET',
         success: function (data) {
@@ -135,21 +141,22 @@ $(document).ready(function () {
                 $('.lead_managers').append('<option value=' + employees[i].id + '>' + employees[i].name + '</option>');
             }
         },
-        error:function(error){
+        error: function (error) {
             console.log(error.responseText);
         }
     });
-    function getService(){
-        $('.servicesCat').each(function(){
+
+    function getService() {
+        $('.servicesCat').each(function () {
             $(this).empty();
             for (var i = 0; i < globalClient.services.length; i++) {
                 $(this).append('<option value=' + globalClient.services[i].id + '>' + globalClient.services[i].service + '</option>');
             }
         });
     }
-    
-    function getEmployee(){
-        $('.lead_managers').each(function(){
+
+    function getEmployee() {
+        $('.lead_managers').each(function () {
             $(this).empty();
             for (var i = 0; i < employees.length; i++) {
                 $(this).append('<option value=' + employees[i].id + '>' + employees[i].name + '</option>');
@@ -157,87 +164,91 @@ $(document).ready(function () {
         });
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     var indContactId;
-    if(contact!=undefined||client!=undefined){
-        if(contact){
+    if (contact != undefined || client != undefined) {
+        if (contact) {
             $.ajax({
-                url:urlRoot+'contacts/'+contact+'/',
-                type:'GET',
-                datatype:'JSON',
-                success:function(data){
+                url: urlRoot + 'contacts/' + contact + '/',
+                type: 'GET',
+                datatype: 'JSON',
+                success: function (data) {
                     client_organisation(data.contact_organisation.organisation.id);
                 }
             });
-        }else if(client){
-            if(legal){
+        } else if (client) {
+            if (legal) {
                 var legalText;
-                if(legal== 1 ){
-                    legalText='individuals';
-                }else if(legal == 2){
+                if (legal == 1) {
+                    legalText = 'individuals';
+                } else if (legal == 2) {
                     legalText = 'hufs';
-                }else if(legal == 3){
+                } else if (legal == 3) {
                     legalText = 'proprietors';
-                }else if(legal == 4){
+                } else if (legal == 4) {
                     legalText = 'partnership-firms';
-                }else if(legal == 5){
+                } else if (legal == 5) {
                     legalText = 'llps';
-                }else if(legal == 6){
+                } else if (legal == 6) {
                     legalText = 'limited-companies';
-                }else if(legal == 7){
+                } else if (legal == 7) {
                     legalText = 'aop-boi';
-                }else if(legal == 8){
+                } else if (legal == 8) {
                     legalText = 'trusts';
                 }
                 $.ajax({
-                    url:urlRoot+'clients/'+legalText+'/'+client,
-                    type:'GET',
-                    datatype:'JSON',
-                    success:function(data){
+                    url: urlRoot + 'clients/' + legalText + '/' + client,
+                    type: 'GET',
+                    datatype: 'JSON',
+                    success: function (data) {
                         AddServiceData(data);
                         var commencement_date = $.datepicker.formatDate("dd/mm/yy", new Date(data.commencement_date));
                         $('#client_legalstatus').val(legal).trigger('change');
                         $('#PANNO').val(data.pan_no);
-                        $('#branch_notify').attr('checked',true);
+                        $('#branch_notify').attr('checked', true);
                         var poc = data.pocs;
-                        
+
                         //getting POC by contact id
                         cC_table.clear().draw();
                         for (let i = 0; i < poc.length; i++) {
                             var id = poc[i].contact;
-                            if(poc[i].relation){
-                                var rel = globalClient.relation.find(function(rel){ return poc[i].relation == rel.id}).relation;
+                            if (poc[i].relation) {
+                                var rel = globalClient.relation.find(function (rel) {
+                                    return poc[i].relation == rel.id
+                                }).relation;
                             }
-                            if(poc[i].purpose){
+                            if (poc[i].purpose) {
                                 var pur = poc[i].purpose;
                             }
-                            $.getJSON(urlRoot+'contacts/'+id,function(data){
+                            $.getJSON(urlRoot + 'contacts/' + id, function (data) {
 
-                                    var row = data;
-                                    var p_email = '';
-                                    var p_phone = '';
+                                var row = data;
+                                var p_email = '';
+                                var p_phone = '';
 
-                                    if(data.contact_organisation){
-                                        var dess = globalContact.designations.find(function(des){ return data.contact_organisation.designation == des.id}).designation;
-                                    }
+                                if (data.contact_organisation) {
+                                    var dess = globalContact.designations.find(function (des) {
+                                        return data.contact_organisation.designation == des.id
+                                    }).designation;
+                                }
 
-                                    if(row.email_addresses.length > 0){
-                                        var p_email = row.email_addresses.find(x=>x.is_primary == true).email;
-                                    }
-                                    if(row.phone_numbers.length > 0){
-                                        var p_phone = row.phone_numbers.find(x=>x.is_primary == true).number;
-                                    }
-                                    cC_table.row.add([
-                                        '',
-                                        row.id,
-                                        row.title+' '+row.name,
-                                        p_email,
-                                        p_phone,
-                                        rel?rel:'Not Mentioned',                                                                        //relation
-                                        dess?dess:'Not Mentioned',            //designation
-                                        pur?pur:'Not Mentioned',                                            //purpose
-                                        '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
-                                    ]).draw(false);
+                                if (row.email_addresses.length > 0) {
+                                    var p_email = row.email_addresses.find(x => x.is_primary == true).email;
+                                }
+                                if (row.phone_numbers.length > 0) {
+                                    var p_phone = row.phone_numbers.find(x => x.is_primary == true).number;
+                                }
+                                cC_table.row.add([
+                                    '',
+                                    row.id,
+                                    row.title + ' ' + row.name,
+                                    p_email,
+                                    p_phone,
+                                    rel ? rel : 'Not Mentioned', //relation
+                                    dess ? dess : 'Not Mentioned', //designation
+                                    pur ? pur : 'Not Mentioned', //purpose
+                                    '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
+                                ]).draw(false);
                             });
                         }
                         var len = data.statdocs.length;
@@ -257,7 +268,7 @@ $(document).ready(function () {
                                 '<div class="sD_edit text-success text-center"><i class="glyphicon glyphicon-pencil"></i></div><div class="sD_remove text-danger text-center"><i class="glyphicon glyphicon-remove"></i></div>'
                             ]).draw(false);
                             // statsObject.name = stats[i].name;
-                            
+
                             // $.ajax({
                             //     async: true,
                             //     url: stats[i].document,
@@ -278,55 +289,55 @@ $(document).ready(function () {
                             // });
                             // stat_documents.push(statsObject);
                         }
-                        
-                        if(legal==1){
+
+                        if (legal == 1) {
                             $('#individual_aadhar').val(data.aadhar_no).trigger('change');
                             $('#individual_typeWork').val(data.typeOfWork).trigger('change');
                             $('#website').val(data.website);
                             // indContactId = data.prospect;
                             indContactId = data.prospect['id'];
-                            $.getJSON(urlRoot+'contacts/'+indContactId,function(data){
+                            $.getJSON(urlRoot + 'contacts/' + indContactId, function (data) {
                                 $('#addContact_title').val(data.title);
                                 var nameArr = data.name.split(' ');
                                 $('#individual_fname').val(nameArr[0]);
-                                $('#individual_mname').val(nameArr.length == 2? '':nameArr[1]);
-                                $('#individual_lname').val(nameArr.length > 1? nameArr[2]:nameArr[1]);
+                                $('#individual_mname').val(nameArr.length == 2 ? '' : nameArr[1]);
+                                $('#individual_lname').val(nameArr.length > 1 ? nameArr[2] : nameArr[1]);
                                 var formatted = $.datepicker.formatDate("dd/mm/yy", new Date(data.dob));
                                 $('#individual_dob').val(formatted);
                             });
-                        }else{
+                        } else {
                             $('#GSTIN').val(data.gstin);
                             $('#TANNO').val(data.tan_no);
-                            
-                            if(legal == 2){
+
+                            if (legal == 2) {
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#HUF_date').val(commencement_date);
                                 $('#HUF_nameOfKarta').val(data.karta_name);
                                 $('#HUF_name').val(data.title);
                                 client_organisation(data.prospect.id);
-                            }else if(legal == 3){
+                            } else if (legal == 3) {
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#prop_Title').val(data.title.id);
                                 var name = data.owner_name.split(' ');
                                 $('#Proprietor_fname').val(name[0]);
-                                $('#Proprietor_mname').val(name.length==2?'':name[1]);
-                                $('#Proprietor_lname').val(name[name.length-1]);
+                                $('#Proprietor_mname').val(name.length == 2 ? '' : name[1]);
+                                $('#Proprietor_lname').val(name[name.length - 1]);
                                 $('#Proprietor_dateOfComm').val(commencement_date);
                                 client_organisation(data.prospect.id);
-                            
-                            }else if(legal == 4){
+
+                            } else if (legal == 4) {
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#Partnership_date').val($.datepicker.formatDate("dd/mm/yy", new Date(data.partnership_deed_date)));
                                 $('#Partnership_dateOfComm').val(commencement_date);
                                 AddPartner(data.partners);
                                 client_organisation(data.prospect.id);
-                            }else if(legal == 5){
+                            } else if (legal == 5) {
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 var other_Partners = "";
                                 for (var i = 0; i < data.other_partners.length; i++) {
                                     other_Partners += data.other_partners[i].name;
-                                    if(data.other_partners.length!=i+1){
-                                        other_Partners+=', ';
+                                    if (data.other_partners.length != i + 1) {
+                                        other_Partners += ', ';
                                     }
                                 }
                                 $('#partners_noopartner').val(other_Partners);
@@ -334,46 +345,46 @@ $(document).ready(function () {
                                 $('#LLP_date').val(commencement_date);
                                 AddDPartner(data.designated_partners);
                                 client_organisation(data.prospect.id);
-                            }else if(legal == 6){
+                            } else if (legal == 6) {
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#company_date').val(commencement_date);
                                 $('#company_types').val(data.company_type).trigger('change');
                                 $('#company_cin').val(data.cin);
-                                $('#company_listedy').prop('checked',data.stock_exchange_listed).trigger('change');
+                                $('#company_listedy').prop('checked', data.stock_exchange_listed).trigger('change');
                                 $('#company_stock').val(data.stock_exchange_name);
                                 AddDirector(data.directors);
                                 client_organisation(data.prospect.id);
-                            }else if(legal == 7){
+                            } else if (legal == 7) {
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 var members = "";
                                 for (var i = 0; i < data.members.length; i++) {
                                     members += data.members[i].name;
-                                    if(data.members.length!=i+1){
-                                        members+=', ';
+                                    if (data.members.length != i + 1) {
+                                        members += ', ';
                                     }
                                 }
                                 $('#members').val(members);
                                 $('#AOP_date').val(commencement_date);
                                 $('#AOP_registration').val(data.registration_no);
                                 client_organisation(data.prospect.id);
-                            }else if(legal == 8){
+                            } else if (legal == 8) {
                                 $('#client_legalstatus').val(legal).trigger('change');
                                 $('#trust_doc').val(commencement_date);
                                 var trustee = "";
                                 for (var i = 0; i < data.trustee.length; i++) {
                                     trustee += data.trustee[i].name;
-                                    if(data.trustee.length!=i+1){
-                                        trustee+=', ';
+                                    if (data.trustee.length != i + 1) {
+                                        trustee += ', ';
                                     }
                                 }
                                 $('#trusteeName').val(trustee);
                                 client_organisation(data.prospect.id);
                             }
-                    }
-                    console.log('legal='+ legal +'-- Org id='+contOrg);
-                    console.log('Client data Added');
+                        }
+                        console.log('legal=' + legal + '-- Org id=' + contOrg);
+                        console.log('Client data Added');
                     },
-                    error:function(){
+                    error: function () {
                         swal('Cannot find Client');
                     }
                 });
@@ -384,22 +395,22 @@ $(document).ready(function () {
 
     var currentOrganisationsId;
     //searching list for organisations
-    $(document).on('click','#search_organisations',function(event){
+    $(document).on('click', '#search_organisations', function (event) {
         //event.preventDefault();
         var searchOrgKeyword = $('#searchOrgKeyword').val();
 
-        if(searchOrgKeyword != ""){
-        $.ajax({
-            url:urlRoot+"organisations/?name="+searchOrgKeyword,
-            method:'GET',
-            datatype:'JSON',
-            success:function(orgList){
-                
-                if(orgList.length){
-                    var display2 = ' ';
-                    for (i = 0; i < orgList.length; i++) {
-                        
-                        display2 += `
+        if (searchOrgKeyword != "") {
+            $.ajax({
+                url: urlRoot + "organisations/?name=" + searchOrgKeyword,
+                method: 'GET',
+                datatype: 'JSON',
+                success: function (orgList) {
+
+                    if (orgList.length) {
+                        var display2 = ' ';
+                        for (i = 0; i < orgList.length; i++) {
+
+                            display2 += `
                         <div class='col-xs-12 col-sm-12'>
                         <div class='col-xs-4 col-sm-4 f-s-12'>${i+1}</div>
                         <div class='col-xs-4 col-sm-4 f-s-12 yellow-line'>${orgList[i].name}</div>
@@ -407,27 +418,27 @@ $(document).ready(function () {
                         <div class='col-xs-1 col-sm-1 orgClick' id='${orgList[i].id}'><b><i class='button btn-default btn-flat icon-check fg-yellow darker-2 hvr-box-shadow-outset p-5'></i></b></div>
                         </div><span class='col-xs-12 col-sm-12 p-5'></span>
                         `;
+                        }
+                        $('#orgList').html(display2);
+                        $('#organisation-modal').modal('show');
+                    } else {
+                        swal('Organisation cannot be found!!!');
                     }
-                    $('#orgList').html(display2);
-                    $('#organisation-modal').modal('show');
-                }else{
-                    swal('Organisation cannot be found!!!');
-                }
 
-            },
-            error:function(error){
-                swal('Cannot fetch Organisation List');
-                console.log(error.responseText);
-            }
-        });
-        }else{
+                },
+                error: function (error) {
+                    swal('Cannot fetch Organisation List');
+                    console.log(error.responseText);
+                }
+            });
+        } else {
             swal('search cannot be empty!!!');
         }
 
     });
 
 
-    window.client_organisation = function (orgId){
+    window.client_organisation = function (orgId) {
         // if($(this).attr('id')){
         //     var orgId = $(this).attr('id');
         // }else if(contOrg){
@@ -435,13 +446,13 @@ $(document).ready(function () {
         // }else{
         //     var orgId = updatedOrgId;
         // }
-        
+
         $.ajax({
-            url:urlRoot+'organisations/'+orgId +'/',
-            type:'GET',
-            contentType:'application/json',
-            datatype:'JSON',
-            success:function(data){
+            url: urlRoot + 'organisations/' + orgId + '/',
+            type: 'GET',
+            contentType: 'application/json',
+            datatype: 'JSON',
+            success: function (data) {
 
                 $('.nameofBusiness').val(data.name);
                 $('#website').val(data.website);
@@ -449,15 +460,15 @@ $(document).ready(function () {
                 $('#businessType').val(data.business_types).trigger('change');
                 $('#industryType').val(data.industry_types).trigger('change');
                 $('#nature_business').val(data.business_natures).trigger('change');
-                
+
                 var multiBrns = data.branches
-                $('#branch-row .new').each(function(index){
-                    if(index>0){
+                $('#branch-row .new').each(function (index) {
+                    if (index > 0) {
                         $(this).remove();
                     }
                 });
-                for(let i=0; i < multiBrns.length; i++){
-                    if(i > 0){
+                for (let i = 0; i < multiBrns.length; i++) {
+                    if (i > 0) {
                         // addAddresses();
                         addBranchRows();
                         $('#branch-row .new:last .branch_name').val(multiBrns[i].name);
@@ -465,7 +476,7 @@ $(document).ready(function () {
                         $('#branch-row .new:last .branch_gst').val(multiBrns[i].gstin);
                         // $('#hoaddress-row .new:last .hoaddress_from').attr('id',multiBrns[i].id);
                         // $('#hoaddress-row .new:last .hoaddress_isHO').attr('checked',multiBrns[i].is_head_office);
-                    }else{
+                    } else {
                         $('#branch-row .new .branch_name').val(multiBrns[i].name);
                         $('#branch-row .new .branch_address').val(multiBrns[i].address);
                         $('#branch-row .new .branch_gst').val(multiBrns[i].gstin);
@@ -474,11 +485,11 @@ $(document).ready(function () {
                     }
                 }
                 currentOrganisationsId = data.id;
-                $('#editOrganisation').attr('oid',currentOrganisationsId).removeAttr('disabled');
+                $('#editOrganisation').attr('oid', currentOrganisationsId).removeAttr('disabled');
                 $('#organisation-modal').modal('hide');
 
             },
-            error:function(error){
+            error: function (error) {
                 swal('Contact\'s Organisations cannot be fetched!!');
                 console.log(error.responseText);
             }
@@ -487,21 +498,18 @@ $(document).ready(function () {
 
 
     var currentClientId;
-    // $(document).on('click','.orgClick',client_organisation);
-    $(document).on('click','.orgClick',function(){
+    $(document).on('click', '.orgClick', function () {
         client_organisation($(this).attr('id'));
     });
 
-    $(document).on('click','#editOrganisation',function(){
+    $(document).on('click', '#editOrganisation', function () {
         currentOrganisationsId = $(this).attr('oid');
         currentClientId = client;
-        // var url = "addOrganisation.html?id="+currentOrganisationsId+'&cid='+currentContactsId;
-        window.open("addOrganisation.html?id="+currentOrganisationsId+'&ctid='+currentClientId, "","menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450");
-        // $(location).attr('href',url);
+        window.open("addOrganisation.html?id=" + currentOrganisationsId + '&ctid=' + currentClientId, "", "menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450");
     });
 
-    $(document).on('click','.addNewOrg',function(){
-        window.open('addOrganisation.html?ctid='+client,'',"menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450");
+    $(document).on('click', '.addNewOrg', function () {
+        window.open('addOrganisation.html?ctid=' + client, '', "menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450");
     });
 
 
@@ -509,7 +517,7 @@ $(document).ready(function () {
     var currentOrganisationsId;
     if (contact != undefined && contact != '') {
         $.ajax({
-            url: urlRoot+'contacts/' + contact,
+            url: urlRoot + 'contacts/' + contact,
             datatype: 'JSON',
             type: 'GET',
             success: function (contact) {
@@ -543,93 +551,33 @@ $(document).ready(function () {
         });
     }
 
-    //Client is being edited
-    // if (client != undefined && client != '') {
-    //     $.ajax({
-    //         url: 'http://office-management-demo.herokuapp.com/clients/' + client,
-    //         datatype: 'JSON',
-    //         type: 'GET',
-    //         success: function (client) {
-    //             //Fill the form with details about the client
-    //             AddPhone(client.phone_numbers);
-    //             AddEmail(client.email_addresses);
-    //             AddAddress(client.address);
-    //             AddPhone(contact.phone_numbers);
-    //             AddEmail(contact.email_addresses);
-    //             AddAddress([contact.address]);
-    //             AddBranch(contact.contact_organisation.organisation.branches);
 
-    //             $('.selTitle').val(client.title);
-    //             var ns = breakName(client.name);
-    //             $('.inpFirstName').val(ns.firstName);
-    //             $('.inpMiddleName').val(ns.middleName);
-    //             $('.inpLastName').val(ns.lastName);
-    //             $('.inputdob').val(client.dob);
-    //             $('#website').val(client.contact_organisation.website);
-    //             $('#Proprietor_name').val(client.client_organisation.name);
-    //             $('#LLP_name').val(client.client_organisation.name);
-    //             $('#company_name').val(contact.contact_organisation.name);
-    //             $('#AOP_name').val(client.contact_organisation.name);
-    //             $('#trust_name').val(client.contact_organisation.name);
-    //             $('#trust_name').val(client.contact_organisation.name);
-    //             $('#nature_business').val(client.business_natures);
-    //             $('#industryType').val(client.industry_types);
-    //             $('#businessType').val(client.business_types);
-    //         }
-    //     });
-    // }
-
-    //get POC for the selected group
-    // $('#client_group').on('change', function () {
-    //     var selectedGroup = $('#client_group').find('option:selected').text();
-
-    //     $.ajax({
-    //         url: 'http://office-management-demo.herokuapp.com/contacts',
-    //         datatype: 'JSON',
-    //         type: 'GET',
-    //         data: 'group=' + selectedGroup,
-    //         success: function (contacts) {
-    //             //Fill these contacts in 'Contact Person' table
-    //             if (contacts.length > 0) {
-    //                 for (var c = 0; c < contacts.length; c++) {
-    //                     var cont = contacts[c];
-
-    //                     AddContactPerson(cont.id, cont.title, cont.name, cont.email_addresses[0], cont.phone_numbers[0], '',cont.contact_organisation.designation, '');
-    //                 }
-    //             }
-    //         },
-    //         error(err) {
-    //             console.log(err);
-    //         }
-    //     });
-    // });
-    
-    $(document).on('change','#client_group',function(){
+    $(document).on('change', '#client_group', function () {
         var groupId = $(this).val();
         $.ajax({
-            url:urlRoot+'contacts/?group='+groupId,
-            datatype:'JSON',
-            success:function(data){
-                
+            url: urlRoot + 'contacts/?group=' + groupId,
+            datatype: 'JSON',
+            success: function (data) {
+
                 cC_table.clear().draw();
-                for(var i = 0; i < data.length; i++){
+                for (var i = 0; i < data.length; i++) {
                     // data[i].name
-                    
-                    var row = data[i]; 
+
+                    var row = data[i];
                     cC_table.row.add([
                         '',
                         row.id,
-                        row.title+' '+row.name,
+                        row.title + ' ' + row.name,
                         row.email,
                         row.phone,
-                        '',                     //relation
-                        row.designation,        //designation
-                        '',                     //purpose
+                        '', //relation
+                        row.designation, //designation
+                        '', //purpose
                         '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
                     ]).draw(false);
                 }
             },
-            error:function(error){
+            error: function (error) {
                 swal('Cannot fetch POCS of group');
                 console.log(error.responseText);
             }
@@ -650,7 +598,7 @@ $(document).ready(function () {
     }
     hideclient_elements();
     $('#Individual').removeClass('hide');
-    $('.disable_webs').attr('disabled',false);
+    $('.disable_webs').attr('disabled', false);
     // var legal = '1';
     $('#client_legalstatus').on('change', function () {
         var selected = this.value;
@@ -658,7 +606,7 @@ $(document).ready(function () {
         hideclient_elements();
         //$('a_branch').removeClass('hide');
         $('.relation_tab').addClass('hide');
-        
+
         if (selected == '1') {
             $('#Individual').removeClass('hide');
             $('.a_branch').addClass('hide');
@@ -670,7 +618,7 @@ $(document).ready(function () {
             $('.designation_tab').addClass('hide');
             $('.service_tab').addClass('hide');
             $('.organis').addClass('hide');
-            $('.disable_webs').attr('disabled',false);
+            $('.disable_webs').attr('disabled', false);
             cC_table.column(5).visible(true);
             cC_table.column(6).visible(false);
             cC_table.column(7).visible(false);
@@ -686,7 +634,7 @@ $(document).ready(function () {
             $('.designation_tab').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
-            $('.disable_webs').attr('disabled',true);
+            $('.disable_webs').attr('disabled', true);
             cC_table.column(5).visible(false);
             cC_table.column(6).visible(true);
             cC_table.column(7).visible(true);
@@ -701,7 +649,7 @@ $(document).ready(function () {
             $('.designation_tab').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
-            $('.disable_webs').attr('disabled',true);
+            $('.disable_webs').attr('disabled', true);
             cC_table.column(5).visible(false);
             cC_table.column(6).visible(true);
             cC_table.column(7).visible(true);
@@ -716,7 +664,7 @@ $(document).ready(function () {
             $('.designation_tab').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
-            $('.disable_webs').attr('disabled',true);
+            $('.disable_webs').attr('disabled', true);
             cC_table.column(5).visible(false);
             cC_table.column(6).visible(true);
             cC_table.column(7).visible(true);
@@ -731,7 +679,7 @@ $(document).ready(function () {
             $('.llp').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
-            $('.disable_webs').attr('disabled',true);
+            $('.disable_webs').attr('disabled', true);
             cC_table.column(5).visible(false);
             cC_table.column(6).visible(true);
             cC_table.column(7).visible(true);
@@ -746,7 +694,7 @@ $(document).ready(function () {
             $('.cin').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
-            $('.disable_webs').attr('disabled',true);
+            $('.disable_webs').attr('disabled', true);
             cC_table.column(5).visible(false);
             cC_table.column(6).visible(true);
             cC_table.column(7).visible(true);
@@ -761,7 +709,7 @@ $(document).ready(function () {
             $('.designation_tab').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
-            $('.disable_webs').attr('disabled',true);
+            $('.disable_webs').attr('disabled', true);
             cC_table.column(5).visible(false);
             cC_table.column(6).visible(true);
             cC_table.column(7).visible(true);
@@ -776,7 +724,7 @@ $(document).ready(function () {
             $('.designation_tab').removeClass('hide');
             $('.service_tab').removeClass('hide');
             $('.organis').removeClass('hide');
-            $('.disable_webs').attr('disabled',true);
+            $('.disable_webs').attr('disabled', true);
             cC_table.column(5).visible(false);
             cC_table.column(6).visible(true);
             cC_table.column(7).visible(true);
@@ -1278,32 +1226,32 @@ $(document).ready(function () {
     });
 
     var ctid;
-    $(document).on('change','.selected',function(){
+    $(document).on('change', '.selected', function () {
         ctid = cC_table.rows('.selected').data()[0][1];
         // alert('changed');
     });
 
     $('#add_clientsContact').on('click', function () {
-        if(legal==undefined){
-            legal=$('#client_legalstatus').val();
+        if (legal == undefined) {
+            legal = $('#client_legalstatus').val();
         }
-        window.open('quick_Add_contact.html?legalStatus='+legal+'&method=Add','',"menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450,location=0");
+        window.open('quick_Add_contact.html?legalStatus=' + legal + '&method=Add', '', "menubar=0,titlebar=0,status=0,resizable=1,top=100,left=100,width=800,height=450,location=0");
     });
 
     var pocObj1;
     var pocObj2;
 
-    window.AddContactPerson = function(id, title, name, email, phone, relationText, relation, designation, purpose,legal) {
+    window.AddContactPerson = function (id, title, name, email, phone, relationText, relation, designation, purpose, legal) {
 
         if (legal == 1) {
             //pocObjArr.push(pocObj);
             var new_row = cC_table.row.add([
                 '',
                 id,
-                title+' '+name,
+                title + ' ' + name,
                 email,
                 phone,
-                relation,            //'<select id="cc_relation"></select>',
+                relation, //'<select id="cc_relation"></select>',
                 '',
                 '',
                 '<div class="custom_inline"><div class="text-center text-success cc_update"><i class="glyphicon glyphicon-pencil"></i></div><span class="m-l-10 m-r-10"></span><div class="text-center text-danger cc_remove"><i class="glyphicon glyphicon-remove"></i></div></div>'
@@ -1315,8 +1263,8 @@ $(document).ready(function () {
             cC_table.row.add([
                 '',
                 id,
-                title+' '+name,
-                email,  
+                title + ' ' + name,
+                email,
                 phone,
                 '',
                 designation,
@@ -1337,18 +1285,18 @@ $(document).ready(function () {
             .then((willDelete) => {
                 if (willDelete) {
                     var cid = cC_table.row($(this).parent()).data()[1];
-                    
+
                     $.ajax({
                         async: true,
                         crossDomain: true,
-                        url: urlRoot + "contacts/" +cid+'/',
+                        url: urlRoot + "contacts/" + cid + '/',
                         type: 'DELETE',
                         datatype: "JSON",
                         success: function (data) {
                             swal('Contact has been deleted!!');
                         }
                     });
-                    
+
                     cC_table.row($(this).parents('tr')).remove().draw();
                     swal("Poof! Your record has been deleted!", {
                         icon: "success",
@@ -1363,8 +1311,8 @@ $(document).ready(function () {
     var editC = true;
     $('#clientsContact_datatable tbody').on('click', 'div.cc_update', function () {
         var legalS = $('#client_legalstatus').val();
-        if(legalS == 1){
-            if(edit){
+        if (legalS == 1) {
+            if (edit) {
                 var relation = cC_table.row($(this).parents('tr')).data()[5];
                 $(this).parents('tr').children()[4].innerHTML = '<select id="cc_relation" width="100%"></select>';
                 $(this).children().removeClass('glyphicon-pencil').addClass('glyphicon-ok');
@@ -1378,12 +1326,12 @@ $(document).ready(function () {
                             $('#cc_relation').append('<option value=' + data.relation[i].id + '>' + data.relation[i].relation + '</option>');
                         }
                     },
-                    error:function(){
+                    error: function () {
                         swal('Cannot fetch client form data');
                     }
                 });
                 edit = false;
-            }else{
+            } else {
                 var editedRelation = cC_table.$(this).parents('tr').find('#cc_relation').val();
                 var editedRelationText = cC_table.$(this).parents('tr').find('#cc_relation').find('option:selected').text();
                 cC_table.row($(this).parents('tr')).data()[5] = editedRelation;
@@ -1391,13 +1339,13 @@ $(document).ready(function () {
                 $(this).children().removeClass('glyphicon-ok').addClass('glyphicon-pencil');
                 edit = true;
             }
-        }else if(legalS > 1){
-            if(editC){
+        } else if (legalS > 1) {
+            if (editC) {
                 var purpose = cC_table.row($(this).parents('tr')).data()[7];
-                $(this).parents('tr').children()[5].innerHTML = '<input id="cc_purpose" type="text" width="100%" value='+ purpose +'>';
+                $(this).parents('tr').children()[5].innerHTML = '<input id="cc_purpose" type="text" width="100%" value=' + purpose + '>';
                 $(this).children().removeClass('glyphicon-pencil').addClass('glyphicon-ok');
                 editC = false;
-            }else{
+            } else {
                 var editedPurpose = cC_table.$(this).parents('tr').find('#cc_purpose').val();
                 cC_table.row($(this).parents('tr')).data()[7] = editedPurpose;
                 $(this).parents('tr').children()[5].innerHTML = editedPurpose;
@@ -1422,19 +1370,19 @@ $(document).ready(function () {
             [1, 'asc']
         ]
     });
-    var stat_documents=[];
+    var stat_documents = [];
     var stats_Obj;
-    var doco='';
-    $(document).on('change','#file3', function(){
-        var mimeType=$(this)[0].files[0]['type'];
-            var ggg1=$(this)[0].files[0];
-            var reader = new FileReader();
-            //$('#doc1txt').val($('#doc1').val());
-            reader.readAsDataURL(ggg1);
-            reader.onload = function () {
-                console.log('FILE :'+reader.result);
-                doco=reader.result;
-            }
+    var doco = '';
+    $(document).on('change', '#file3', function () {
+        var mimeType = $(this)[0].files[0]['type'];
+        var ggg1 = $(this)[0].files[0];
+        var reader = new FileReader();
+        //$('#doc1txt').val($('#doc1').val());
+        reader.readAsDataURL(ggg1);
+        reader.onload = function () {
+            console.log('FILE :' + reader.result);
+            doco = reader.result;
+        }
     });
     $('#submit_addmore').on('click', function () {
         var name = $('#stat_name').val();
@@ -1490,7 +1438,7 @@ $(document).ready(function () {
         swal("Row added", "Look in the above table!", "success");
     });
 
-    $(document).on('click','#statDocs > tbody > tr.even > td:nth-child(8) > div.sD_edit',function(){
+    $(document).on('click', '#statDocs > tbody > tr.even > td:nth-child(8) > div.sD_edit', function () {
         var row = stat_docs.row($(this).parents('tr')).data();
         $('#stat_name').val(row[1]);
         $('#stat_number').val(row[2]);
@@ -1498,9 +1446,11 @@ $(document).ready(function () {
         $('#stat_validFrom').val(row[4]);
         $('#stat_validTo').val(row[5]);
         $('#stat_applicable').val(row[6]);
-        
-        var pri_row = stat_documents.find(function(a){return a.name==row[1]})
-        if(pri_row){
+
+        var pri_row = stat_documents.find(function (a) {
+            return a.name == row[1]
+        })
+        if (pri_row) {
             $('#stat_type').val(pri_row.document_type);
             $('#stat_document').val(pri_row.document);
         }
@@ -1515,7 +1465,7 @@ $(document).ready(function () {
     });
 
     //adding Service in client
-    function addServiceRows(){
+    function addServiceRows() {
         $('#service').append(`
                 <div class="newservice row well">
                     <div class="col-md-4">
@@ -1542,14 +1492,14 @@ $(document).ready(function () {
                     </div>
                 </div>
                 `);
-            $('#service').children('div:last').addClass('zoomInUp animated').show('fast');
-            editSelect();
-            $('.lead_managers').select2()
-            $('.servicesCat').select2()
-            getService();
-            getEmployee();
+        $('#service').children('div:last').addClass('zoomInUp animated').show('fast');
+        editSelect();
+        $('.lead_managers').select2()
+        $('.servicesCat').select2()
+        getService();
+        getEmployee();
     }
-    $(document).on('click','#addService',addServiceRows);
+    $(document).on('click', '#addService', addServiceRows);
 
     $('#service').on('click', '#removeService', function () {
         $(this).parent('.newservice').remove();
@@ -1570,9 +1520,10 @@ $(document).ready(function () {
         }
     }
     var leadArr = [];
-    function getLeadManagement(){
+
+    function getLeadManagement() {
         var leadObj;
-        $('#service .newservice').each(function(){
+        $('#service .newservice').each(function () {
             leadObj = new Object();
             leadObj.service = $(this).find('.servicesCat').val();
             leadObj.manager = $(this).find('.lead_managers').val();
@@ -1583,9 +1534,9 @@ $(document).ready(function () {
     }
 
     var dirs;
-    getDirectorsRow=function(){
-        var directors=[];
-        $('#director-row .new').each(function(index) {
+    getDirectorsRow = function () {
+        var directors = [];
+        $('#director-row .new').each(function (index) {
             dirs = new Object();
             dirs['name'] = $(this).find('.company_directors').val();
             dirs['din'] = $(this).find('.company_din_directors').val();
@@ -1595,9 +1546,9 @@ $(document).ready(function () {
     }
 
     var parss;
-    getPartnersRow=function(){
-        var partnerInShare=[];
-        $('#partner-row .new').each(function(index) {
+    getPartnersRow = function () {
+        var partnerInShare = [];
+        $('#partner-row .new').each(function (index) {
             parss = new Object();
             parss['name'] = $(this).find('.partnerName').val();
             parss['share'] = $(this).find('.partnershare').val();
@@ -1607,9 +1558,9 @@ $(document).ready(function () {
     }
 
     var pars;
-    getDpartnersRow=function(){
-        var dPartners=[];
-        $('#dpartner-row .new').each(function(index) {
+    getDpartnersRow = function () {
+        var dPartners = [];
+        $('#dpartner-row .new').each(function (index) {
             pars = new Object();
             pars['name'] = $(this).find('.LLP_designatedpartner').val();
             pars['din'] = $(this).find('.LLP_din_designatedpartner').val();
@@ -1618,59 +1569,59 @@ $(document).ready(function () {
         return dPartners;
     }
 
-    function validator(){
+    function validator() {
         var pocIdArr = $('#clientsContact_datatable').DataTable().row().data();
-        
-        if(pocIdArr == null){
+
+        if (pocIdArr == null) {
             swal('Please add a POC');
             return false;
-        }else{
+        } else {
             var is_Selected = cC_table.row('.selected').data();
-            if( is_Selected == null){
+            if (is_Selected == null) {
                 swal('Please select a POC');
                 $('#horizontal-wizard > ul > li:nth-child(2) > a').tab('show');
                 return false;
             }
         }
-        if(legal){
-            if(legal != 1){
-                if(currentOrganisationsId == undefined){
+        if (legal) {
+            if (legal != 1) {
+                if (currentOrganisationsId == undefined) {
                     swal('Please select a Organisation');
                     return false;
                 }
-                if(legal == 6){
+                if (legal == 6) {
                     var company_type = $('#company_types').val();
-                    if(company_type == null){
+                    if (company_type == null) {
                         swal('Please add a Company');
                         $('#horizontal-wizard > ul > li:nth-child(1) > a').tab('show');
                         $('#company_type').focus();
                         return false;
                     }
                 }
-                if(legal == 4){
+                if (legal == 4) {
                     var partners = getPartnersRow();
-                    if(partners == []){
+                    if (partners == []) {
                         swal('Please add a partner');
                         $('#horizontal-wizard > ul > li:nth-child(1) > a').tab('show');
                         return false;
                     }
                 }
-            }else if(legal == 1){
+            } else if (legal == 1) {
                 var fname = $('#individual_fname').val();
                 var lname = $('#individual_lname').val();
-                var aadharNo  = $("#individual_aadhar").val();
+                var aadharNo = $("#individual_aadhar").val();
                 var dob = $(".dobdatepickr").val();
-                if(dob == ''){
+                if (dob == '') {
                     $('#horizontal-wizard > ul > li:nth-child(1) > a').tab('show');
                     swal('Please Enter Date Of Birth');
                     return false;
                 }
-                if(fname == "" || lname == ""){
+                if (fname == "" || lname == "") {
                     $('#horizontal-wizard > ul > li:nth-child(1) > a').tab('show');
                     swal('Please Enter full Name');
                     return false;
                 }
-                if(aadharNo == ''){
+                if (aadharNo == '') {
                     $('#horizontal-wizard > ul > li:nth-child(1) > a').tab('show');
                     swal('Please Enter the aadhar no.');
                     return false;
@@ -1680,11 +1631,11 @@ $(document).ready(function () {
         return true;
     }
 
-    function createQuickContact(contact){
+    function createQuickContact(contact) {
 
         var newId;
         $.ajax({
-            async:false,
+            async: false,
             crossDomain: true,
             url: urlRoot + 'contacts/?',
             datatype: 'JSON',
@@ -1705,12 +1656,12 @@ $(document).ready(function () {
         return newId;
     }
 
-    function createUpdateContact(contact,id){
-        
+    function createUpdateContact(contact, id) {
+
         var newId;
         $.ajax({
             async: false,
-            url: urlRoot + 'contacts/'+id+'/?',
+            url: urlRoot + 'contacts/' + id + '/?',
             datatype: 'JSON',
             method: 'PUT',
             data: JSON.stringify(contact),
@@ -1730,7 +1681,7 @@ $(document).ready(function () {
     }
 
     //Save Client details in the DB
-    var urlRooT = urlRoot+"clients/";
+    var urlRooT = urlRoot + "clients/";
     $(document).on('click', '#clientSubmit', function () {
         var clientData = new Object();
         var url = '';
@@ -1738,18 +1689,18 @@ $(document).ready(function () {
         clientData.send_mail = $('#branch_notify').prop('checked');
 
         var valid = validator();
-        if(valid){
-            if (contact != undefined||client!=undefined) {
+        if (valid) {
+            if (contact != undefined || client != undefined) {
                 //Updating a client/contact
                 var id;
-                var id = (contact !=undefined?contact:client);
+                var id = (contact != undefined ? contact : client);
                 var legalStatus = $('#client_legalstatus').val();
 
                 //Create a new client
                 clientData.pan_no = $('#PANNO').val();
                 clientData.services = [];
-                clientData.services.push(1); 
-                clientData.statdocs = stat_documents; 
+                clientData.services.push(1);
+                clientData.statdocs = stat_documents;
                 clientData.managers = getLeadManagement();
                 clientData.handle_group = $('#persmissions').is(':checked');
 
@@ -1765,16 +1716,16 @@ $(document).ready(function () {
                     } else {
                         website = "http://" + website;
                     }
-                    var Name = fname +' '+ mname+ ' ' +lname;
+                    var Name = fname + ' ' + mname + ' ' + lname;
                     var indContactData = new Object();
                     indContactData.title = titleId;
-                    indContactData.name = Name; 
+                    indContactData.name = Name;
                     indContactData.dob = dob;
                     indContactData.email_addresses = [];
                     indContactData.phone_numbers = [];
                     indContactData.social_media_links = [];
                     var c_org = new Object();
-                    clientData.prospect = createUpdateContact(indContactData,indContactId);
+                    clientData.prospect = createUpdateContact(indContactData, indContactId);
 
                     clientData.aadhar_no = $('#individual_aadhar').val();
                     clientData.typeOfWork = $('#individual_typeWork').val();
@@ -1793,33 +1744,35 @@ $(document).ready(function () {
                     var pocRows = cC_table.rows().data();
                     for (var c = 0; c < pocRows.length; c++) {
                         var row = pocRows[c];
-            
+
                         //Create contact for each POC
                         var relation = row[5]; //relation
                         var newId = row[1]; //id
-                        
+
                         var rel_Id;
-                        if(relation.length > 2){ 
-                            rel_Id = globalClient.relation.find(function(rel){return rel.relation == relation}).id;
-                        }else{
+                        if (relation.length > 2) {
+                            rel_Id = globalClient.relation.find(function (rel) {
+                                return rel.relation == relation
+                            }).id;
+                        } else {
                             rel_Id = relation;
                         }
-                        
+
                         pocObjArr.push({
-                            "contact":newId,
-                            "relation":rel_Id,
-                            "is_primary":false
+                            "contact": newId,
+                            "relation": rel_Id,
+                            "is_primary": false
                         });
                     }
 
                     var isPrimaryId = cC_table.rows('.selected').data()[0][1];
-                    var indexPrimary = pocObjArr.findIndex(x=>x.contact == isPrimaryId);
+                    var indexPrimary = pocObjArr.findIndex(x => x.contact == isPrimaryId);
                     pocObjArr[indexPrimary].is_primary = true;
-                    
+
                     clientData.pocs = pocObjArr;
 
-                    url = urlRooT +  'individuals/';
-                    
+                    url = urlRooT + 'individuals/';
+
                 } else {
 
                     clientData.gstin = $('#GSTIN').val();
@@ -1830,25 +1783,25 @@ $(document).ready(function () {
                     var pocRows = cC_table.rows().data();
                     for (var c = 0; c < pocRows.length; c++) {
                         var row = pocRows[c];
-            
+
                         //Create contact for each POC
                         var purpose = row[7]; //purpose
                         var newId = row[1]; //id
-            
+
                         pocObjArr.push({
-                            "contact":newId,
-                            "purpose":purpose,
-                            "is_primary":false
+                            "contact": newId,
+                            "purpose": purpose,
+                            "is_primary": false
                         });
                     }
 
                     var isPrimaryId = cC_table.rows('.selected').data()[0][1];
-                    var indexPrimary = pocObjArr.findIndex(x=>x.contact == isPrimaryId);
+                    var indexPrimary = pocObjArr.findIndex(x => x.contact == isPrimaryId);
                     pocObjArr[indexPrimary].is_primary = true;
 
                     clientData.pocs = pocObjArr;
                     clientData.prospect = currentOrganisationsId;
-                    if (legalStatus == 2) {//HUF
+                    if (legalStatus == 2) { //HUF
 
                         clientData.commencement_date = getFormateDateToServer($('#HUF_date').val());
                         clientData.karta_name = $('#HUF_nameOfKarta').val();
@@ -1856,9 +1809,9 @@ $(document).ready(function () {
                         // clientData.name = $('#HUF_name').val();
                         // clientData.businessName = $('#HUF_nameofBusiness').val();
 
-                        url = urlRooT +  'hufs/';
+                        url = urlRooT + 'hufs/';
 
-                    } else if (legalStatus == 3) {//Proprietor
+                    } else if (legalStatus == 3) { //Proprietor
 
                         clientData.title = $('#prop_Title').val();
                         clientData.owner_name = $('#Proprietor_fname').val();
@@ -1869,9 +1822,9 @@ $(document).ready(function () {
 
                         // clientData.businessName = $('#Proprietor_name').val();
 
-                        url =   urlRooT +  'proprietors/';
+                        url = urlRooT + 'proprietors/';
 
-                    } else if (legalStatus == 4) {//Partnership
+                    } else if (legalStatus == 4) { //Partnership
 
                         clientData.partnership_deed_date = getFormateDateToServer($('#Partnership_date').val());
                         clientData.commencement_date = getFormateDateToServer($('#Partnership_dateOfComm').val());
@@ -1879,21 +1832,23 @@ $(document).ready(function () {
                         //Get Details of Partners
                         // clientData.businessName = $('#Partnership_name').val();
 
-                        url =   urlRooT +  'partnership-firms/';
+                        url = urlRooT + 'partnership-firms/';
 
-                    } else if (legalStatus == 5) {//LLP
-                        
+                    } else if (legalStatus == 5) { //LLP
+
                         var partners = $('#partners_noopartner').val();
                         var oparsObj = [];
-                        if(partners.indexOf(',')){
+                        if (partners.indexOf(',')) {
                             var Opartners = partners.split(',');
                             for (let i = 0; i < Opartners.length; i++) {
                                 var pars = new Object();
                                 pars.name = Opartners[i];
                                 oparsObj.push(pars);
                             }
-                        }else{
-                            oparsObj.push({name:partners});
+                        } else {
+                            oparsObj.push({
+                                name: partners
+                            });
                         }
                         clientData.llpin = $('#LLP_LLPIN').val();
                         clientData.commencement_date = getFormateDateToServer($('#LLP_date').val());
@@ -1901,11 +1856,11 @@ $(document).ready(function () {
                         clientData.designated_partners = getDpartnersRow();
                         // clientData.businessName = $('#LLP_name').val();
 
-                        url =   urlRooT +  'llps/';
+                        url = urlRooT + 'llps/';
 
-                    } else if (legalStatus == 6) {//Company
-                        
-                        
+                    } else if (legalStatus == 6) { //Company
+
+
                         // clientData.businessName = $('#company_name').val();
                         clientData.commencement_date = getFormateDateToServer($('#company_date').val());
                         clientData.company_type = $('#company_types').val();
@@ -1915,48 +1870,52 @@ $(document).ready(function () {
                         clientData.directors = getDirectorsRow();
                         //Get Details of Directors
 
-                        url =   urlRooT +  'limited-companies/';
+                        url = urlRooT + 'limited-companies/';
 
-                    } else if (legalStatus == 7) {//AOP-BOI
-                        
+                    } else if (legalStatus == 7) { //AOP-BOI
+
                         var memberArr = $('#members').val();
                         var memObj = [];
-                        if(memberArr.indexOf(',')>0){
+                        if (memberArr.indexOf(',') > 0) {
                             var members = memberArr.split(',');
                             for (let i = 0; i < members.length; i++) {
                                 var mem = new Object()
                                 mem.name = members[i];
                                 memObj.push(mem);
                             }
-                        }else{
-                            memObj.push({name:memberArr});
+                        } else {
+                            memObj.push({
+                                name: memberArr
+                            });
                         }
                         clientData.members = memObj;
                         // clientData.businessName = $('#AOP_name').val();
                         clientData.commencement_date = getFormateDateToServer($('#AOP_date').val());
                         clientData.registration_no = $('#AOP_registration').val();
 
-                        url =   urlRooT +  'aop-boi/';
+                        url = urlRooT + 'aop-boi/';
 
-                    } else if (legalStatus == 8) {//Trusts
-                        
+                    } else if (legalStatus == 8) { //Trusts
+
                         // clientData.businessName = $('#trust_name').val();
                         clientData.commencement_date = getFormateDateToServer($('#trust_doc').val());
                         var trusteeArr = $('#trusteeName').val();
                         var truObj = [];
-                        if(trusteeArr.indexOf(',')>0){
+                        if (trusteeArr.indexOf(',') > 0) {
                             var tru = trusteeArr.split(',');
                             for (let i = 0; i < tru.length; i++) {
                                 var trust = new Object();
                                 trust.name = tru[i];
                                 truObj.push(trust);
                             }
-                        }else{
-                            truObj.push({name:trusteeArr});
+                        } else {
+                            truObj.push({
+                                name: trusteeArr
+                            });
                         }
-                        clientData.trustee = truObj;              
+                        clientData.trustee = truObj;
 
-                        url =   urlRooT +  'trusts/';
+                        url = urlRooT + 'trusts/';
 
                     }
                 }
@@ -1966,8 +1925,8 @@ $(document).ready(function () {
                 $.ajax({
                     async: true,
                     crossDomain: true,
-                    url: url+''+id+'/',
-                    headers:{
+                    url: url + '' + id + '/',
+                    headers: {
                         "X-CSRFToken": csrftoken
                     },
                     type: 'PUT',
@@ -1996,15 +1955,15 @@ $(document).ready(function () {
                 clientData.managers = getLeadManagement();
                 clientData.handle_group = $('#persmissions').is(':checked')
 
-                if (legalStatus == 1) {//Individuals
+                if (legalStatus == 1) { //Individuals
 
-                    
+
                     var titleId = $('#addContact_title').val();
                     var fname = $('#individual_fname').val();
                     var mname = $('#individual_mname').val();
                     var lname = $('#individual_lname').val();
                     // var gender = $('#individual_gender').val();
-                    var Name = fname + ' ' +mname + ' ' + lname;
+                    var Name = fname + ' ' + mname + ' ' + lname;
                     var dob = getFormateDateToServer($('#individual_dob').val());
                     var website = $('#website').val();
                     if (website.indexOf('http://') > -1 || website.indexOf('https://') > -1) {
@@ -2027,7 +1986,7 @@ $(document).ready(function () {
                     // indContactData.contact_organisation = c_org;
                     clientData.prospect = createQuickContact(indContactData);
 
-                    if($('#individual_aadhar').val()){
+                    if ($('#individual_aadhar').val()) {
                         clientData.aadhar_no = $('#individual_aadhar').val().split('-').join('');
                     }
                     clientData.typeOfWork = $('#individual_typeWork').val();
@@ -2038,169 +1997,175 @@ $(document).ready(function () {
                     var pocRows = cC_table.rows().data();
                     for (var c = 0; c < pocRows.length; c++) {
                         var row = pocRows[c];
-            
+
                         //Create contact for each POC
                         var relation = row[5]; //relation
                         var newId = row[1]; //id
-            
-                        
+
+
                         pocObjArr.push({
-                            "contact":newId,
-                            "relation":relation,
-                            "is_primary":false
+                            "contact": newId,
+                            "relation": relation,
+                            "is_primary": false
                         });
                     }
 
                     var isPrimaryId = cC_table.rows('.selected').data()[0][1];
-                    var indexPrimary = pocObjArr.findIndex(x=>x.contact == isPrimaryId);
+                    var indexPrimary = pocObjArr.findIndex(x => x.contact == isPrimaryId);
                     pocObjArr[indexPrimary].is_primary = true;
-                    
+
                     clientData.pocs = pocObjArr;
 
                     url = urlRooT + 'individuals/?';
 
-                    
+
                 } else {
 
                     clientData.GSTIN = $('#GSTIN').val();
                     clientData.TANNO = $('#TANNO').val();
-                    
+
                     //Creating POCs for companies
                     var pocObjArr = [];
                     var pocRows = cC_table.rows().data();
                     for (var c = 0; c < pocRows.length; c++) {
                         var row = pocRows[c];
-            
+
                         //Create contact for each POC
                         var purpose = row[7]; //purpose
                         var newId = row[1]; //id
                         console.log(globalClient);
-                        
+
                         pocObjArr.push({
-                            "contact":newId,
-                            "purpose":purpose,
-                            "is_primary":false
+                            "contact": newId,
+                            "purpose": purpose,
+                            "is_primary": false
                         });
                     }
 
                     var isPrimaryId = cC_table.rows('.selected').data()[0][1];
-                    var indexPrimary = pocObjArr.findIndex(x=>x.contact == isPrimaryId);
+                    var indexPrimary = pocObjArr.findIndex(x => x.contact == isPrimaryId);
                     pocObjArr[indexPrimary].is_primary = true;
 
                     clientData.pocs = pocObjArr;
                     clientData.prospect = currentOrganisationsId;
-                    if (legalStatus == 2) {//HUF
-                        
+                    if (legalStatus == 2) { //HUF
+
                         clientData.commencement_date = getFormateDateToServer($('#HUF_date').val());
                         clientData.karta_name = $('#HUF_nameOfKarta').val();
                         clientData.title = $('#HUF_name').val();
 
-                        url = urlRooT +  'hufs/?';
+                        url = urlRooT + 'hufs/?';
 
-                    } else if (legalStatus == 3) {//Proprietor
-                        
+                    } else if (legalStatus == 3) { //Proprietor
+
                         clientData.title = $('#prop_Title').val();
                         clientData.owner_name = $('#Proprietor_fname').val();
                         if ($('#Proprietor_mname').val() != '')
                             clientData.owner_name += ' ' + $('#Proprietor_mname').val();
-                        clientData.owner_name +=' ' + $('#Proprietor_lname').val();
+                        clientData.owner_name += ' ' + $('#Proprietor_lname').val();
                         clientData.commencement_date = getFormateDateToServer($('#Proprietor_dateOfComm').val());
 
-                        url =   urlRooT +  'proprietors/?';
+                        url = urlRooT + 'proprietors/?';
 
-                    } else if (legalStatus == 4) {//Partnership
-                        
+                    } else if (legalStatus == 4) { //Partnership
+
                         clientData.partnership_deed_date = getFormateDateToServer($('#Partnership_date').val());
                         clientData.commencement_date = getFormateDateToServer($('#Partnership_dateOfComm').val());
                         clientData.partners = getPartnersRow();
 
-                        url =   urlRooT +  'partnership-firms/?';
+                        url = urlRooT + 'partnership-firms/?';
 
-                    } else if (legalStatus == 5) {//LLP
-                        
+                    } else if (legalStatus == 5) { //LLP
+
                         var partners = $('#partners_noopartner').val();
                         var oparsObj = [];
-                        if(partners.indexOf(',')>0){
+                        if (partners.indexOf(',') > 0) {
                             var Opartners = partners.split(',');
                             for (let i = 0; i < Opartners.length; i++) {
                                 var pars = new Object();
                                 pars.name = Opartners[i];
                                 oparsObj.push(pars);
                             }
-                        }else{
-                            oparsObj.push({name:partners});
+                        } else {
+                            oparsObj.push({
+                                name: partners
+                            });
                         }
                         clientData.llpin = $('#LLP_LLPIN').val();
                         clientData.commencement_date = getFormateDateToServer($('#LLP_date').val());
                         clientData.other_partners = oparsObj;
                         clientData.designated_partners = getDpartnersRow();
 
-                        url =   urlRooT +  'llps/?';
+                        url = urlRooT + 'llps/?';
 
-                    } else if (legalStatus == 6) {//Company
-                        
+                    } else if (legalStatus == 6) { //Company
+
                         clientData.commencement_date = getFormateDateToServer($('#company_date').val());
                         clientData.company_type = $('#company_types').val();
                         clientData.cin = $('#company_cin').val();
                         clientData.stock_exchange_listed = $('#company_listedy').prop('checked');
                         clientData.stock_exchange_name = $('#company_stock').val();
                         clientData.directors = getDirectorsRow();
-                        
-                        url =   urlRooT +  'limited-companies/?';
 
-                    } else if (legalStatus == 7) {//AOP-BOI
-                        
+                        url = urlRooT + 'limited-companies/?';
+
+                    } else if (legalStatus == 7) { //AOP-BOI
+
                         var memberArr = $('#members').val();
                         var memObj = [];
-                        if(memberArr.indexOf(',')>0){
+                        if (memberArr.indexOf(',') > 0) {
                             var members = memberArr.split(',');
                             for (let i = 0; i < members.length; i++) {
                                 var mem = new Object()
                                 mem.name = members[i];
                                 memObj.push(mem);
                             }
-                        }else{
-                            memObj.push({name:memberArr});
+                        } else {
+                            memObj.push({
+                                name: memberArr
+                            });
                         }
                         clientData.members = memObj;
                         clientData.commencement_date = getFormateDateToServer($('#AOP_date').val());
                         clientData.registration_no = $('#AOP_registration').val();
 
-                        url =   urlRooT +  'aop-boi/?';
+                        url = urlRooT + 'aop-boi/?';
 
-                    } else if (legalStatus == 8) {//Trusts
-                        
+                    } else if (legalStatus == 8) { //Trusts
+
                         // clientData.businessName = $('#trust_name').val();
                         clientData.commencement_date = getFormateDateToServer($('#trust_doc').val());
                         var trusteeArr = $('#trusteeName').val();
                         var truObj = [];
-                        if(trusteeArr.indexOf(',')>0){
+                        if (trusteeArr.indexOf(',') > 0) {
                             var tru = trusteeArr.split(',');
                             for (let i = 0; i < tru.length; i++) {
                                 var trust = new Object();
                                 trust.name = tru[i];
                                 truObj.push(trust);
                             }
-                        }else{
-                            truObj.push({name:trusteeArr});
+                        } else {
+                            truObj.push({
+                                name: trusteeArr
+                            });
                         }
                         clientData.trustee = truObj;
-                        
-                        url =   urlRooT +  'trusts/?';
+
+                        url = urlRooT + 'trusts/?';
 
                     }
                 }
 
                 var clientJSON = JSON.stringify(clientData);
                 console.log(clientJSON);
-                
+
                 $.ajax({
                     async: true,
                     crossDomain: true,
                     url: url,
                     type: 'POST',
                     contentType: 'application/json',
-                    headers:{
+                    headers: {
                         "X-CSRFToken": csrftoken
                     },
                     data: clientJSON,
@@ -2208,9 +2173,9 @@ $(document).ready(function () {
                         swal('Client added');
                     },
                     error: function (error) {
-                        if(error.responseJSON.detail){
+                        if (error.responseJSON.detail) {
                             swal(error.responseJSON.detail);
-                        }else{
+                        } else {
                             swal('Not able to create client');
                         }
                         console.log('Error in creating client:' + error.responseText);
