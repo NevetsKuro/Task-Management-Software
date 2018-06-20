@@ -545,32 +545,32 @@ $(document).ready(function(){
             $('#prodslider').find('.ui-state-disabled').css('opacity','100');
             $('#mainempslider').find('.ui-slider-handle').css({
                 'background': 'none',
-                'border-left': '10px solid transparent',
-                'border-right': '10px solid transparent',
-                'border-top': '8px solid #000',
+                'border-left': '8px solid transparent',
+                'border-right': '8px solid transparent',
+                'border-top': '5px solid #000',
                 'border-bottom':'none',
                 'width': '0px',
                 'height': '0px',
-                'top':'-0.6em',
+                'top':'-0.3em',
                 
             });
             $('#prodslider').find('.ui-slider-handle').css({
                 'background': 'none',
-                'border-left': '10px solid transparent',
-                'border-right': '10px solid transparent',
-                'border-top': '8px solid #000',
+                'border-left': '8px solid transparent',
+                'border-right': '8px solid transparent',
+                'border-top': '5px solid #000',
                 'border-bottom':'none',
                 'width': '0px',
                 'height': '0px',
-                'top':'-0.6em',
+                'top':'-0.3em',
                 
             });
             $('#mainempslider').find('.ui-slider-handle').attr('id','empeffranger');
             $('#prodslider').find('.ui-slider-handle').attr('id','prodranger');
             var left=parseInt($('#empeffranger').position().left / $('#empeffranger').parent().width() * 100);
             var left2=parseInt($('#prodranger').position().left / $('#prodranger').parent().width() * 100);
-            $('#empeff').css('left',left-2+'%');
-            $('#empprod').css('left',left2-2+'%');
+            $('#empeff').css('left',left-4+'%');
+            $('#empprod').css('left',left2-4+'%');
             console.log("LEFT-eff: "+left);
             console.log("LEFT-prod: "+left2);
         }
@@ -1269,10 +1269,6 @@ $(document).ready(function(){
     //
     //
     //
-    //
-    //
-    //
-    //
     //delete subtask ends--------------
         $(document).on('click','.start',function(){
             var id=$(this).attr('id')
@@ -1335,6 +1331,5 @@ $(document).ready(function(){
             timer.forEach(function(value,key){
             value.innerHTML=stopwatch.get(key);
             });
-        }, 1000);
-        
+        }, 1000);    
 });
