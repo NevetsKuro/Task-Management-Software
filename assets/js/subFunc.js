@@ -85,7 +85,7 @@
             }
             
         });
-
+        
         $(document).on('change',".din_valid", function(){
             var inputvalues = $(this).val();
             var dinformat = new RegExp('^[0-9]{8}$');

@@ -14,6 +14,10 @@ $(document).ready(function(){
         $('#addContact_image').val($(this).val().substr($(this).val().indexOf(String.fromCharCode(92),4)+1));
     });
     
+    $(document).on('change','#addContact_originator',function(){
+        var emp = 1;
+
+    })
 
     // UpdateCont = inputChanges(); 
     // var $form = $('#addContact_form'),
@@ -512,8 +516,6 @@ $(document).ready(function(){
 
         UpdateCont.push($(this));
     });
-
-
 
     // adding websiteEntry tab in contact form
     function addWebsiteRows(){

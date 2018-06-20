@@ -3,6 +3,15 @@ $(document).ready(function(){
     $('#loader').show()
     var employees =[],clients=[],contacts=[],pocs=[];
 
+    $(document).on('change','#mode_meeting',function(){
+        var valueIs = $(this).val()
+        if(valueIs == 'L'){
+            $('.label_Change').html('Enter Location:');
+        }else if(valueIs == 'P'){
+            $('.label_Change').html('Enter Phone Number:');
+        }
+    });
+
     $.ajax({
         async:false,
         url:urlRoot+'employees/',
@@ -40,10 +49,11 @@ $(document).ready(function(){
         }
     })
 
-
+    //Url parameter for update
     var p=GetURLParams();
     var mid=p['meet_id'];
 
+    //Toggle between client/contact
     $('#taskType').bootstrapToggle({
         off: 'Client',
         on: 'Contact',
@@ -54,6 +64,7 @@ $(document).ready(function(){
         size: 'large'
     });
 
+    //Data of the selected meeting to be filled
     if(mid){
         $.ajax({
             url:urlRoot+'meetings/'+mid,
@@ -223,7 +234,7 @@ $(document).ready(function(){
             <tr class="new">
                 <td>
                     <label class="input">
-                        <input type="type" class="Magenda_list">
+                        <input type="type" class="Magenda_list" disabled>
                     </label>
                 </td>
                 <td>
@@ -252,12 +263,6 @@ $(document).ready(function(){
             }
         }).get();
         
-        // var valueArray5 = $('.agenda_owner').map(function() {
-        //     if($(this).parentsUntil('#agenda_row').find('.agenda_type').val()=='C'){
-        //         return this.value;
-        //     }
-        // }).get();
-
 
         var empList=[],conList=[],cliList=[],agendaEmp=[],agendaCon=[];
         for (let index = 0; index < valueArray1.length; index++) {
@@ -272,21 +277,6 @@ $(document).ready(function(){
             var a = contacts.find(function(a){return a.id==valueArray3[index]});
             conList.push(a);
         }
-        // for (let index = 0; index < valueArray4.length; index++) {
-        //     var a = employees.find(function(a){return a.id==valueArray4[index]});
-        //     agendaEmp.push(a);
-        // }
-        // for (let index = 0; index < valueArray5.length; index++) {
-        //     var a = contacts.find(function(a){return a.id==valueArray5[index]});
-        //     agendaCon.push(a);
-        // }
-
-        // var new2=agendaEmp.concat(agendaCon);
-        // $('.Magenda_list').empty()
-        // for(var i=0;i<new2.length;i++){
-        //     $('.Magenda_list').append('<option value='+new2[i].id+'>'+new2[i].name+'</option>');
-        // }
-
         var new1;
         if(cliList){
             new1 = cliList.concat(conList);

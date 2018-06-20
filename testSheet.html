@@ -47,9 +47,10 @@
 
 
         <div id="createTable"></div>
+        <div id="createTable2"></div>
         <script type="text/javascript">
             
-            $('#table1').tableExport();
+            // $('#table1').tableExport();
             $.ajax({
                 url:'http://35.202.86.61/office-management/contacts/',
                 type:'GET',
@@ -120,13 +121,63 @@
                     }
                     table+=`</tbody></table>`;
                     $('#createTable').html(table);
+                    $('#createTable').tableExport();
                 },
                 error:function(error){
                     console.log(error.responseText);
                 }
                 });
 
-
+                $.ajax({
+                url:'http://35.202.86.61/office-management/employees/',
+                type:'GET',
+                datatype:'JSON',
+                success:function(data){
+                    var table = `<table>
+                        <thead>
+                        <th>Name</th>
+                        <th>Date Of Birth</th>
+                        <th>Designation</th>
+                        <th>Email Address</th>
+                        <th>Phone Number</th>
+                        <th>Locations</th>
+                        <th>Department</th>
+                        <th>CTC</th>
+                        <th>CTCperHour</th>
+                        <th>Reporting Managers</th>
+                        <th>Efficiency</th>
+                        <th>Productivity</th>
+                        <th>Self Revenue</th>
+                        <th>Team Revenue</th>
+                        <th>Total Time</th>
+                        </thead>
+                        <tbody>
+                        `;
+                    for (let i = 0; i < data.length; i++) {
+                        table+=`<tr>
+                        <td>${data[i].name}</td>
+                        <td>${data[i].dob}</td>
+                        <td>${data[i].designation}</td>
+                        <td>${data[i].emp_email_addresses?data[i].emp_email_addresses.find((a)=>a.is_primary ==true).email:'NOT MENTIONED'}</td>
+                        <td>${data[i].emp_phone_numbers?emp_phone_numbers.find((a)=>a.is_primary==true).number:'NOT MENTIONED'}</td>
+                        <td>${data[i].locations}</td>
+                        <td>${data[i].department}</td>
+                        <td>${data[i].ctc}</td>
+                        <td>${data[i].ctcPerHour}</td>
+                        <td>${data[i].reportingManager.length>1?data[i].reportingManager.join(', '):data[i].reportingManager[0]}</td>
+                        <td>${data[i].efficiency}</td>
+                        <td>${data[i].productivity}</td>
+                        <td>${data[i].self_revenue}</td>
+                        <td>${data[i].team_revenue}</td>
+                        <td>${data[i].total_time}</td>
+                        </tr>`;
+                    }
+                    table+=`</tbody></table>`;
+                },
+                error:function(error){
+                    console.log(error.responseText)
+                }
+                });
         </script>
     </body>
 </html>
