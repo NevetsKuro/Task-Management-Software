@@ -171,9 +171,9 @@ h+= '                                                                <div class=
 h+= '                                                                    <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>' ;
 h+= '                                                                    <strong><a href="http://lancecoder.com/themes/calibre/layouts/iconic/index.php#">Laravel Login Customization</a></strong> ' ;
 h+= '                                                                    <p>TASKS SECTION</p>' ;
-h+= '                                                                    <div class="progress progress-xs">' ;
+h+= '                                                                    <!--div class="progress progress-xs">' ;
 h+= '                                                                        <div class="progress-bar bg-info ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" data-transitiongoal="74" aria-valuenow="0" style="width: 74%;" aria-valuemin="0" aria-valuemax="100"><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div></div>' ;
-h+= '                                                                    </div>' ;
+h+= '                                                                    </div-->' ;
 h+= '                                                                </div>' ;
 h+= '                                                            </li>' ;
 h+= '                                                            <li>' ;
