@@ -87,7 +87,7 @@
                 <!-- START MAIN CONTAINER -->
                 <div class="main-container">
                     <!-- START PAGE HEADER -->
-                    <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
+                    <!-- <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
                         <div class="page-header-content slideshow">
                             <div class="page-header-overlay">
                                 <h1 class="page-title">Dashboard</h1>
@@ -105,7 +105,7 @@
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section> -->
                     <!-- END PAGE HEADER -->
                     <!-- START PAGE CONTENT -->
                     <div class="page-content">
@@ -347,10 +347,10 @@
                                         <div class="col-sm-12">
                                             <div class="panel list-widget notes">
                                                 <div class="panel-body" style="padding: 0px">   
-                                                    <div class="list-header p-10" style="background-color: #b51f63">
+                                                    <div class="list-header p-5 dashCard" style="background-color: #b51f63;">
                                                         <div class="row">
-                                                            <div class="col-sm-4">
-                                                                <h3 style="color: white">To Do List</h3>
+                                                            <div class="col-sm-10">
+                                                                <h3 class="m-b-0 m-t-0" style="color: white">To Do List</h3>
                                                             </div>
                                                             <div class="col-sm-2" style="float: right; vertical-align: middle">
                                                                 <button type="button" class="btn btn-foursquare btn-flat rippler dashbutton m-t-5" title="Add new todo-item" data-toggle="modal" data-target="#modal-responsive">
@@ -370,10 +370,10 @@
                                         <div class="col-sm-12">
                                             <div class="panel list-widget notes">
                                                 <div class="panel-body" style="padding: 0px">   
-                                                    <div class="list-header p-10" style="background-color: #1fa3b5">
+                                                    <div class="list-header p-5 dashCard" style="background-color: #1fa3b5">
                                                         <div class="row">
                                                             <div class="col-sm-10">
-                                                                <h3 style="color: white">Extra Work</h3>
+                                                                <h3 class="m-b-0 m-t-0" style="color: white">Extra Work</h3>
                                                             </div>
                                                             <div class="col-sm-2" style="float: right; vertical-align: middle">
                                                                 <button type="button" class="btn btn-reddit btn-flat rippler dashbutton m-t-5" title="Add Extra Work" data-toggle="modal" data-target="#modalextra">
@@ -393,10 +393,10 @@
                                         <div class="col-sm-12">
                                             <div class="panel list-widget notes p-0">
                                                 <div class="panel-body p-0">
-                                                    <div class="list-header p-10" style="background-color: peru">
+                                                    <div class="list-header p-5 dashCard" style="background-color: peru">
                                                         <div class="row">
-                                                            <div class="col-sm-2">
-                                                                <h3 style="color: white">Notes</h3>
+                                                            <div class="col-sm-10">
+                                                                <h3 class="m-t-0 m-b-0" style="color: white">Notes</h3>
                                                             </div>
                                                             <div class="col-sm-2" style="float: right; vertical-align: middle">
                                                                 <button type="button" class="btn btn-soundcloud btn-flat notesave dashbutton m-t-5" title="Save Changes">
@@ -420,13 +420,13 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-8 ">
-                                    <div class="panel list-widget notes p-0 dashCard">
+                                    <div class="panel list-widget notes p-0">
                                         <div class="panel-body p-0">
-                                            <div class="list-header p-30" style="background-color:#3a87ad">
-                                                <h3 style="color: white">Activity Calendar</h3>
+                                            <div class="list-header p-5 dashCard" style="background-color:#3a87ad">
+                                                <h3 class="m-t-0 m-b-0 m-l-30" style="color: white">Activity Calendar</h3>
                                             </div>
                                             <div class="list-content">
-                                                <div id="calendar" class="m-20"></div>
+                                                <div id="calendar" class="m-t-5 m-l-10"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -437,12 +437,12 @@
                                 <!-- task -->
                                 <div class="col-sm-12 panel list-widget tasks p-0">
                                     <div class="panel-body p-0" id="tasklist" style="border-radius: 10px">
-                                        <div class="list-header" style="background-color: #e9775b">
+                                        <div class="list-header dashCard p-10" style="background-color: #e9775b">
                                             <h3>Tasks</h3>
                                         </div>
-                                        <div class="panel-group">
-                                            <div id="taskaccordion">
-                                            </div>
+                                        <div class="panel-group" id="accordion">
+                                            <!-- <div >
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>

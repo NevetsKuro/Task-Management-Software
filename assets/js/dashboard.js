@@ -659,7 +659,7 @@ $(document).ready(function(){
                                 </div>` 
                 }
             });
-            $('#taskaccordion').html(tasktxt);
+            $('#accordion').html(tasktxt);
             $('#tstats').html(taskscomplete);
             setDonut();
             $.ajax({
@@ -690,10 +690,15 @@ $(document).ready(function(){
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 events:eventarr,
-                aspectRatio: 2,
-                contentHeight: 500,
+                aspectRatio: 0.5,
+                contentHeight: 400,
               });
               $('#calendar').fullCalendar('today');
+              $('.fc-basic-view').addClass('m-t-5');
+              $('.fc-basic-view').addClass('m-r-5');
+              $('.fc-header-toolbar').addClass('m-t-0');
+              $('.fc-header-toolbar').addClass('m-b-0');
+              $('.fc-right').addClass('m-r-10');
         },
         error:function(error){
             console.log(error.responseText);
