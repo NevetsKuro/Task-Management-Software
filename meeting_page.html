@@ -137,11 +137,20 @@
                                                                             </label>
                                                                         </div>
                                                                         
-                                                                        <h3>Meeting Information: </h3>
+                                                                        <h3 class="m-l-10">Meeting Information: </h3>
                                                                         
                                                                         <div class="col-sm-6">
+                                                                            <label class="label">Mode:</label>
+                                                                            <label class="select">
+                                                                                <select id="mode_meeting" class="select2">
+                                                                                    <option value="L">Location</option>
+                                                                                    <option value="P">Phone Number</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
                                                                             <div id="loc-wrapper">
-                                                                                <label class="label">Enter Location: </label>
+                                                                                <label class="label label_Change">Enter Location: </label>
                                                                                 <label class="input">
                                                                                     <input type="text" id="meet_location" required/>
                                                                                 </label>
@@ -300,7 +309,7 @@
                                                                                 <tr class="new">
                                                                                     <td>
                                                                                         <label class="input">
-                                                                                            <input type="text" class="Magenda_list">
+                                                                                            <input type="text" class="Magenda_list" disabled>
                                                                                         </label>
                                                                                     </td>
                                                                                     <td>

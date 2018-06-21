@@ -247,12 +247,34 @@ $(document).ready(function(){
     });
     $(document).on('change','#taskProposal',function(){
         var id = $('#taskProposal').val();
+        $('.download').removeClass('hide');
         $.getJSON(urlRoot+'tasks/proposals/'+id,function(data){
+            $('.dwnBtn').attr('data-href',data.proposal_document);
             $('#taskProposalFee').html(data.fees);
             $('#taskProposalTile').html(data.subject);
         });
     })
 
+    $(document).on('click','.dwnBtn',function(e){
+        e.preventDefault();
+        // window.open(link);
+        
+        var link = $(this).attr('data-href');
+        if(link!=''){
+
+            var oReq = new XMLHttpRequest();
+            var URLToPDF = link;//"http://35.202.86.61/media/docs/10000.pdf";
+            oReq.open("GET", URLToPDF, true);
+            oReq.responseType = "blob";
+            oReq.onload = function() {
+                var file = new Blob([oReq.response]);
+                saveAs(file, link.split('/').pop());
+            };
+            oReq.send();
+        }else{
+            swal('No document present!')
+        }
+    });
     
     $(document).on('click','#taskBar',function(e){
         e.preventDefault();

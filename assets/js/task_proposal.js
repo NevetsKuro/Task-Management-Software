@@ -142,7 +142,8 @@ $(document).ready(function () {
         $(this).parentsUntil('.rowEntry').find('.empDesignM').html(empObj.designation);
     })
 
-    $(document).on('click', '.feeCheck', function () {
+    // $(document).on('click', '.feeCheck', function () {
+        $(document).on('keyup', '#marginCost', function () {
         var empName = '';
         var empDuration;
         var ctc = 0;
@@ -169,8 +170,8 @@ $(document).ready(function () {
             }
             perEmp = ctcPerHour * empDuration;
             EmpCost += perEmp; //total employees cost * by its duration.
-            console.log(EmpCost);
-            $(this).parentsUntil('.rowEntry').find('.empCostM').html(perEmp);
+            console.log(EmpCost.toFixed(2));
+            $(this).parentsUntil('.rowEntry').find('.empCostM').html(perEmp.toFixed(2));
         });
         AdminCost = (EmpCost * 25 / 100);
         TotalCost = AdminCost + EmpCost;
@@ -179,7 +180,7 @@ $(document).ready(function () {
         $('#adminCost').empty().html(AdminCost.toFixed(2));
         $('#totalCost').empty().html(TotalCost.toFixed(2));
         // $('#marginCost').empty().html(marginCost);
-        var t = parseInt(margin) + parseInt(TotalCost);
+        var t = parseInt(TotalCost) + parseInt(TotalCost)*parseInt(margin)/100;
         $('#totalFee').val(t);
         console.log(TotalCost + ':' + marginCost);
     });

@@ -24,6 +24,9 @@ $(document).ready(function () {
         }
     }
 
+    //pass a parameter i.e. the list of contacts
+    //function for creating cards for each contacts found in the array
+    //currentList => array
     function contactListBody(currentList) {
 
         var listContact = "";
@@ -106,6 +109,9 @@ $(document).ready(function () {
         showPage(1);
     }
 
+    //pass a parameter i.e. the list of clients
+    //function for creating cards for each client found in the array
+    //currentList => array 
     function clientListBody(currentList) {
         var listClient = "";
         var clientLink = "AddClient.html?client=";
@@ -196,6 +202,8 @@ $(document).ready(function () {
             $('.cList').html(listClient);
         }
         $('.personimg').attr('height', $('.personimg').attr('width'));
+        
+        //Pagination for the list
         var Totalpages = $(".col-sm-4").length;
         var templateLI;
         var blocks = Math.ceil(Totalpages / pageSize);
@@ -208,6 +216,7 @@ $(document).ready(function () {
         $("#pagin li:nth-child(2)").addClass('active');
         showPage(1);
     }
+
     if (listOf === 'contact') {
         $.ajax({
             url: urlRoot + 'contacts/',
@@ -235,9 +244,8 @@ $(document).ready(function () {
         $('.CTC').addClass('hide');
     }
 
+    //Custom Pagination
     var pageSize = 12;
-
-
 
     showPage = function (page) {
         $(".col-sm-4").hide();
@@ -343,6 +351,7 @@ $(document).ready(function () {
             });
     });
 
+    //Select Function for Deleting
     $(document).on('click', '.selectable', function () {
         if ($(this).hasClass('bg-grey')) {
             $(this).removeClass('bg-grey');
@@ -371,8 +380,6 @@ $(document).ready(function () {
             $('.counter-widget.variant-1 .counter-icon .front-content p').addClass('color-black');
             $('.header-title').addClass('color-black');
         }
-
-
     });
 
     $(document).on('click', ".selectAll", function () {
@@ -397,6 +404,8 @@ $(document).ready(function () {
         }
     });
 
+
+    //Sort By Functions
     function compareFName(a, b) {
         if (a.name.split(' ')[0] <= b.name.split(' ')[0])
             return -1;
@@ -427,7 +436,6 @@ $(document).ready(function () {
             return 1;
     }
 
-
     $(document).on('click', ".sortByFName", function () {
         var sortByFName = currentList.sort(compareFName);
         (listOf == 'contact' ? contactListBody(sortByFName) : clientListBody(sortByFName));
@@ -437,43 +445,52 @@ $(document).ready(function () {
         (listOf == 'contact' ? contactListBody(sortByLName) : clientListBody(sortByLName));
     });
     $(document).on('click', ".sortByOrganisation", function () {
-        var sortByOrganisation = currentList.sort(compareOrganisation);
-        // for (let key in sortByOrganisation) {
-        //     if(sortByOrganisation[key].organisation == null){var f = sortByOrganisation[key]; sortByOrganisation.splice(sortByOrganisation.indexOf(sortByOrganisation[key]),1);sortByOrganisation.push(f) };
-        // }
-        //   console.log(sortByOrganisation);          
+        var sortByOrganisation = currentList.sort(compareOrganisation);    
         (listOf == 'contact' ? contactListBody(sortByOrganisation) : clientListBody(sortByOrganisation));
     });
     $(document).on('click', ".sortByDesignation", function () {
         var sortByDesignation = currentList.sort(compareDesignation);
         (listOf == 'contact' ? contactListBody(sortByDesignation) : clientListBody(sortByDesignation));
     });
-    // $(document).on('click',".sortByOrganisation", function () {
-    //     var sortByDesignation = currentList.sort(compareDesignation);
-    //     contactListBody(sortByDesignation);
-    // });
 
     $(document).on('click', '.searchContact', function (e) {
         e.preventDefault();
         var searchData = $('.searchContactText').val();
         $('.cList').empty();
-        $.ajax({
-            url: urlRoot + 'contacts/?name=' + searchData,
-            datatype: 'JSON',
-            type: 'GET',
-            success: function (searchResult) {
-                contactListBody(searchResult);
-            },
-            error: function (err) {
-                swal('server not conected!!!' + err);
-            },
-            complete: function (data) {
-                if ($('.cList').children().length == 0) {
-                    swal('No data found!');
+        if(true){
+            $.ajax({
+                url: urlRoot + 'contacts/?name=' + searchData,
+                datatype: 'JSON',
+                type: 'GET',
+                success: function (searchResult) {
+                    contactListBody(searchResult);
+                },
+                error: function (err) {
+                    swal('server not conected!!!' + err);
+                },
+                complete: function (data) {
+                    if ($('.cList').children().length == 0) {
+                        swal('No data found!');
+                    }
                 }
-            }
-        });
-
+            });
+        }else{
+            // $.ajax({
+            //     url: urlRoot + 'clients/allclients/?name=' + searchData,
+            //     datatype: 'JSON',
+            //     type: 'GET',
+            //     success: function (searchResult) {
+            //         clientListBody(searchResult);
+            //     },
+            //     error: function (err) {
+            //         swal('server not conected!!!' + err);
+            //     },
+            //     complete: function (data) {
+            //         if ($('.cList').children().length == 0) {
+            //             swal('No data found!');
+            //         }
+            //     }
+            // });
+        }
     });
-
 });

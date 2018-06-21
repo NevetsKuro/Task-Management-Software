@@ -283,3 +283,7 @@ body>div.ui-timepicker-wrapper {
 	height:30px!important;
 	border-radius:4px;
 }
+.posMargin{
+	position: relative;
+	bottom: 8px;
+}
