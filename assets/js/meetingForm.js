@@ -1,6 +1,5 @@
 $(document).ready(function(){
     
-    $('#loader').show()
     var employees =[],clients=[],contacts=[],pocs=[];
 
     $(document).on('change','#mode_meeting',function(){
@@ -143,7 +142,6 @@ $(document).ready(function(){
             }
         });
         
-        $('#loader').hide()
     }
 
 
@@ -161,7 +159,6 @@ $(document).ready(function(){
 
     $(document).on('change','.attendee_type',function(){
         
-        $('.page-loader').removeClass('hide');
         var type = $(this).val()
         var target = $(this).parentsUntil('#attendee_row').find('.attendees_list');
         target.empty();
@@ -178,7 +175,6 @@ $(document).ready(function(){
         }else if(type == 'T'){
             getContactList(target);
         }
-        $('.page-loader').addClass('hide');
     });
     
     getClientList($('#meet_referedFor'));
@@ -227,7 +223,6 @@ $(document).ready(function(){
         for (var i = 0; i < contacts.length; i++) {
             selector.append('<option value='+contacts[i].id+'>'+contacts[i].name+'</option>');
         }
-        $('.page-loader').removeClass('hide');
     }
     function addRowMinutes(){
         $('#Magenda_row').append(`

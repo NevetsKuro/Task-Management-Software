@@ -253,24 +253,24 @@
                                                     <div class="row">
                                                         <label class="col-xs-4 col-sm-4 text-bold f-s-12">Name</label>
                                                         <label class="col-xs-3 col-sm-3 text-bold f-s-12">Designation</label>
-                                                        <label class="col-xs-3 col-sm-3 text-bold f-s-12">Duration</label>
+                                                        <label class="col-xs-2 col-sm-2 text-bold f-s-12">Duration</label>
+                                                        <label class="col-xs-2 col-sm-2 text-bold f-s-12">Cost-Per-Hour</label>
                                                         <label class="col-xs-2 col-sm-2 text-bold f-s-12">Cost</label>
+                                                        <label class="col-xs-1 col-sm-1 text-bold f-s-12">Remove</label>
                                                     </div>
                                                     <div class="rowEntry">
                                                         <div class="row">
                                                             <label class="col-xs-4 col-sm-4 select">
-                                                                <!-- <input class="empNameM" type="text"> -->
                                                                 <select class="select2 empNameM"></select>
                                                             </label>
                                                             <label class="col-xs-3 col-sm-3 label">
-                                                                <!-- <input class="empDesignM" type="text"> -->
                                                                 <span class="empDesignM pos-des"></span>
                                                             </label>
-                                                            <label class="col-xs-2 col-sm-2 input">
+                                                            <label class="col-xs-3 col-sm-3 input">
                                                                 <input class="empDurationM" type="text">
                                                             </label>
                                                             <label class="col-xs-2 col-sm-2 label">
-                                                                <span class="empCostM"></span>
+                                                                <span class="empCostM pos-des"></span>
                                                             </label>
                                                             <label class="col-xs-1 col-xs-1 m-t-10">
                                                                 <i class="glyphicon glyphicon-remove text-danger removeRow"></i>
@@ -303,9 +303,9 @@
                                                             <label class="label"><span id="totalCost"></span></label>
                                                         </div>
                                                         <div class="col-sm-3">
-                                                            <label class="label">Margin:</label>
+                                                            <label class="label">Margin(in %):</label>
                                                         </div>
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-2 posMargin">
                                                             <label class="input"><input id="marginCost" type="number" min="1" max="100">
                                                         </div>
                                                     </div>
@@ -315,11 +315,9 @@
                                                         <label class="label">Fee:</label>
                                                         </div>
                                                         <label class="input"><input id="totalFee" type="text" disabled></label>
-                                                        <div class="col-sm-4 pull-right">
-                                                            <input class="btn btn-raised buttonDefSize btn-success feeCheck" value="Update">
-                                                        </div>
-                                                        <div class="col-sm-4 pull-right">
-                                                            <input class="btn btn-raised buttonDefSize btn-success feeSubmit" value="Insert">
+                                                        
+                                                        <div class="col-sm-offset-4 col-sm-4 pull-right">
+                                                            <input type="button" class="btn btn-raised btn-success feeSubmit" value="Insert">
                                                         </div>
                                                     </div>
                                                     
