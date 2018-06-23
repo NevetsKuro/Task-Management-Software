@@ -7,7 +7,9 @@ $(document).ready(function(){
         if(valueIs == 'L'){
             $('.label_Change').html('Enter Location:');
         }else if(valueIs == 'P'){
-            $('.label_Change').html('Enter Phone Number:');
+            $('.label_Change').html('Enter Phone:');
+        }else if(valueIs == 'V'){
+            $('.label_Change').html('Enter Video Conference:');
         }
     });
 
@@ -22,7 +24,7 @@ $(document).ready(function(){
         error:function(error){
             console.log(error.responseText);
         }
-    })
+    });
     $.ajax({
         async:false,
         url:urlRoot+'clients/allclients',
@@ -34,7 +36,7 @@ $(document).ready(function(){
         error:function(error){
             console.log(error.responseText);
         }
-    })
+    });
     $.ajax({
         async:false,
         url:urlRoot+'contacts/',
@@ -46,7 +48,7 @@ $(document).ready(function(){
         error:function(error){
             console.log(error.responseText);
         }
-    })
+    });
 
     //Url parameter for update
     var p=GetURLParams();
@@ -242,6 +244,10 @@ $(document).ready(function(){
     }
 
     $(document).on('change','.attendees_list',function(){
+        //List of all selected attendees 
+        //O for Organisation
+        //C for Client
+        //T for Third party i.e. contacts
         var valueArray1 = $('.attendees_list').map(function() {
             if($(this).parentsUntil('#attendee_row').find('.attendee_type').val()=='O'){
                 return this.value;
@@ -327,6 +333,17 @@ $(document).ready(function(){
     function addRowAttendees(){
         $('#attendee_row').append(`
             <tr class="new">
+                <td>
+                    <label class="checkbox">
+                        <input id="branch_notify" type="checkbox">
+                        <i></i>
+                    </label>
+                </td>
+                <td>
+                    <label class="label">
+                        <i class="glyphicon glyphicon-ok-cirle"></i>
+                    </label>    
+                </td>
                 <td>
                     <label class="select">
                         <select class="attendee_type select2">

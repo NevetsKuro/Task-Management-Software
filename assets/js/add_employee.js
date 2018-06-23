@@ -128,12 +128,10 @@ $(document).ready(function () {
     //remove contactEntered data tab in contact form
     $('#contact-row').on('click','#remove-contact',function(){
         $(this).parentsUntil('#contact-row').remove();
-
-        //UpdateCont.push($(this));
     });
 
 
-    ///////////////////////////////////////////  GET REQUEST   /////////////////
+    ///////////////////////////////////////////  GET REQUEST  /////////////////
     if(update){
         $('.toShown').removeClass('hide')
         $.getJSON(urlRoot+'employees/'+empId,function(data){

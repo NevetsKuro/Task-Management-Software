@@ -85,9 +85,6 @@ $(document).ready(function () {
                             <a title="Convert to Client" href="${clientLink}${element.id}" class="btn btn-primary btn-sm CTC">
                                 <i class="glyphicon glyphicon-random"></i>
                             </a>
-                            <a title="Export .PDF/.DOC" href="" class="btn btn-info btn-sm sm">
-                                <i class="linear-icons li icon-cloud-upload f-s-18"></i>
-                            </a> 
                         </div>
                     </div>
                 </div>

@@ -85,7 +85,7 @@ $(document).ready(function () {
     $(document).on('click', '.addRow', function () {
         $('.rowEntry').append(`
             <div class="row">
-                <label class="col-xs-4 col-sm-4 select">
+                <label class="col-xs-3 col-sm-3 select">
                     <select class="select2 empNameM"></select>
                 </label>
                 <label class="col-xs-3 col-sm-3 label">
@@ -95,7 +95,10 @@ $(document).ready(function () {
                     <input class="empDurationM" type="text">
                 </label>
                 <label class="col-xs-2 col-sm-2 label">
-                    <span class="empCostM"></span>
+                    <span class="empPerCostM pos-des"></span>
+                </label>
+                <label class="col-xs-1 col-sm-1 label">
+                    <span class="empCostM pos-des"></span>
                 </label>
                 <label class="col-xs-1 col-sm-1 m-t-10">
                     <i class="glyphicon glyphicon-remove text-danger removeRow"></i>
@@ -104,16 +107,6 @@ $(document).ready(function () {
         `);
         getEmp(globalEmployee);
     });
-
-    // var globalEmployee = [
-    //     {
-    //         'name':'steven',
-    //         'ctc':12.00
-    //     },{
-    //         'name':'stark',
-    //         'ctc':8.00
-    //     }
-    // ]
 
     function getEmp(data) {
         for (var i = 0; i < data.length; i++) {
@@ -139,7 +132,9 @@ $(document).ready(function () {
         empObj = globalEmployee.find(function (data) {
             return data.id == empid
         });
-        $(this).parentsUntil('.rowEntry').find('.empDesignM').html(empObj.designation);
+        if(empObj.designation){
+            $(this).parentsUntil('.rowEntry').find('.empDesignM').html(empObj.designation);
+        }
     })
 
     // $(document).on('click', '.feeCheck', function () {
@@ -170,6 +165,7 @@ $(document).ready(function () {
             }
             perEmp = ctcPerHour * empDuration;
             EmpCost += perEmp; //total employees cost * by its duration.
+            $(this).parentsUntil('.rowEntry').find('.empPerCostM').html(ctcPerHour);
             console.log(EmpCost.toFixed(2));
             $(this).parentsUntil('.rowEntry').find('.empCostM').html(perEmp.toFixed(2));
         });

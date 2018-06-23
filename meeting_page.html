@@ -144,7 +144,8 @@
                                                                             <label class="select">
                                                                                 <select id="mode_meeting" class="select2">
                                                                                     <option value="L">Location</option>
-                                                                                    <option value="P">Phone Number</option>
+                                                                                    <option value="P">Phone</option>
+                                                                                    <option value="V">Video Conference</option>
                                                                                 </select>
                                                                             </label>
                                                                         </div>
@@ -157,13 +158,6 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-sm-6">
-                                                                            <label class="label">Date:</label>
-                                                                            <label class="input">
-                                                                            <input type="text" class="datepickr" id="meet_date" placeholder="Date...">
-                                                                            </label>
-                                                                        </div>
-                                                                        
-                                                                        <div class="col-sm-6">
                                                                             <label class="label">Start Time:</label>
                                                                             <label class="input">
                                                                             <input type="text" id="meet_STime" class="timepicker" placeholder="1:00">
@@ -175,13 +169,24 @@
                                                                             <input type="text" id="meet_ETime" class="timepicker" placeholder="1:00">
                                                                             </label>
                                                                         </div>
+                                                                        <div class="col-sm-6">
+                                                                            <label class="label">Date:</label>
+                                                                            <label class="input">
+                                                                            <input type="text" class="datepickr" id="meet_date" placeholder="Date...">
+                                                                            </label>
+                                                                        </div>
                                                                         <div class="col-sm-6" style="visibility: hidden">
                                                                             <label class="label">Temp:</label>
                                                                             <label class="input">
                                                                             <input type="text">
                                                                             </label>
                                                                         </div>
-                                                                        
+                                                                        <div class="col-lg-12">
+                                                                            <label class="label">Notes:</label>
+                                                                            <label class="textarea">
+                                                                                <textarea id="meet_notes" class="textarea textarea-expandable" rows="3"></textarea>
+                                                                            </label>
+                                                                        </div>
                                                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     
                                                                         <div class="well row m-0">
@@ -191,14 +196,28 @@
                                                                         <div class="table-responsive">
                                                                             <table id="attendees" class="table table-small-font table-bordered table-striped m-b-10 ">
                                                                                 <thead>
+                                                                                <!-- 83 -->
                                                                                     <tr>
-                                                                                        <th>Type</th>
-                                                                                        <th>Attendees</th>
+                                                                                        <th width="15%">col1</th>
+                                                                                        <th width="15%">col2</th>
+                                                                                        <th width="25%">Type</th>
+                                                                                        <th width="28%">Attendees</th>
                                                                                         <th>Remove</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody id="attendee_row">
                                                                                     <tr class="new">
+                                                                                        <td>
+                                                                                            <label class="checkbox">
+                                                                                                <input id="branch_notify" type="checkbox">
+                                                                                                <i></i>
+                                                                                            </label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <label class="label">
+                                                                                                <i class="glyphicon glyphicon-ok-circle"></i>
+                                                                                            </label>    
+                                                                                        </td>
                                                                                         <td>
                                                                                             <label class="select">
                                                                                                 <select class="attendee_type select2">
@@ -228,17 +247,17 @@
                     
                     
                                                                         <div class="well row m-0">
-                                                                            <label class="text-bold f-s-20 col-sm-10">Agenda</label>
+                                                                            <label class="text-bold f-s-20 col-sm-11">Agenda</label>
                                                                             <span id='addAgenda' class=" col-sm-1"><i class="glyphicon glyphicon-plus m-l-20 text-danger" title="Add Agenda"></i></span>
                                                                         </div>
                                                                         <div class="table-responsive">
                                                                             <table id="agendas" class="table table-small-font table-bordered table-striped m-b-10">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th>Agenda Number</th>
-                                                                                        <th>Type</th>
-                                                                                        <th>Owner</th>
-                                                                                        <th>Duration</th>
+                                                                                        <th width="35%">Agenda</th>
+                                                                                        <th width="20%">Type</th>
+                                                                                        <th width="20%">Owner</th>
+                                                                                        <th width="15%">Duration</th>
                                                                                         <th>Remove</th>
                                                                                     </tr>
                                                                                 </thead>
@@ -279,12 +298,7 @@
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
-                                                                        <div class="col-lg-12">
-                                                                            <label class="label">Notes:</label>
-                                                                            <label class="textarea">
-                                                                                <textarea id="meet_notes" class="textarea textarea-expandable" rows="3"></textarea>
-                                                                            </label>
-                                                                        </div>
+                                                                        
                                                                     </fieldset>
                                                                 </div>
                                                                 <div class="tab-pane fade" id="tab2">
@@ -294,15 +308,13 @@
                                                                     
                                                                     <div class="well row m-0">
                                                                         <label class="text-bold f-s-20 col-sm-10">Agenda</label>
-                                                                        <!-- <span id='addMAgenda' class=" col-sm-1"><i class="glyphicon glyphicon-plus m-l-20 text-danger" title="Add Minutes"></i></span> -->
                                                                     </div>
                                                                     <div class="table-responsive">
                                                                         <table id="Magenda" class="table table-small-font table-bordered table-striped m-b-10 ">
                                                                             <thead>
                                                                                 <tr>
-                                                                                    <th>Agenda</th>
-                                                                                    <th>Note</th>
-                                                                                    <!-- <th>Remove</th> -->
+                                                                                    <th width="25%">Agenda</th>
+                                                                                    <th width="75%">Note</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody id="Magenda_row">

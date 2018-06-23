@@ -48,7 +48,7 @@ $(document).ready(function(){
           {
             element: "#accord > div",
             title: "Search Contacts",
-            content: "For searching if the contact already exist or not!",
+            content: "For searching if the contact already exists or not!",
             placement:'top',
             onShow: function (tour) {
                     $('#collapseChck').collapse('show');
@@ -57,7 +57,7 @@ $(document).ready(function(){
           {
             element: "#tab1 > div:nth-child(1) > div.col-sm-2 > label.label",
             title: "Compulsory",
-            content: "Fields with star needs to be filled mandatorily",
+            content: "Fields with star need to be filled mandatorily",
             onShow: function(tour) {
                 jQuery('#horizontal-wizard a[href=#tab1]').tab('show');
                 jQuery('#tab2').removeClass('active');
@@ -67,8 +67,8 @@ $(document).ready(function(){
           },
           {
             element: "#tab1 > div:nth-child(1) > div.col-sm-2",
-            title: "Quick Adding",
-            content: "Can add options to some dropdown fields by typing in it.",
+            title: "Quick Option Adding",
+            content: "Can add additional options to some dropdown fields by typing on it.",
             onNext: function (tour) {
                     jQuery('#horizontal-wizard a[href=#tab2]').tab('show');
                     jQuery('#tab1').removeClass('active');
@@ -79,7 +79,7 @@ $(document).ready(function(){
           {
             element: "#tab2 > div:nth-child(1) > div.col-sm-7.contact-search",
             title: "Search",
-            content: "Use it to search existing Organisation.",
+            content: "Use it to search existing Organisations.",
             placement:'top',
             onPrev: function (tour) {
                     jQuery('#tab2').removeClass('active');
@@ -90,7 +90,7 @@ $(document).ready(function(){
           {
               element: "#tab2 > div.row.well",
             title: "Branches",
-            content: "One Branch needs to be filled mandatory.",
+            content: "One Branch need to be filled mandatorily.",
             placement:'top'
           },
           {
