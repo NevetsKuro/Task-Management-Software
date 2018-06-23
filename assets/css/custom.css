@@ -1,5 +1,6 @@
 .dashCard{
-	border-radius: 0px !important;
+	border-top-left-radius: 5px !important;
+	border-top-right-radius: 5px !important;
 }
 .dashColor1{
 	background-color: #26C6DA;
