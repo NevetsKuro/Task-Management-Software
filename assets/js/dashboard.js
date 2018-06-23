@@ -2,6 +2,7 @@ $(document).ready(function(){
     var urlparam=GetURLParams();
     var stopwatch=new Map();
     var timer=new Map();
+    var timelog;
     $("#that").html("HERE");
     $("#this").html("Try2");
 	var taskscomplete=0;
@@ -15,7 +16,7 @@ $(document).ready(function(){
         empid=1;
     var taskstatuses=new Map();
     var tstats=new Map();
-    console.log('Current USER: '+current_user);
+    // console.log('Current USER: '+current_user);
     datetime();
     //formdata
     $.ajax({
@@ -44,7 +45,7 @@ $(document).ready(function(){
             console.log(error.responseText);
             swal("Could not load Please Reload.")
         }
-    })
+    });
     //formdata
     // console.log("TOKEN: ");
     // $.ajax({
@@ -180,13 +181,15 @@ $(document).ready(function(){
     $.ajax({
         async: true,
         crossDomain: true,
-        url:urlRoot+'widgets/note/'+empid+'/',
+        // url:urlRoot+'widgets/note/'+empid+'/',
+        url:urlRoot+'widgets/note/',
         type:'GET',
         datatype:'JSON',
         headers:{
             "content-type": "application/json",
             "cache-control": "no-cache",
-            "X-CSRFToken":csrftoken
+            "X-CSRFToken":csrftoken,
+            "Authorization":"Bearer"+localStorage.getItem('token'),
         },
         success:function(notes){
             if(notes){  
@@ -341,6 +344,7 @@ $(document).ready(function(){
             headers:{
                 "content-type": "application/json",
                 "cache-control": "no-cache",
+                "Authorization":"Bearer"+localStorage.getItem('token'),
             },
             success:function(todolist){
                 var tdlist='';
@@ -359,13 +363,14 @@ $(document).ready(function(){
         $.ajax({
             async: true,
             crossDomain: true,
-            url:urlRoot+'widgets/todo-list/?employee-id='+empid,
+            url:urlRoot+'widgets/todo-list/',
             type:'GET',
             datatype:'JSON',
             headers:{
                 "content-type": "application/x-www-form-urlencoded",
                 "cache-control": "no-cache",
-                "X-CSRFToken":csrftoken
+                "X-CSRFToken":csrftoken,
+                "Authorization":"Bearer"+localStorage.getItem('token'),
             },
             success:function(todolist){
                 var tdlist='';
@@ -422,7 +427,8 @@ $(document).ready(function(){
                     headers:{
                         "content-type": "application/json",
                         "cache-control": "no-cache",
-                        "X-CSRFToken":csrftoken
+                        "X-CSRFToken":csrftoken,
+                        "Authorization":"Bearer"+localStorage.getItem('token'),
                     },
                     success:function(todolist){
                         swal("To-Do Element Updated");
@@ -442,7 +448,6 @@ $(document).ready(function(){
         $(document).on('click','.deltodo',function(){
             var btnid=$(this).attr('id');
             var id=$(this).attr('id').split("T")[0];
-            
             $.ajax({
                 async: true,
                 crossDomain: true,
@@ -603,7 +608,8 @@ $(document).ready(function(){
     $.ajax({
         async: true,
         crossDomain: true,
-        url:urlRoot+'tasks/?assignee='+empid,
+        url:urlRoot+'tasks/',
+        // url:urlRoot+'tasks/?assignee='+empid,
         type:'GET',
         datatype:'JSON',
         headers: {
@@ -664,7 +670,8 @@ $(document).ready(function(){
             setDonut();
             $.ajax({
                 crossDomain: true,
-                url:urlRoot+'subtasks/?assignee='+empid,
+                // url:urlRoot+'subtasks/?assignee='+empid,
+                url:urlRoot+'subtasks/',
                 type:'GET',
                 datatype:'JSON',
                 headers: {
@@ -846,6 +853,8 @@ $(document).ready(function(){
     //clock ends starts--------
     //clocks start end---------
     $(document).on('click','.timersend',function(){
+        $('.timerss').removeAttr('disabled');
+        $('.timerss').attr('title','Start Timer');
         $(this).addClass('hide');
         $(this).siblings('.timerss').removeClass('hide');
         var subid=$(this).attr('id').split('T')[0];
@@ -903,64 +912,109 @@ $(document).ready(function(){
         }
         $(rmv).remove();
     });
+    //pauser function
+    function pauser(id){
+            var today = new Date();
+            var end=today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+            timelog.end_timestamp=end;
+            
+            stopwatch.get(id).pause();
+            console.log('TIME: '+stopwatch.get(id).getElapsed()/3600000);
+            var timespent=parseFloat(Math.round(stopwatch.get(id).getElapsed()/3600000 *100) / 100);
+            console.log(timespent + 'Hours');
+            stopwatch.get(id).stop();
+            var stid=id.split("__")[1];
+            var log=JSON.stringify(timelog);
+            timelog=null;
+            console.log('JSON is '+log);
+            $.ajax({
+                    async: true,
+                    crossDomain: true,
+                    url:urlRoot+'subtasks/logtime/',
+                    type:'POST',
+                    datatype:'JSON',
+                    data:log,
+                    headers:{
+                        "content-type": "application/json",
+                        "cache-control": "no-cache",
+                        "X-CSRFToken":csrftoken
+                    },
+                    success:function(logg){
+                        console.log(logg);
+                    },
+                    error:function(error){
+                        console.log(error.responseText);
+                    }
+                });
+    }
+    //pauser endss
     //clock call starts--------
     $(document).on('click','.closeme',function(){
+        var id=$(this).attr('id');
         var subid=$(this).attr('id').split('__')[1];
+        $('.timerss').removeAttr('disabled');
+        $('.timerss').attr('title','Start Timer');
         $('#'+subid+'Tsimernd').addClass('hide');
         $('#'+subid+'Tsimernd').siblings('.timerss').removeClass('hide');
+        
         var watchid=$(this).attr('id');
         console.log("Timerid: "+watchid);
-        if(stopwatch.get(watchid).running);
+        if(stopwatch.get(watchid).running){
             stopwatch.get(watchid).pause();
-        var timespent= parseFloat(Math.round(stopwatch.get(watchid).getElapsed()/3600000 *100) / 100);
-        stopwatch.get(watchid).stop();
-        if(timespent>0.00){
-            $.ajax({
-                async: true,
-                crossDomain: true,
-                url:urlRoot+'subtasks/'+subid+'/',
-                type:'GET',
-                datatype:'JSON',
-                headers:{
-                    "content-type": "application/json",
-                    "cache-control": "no-cache",
-                    "X-CSRFToken":csrftoken
-                },
-                success:function(subtask){
-                    if(parseFloat(subtask.actual_time))
-                        subtask.actual_time=parseFloat(subtask.actual_time)+timespent;
-                    else
-                        subtask.actual_time=timespent;
-                    var updstask=JSON.stringify(subtask);
-                    $.ajax({
-                        async: true,
-                        crossDomain: true,
-                        url:urlRoot+'subtasks/'+subid+'/',
-                        type:'PUT',
-                        datatype:'JSON',
-                        data:updstask,
-                        headers:{
-                            "content-type": "application/json",
-                            "cache-control": "no-cache",
-                            "X-CSRFToken":csrftoken
-                        },
-                        success:function(subtask){ 
-                            swal('Updated Subtask:'+subtask.title);
-                        },
-                        error:function(error){
-                            console.log(error.responseText);
-                        }
-                    });
-                },
-                error:function(error){
-                    console.log(error.responseText);
-                }
-            });
+            pauser(id);
         }
+            
+        // var timespent= parseFloat(Math.round(stopwatch.get(watchid).getElapsed()/3600000 *100) / 100);
+        // stopwatch.get(watchid).stop();
+        // if(timespent>0.00){
+        //     $.ajax({
+        //         async: true,
+        //         crossDomain: true,
+        //         url:urlRoot+'subtasks/'+subid+'/',
+        //         type:'GET',
+        //         datatype:'JSON',
+        //         headers:{
+        //             "content-type": "application/json",
+        //             "cache-control": "no-cache",
+        //             "X-CSRFToken":csrftoken
+        //         },
+        //         success:function(subtask){
+        //             if(parseFloat(subtask.actual_time))
+        //                 subtask.actual_time=parseFloat(subtask.actual_time)+timespent;
+        //             else
+        //                 subtask.actual_time=timespent;
+        //             var updstask=JSON.stringify(subtask);
+        //             $.ajax({
+        //                 async: true,
+        //                 crossDomain: true,
+        //                 url:urlRoot+'subtasks/'+subid+'/',
+        //                 type:'PUT',
+        //                 datatype:'JSON',
+        //                 data:updstask,
+        //                 headers:{
+        //                     "content-type": "application/json",
+        //                     "cache-control": "no-cache",
+        //                     "X-CSRFToken":csrftoken
+        //                 },
+        //                 success:function(subtask){ 
+        //                     swal('Updated Subtask:'+subtask.title);
+        //                 },
+        //                 error:function(error){
+        //                     console.log(error.responseText);
+        //                 }
+        //             });
+        //         },
+        //         error:function(error){
+        //             console.log(error.responseText);
+        //         }
+        //     });
+        // }
         $(this).parent().parent().parent().parent().remove();
     });
     $(document).on('click','.timerss',function(){
         var subid=$(this).attr('id').split('T')[0];
+        $('.timerss').attr('disabled','true');
+        $('.timerss').attr('title','One instance already running');
         $(this).addClass('hide');
         $(this).siblings('.timersend').removeClass('hide');
         $.ajax({
@@ -1010,7 +1064,8 @@ $(document).ready(function(){
                             </li>`
                 $('.watchrow').append(clock);
                 timer.set(subtask.title+'__'+subtask.id,document.querySelector('#'+subtask.title+'__'+subtask.id+'time'));
-                stopwatch.set(subtask.title+'__'+subtask.id,new Stopwatch(0));    
+                stopwatch.set(subtask.title+'__'+subtask.id,new Stopwatch(0));
+                // timelog.stimelog.set(subtask.title+'__'+subtask.id,) 
             },
             error:function(error){
                 console.log(error.responseText);
@@ -1276,65 +1331,69 @@ $(document).ready(function(){
     //
     //delete subtask ends--------------
         $(document).on('click','.start',function(){
-            var id=$(this).attr('id')
+            timelog=new Object();
+            var id=$(this).attr('id');
+            timelog.sub_task=id.split('__')[1];
             stopwatch.get(id).start();
+            var today = new Date();
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            console.log(date);
+            var start=today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+            timelog.date=date;
+            console.log(start);
+            timelog.start_timestamp=start;
         });
+
         $(document).on('click','.pause',function(){
             var id=$(this).attr('id');
-            stopwatch.get(id).pause();
-            
-            console.log('TIME: '+stopwatch.get(id).getElapsed()/3600000);
-            var timespent=parseFloat(Math.round(stopwatch.get(id).getElapsed()/3600000 *100) / 100);
-            console.log(timespent + 'Hours');
-            stopwatch.get(id).stop();
-            var stid=id.split("__")[1];
-            if(timespent>0.00){
-                $.ajax({
-                    async: true,
-                    crossDomain: true,
-                    url:urlRoot+'subtasks/'+stid+'/',
-                    type:'GET',
-                    datatype:'JSON',
-                    headers:{
-                        "content-type": "application/json",
-                        "cache-control": "no-cache",
-                        "X-CSRFToken":csrftoken
-                    },
-                    success:function(subtask){
-                        if(parseFloat(subtask.actual_time))
-                            subtask.actual_time=parseFloat(subtask.actual_time)+timespent;
-                        else
-                            subtask.actual_time=timespent;
-                        var updstask=JSON.stringify(subtask);
-                        $.ajax({
-                            async: true,
-                            crossDomain: true,
-                            url:urlRoot+'subtasks/'+stid+'/',
-                            type:'PUT',
-                            datatype:'JSON',
-                            data:updstask,
-                            headers:{
-                                "content-type": "application/json",
-                                "cache-control": "no-cache",
-                                "X-CSRFToken":csrftoken
-                            },
-                            success:function(subtask){ 
-                                swal('Updated Subtask:'+subtask.title);
-                            },
-                            error:function(error){
-                                console.log(error.responseText);
-                            }
-                        });
-                    },
-                    error:function(error){
-                        console.log(error.responseText);
-                    }
-                });
-            }
+            pauser(id);
+            // if(timespent>0.00){
+            //     $.ajax({
+            //         async: true,
+            //         crossDomain: true,
+            //         url:urlRoot+'subtasks/'+stid+'/',
+            //         type:'GET',
+            //         datatype:'JSON',
+            //         headers:{
+            //             "content-type": "application/json",
+            //             "cache-control": "no-cache",
+            //             "X-CSRFToken":csrftoken
+            //         },
+            //         success:function(subtask){
+            //             if(parseFloat(subtask.actual_time))
+            //                 subtask.actual_time=parseFloat(subtask.actual_time)+timespent;
+            //             else
+            //                 subtask.actual_time=timespent;
+            //             var updstask=JSON.stringify(subtask);
+            //             $.ajax({
+            //                 async: true,
+            //                 crossDomain: true,
+            //                 url:urlRoot+'subtasks/'+stid+'/',
+            //                 type:'PUT',
+            //                 datatype:'JSON',
+            //                 data:updstask,
+            //                 headers:{
+            //                     "content-type": "application/json",
+            //                     "cache-control": "no-cache",
+            //                     "X-CSRFToken":csrftoken
+            //                 },
+            //                 success:function(subtask){ 
+            //                     swal('Updated Subtask:'+subtask.title);
+            //                 },
+            //                 error:function(error){
+            //                     console.log(error.responseText);
+            //                 }
+            //             });
+            //         },
+            //         error:function(error){
+            //             console.log(error.responseText);
+            //         }
+            //     });
+            // }
         });
         setInterval(function() {
             timer.forEach(function(value,key){
             value.innerHTML=stopwatch.get(key);
             });
-        }, 1000);    
+        }, 1000);
 });

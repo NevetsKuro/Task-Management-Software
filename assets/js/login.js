@@ -31,7 +31,7 @@ $(document).ready(function(){
                 if(src!=null && src!='')
                     $(location).attr('href',src);
                 else
-                    $(location).attr('href','dashboard.html?emp='+data.id);    
+                    $(location).attr('href','dashboard.html');    
             },
             error:function(error){
                 console.log(error.responseText);
