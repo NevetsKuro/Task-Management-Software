@@ -1,89 +1,115 @@
-    <!DOCTYPE html>
-    <html lang="en" class="desktop landscape chrome">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dashboard</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        
-        <meta name="description" content="Calibre is imple and easy admin template">
-        <meta name="keywords" content="calibre bootstrap template, calibre admin, bootstrap, admin template, bootstrap admin">
-        <meta name="author" content="LanceCoder">
-        
-        <meta property="og:site_name" content="-CUSTOMER VALUE-">
-        <meta property="og:title" content="-CUSTOMER VALUE-">
-        <meta property="og:description" content="-CUSTOMER VALUE-">
-        <meta property="og:type" content="website">
-        <meta property="og:image" content="-CUSTOMER VALUE-">
-        <meta property="og:url" content="-CUSTOMER VALUE-">
-        
-        <link href="assets/css/jquery-ui.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-        <link rel="stylesheet" href="Libraries/timepicker/jquery.timepicker.min.css">
-        <link rel="stylesheet" href="stopwatch/stopwatch.css">
-        
-        <link href='fullcalendar-3.9.0/fullcalendar.min.css' rel='stylesheet' />
-        <link href='fullcalendar-3.9.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-        
-        
-        <script src='fullcalendar-3.9.0/lib/jquery.min.js'></script>
-        <!-- morris -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
-        <script src="assets/js/morris.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
-        <script src="assets/js/example.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
-        <link rel="stylesheet" href="assets/css/morris.css">
-        <!-- morris -->
+<!DOCTYPE html>
+<html lang="en" class="desktop landscape chrome">
 
-        <script src='fullcalendar-3.9.0/lib/moment.min.js'></script>
-        <script src='fullcalendar-3.9.0/fullcalendar.min.js'></script>
-        <div id="css"></div>
-        <link class="css-theme-color-file" href="assets/css/light-cyan.css" rel="stylesheet">
-        <link href="assets/css/custom.css" rel="stylesheet">
-        <style>
-            body {
-                margin: 40px 10px;
-                padding: 0;
-                font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-                font-size: 14px;
-            }
-            
-            #calendar {
-                max-width: 900px;
-                margin: 0 auto;
-            }
-            #graph {
-                width: 420px;
-                height: 150px;
-                margin-left: -80px;
-                margin-top: -20px;
-                }
-                .ui-draggable, .ui-droppable {
-	background-position: top;
-}
-.ui-state-disabled{
-    opacity: 100;
-}
-            </style>
-    </head>
-    <body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
-        <i class="btn-theme-switcher icon-cog hidden-xs"></i>
-        <!-- Page Loader -->
-        <!-- START WRAPPER -->
-        <div class="wrapper">
-            <div id="divHeader"></div>
-            <div id="divSide"></div>
-            <div class="main-content small_content">
-                <!-- START MAIN CONTAINER -->
-                <div class="main-container">
-                    <!-- START PAGE HEADER -->
-                    <!-- <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Calibre is imple and easy admin template">
+    <meta name="keywords"
+        content="calibre bootstrap template, calibre admin, bootstrap, admin template, bootstrap admin">
+    <meta name="author" content="LanceCoder">
+
+    <meta property="og:site_name" content="-CUSTOMER VALUE-">
+    <meta property="og:title" content="-CUSTOMER VALUE-">
+    <meta property="og:description" content="-CUSTOMER VALUE-">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="-CUSTOMER VALUE-">
+    <meta property="og:url" content="-CUSTOMER VALUE-">
+
+    <style>
+        .loaders {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+        }
+        .loaders>img{
+            margin-top: 200px;
+            margin: auto;
+        }
+
+    </style>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+        integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="stylesheet" href="Libraries/timepicker/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="stopwatch/stopwatch.css">
+
+    <link href='fullcalendar-3.9.0/fullcalendar.min.css' rel='stylesheet' />
+    <link href='fullcalendar-3.9.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+
+
+    <script src='fullcalendar-3.9.0/lib/jquery.min.js'></script>
+    <!-- morris -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+    <script src="assets/js/morris.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
+    <script src="assets/js/example.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
+    <link rel="stylesheet" href="assets/css/morris.css">
+    <!-- morris -->
+
+    <script src='fullcalendar-3.9.0/lib/moment.min.js'></script>
+    <script src='fullcalendar-3.9.0/fullcalendar.min.js'></script>
+    <div id="css"></div>
+    <link class="css-theme-color-file" href="assets/css/light-cyan.css" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+            font-size: 14px;
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        #graph {
+            width: 420px;
+            height: 150px;
+            margin-left: -80px;
+            margin-top: -20px;
+        }
+
+        .ui-draggable,
+        .ui-droppable {
+            background-position: top;
+        }
+
+        .ui-state-disabled {
+            opacity: 100;
+        }
+    </style>
+</head>
+
+<body class="sidebar-expanded sidebar-theme-2 theme-light-cyan">
+    <i class="btn-theme-switcher icon-cog hidden-xs"></i>
+    <!-- Page Loader -->
+    <!-- START WRAPPER -->
+    <div class="loaders text-center">
+        <img src="assets/images/loader/loader.gif">
+    </div>
+    <div class="wrapper">
+        <div id="divHeader"></div>
+        <div id="divSide"></div>
+        <div class="main-content small_content">
+            <!-- START MAIN CONTAINER -->
+            <div class="main-container">
+                <!-- START PAGE HEADER -->
+                <!-- <section class="page-header" style="background-image: url(&#39;assets/images/img1.jpg&#39;);">
                         <div class="page-header-content slideshow">
                             <div class="page-header-overlay">
                                 <h1 class="page-title">Dashboard</h1>
@@ -102,378 +128,825 @@
                             </div>
                         </div>
                     </section> -->
-                    <!-- END PAGE HEADER -->
-                    <!-- START PAGE CONTENT -->
-                    <div class="page-content">
-                        <!-- <div class="container"> -->
-                             <!--****** Start Modal Responsive******-->
-                            <div class="modal" id="modal-responsive" aria-hidden="true" style="display: none;">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content animated fadeOut">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                                            <h4 class="modal-title"><strong>TO Do List</strong> (new item)</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form class="sky-form" id="todoform">    
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="label">Date-Time :</label>
-                                                            <label class="input custom_inline m-l-0">
-                                                                <input class="form-control TodoDate datepickr" type="text" placeholder="Date">
-                                                                <input class="form-control TodoTime timepicker" type="text" placeholder="Time">
-                                                            </label>
-                                                        </div> 
-                                                    </div>
-                                                    <label class="select col-md-6">
-                                                        <label class="label">Select Subtask:</label>
-                                                        <select entity="subtasklistask" class="SubTask_list select2 form-control" id="subtasklistask">
-                                                            <option default value="">Select...</option>
-                                                        </select>
+                <!-- END PAGE HEADER -->
+                <!-- START PAGE CONTENT -->
+                <div class="page-content">
+                    <!-- <div class="container"> -->
+                    <!--****** Start Modal Responsive******-->
+                    <div class="modal" id="modal-responsive" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content animated fadeOut">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                                            class="fa fa-times"></i></button>
+                                    <h4 class="modal-title"><strong>TO Do List</strong> (new item)</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="sky-form" id="todoform">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="label">Date-Time :</label>
+                                                    <label class="input custom_inline m-l-0">
+                                                        <input class="form-control TodoDate datepickr" type="text"
+                                                            placeholder="Date">
+                                                        <input class="form-control TodoTime timepicker" type="text"
+                                                            placeholder="Time">
                                                     </label>
                                                 </div>
-                                                <div class="row"> 
-                                                    <label class="textarea col-md-8">
-                                                        <label class="label">Add some note:</label>
-                                                        <textarea id="todonote" class="form-control textarea textarea-expandable" rows="5" placeholder="Note"></textarea>
-                                                    </label>
-                                                    <label class="select col-md-4">
-                                                        <label class="label">Select Status:</label>
-                                                        <select entity="subtaskstatus" class="subtaskstatus form-control m-t-5" id="subtaskstatus">
-                                                            <option default value="">Select...</option>
-                                                            <option value="P">Pending</option>
-                                                            <option value="C">Completed</option>
-                                                        </select>
-                                                    </label>
-                                                </div>
-                                            </form>
+                                            </div>
+                                            <label class="select col-md-6">
+                                                <label class="label">Select Subtask:</label>
+                                                <select entity="subtasklistask"
+                                                    class="SubTask_list select2 form-control" id="subtasklistask">
+                                                    <option default value="">Select...</option>
+                                                </select>
+                                            </label>
                                         </div>
-                                        <div class="modal-footer text-center">
-                                            <button type="button" class="btn btn-primary btn-raised savetodo"><i class="fa fa-check"></i> Save</button>
+                                        <div class="row">
+                                            <label class="textarea col-md-8">
+                                                <label class="label">Add some note:</label>
+                                                <textarea id="todonote"
+                                                    class="form-control textarea textarea-expandable" rows="5"
+                                                    placeholder="Note"></textarea>
+                                            </label>
+                                            <label class="select col-md-4">
+                                                <label class="label">Select Status:</label>
+                                                <select entity="subtaskstatus" class="subtaskstatus form-control m-t-5"
+                                                    id="subtaskstatus">
+                                                    <option default value="">Select...</option>
+                                                    <option value="P">Pending</option>
+                                                    <option value="C">Completed</option>
+                                                </select>
+                                            </label>
                                         </div>
-                                    </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer text-center">
+                                    <button type="button" class="btn btn-primary btn-raised savetodo"><i
+                                            class="fa fa-check"></i> Save</button>
                                 </div>
                             </div>
-                            <!-- Xtrawork -->
-                            <div class="modal" id="modalextra" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content animated fadeOut">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                                                <h4 class="modal-title"><strong>Extra Work</strong> (new item)</h4>
+                        </div>
+                    </div>
+                    <!-- Xtrawork -->
+                    <div class="modal" id="modalextra" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content animated fadeOut">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                                            class="fa fa-times"></i></button>
+                                    <h4 class="modal-title"><strong>Extra Work</strong> (new item)</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="sky-form" id="xtraform">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group input">
+                                                    <label class="label">Set Duration :</label>
+                                                    <input type="text" class="valid_duration" placeholder="HH:MM"
+                                                        id="xtradur">
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="sky-form" id="xtraform">    
-                                                    <div class="row">
-                                                        <div class="col-md-3">
-                                                            <div class="form-group input">
-                                                                <label class="label">Set Duration :</label>
-                                                                <input type="text" class="valid_duration" placeholder="HH:MM" id="xtradur">
-                                                            </div> 
-                                                        </div>
-                                                        <label class="col-md-3 input">
-                                                            <label class="label">Title:</label>
-                                                            <input type="text" id="titlex" class="form-control" placeholder="Extra Work...">
-                                                        </label>
-                                                        <label class="select col-md-3">
-                                                            <label class="label">Select Subtask:</label>
-                                                            <select entity="subtasklist" class="SubTask_list select2 form-control" id="subtasklistx">
-                                                                <option default value="">Select...</option>
-                                                            </select>
-                                                        </label>
-                                                        <label class="select col-md-3">
-                                                            <label class="label">Select Category:</label>
-                                                            <select entity="xcat" class="xtracategory form-control select2 editselect" id="xcat">
-                                                                <option default value="">Select...</option>
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer text-center">
-                                                <button type="button" class="btn btn-primary btn-raised savextra"><i class="fa fa-check"></i> Save</button>
+                                            <label class="col-md-3 input">
+                                                <label class="label">Title:</label>
+                                                <input type="text" id="titlex" class="form-control"
+                                                    placeholder="Extra Work...">
+                                            </label>
+                                            <label class="select col-md-3">
+                                                <label class="label">Select Subtask:</label>
+                                                <select entity="subtasklist" class="SubTask_list select2 form-control"
+                                                    id="subtasklistx">
+                                                    <option default value="">Select...</option>
+                                                </select>
+                                            </label>
+                                            <label class="select col-md-3">
+                                                <label class="label">Select Category:</label>
+                                                <select entity="xcat"
+                                                    class="xtracategory form-control select2 editselect" id="xcat">
+                                                    <option default value="">Select...</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer text-center">
+                                    <button type="button" class="btn btn-primary btn-raised savextra"><i
+                                            class="fa fa-check"></i> Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Xtrawork ends -->
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6 ">
+                            <div class="counter-widget variant-1 dashColor1" style="border-radius: 10px">
+                                <div class="counter-icon">
+                                    <div class="front-content">
+                                        <i class="icon icon-binoculars"></i>
+                                        <span class="total" id="empcode">28001</span>
+                                        <div class="m-t-20 progress progress-xs">
+                                            <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all"
+                                                role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                                aria-valuemax="100" style="width: 100%">
+                                                <!-- example code -->
+                                                <span class="sr-only">60% Complete (success)</span>
+                                                <!-- example code -->
+                                                <div class="ui-progressbar-value ui-widget-header ui-corner-left"
+                                                    style="display: none; width: 0%;"></div>
+                                                <div class="ui-progressbar-value ui-widget-header ui-corner-left"
+                                                    style="display: none; width: 0%;"></div>
                                             </div>
                                         </div>
+                                        <p style="color: white">Employee Code</p>
                                     </div>
                                 </div>
-                            <!-- Xtrawork ends -->
-                            <div class="row">
-                                <div class="col-lg-3 col-sm-6 ">
-                                    <div class="counter-widget variant-1 dashColor1"  style="border-radius: 10px">
-                                        <div class="counter-icon">
-                                            <div class="front-content">
-                                                <i class="icon icon-binoculars"></i>
-                                                <span class="total" id="empcode">0</span>
-                                                <div class="m-t-20 progress progress-xs">
-                                                    <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                                        <!-- <span class="sr-only">60% Complete (success)</span> -->
-                                                        <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div>
-                                                    </div>
+                                <div class="counter-content whitecolor p-t-10">
+                                    <div class="row p-t-0 m-t-0">
+                                        <div class="col-sm-4 p-r-0 p-l-0 m-r-0">
+                                            <h5 style="line-height: 12px;text-align: left"><b>Efficiency:</b></h5>
+                                        </div>
+                                    </div>
+                                    <div class="p-b-2" style="border-bottom: 1px solid silver">
+                                        <div class="row m-t-10">
+                                            <div class="col-sm-12">
+                                                <div id="mainempslider"
+                                                    style="height:5px;background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;">
+                                                    <div id="empeff"
+                                                        style="position: absolute;top: -1.7em;font-size: 9px;"></div>
                                                 </div>
-                                                <p style="color: white">Employee Code</p>
                                             </div>
                                         </div>
-                                        <div class="counter-content whitecolor p-t-10">
-                                            <div class="row p-t-0 m-t-0">
-                                                <div class="col-sm-4 p-r-0 p-l-0 m-r-0">
-                                                    <h5 style="line-height: 12px;text-align: left"><b>Efficiency:</b></h5>
+                                        <div class="row">
+                                            <div class="col-sm-4" style="font-size: 10px;text-align: left; ">Poor</div>
+                                            <div class="col-sm-4" style="font-size: 10px">Average</div>
+                                            <div class="col-sm-4" style="font-size: 10px;text-align: right">Good</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 p-r-0 p-l-0 m-r-0">
+                                            <h5 style="line-height: 12px"><b>Productivity:</b></h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="row m-t-10">
+                                            <div class="col-sm-12">
+                                                <div id="prodslider"
+                                                    style="height:5px;background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;">
+                                                    <div id="empprod"
+                                                        style="position: absolute;top: -1.7em;font-size: 9px;"></div>
                                                 </div>
                                             </div>
-                                            <div class="p-b-2" style="border-bottom: 1px solid silver">
-                                                <div class="row m-t-10">
-                                                    <div class="col-sm-12">
-                                                        <div id="mainempslider" style="height:5px;background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;">
-                                                            <div id="empeff" style="position: absolute;top: -1.7em;font-size: 9px;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-sm-4" style="font-size: 10px;text-align: left">Poor</div>
-                                                    <div class="col-sm-4" style="font-size: 10px">Average</div>
-                                                    <div class="col-sm-4" style="font-size: 10px;text-align: right">Good</div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-4 p-r-0 p-l-0 m-r-0">
-                                                    <h5 style="line-height: 12px"><b>Productivity:</b></h5>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div class="row m-t-10">
-                                                    <div class="col-sm-12">
-                                                        <div id="prodslider" style="height:5px;background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;">
-                                                            <div id="empprod" style="position: absolute;top: -1.7em;font-size: 9px;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row m-t-2">
-                                                    <div class="col-sm-4" style="font-size: 10px;text-align: left">Poor</div>
-                                                    <div class="col-sm-4" style="font-size: 10px">Average</div>
-                                                    <div class="col-sm-4" style="font-size: 10px;text-align: right">Good</div>
-                                                </div>
-                                            </div>
-                                            <!-- <div class="col-sm-9 p-r-0 p-l-0 m-r-0">
+                                        </div>
+                                        <div class="row m-t-2">
+                                            <div class="col-sm-4" style="font-size: 10px;text-align: left">Poor</div>
+                                            <div class="col-sm-4" style="font-size: 10px">Average</div>
+                                            <div class="col-sm-4" style="font-size: 10px;text-align: right">Good</div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-sm-9 p-r-0 p-l-0 m-r-0">
                                                 <h4>Productivity:</h4>
                                             </div>
                                             <div class="col-sm-1 p-l-0 m-l-0" id="empprod">
 
                                             </div> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 ">
-                                    <div class="counter-widget variant-1 color-2">
-                                        <div class="counter-icon">
-                                            <div class="front-content">
-                                                <i class="icon icon-users"></i>
-                                                <span class="total" id="teamrev">0</span>
-                                                <div class="m-t-20 progress progress-xs">
-                                                    <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                                        <span class="sr-only">40% Complete (success)</span>
-                                                        <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div>
-                                                    </div>
-                                                </div>
-                                                <p style="color: white">Team Revenue</p>
-                                            </div>
-                                        </div>
-                                        <div class="counter-content whitecolor">
-                                            <h3>......</h3>
-                                            <!-- <div>
-                                                <span class="line" style="height: 100px; display: none;">5,3,9,6,5,9,7,3,5,2,9,10,5</span><svg class="peity" height="16" width="200"><polygon fill="#c6d9fd" points="0 15.5 0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8 200 15.5"></polygon><polyline fill="none" points="0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8" stroke="#4d89f9" stroke-width="1" stroke-linecap="square"></polyline></svg>
-                                                <span class="text-success counter-status" id="">4.7% <i class="fa fa-level-up"></i></span>
-                                            </div>     -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="counter-widget variant-1 color-3">
-                                        <div class="counter-icon">
-                                            <div class="front-content">
-                                                <i class="icon icon-clock"></i>
-                                                <span class="total" id="tatime">850</span>
-                                                <div class="progress progress-xs">
-                                                    <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                                        <span class="sr-only">60% Complete (success)</span>
-                                                        <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div>
-                                                    </div>
-                                                </div>
-                                                <p style="color: white">Total Time Spent</p>
-                                            </div>
-                                        </div>
-                                        <div class="counter-content whitecolor">
-                                            .......................
-                                            <!-- <h3>TIME STATS</h3>..
-                                            <div>
-                                                <span class="line" style="height: 100px; display: none;">5,3,9,6,5,9,7,3,5,2,9,10,5</span><svg class="peity" height="16" width="200"><polygon fill="#c6d9fd" points="0 15.5 0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8 200 15.5"></polygon><polyline fill="none" points="0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8" stroke="#4d89f9" stroke-width="1" stroke-linecap="square"></polyline></svg>
-                                                <span class="text-danger counter-status">1.6% <i class="fa fa-level-down"></i></span>
-                                            </div>     -->
-                                            .........................
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 ">
-                                    <div class="counter-widget variant-1 color-4">
-                                        <div class="counter-icon">
-                                            <div class="front-content">
-                                                <i class="icon icon-thumbs-up"></i>
-                                                <span class="total" id="tass">50, 256</span>
-                                                <div class="m-t-20 progress progress-xs">
-                                                    <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                                        <span class="sr-only">60% Complete (success)</span>
-                                                        <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: none; width: 0%;"></div>
-                                                    </div>
-                                                </div>
-                                                <p style="color: white">Total Tasks Assigned</p>
-                                            </div>
-                                        </div>
-                                        <div class="counter-content whitecolor">
-                                            <!-- <h3 class="m-b-0">Total Tasks Done</h3> -->
-                                            <div>
-                                                <div id="graph"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- todo List -->
-                                <div class="col-sm-4">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="panel list-widget notes">
-                                                <div class="panel-body" style="padding: 0px">   
-                                                    <div class="list-header p-5 dashCard" style="background-color: #b51f63;">
-                                                        <div class="row">
-                                                            <div class="col-sm-10">
-                                                                <h3 class="m-b-0 m-t-0" style="color: white">To Do List</h3>
-                                                            </div>
-                                                            <div class="col-sm-2" style="float: right; vertical-align: middle">
-                                                                <button type="button" class="btn btn-foursquare btn-flat rippler dashbutton m-t-5" title="Add new todo-item" data-toggle="modal" data-target="#modal-responsive">
-                                                                    <i class="fa fa-plus"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="list-content dashlist">
-                                                        <ul class="list-group" id="todoli"></ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="panel list-widget notes">
-                                                <div class="panel-body" style="padding: 0px">   
-                                                    <div class="list-header p-5 dashCard" style="background-color: #1fa3b5">
-                                                        <div class="row">
-                                                            <div class="col-sm-10">
-                                                                <h3 class="m-b-0 m-t-0" style="color: white">Extra Work</h3>
-                                                            </div>
-                                                            <div class="col-sm-2" style="float: right; vertical-align: middle">
-                                                                <button type="button" class="btn btn-reddit btn-flat rippler dashbutton m-t-5" title="Add Extra Work" data-toggle="modal" data-target="#modalextra">
-                                                                    <i class="fa fa-plus"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="list-content dashlist">
-                                                        <ul class="list-group" id="extrawork"></ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="panel list-widget notes p-0">
-                                                <div class="panel-body p-0">
-                                                    <div class="list-header p-5 dashCard" style="background-color: peru">
-                                                        <div class="row">
-                                                            <div class="col-sm-10">
-                                                                <h3 class="m-t-0 m-b-0" style="color: white">Notes</h3>
-                                                            </div>
-                                                            <div class="col-sm-2" style="float: right; vertical-align: middle">
-                                                                <button type="button" class="btn btn-soundcloud btn-flat notesave dashbutton m-t-5" title="Save Changes">
-                                                                    <i class="fa fa-save"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="list-content" id="notesli" style="background-color: khaki">
-                                                        <form class="form-wizard p-5">
-                                                            <div class="row">
-                                                                <div class="col-sm-12">
-                                                                    <textarea class="textarea textarea-expandable col-sm-12" style="background-color: rgba(0,0,0,0);border: none;resize: none;" id="notearea" rows="5" placeholder="Add Your Notes Here...."></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-8 ">
-                                    <div class="panel list-widget notes p-0">
-                                        <div class="panel-body p-0">
-                                            <div class="list-header p-5 dashCard" style="background-color:#3a87ad">
-                                                <h3 class="m-t-0 m-b-0 m-l-30" style="color: white">Activity Calendar</h3>
-                                            </div>
-                                            <div class="list-content">
-                                                <div id="calendar" class="m-t-5 m-l-10"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- top ends -->
-                            <div class="row">
-                                <!-- task -->
-                                <div class="col-sm-12 panel list-widget tasks p-0">
-                                    <div class="panel-body p-0" id="tasklist" style="border-radius: 10px">
-                                        <div class="list-header dashCard p-10" style="background-color: #e9775b">
-                                            <h3>Tasks</h3>
-                                        </div>
-                                        <div class="panel-group" id="accordion">
-                                            <!-- <div >
-                                            </div> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- task -->
-                            </div>
-                            <div class="row" id="reporteerow">
-                                <div class="panel list-widget notes p-b-0 m-b-0">
-                                    <div class="panel-body" style="padding: 0px">   
-                                        <div class="list-header p-10" style="background-color: #549ca5">
-                                            <h3 style="color: white">Reportees</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-l-1">
-                                    <!-- <div class="col-sm-12"> -->
-                                        <ul class="col-sm-12" id="employeelist" style="list-style-type: none;line-height-step: 260px">
-                                            
-                                        </ul>
-                                    <!-- </div> -->
                                 </div>
                             </div>
                         </div>
-                            
-                            <!-- <div class="row">
-                                <div class="col-sm-12"> -->
-                                       
-                                        <script>
-                                        
-                                        </script>
-                                <!-- </div>
-                            </div> -->
-                        <!-- </div> -->
-                    <div class="page-footer">FOOTER...</div>
+                        <div class="col-lg-3 col-sm-6 ">
+                            <div class="counter-widget variant-1 color-2">
+                                <div class="counter-icon">
+                                    <div class="front-content">
+                                        <i class="icon icon-users"></i>
+                                        <span class="total" id="teamrev">$12,000</span>
+                                        <div class="m-t-20 progress progress-xs">
+                                            <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all"
+                                                role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                                aria-valuemax="100" style="width: 100%">
+                                                <span class="sr-only">40% Complete (success)</span>
+                                                <div class="ui-progressbar-value ui-widget-header ui-corner-left"
+                                                    style="display: none; width: 0%;"></div>
+                                                <div class="ui-progressbar-value ui-widget-header ui-corner-left"
+                                                    style="display: none; width: 0%;"></div>
+                                            </div>
+                                        </div>
+                                        <p style="color: white">Team Revenue</p>
+                                    </div>
+                                </div>
+                                <div class="counter-content whitecolor">
+                                    <!-- example code -->
+                                    <h3>Revenue Stats</h3>
+                                    <div>
+                                        <span class="line"
+                                            style="height: 100px; display: none;">5,3,9,6,5,9,7,3,5,2,9,10,5</span><svg
+                                            class="peity" height="16" width="200">
+                                            <polygon fill="#c6d9fd"
+                                                points="0 15.5 0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8 200 15.5">
+                                            </polygon>
+                                            <polyline fill="none"
+                                                points="0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8"
+                                                stroke="#4d89f9" stroke-width="1" stroke-linecap="square"></polyline>
+                                        </svg>
+                                        <span class="text-success counter-status" id="">4.7% <i
+                                                class="fa fa-level-up"></i></span>
+                                    </div>
+                                    <!-- example code -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="counter-widget variant-1 color-3">
+                                <div class="counter-icon">
+                                    <div class="front-content">
+                                        <i class="icon icon-clock"></i>
+                                        <span class="total" id="tatime">
+                                            <!-- example code -->
+                                            <div class="row">
+                                                <div class="col-sm-2 col-sm-offset-3 p-l-0 p-r-0"
+                                                    style="text-align:center">8</div>
+                                                <div class="col-sm-2 p-l-0 p-r-0" style="text-align:center"> : </div>
+                                                <div class="col-sm-2 p-l-0 p-r-0" style="text-align:center">25</div>
+                                            </div>
+                                            <div class="row m-t-5 m-b-0" style="font-size:8px">
+                                                <div class="col-sm-2 col-sm-offset-3 p-l-0 p-r-0"
+                                                    style="text-align:center">HOURS</div>
+                                                <div class="col-sm-2 p-l-0 p-r-0" style="text-align:center"> </div>
+                                                <div class="col-sm-2 p-l-0 p-r-0" style="text-align:center">MINUTES
+                                                </div>
+                                            </div>
+                                            <!-- example code -->
+                                        </span>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all"
+                                                role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                                aria-valuemax="100" style="width: 100%">
+                                                <span class="sr-only">60% Complete (success)</span>
+                                                <div class="ui-progressbar-value ui-widget-header ui-corner-left"
+                                                    style="display: none; width: 0%;"></div>
+                                                <div class="ui-progressbar-value ui-widget-header ui-corner-left"
+                                                    style="display: none; width: 0%;"></div>
+                                            </div>
+                                        </div>
+                                        <p style="color: white">Total Time Spent</p>
+                                    </div>
+                                </div>
+                                <div class="counter-content whitecolor">
+                                    <!-- ....................... -->
+                                    <h3>TIME STATS</h3>..
+                                    <div>
+                                        <span class="line"
+                                            style="height: 100px; display: none;">5,3,9,6,5,9,7,3,5,2,9,10,5</span><svg
+                                            class="peity" height="16" width="200">
+                                            <polygon fill="#c6d9fd"
+                                                points="0 15.5 0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8 200 15.5">
+                                            </polygon>
+                                            <polyline fill="none"
+                                                points="0 8 16.666666666666668 11 33.333333333333336 2 50 6.5 66.66666666666667 8 83.33333333333334 2 100 5 116.66666666666667 11 133.33333333333334 8 150 12.5 166.66666666666669 2 183.33333333333334 0.5 200 8"
+                                                stroke="#4d89f9" stroke-width="1" stroke-linecap="square"></polyline>
+                                        </svg>
+                                        <span class="text-danger counter-status">1.6% <i
+                                                class="fa fa-level-down"></i></span>
+                                    </div>
+                                    <!-- ......................... -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 ">
+                            <div class="counter-widget variant-1 color-4">
+                                <div class="counter-icon">
+                                    <div class="front-content">
+                                        <i class="icon icon-thumbs-up"></i>
+                                        <span class="total" id="tass">50, 256</span>
+                                        <div class="m-t-20 progress progress-xs">
+                                            <div class="progress-bar ui-progressbar no-border ui-widget ui-widget-content ui-corner-all"
+                                                role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                                aria-valuemax="100" style="width: 100%">
+                                                <span class="sr-only">60% Complete (success)</span>
+                                                <div class="ui-progressbar-value ui-widget-header ui-corner-left"
+                                                    style="display: none; width: 0%;"></div>
+                                                <div class="ui-progressbar-value ui-widget-header ui-corner-left"
+                                                    style="display: none; width: 0%;"></div>
+                                            </div>
+                                        </div>
+                                        <p style="color: white">Total Tasks Assigned</p>
+                                    </div>
+                                </div>
+                                <div class="counter-content whitecolor">
+                                    <!-- <h3 class="m-b-0">Total Tasks Done</h3> -->
+                                    <div>
+                                        <div id="graph"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- todo List -->
+                        <div class="col-sm-4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel list-widget notes">
+                                        <div class="panel-body" style="padding: 0px">
+                                            <div class="list-header p-5 dashCard" style="background-color: #b51f63;">
+                                                <div class="row">
+                                                    <div class="col-sm-10">
+                                                        <h3 class="m-b-0 m-t-0" style="color: white">To Do List</h3>
+                                                    </div>
+                                                    <div class="col-sm-2" style="float: right; vertical-align: middle">
+                                                        <button type="button"
+                                                            class="btn btn-foursquare btn-flat rippler dashbutton m-t-5"
+                                                            title="Add new todo-item" data-toggle="modal"
+                                                            data-target="#modal-responsive">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-content dashlist">
+                                                <ul class="list-group" id="todoli">
+                                                    <!-- Example Code -->
+                                                    <li class="list-group-item p-5 m-0"
+                                                        style="border-bottom:1px solid #ccc">
+                                                        <div class="content row p-0">
+                                                            <div class="col-sm-2">
+                                                                <input type="checkbox"
+                                                                    class="checkbox todocomp dashcheck" id="Tcompc"
+                                                                    name="checkbox" title="Mark Complete">
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <div class="name">Create a PO</div>
+                                                            </div>
+                                                            <div class="col-sm-2" style="float:right">
+                                                                <button type="button"
+                                                                    class="btn btn-pinterest btn-raised rippler deltodo dashbutton"
+                                                                    id="`+todoitem.id+`Tedit" title="Delete ToDo Item">
+                                                                    <i class="fa fa-close"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item p-5 m-0"
+                                                        style="border-bottom:1px solid #ccc">
+                                                        <div class="content row p-0">
+                                                            <div class="col-sm-2">
+                                                                <input type="checkbox"
+                                                                    class="checkbox todocomp dashcheck" id="Tcompc"
+                                                                    name="checkbox" checked="" title="Mark Pending">
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <s>
+                                                                    <div class="name">Add new employees</div>
+                                                                </s>
+                                                            </div>
+                                                            <div class="col-sm-2" style="float:right">
+                                                                <!--button type="button" class="btn btn-info btn-flat edittodo dashbutton" id="`+todoitem.id+`Tedit" title="Edit ToDo Item">
+                                                                            <span class="icon icon-pencil add-new"></span>
+                                                                        </button-->
+                                                                <button type="button"
+                                                                    class="btn btn-pinterest btn-raised rippler deltodo dashbutton"
+                                                                    id="`+todoitem.id+`Tedit" title="Delete ToDo Item">
+                                                                    <i class="fa fa-close"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <!-- Example Code -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel list-widget notes">
+                                        <div class="panel-body" style="padding: 0px">
+                                            <div class="list-header p-5 dashCard" style="background-color: #1fa3b5">
+                                                <div class="row">
+                                                    <div class="col-sm-10">
+                                                        <h3 class="m-b-0 m-t-0" style="color: white">Extra Work</h3>
+                                                    </div>
+                                                    <div class="col-sm-2" style="float: right; vertical-align: middle">
+                                                        <button type="button"
+                                                            class="btn btn-reddit btn-flat rippler dashbutton m-t-5"
+                                                            title="Add Extra Work" data-toggle="modal"
+                                                            data-target="#modalextra">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-content dashlist">
+                                                <ul class="list-group" id="extrawork">
+                                                    <!-- Example Code -->
+                                                    <li class="list-group-item p-5 m-0"
+                                                        style="border-bottom:1px solid #ccc">
+                                                        <div class="content row p-0">
+                                                            <ul class="col-sm-5 custom-inline"
+                                                                style="list-style-type:none">
+                                                                <li style="float:left"><label
+                                                                        class="input m-t-5 m-l-5">Auditing</label></li>
+                                                                <li
+                                                                    style="float:left;font-size:11px; line-height:30px;vertical-align:bottom;margin-left:1px">
+                                                                    -${work.subtask}</li>
+                                                            </ul>
+                                                            <div class="col-sm-5">
+                                                                <label class="input m-t-5 m-l-5">3 Hours</label>
+                                                            </div>
+                                                            <div class="col-sm-2" style="float:right">
+                                                                <button type="button"
+                                                                    class="btn btn-pinterest btn-raised rippler delxtra dashbutton"
+                                                                    id="${work.id}Tdelw" title="Delete ToDo Item">
+                                                                    <i class="fa fa-close"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <!-- Example Code -->
+
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel list-widget notes p-0">
+                                        <div class="panel-body p-0">
+                                            <div class="list-header p-5 dashCard" style="background-color: peru">
+                                                <div class="row">
+                                                    <div class="col-sm-10">
+                                                        <h3 class="m-t-0 m-b-0" style="color: white">Notes</h3>
+                                                    </div>
+                                                    <div class="col-sm-2" style="float: right; vertical-align: middle">
+                                                        <button type="button"
+                                                            class="btn btn-soundcloud btn-flat notesave dashbutton m-t-5"
+                                                            title="Save Changes">
+                                                            <i class="fa fa-save"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-content" id="notesli" style="background-color: khaki">
+                                                <form class="form-wizard p-5">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <textarea class="textarea textarea-expandable col-sm-12"
+                                                                style="background-color: rgba(0,0,0,0);border: none;resize: none;"
+                                                                id="notearea" rows="5"
+                                                                placeholder="Add Your Notes Here...."></textarea>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 ">
+                            <div class="panel list-widget notes p-0">
+                                <div class="panel-body p-0">
+                                    <div class="list-header p-5 dashCard" style="background-color:#3a87ad">
+                                        <h3 class="m-t-0 m-b-0 m-l-30" style="color: white">Activity Calendar</h3>
+                                    </div>
+                                    <div class="list-content">
+                                        <div id="calendar" class="m-t-5 m-l-10">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- top ends -->
+                    <div class="row">
+                        <!-- task -->
+                        <div class="col-sm-12 panel list-widget tasks p-0">
+                            <div class="panel-body p-0" id="tasklist" style="border-radius: 10px">
+                                <div class="list-header dashCard p-10" style="background-color: #e9775b">
+                                    <h3>Tasks</h3>
+                                </div>
+                                <div class="panel-group" id="accordion">
+                                    <!-- Example Code -->
+                                    <div class="panel panel-default m-0 p-0" style="border-radius:0px">
+                                        <div class="panel-heading" style="padding: 0px;">
+                                            <h4 class="panel-title">
+                                                <a class="p-15 collapsed" style="" data-toggle="collapse"
+                                                    data-parent="#accordion" href="#ansk" aria-expanded="false"
+                                                    class="collapsed">
+                                                    <div class="row m-t-0 m-b-0">
+                                                        <div class="col-sm-2 m-t-5">
+                                                            <div class="m-l-10"> Start a meeting on 27 Nov, 2020.</div>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <div class="progress p-0 m-0" style="height:25px;">
+                                                                <div class="progress-bar progress-bar-striped active"
+                                                                    id="`+tasks[i].id+`tskprg" role="progressbar"
+                                                                    aria-valuemin="20" aria-valuemax="20"
+                                                                    style="width:20%; height:50px;color:#A9A9A9;background-color:`+color+`">
+                                                                </div>
+                                                                <div class="m-5" style=font-size:15px;vertical-align:
+                                                                    middle; line-height:15px;" id="`+tasks[i].id+`tprg">
+                                                                    20% </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="naskj182" class="panel-collapse collapse" aria-expanded="false"
+                                            style="height: 0px;">
+                                            <!--h4 class="panel-title p-t-5 p-l-20 p-r-10"> Subtasks: </h4-->
+                                            <div class="panel-body p-t-5 p-b-5">
+                                                <div class="subtask m-t-0"
+                                                    style="border-radius:0px;border-bottom:1px solid #ccc"
+                                                    id="`+subtask.id+`subt">
+                                                    <div class="row">
+                                                        <div class="col-sm-2 m-l-5 ">
+                                                            <h5>Form a Group and send notification</h5>
+                                                        </div>
+                                                        <div class="col-sm-6" id="`+subtask.id+`progress">
+                                                            <div class="row m-t-0 p-t-0">
+                                                                <label class="input col-sm-2 m-b-0"
+                                                                    style="font-size:12px;text-align:left">Efficiency:</label>
+                                                                <div class="col-sm-2 m-t-0"
+                                                                    style="font-size:10px;text-align:right">Poor</div>
+                                                                <div class="col-sm-4 m-t-0"
+                                                                    style="font-size:10px;text-align:center">Average
+                                                                </div>
+                                                                <div class="col-sm-4 m-t-0"
+                                                                    style="font-size:10px;text-align:left">Good</div>
+                                                            </div>
+                                                            <div class="row m-t-0" style="height=15px">
+                                                                <div class="col-sm-12">
+                                                                    <div id="slnj121ier"
+                                                                        style="height:10px;background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row m-t-0 m-b-0 p-b-0">
+                                                                <div class="col-sm-12" style="height:25px">
+                                                                    <div class="progress m-t-5" style="height:15px;">
+                                                                        <div class="progress-bar progress-bar-striped active"
+                                                                            id="`+subtask.id+`takewid"
+                                                                            role="progressbar" aria-valuemin="20"
+                                                                            aria-valuemax="20"
+                                                                            style="width:80%; height:25px;color:#A9A9A9;background-color:`+subcolor+`">
+                                                                            <div class="subcomplete m-t-5"
+                                                                                style=font-size:8px;line-height:8px;vertical-align:
+                                                                                middle;">
+                                                                                80%
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 m-r-0" id="sbtbtnarea">
+                                                            <div class="m-t-5" style="">`
+                                                                <button type="button"
+                                                                    class="btn btn-vimeo btn-raised rippler changecomp dashbutton"
+                                                                    id="`+subtask.id+`Tcomplete"
+                                                                    title="Update Progress">
+                                                                    <i class="icon icon-percent" aria-hidden="true"></i>
+                                                                </button>
+                                                                <input type="number" style="height:35px;width:100px"
+                                                                    step=".01" value=${subcomplete}
+                                                                    id="${subtask.id}Tprogtxt" class=" hide"
+                                                                    placeholder="% Completed" max="100" min="0">
+                                                                <button type="button"
+                                                                    class="btn btn-success btn-flat sbtsave rippler hide dashbutton"
+                                                                    id="`+subtask.id+`Tsave" title="Save Changes">
+                                                                    <i class="fa fa-save"></i>
+                                                                </button>
+                                                                <button type="button"
+                                                                    class="btn btn-openid btn-raised rippler timerss dashbutton"
+                                                                    id="`+subtask.id+`Tsimer" title="Start Timer">
+                                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                                </button>
+                                                                <button type="button"
+                                                                    class="btn btn-openid btn-raised rippler timersend dashbutton hide"
+                                                                    id="`+subtask.id+`Tsimernd" title="Remove Timer">
+                                                                    <i class="linear-icons li icon-timer-crossed"
+                                                                        aria-hidden="true"></i>
+                                                                </button>
+                                                                <a href="Tasks_Form.html?tid=`+subtask.task+`"
+                                                                    type="button"
+                                                                    class="btn btn-adn btn-raised rippler viewsbt dashbutton"
+                                                                    id="`+subtask.id+`Tview" title="View Details"
+                                                                    style="vertical-align:middle">
+                                                                    <i class="font-awesome fa fa-eye m-t-5"
+                                                                        aria-hidden="true"></i>
+                                                                </a>
+                                                                <button type="button"
+                                                                    class="btn btn-linkedin btn-raised rippler todobtn dashbutton"
+                                                                    id="`+subtask.id+`TAdd" title="Add to todo-list"
+                                                                    data-toggle="modal" data-target="#modal-responsive">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                                <button type="button"
+                                                                    class="btn btn-bitbucket btn-raised rippler xtrabtn dashbutton"
+                                                                    id="`+subtask.id+`TAdd" title="Add Some Extra Work"
+                                                                    data-toggle="modal" data-target="#modalextra">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                                <button type="button"
+                                                                    class="btn btn-pinterest btn-raised rippler delsbt dashbutton"
+                                                                    id="`+subtask.id+`Tdelete" title="Delete Subtask">
+                                                                    <i class="fa fa-close"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Example Code -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- task -->
+                    </div>
+                    <div class="row" id="reporteerow">
+                        <div class="panel list-widget notes p-b-0 m-b-0">
+                            <div class="panel-body" style="padding: 0px">
+                                <div class="list-header p-10" style="background-color: #549ca5">
+                                    <h3 style="color: white">Reportees</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-l-1">
+                            <!-- <div class="col-sm-12"> -->
+                            <ul class="col-sm-12" id="employeelist"
+                                style="list-style-type: none;line-height-step: 260px">
+                                <!-- Example Code -->
+                                <li class="m-r-10 m-t-5 m-b-5" style="width=150px;height:275px;float:left;">
+                                    <a href="dashboard.html?emp=${emplist[i].id}" title="View Dashboard"
+                                        style="text-decoration:none;color:#585b5c">
+                                        <div class="panel profile-widget variant-2">
+                                            <div class="panel-body"
+                                                style="box-shadow: 0 1px 1px 1px rgba(16, 16, 16, 0.57);">
+                                                <div class="profile-header" style=" height: 100px">
+                                                    <div class="overlay"></div>
+                                                    <div class="profine-info">
+                                                        <div class="name text-center repname" style="font-size:17px">
+                                                            Stark Nerds</div>
+                                                        <div class="position text-center empdes" style="font-size:10px">
+                                                            IT</div>
+                                                    </div>
+                                                </div>
+                                                <div class="profile-body p-b-0">
+                                                    <div class="profile-image-wrapper" style="height:80px;width:80px">
+                                                        <img src="assets/images/user.png" alt="avatar"
+                                                            style="border:none;background-color:#fff;padding-top:5px;border-radius:50px;width:80px;height:80px">
+                                                    </div>
+                                                    <div class="social-stats ">
+                                                        <ul class="list-group m-b-0">
+                                                            <li class="list-group-item p-b-10 p-t-10 p-l-5 p-r-5">
+                                                                <div class="row">
+                                                                    <label class="input col-sm-2">
+                                                                        <i class="font-awesome fa fa-envelope"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <div class="col-sm-10" style="font-size:13px">
+                                                                        starkitto@gmail.com</div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <label class="input col-sm-2">
+                                                                        <i class="font-awesome fa fa-phone"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <div class="col-sm-10" style="font-size:13px">
+                                                                        9862761665</div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="list-group-item p-b-10 p-t-10 p-l-5 p-r-5">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4 p-r-0" style="font-size:12px">
+                                                                        Efficiency:</div>
+                                                                    <div class="col-sm-8">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12">
+                                                                                <div id="${emplist[i].id}empslider"
+                                                                                    style="background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row ">
+                                                                            <div class="input col-sm-3"
+                                                                                style="font-size:10px">Poor</div>
+                                                                            <div class="input col-sm-4"
+                                                                                style="font-size:10px">Average</div>
+                                                                            <div class="input col-sm-4"
+                                                                                style="font-size:10px;background-color: lightgrey;border-radius:4px;">
+                                                                                Good</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="m-r-10 m-t-5 m-b-5" style="width=150px;height:275px;float:left;">
+                                    <a href="dashboard.html?emp=${emplist[i].id}" title="View Dashboard"
+                                        style="text-decoration:none;color:#585b5c">
+                                        <div class="panel profile-widget variant-2">
+                                            <div class="panel-body"
+                                                style="box-shadow: 0 1px 1px 1px rgba(16, 16, 16, 0.57);">
+                                                <div class="profile-header" style=" height: 100px">
+                                                    <div class="overlay"></div>
+                                                    <div class="profine-info">
+                                                        <div class="name text-center repname" style="font-size:17px">
+                                                            Brain Topps</div>
+                                                        <div class="position text-center empdes" style="font-size:10px">
+                                                            Marketing</div>
+                                                    </div>
+                                                </div>
+                                                <div class="profile-body p-b-0">
+                                                    <div class="profile-image-wrapper" style="height:80px;width:80px">
+                                                        <img src="assets/images/user.png" alt="avatar"
+                                                            style="border:none;background-color:#fff;padding-top:5px;border-radius:50px;width:80px;height:80px">
+                                                    </div>
+                                                    <div class="social-stats ">
+                                                        <ul class="list-group m-b-0">
+                                                            <li class="list-group-item p-b-10 p-t-10 p-l-5 p-r-5">
+                                                                <div class="row">
+                                                                    <label class="input col-sm-2">
+                                                                        <i class="font-awesome fa fa-envelope"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <div class="col-sm-10" style="font-size:13px">
+                                                                        brain@gmail.com</div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <label class="input col-sm-2">
+                                                                        <i class="font-awesome fa fa-phone"
+                                                                            aria-hidden="true"></i>
+                                                                    </label>
+                                                                    <div class="col-sm-10" style="font-size:13px">
+                                                                        878182XXX</div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="list-group-item p-b-10 p-t-10 p-l-5 p-r-5">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4 p-r-0" style="font-size:12px">
+                                                                        Efficiency:</div>
+                                                                    <div class="col-sm-8">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12">
+                                                                                <div id="${emplist[i].id}empslider"
+                                                                                    style="background: linear-gradient(to right, #FF0000, #FF0000 47.21%, #999999 47.21%, #999999 52.79%, #68db02 52.79%, #68db02) !important;">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row ">
+                                                                            <div class="input col-sm-4"
+                                                                                style="font-size:10px;background-color: lightgrey;border-radius:4px;">
+                                                                                Poor</div>
+                                                                            <div class="input col-sm-4"
+                                                                                style="font-size:10px">Average</div>
+                                                                            <div class="input col-sm-4"
+                                                                                style="font-size:10px;text-align:right">
+                                                                                Good</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <!-- Example Code -->
+                            </ul>
+                            <!-- </div> -->
+                        </div>
+                    </div>
                 </div>
+
+                <!-- <div class="row">
+                                <div class="col-sm-12"> -->
+
+                <script>
+
+                </script>
+                <!-- </div>
+                            </div> -->
+                <!-- </div> -->
+                <div class="page-footer">FOOTER...</div>
             </div>
+        </div>
         <!-- <script type="text/javascript" src="assets/js/jquery.min.js"></script> -->
         <script src="assets/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
         <script src="assets/js/jquery-ui.min.js" type="text/javascript"></script>
@@ -481,11 +954,11 @@
         <script src="socket.io.js"></script>
         <script src="assets/js/addheader.js" type="text/javascript"></script>
         <script src="assets/js/addSidebar.js" type="text/javascript"></script>
-        
+
         <script type="text/javascript" src="assets/js/addCss.js"></script>
 
         <script type="text/javascript">
-            
+
             //paste this code under the head tag or in a separate js file.
             // Wait for window load
             // $(window).load(function() {
@@ -504,7 +977,7 @@
             $.widget.bridge('uibutton', $.ui.button);
             $.widget.bridge('uitooltip', $.ui.tooltip);
         </script>
-            
+
         <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="assets/js/velocity.min.js" type="text/javascript"></script>
         <script src="assets/js/velocity.ui.min.js" type="text/javascript"></script>
@@ -528,13 +1001,13 @@
         <script src="assets/js/skycons.js"></script>
         <script src="assets/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="assets/vendors/bootstrap-fileupload/js/bootstrap-fileupload.js"></script>
-        
+
         <script src="assets/js/forms/forms.js" type="text/javascript"></script>
         <script src="assets/js/forms/form-wizard.js" type="text/javascript"></script>
-        
+
         <script src="assets/js/widget-weather.js" type="text/javascript"></script>
         <script src="assets/js/widget-list.js" type="text/javascript"></script>
-        
+
         <script type="text/javascript">
             $(document).ready(function () {
                 //global functions
@@ -551,9 +1024,13 @@
         <script src="stopwatch/stopwatch.js" type="text/javascript"></script>
         <script src="assets/js/dashboard.js" type="text/javascript"></script>
         <!--script src="assets/js/dashboard.js" type="text/javascript"></script-->
-    </body>
         <script src="assets/js/echarts.js"></script>
-        
-        <!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
-        <!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
-        
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.loaders').hide();
+            });
+        </script>
+</body>
+
+<!--<script src="assets/js/widget-echarts.js" type="text/javascript"></script>-->
+<!-- <script src="assets/js/widget-echarts-box.js" type="text/javascript"></script>-->
