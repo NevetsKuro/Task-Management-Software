@@ -28,7 +28,6 @@ Made by @Stark1996. Create with :heart:. Give a :star:.
 ## Personal Info:
 
 Check out my other projects https://github.com/stark1996
-Online Resume: http://nevetsegghead.gearhostpreview.com/ProfileViewer/public_html/views/profile1.html
 	
 	
 	
